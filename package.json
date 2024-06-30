@@ -9,21 +9,35 @@
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint-staged": "lint-staged"
   },
   "dependencies": {
+    "@icon-park/vue-next": "^1.4.2",
+    "@nutui/nutui": "^4.3.10",
+    "axios": "^1.7.2",
     "pinia": "^2.1.7",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
   },
   "devDependencies": {
+    "@nutui/auto-import-resolver": "^1.0.0",
     "@rushstack/eslint-patch": "^1.8.0",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vue/eslint-config-prettier": "^9.0.0",
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.23.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.2.7",
+    "pinia-plugin-persistedstate": "^3.2.1",
     "prettier": "^3.2.5",
-    "vite": "^5.3.1",
-    "husky": "^8.0.0"
+    "sass": "^1.77.6",
+    "unplugin-vue-components": "^0.27.2",
+    "vite": "^5.3.1"
+  },
+  "lint-staged": {
+    "*.{js,ts,vue}": [
+      "eslint --fix"
+    ]
   }
 }
