@@ -18,5 +18,7 @@ export const useStaffState = defineStore(
       clear
     }
   },
-  {}
+  {
+    persist: true
+  }
 )

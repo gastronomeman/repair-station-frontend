@@ -14,6 +14,9 @@ importers:
       '@nutui/nutui':
         specifier: ^4.3.10
         version: 4.3.10(unplugin-vue-components@0.27.2(@babel/parser@7.24.7)(rollup@4.18.0)(vue@3.4.31))(vue@3.4.31)
+      '@nutui/touch-emulator':
+        specifier: ^1.0.0
+        version: 1.0.0
       axios:
         specifier: ^1.7.2
         version: 1.7.2
@@ -293,6 +296,9 @@ packages:
     peerDependenciesMeta:
       unplugin-vue-components:
         optional: true
+
+  '@nutui/touch-emulator@1.0.0':
+    resolution: {integrity: sha512-k2hvI/9LlRA7Ph1Chni27pTuvPmKPt+/I10sWWd2sWzqiCOYRerD79eIwCMRGUF/q6WVDEKVnv00t9CEUL4sPA==}
 
   '@pkgr/core@0.1.1':
     resolution: {integrity: sha512-cq8o4cWH0ibXh9VGi5P20Tu9XF/0fFXl9EUinr9QfTM7a7p0oTA4iJRCQWppXR1Pg8dSM0UCItCkPwsk9qWWYA==}
@@ -1453,6 +1459,8 @@ snapshots:
       vue: 3.4.31
     optionalDependencies:
       unplugin-vue-components: 0.27.2(@babel/parser@7.24.7)(rollup@4.18.0)(vue@3.4.31)
+
+  '@nutui/touch-emulator@1.0.0': {}
 
   '@pkgr/core@0.1.1': {}
 
