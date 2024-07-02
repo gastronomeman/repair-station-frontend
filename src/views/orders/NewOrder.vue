@@ -2,16 +2,26 @@
 import { Agreement, EditOne, Tool } from '@icon-park/vue-next'
 import { ref } from 'vue'
 import OrdersNotice from '@/components/orders/OrdersNotice.vue'
+import OrdersFrom from '@/components/orders/OrdersFrom.vue'
 
 const current = ref(1)
 const onClickStep = (index) => {
   console.log(index)
+  if (index < current.value) {
+    current.value = index
+  }
 }
 
 const handleAgreementStatus = (status) => {
   console.log('User agreement status:', status)
   if (status) {
     current.value = 2
+  }
+}
+const handleSuccessStatus = (status) => {
+  console.log('User agreement status:', status)
+  if (status) {
+    current.value = 3
   }
 }
 </script>
@@ -41,9 +51,13 @@ const handleAgreementStatus = (status) => {
           </nut-step>
         </nut-steps>
         <orders-notice
-          v-if="current === 1"
+          v-show="current === 1"
           @agreementStatus="handleAgreementStatus"
         ></orders-notice>
+        <orders-from
+          v-show="current === 2"
+          @successStatus="handleSuccessStatus"
+        ></orders-from>
       </div>
     </div>
   </div>

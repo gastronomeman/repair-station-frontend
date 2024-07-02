@@ -21,7 +21,7 @@ const handleAgree = () => {
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;二、在使用本服务之前，表示你已同意承担在处理过程中可能存在的一定风险。<br />
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;三、我们“ITeam基地-维修站”的所有成员，本着一颗服务同学们的心，在实践中提升自己的专业技能，从不收取一分钱。<br />
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;四、正常情况下我们会根据报修的时间顺序进行处理，请耐心等候工作人员与您联系。（我们不会以任何方式添加您的微信）<br />
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;五、我们不销售任何电子产品，不提供购买意见。<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;五、我们不销售任何电子产品，不提任何供购买意见。<br />
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;六、在使用本服务之前，表示你已同意承担在处理过程中可能存在的风险。<br />
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;七、如有任何纠纷投诉请与本公众号取得联系。<br />
     </p>

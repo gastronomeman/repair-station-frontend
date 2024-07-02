@@ -1,11 +1,12 @@
 <script setup>
-import { ref, nextTick } from 'vue'
+import { ref, nextTick, watch } from 'vue'
 import { Search, Announcement } from '@icon-park/vue-next'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 
 import '@/assets/orders/orders.scss'
 
 const router = useRouter()
+const route = useRoute()
 
 const text = ref('')
 const title = ref('电脑报修')
@@ -38,8 +39,17 @@ const focusSearchbar = () => {
   }
 }
 const goToQuery = () => {
+  title.value = '查询修单'
   router.push('/orders/query')
 }
+
+watch(
+  () => route.fullPath,
+  (newPath) => {
+    if (newPath === '/orders/query') title.value = '查询修单'
+    else title.value = '电脑报修'
+  }
+)
 </script>
 
 <template>
@@ -50,7 +60,7 @@ const goToQuery = () => {
   </nut-noticebar>
   <div class="orders-head">
     <h1>{{ title }}</h1>
-    <h3>- Online Repair -</h3>
+    <h3>- Repair Station -</h3>
     <nut-sticky @change="sticky">
       <nut-searchbar
         @click="focusSearchbar"
@@ -73,7 +83,21 @@ const goToQuery = () => {
         </template>
       </nut-searchbar>
     </nut-sticky>
-    <img src="@/assets/orders/images/adv_repair.jpg" alt="图标" />
+    <div class="orders-img">
+      <div>
+        <nut-row>
+          <nut-col :span="12">
+            <div class="text" @click="router.push('/orders/new')">电脑报修</div>
+          </nut-col>
+          <nut-col :span="12">
+            <div class="text" @click="router.push('/orders/query')">
+              订单查询
+            </div>
+          </nut-col>
+        </nut-row>
+      </div>
+      <img src="@/assets/orders/images/adv_repair.jpg" alt="图标" />
+    </div>
   </div>
   <router-view></router-view>
   <div class="orders-footer" style="height: 100px"></div>
