@@ -39,14 +39,14 @@ const focusSearchbar = () => {
   }
 }
 const goToQuery = () => {
-  title.value = '查询修单'
+  title.value = '报修查询'
   router.push('/orders/query')
 }
 
 watch(
   () => route.fullPath,
   (newPath) => {
-    if (newPath === '/orders/query') title.value = '查询修单'
+    if (newPath === '/orders/query') title.value = '报修查询'
     else title.value = '电脑报修'
   }
 )
@@ -91,7 +91,7 @@ watch(
           </nut-col>
           <nut-col :span="12">
             <div class="text" @click="router.push('/orders/query')">
-              订单查询
+              报修查询
             </div>
           </nut-col>
         </nut-row>
