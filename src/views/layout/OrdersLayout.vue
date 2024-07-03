@@ -1,6 +1,6 @@
 <script setup>
 import { ref, nextTick, watch } from 'vue'
-import { Search, Announcement } from '@icon-park/vue-next'
+import { Search, Announcement, Tool } from '@icon-park/vue-next'
 import { useRouter, useRoute } from 'vue-router'
 
 import '@/assets/orders/orders.scss'
@@ -87,11 +87,19 @@ watch(
       <div>
         <nut-row>
           <nut-col :span="12">
-            <div class="text" @click="router.push('/orders/new')">电脑报修</div>
+            <div class="text" @click="router.push('/orders/new')">
+              电脑报修<tool
+                class="search-icon"
+                theme="outline"
+                size="20"
+                fill="#333"
+              />
+            </div>
           </nut-col>
           <nut-col :span="12">
             <div class="text" @click="router.push('/orders/query')">
-              报修查询
+              <span>报修查询</span>
+              <Search class="search-icon" theme="outline" size="20" />
             </div>
           </nut-col>
         </nut-row>

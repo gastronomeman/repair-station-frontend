@@ -8,6 +8,7 @@ const val = ref()
 
 const order = ref({
   name: '',
+  studentId: '',
   building: '点击选择宿舍号',
   dormitory: '',
   phone: '',
@@ -17,20 +18,20 @@ const order = ref({
 })
 
 const columns = ref([
-  { text: '13A栋', value: '13A栋' },
-  { text: '13B栋', value: '13B栋' },
-  { text: '14A栋', value: '14A栋' },
-  { text: '14B栋', value: '14B栋' },
-  { text: '18栋', value: '18栋' },
-  { text: '19栋', value: '19栋' },
-  { text: '20栋', value: '20栋' },
-  { text: '21栋', value: '21栋' },
-  { text: '22栋', value: '22栋' },
-  { text: '23栋', value: '23栋' },
-  { text: '24栋', value: '24栋' },
-  { text: '25栋', value: '25栋' },
-  { text: '26栋', value: '26栋' },
-  { text: '27栋', value: '27栋' }
+  { text: '13A栋', value: '13A' },
+  { text: '13B栋', value: '13B' },
+  { text: '14A栋', value: '14A' },
+  { text: '14B栋', value: '14B' },
+  { text: '18栋', value: '18' },
+  { text: '19栋', value: '19' },
+  { text: '20栋', value: '20' },
+  { text: '21栋', value: '21' },
+  { text: '22栋', value: '22' },
+  { text: '23栋', value: '23' },
+  { text: '24栋', value: '24' },
+  { text: '25栋', value: '25' },
+  { text: '26栋', value: '26' },
+  { text: '27栋', value: '27' }
 ])
 
 const formRef = ref(null)
@@ -39,6 +40,7 @@ const formRules = ref({
     { required: true, message: '请填写姓名' },
     { regex: /^(?:[\u4e00-\u9fa5·]{2,16})$/, message: '姓名格式不正确' }
   ],
+  studentId: [{ required: true, message: '学号不能为空' }],
   dormitory: [{ required: true, message: '地点不能为空' }],
   phone: [
     { required: true, message: '手机号不能为空' },
@@ -82,6 +84,7 @@ const submit = () => {
       }
 
       alert('成功')
+      console.log(order.value)
       emit('successStatus', true)
     } else {
       console.warn('error:', errors)
@@ -121,9 +124,23 @@ const submit = () => {
           v-model="order.dormitory"
           text-align="left"
           class="nut-input-text"
-          placeholder="尽量详细填写，或者填写待定等待同学电话联系"
+          placeholder="尽量详细填写，或者填写”待定“等待同学电话联系"
           type="text"
           @blur="customBlurValidate('dormitory')"
+        />
+      </nut-form-item>
+      <nut-form-item
+        v-if="order.identity === '1'"
+        label="学号"
+        prop="studentId"
+        error-message-align="left"
+      >
+        <input
+          v-model="order.studentId"
+          class="nut-input-text"
+          placeholder="请输入学号"
+          type="text"
+          @blur="customBlurValidate('studentId')"
         />
       </nut-form-item>
       <nut-form-item
@@ -132,7 +149,7 @@ const submit = () => {
         prop="building"
         v-show="order.identity === '1'"
       >
-        <div @click="show = true" style="cursor: pointer">
+        <div @click="show = true" style="cursor: pointer; color: black">
           {{ order.building }}&nbsp;
         </div>
       </nut-form-item>
@@ -173,7 +190,10 @@ const submit = () => {
         prop="orderType"
         error-message-align="left"
       >
-        <nut-radio-group v-model="order.orderType">
+        <nut-radio-group
+          v-model="order.orderType"
+          @click.prevent="customBlurValidate('orderType')"
+        >
           <nut-radio label="1">
             软件类：<br />
             <span style="color: #465ff0">

@@ -13,7 +13,6 @@ const onClickStep = (index) => {
 }
 
 const handleAgreementStatus = (status) => {
-  console.log('User agreement status:', status)
   if (status) {
     current.value = 2
   }
