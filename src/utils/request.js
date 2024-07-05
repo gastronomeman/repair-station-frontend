@@ -1,8 +1,9 @@
 import axios from 'axios'
 import { useStaffState } from '@/stores'
-import router from '@/router'
-
-const baseURL = 'http://localhost:8080'
+//import { useRouter } from 'vue-router'
+//
+//const router = useRouter()
+const baseURL = 'http://10.117.179.195:8080'
 
 const instance = axios.create({
   // 1. 基础地址，超时时间
@@ -32,9 +33,9 @@ instance.interceptors.response.use(
       return res.data
     }
     // 3. 处理业务失败
-    if (res.data.code === 0 && res.data.msg === 'NOT_LOGIN') {
-      router.push('/authentication')
-    }
+    //if (res.data.code === 0 && res.data.msg === 'NOT_LOGIN') {
+    //  router.push('/authentication')
+    //}
     return res.data
   },
   (err) => {

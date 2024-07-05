@@ -17,6 +17,7 @@
     "@nutui/nutui": "^4.3.10",
     "@nutui/touch-emulator": "^1.0.0",
     "axios": "^1.7.2",
+    "element-plus": "^2.7.6",
     "pinia": "^2.1.7",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
@@ -33,6 +34,7 @@
     "pinia-plugin-persistedstate": "^3.2.1",
     "prettier": "^3.2.5",
     "sass": "^1.77.6",
+    "unplugin-auto-import": "^0.17.6",
     "unplugin-vue-components": "^0.27.2",
     "vite": "^5.3.1"
   },

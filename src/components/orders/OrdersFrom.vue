@@ -1,5 +1,6 @@
 <script setup>
-import { ref, defineEmits } from 'vue'
+import { ref } from 'vue'
+import { ordersNewService } from '@/api/orders.js'
 
 const emit = defineEmits(['agreementStatus'])
 
@@ -13,25 +14,25 @@ const order = ref({
   dormitory: '',
   phone: '',
   orderType: '',
-  describe: '',
+  orderDescribe: '',
   identity: '1'
 })
 
 const columns = ref([
-  { text: '13A栋', value: '13A' },
-  { text: '13B栋', value: '13B' },
-  { text: '14A栋', value: '14A' },
-  { text: '14B栋', value: '14B' },
-  { text: '18栋', value: '18' },
-  { text: '19栋', value: '19' },
-  { text: '20栋', value: '20' },
-  { text: '21栋', value: '21' },
-  { text: '22栋', value: '22' },
-  { text: '23栋', value: '23' },
-  { text: '24栋', value: '24' },
-  { text: '25栋', value: '25' },
-  { text: '26栋', value: '26' },
-  { text: '27栋', value: '27' }
+  { text: '13A栋', value: '13A栋' },
+  { text: '13B栋', value: '13B栋' },
+  { text: '14A栋', value: '14A栋' },
+  { text: '14B栋', value: '14B栋' },
+  { text: '18栋', value: '18栋' },
+  { text: '19栋', value: '19栋' },
+  { text: '20栋', value: '20栋' },
+  { text: '21栋', value: '21栋' },
+  { text: '22栋', value: '22栋' },
+  { text: '23栋', value: '23栋' },
+  { text: '24栋', value: '24栋' },
+  { text: '25栋', value: '25栋' },
+  { text: '26栋', value: '26栋' },
+  { text: '27栋', value: '27栋' }
 ])
 
 const formRef = ref(null)
@@ -51,7 +52,7 @@ const formRules = ref({
     }
   ],
   orderType: [{ required: true, message: '维修类型要进行选择' }],
-  describe: [
+  orderDescribe: [
     { required: true, message: '问题描述不能为空' },
     { regex: /^(?!.*\s).{5,}$/, message: '请详细点描述问题' }
   ]
@@ -72,8 +73,9 @@ const confirmShow = ({ selectedValue }) => {
   show.value = false
 }
 
+const loading = ref(false)
 const submit = () => {
-  formRef.value?.validate().then(({ valid, errors }) => {
+  formRef.value?.validate().then(async ({ valid, errors }) => {
     if (valid) {
       if (
         order.value.identity === '1' &&
@@ -82,10 +84,17 @@ const submit = () => {
         alert('宿舍栋数不能为空！')
         return
       }
+      loading.value = true
 
-      alert('成功')
-      console.log(order.value)
-      emit('successStatus', true)
+      setTimeout(async function () {
+        const resp = await ordersNewService(order.value)
+
+        if (resp.code === 1) {
+          console.log(order.value)
+          emit('successStatus', true)
+        }
+        loading.value = false
+      }, 800)
     } else {
       console.warn('error:', errors)
     }
@@ -95,7 +104,12 @@ const submit = () => {
 
 <template>
   <div class="order-from">
-    <nut-form :rules="formRules" ref="formRef" :model-value="order">
+    <nut-form
+      :rules="formRules"
+      ref="formRef"
+      :model-value="order"
+      v-loading="loading"
+    >
       <nut-form-item label="姓名" prop="name" error-message-align="left">
         <input
           v-model="order.name"
@@ -212,22 +226,26 @@ const submit = () => {
               认证网页不显示、找不到网卡，网络卡顿等
             </span>
           </nut-radio>
+          <nut-radio label="4">
+            手机类<br />
+            <span style="color: #465ff0"> 手机贴膜，清理内存，更换屏幕 </span>
+          </nut-radio>
         </nut-radio-group>
       </nut-form-item>
       <nut-form-item
         label="问题描述"
-        prop="describe"
+        prop="orderDescribe"
         error-message-align="left"
       >
         <nut-textarea
           limit-show
           :max-length="100"
           :rows="5"
-          v-model="order.describe"
+          v-model="order.orderDescribe"
           text-align="left"
           placeholder="详细描述能更好了解问题哦"
           type="text"
-          @blur="customBlurValidate('describe')"
+          @blur="customBlurValidate('orderDescribe')"
         />
       </nut-form-item>
     </nut-form>

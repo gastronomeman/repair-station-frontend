@@ -4,6 +4,7 @@ import { Search, Announcement, Tool } from '@icon-park/vue-next'
 import { useRouter, useRoute } from 'vue-router'
 
 import '@/assets/orders/orders.scss'
+import OrdersFooter from '@/components/orders/OrdersFooter.vue'
 
 const router = useRouter()
 const route = useRoute()
@@ -39,16 +40,20 @@ const focusSearchbar = () => {
   }
 }
 const goToQuery = () => {
-  title.value = '报修查询'
-  router.push('/orders/query')
+  router.push({
+    path: '/orders/query',
+    query: { studentId: search.value.input }
+  })
 }
 
 watch(
   () => route.fullPath,
   (newPath) => {
-    if (newPath === '/orders/query') title.value = '报修查询'
-    else title.value = '电脑报修'
-  }
+    if (newPath.includes('/orders/query')) title.value = '报修查询'
+    else if (newPath === '/orders/new') title.value = '电脑报修'
+    else title.value = '维修公告'
+  },
+  { immediate: true }
 )
 </script>
 
@@ -68,7 +73,7 @@ watch(
         v-model="search.input"
         :background="search.backgroundColor"
         @search="goToQuery"
-        placeholder="输入你的学号查询报修状态"
+        placeholder="输入学号或姓名查询报修状态"
       >
         <template #leftout>
           {{ search.left }}
@@ -84,7 +89,7 @@ watch(
       </nut-searchbar>
     </nut-sticky>
     <div class="orders-img">
-      <div>
+      <div v-if="title !== '维修公告'">
         <nut-row>
           <nut-col :span="12">
             <div class="text" @click="router.push('/orders/new')">
@@ -97,7 +102,7 @@ watch(
             </div>
           </nut-col>
           <nut-col :span="12">
-            <div class="text" @click="router.push('/orders/query')">
+            <div class="text" @click="router.push('/orders/query?studentId=')">
               <span>报修查询</span>
               <Search class="search-icon" theme="outline" size="20" />
             </div>
@@ -108,7 +113,7 @@ watch(
     </div>
   </div>
   <router-view></router-view>
-  <div class="orders-footer" style="height: 100px"></div>
+  <OrdersFooter></OrdersFooter>
 </template>
 
 <style scoped></style>

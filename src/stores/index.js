@@ -7,4 +7,3 @@ pinia.use(persist)
 export default pinia
 
 export * from './modules/staff.js'
-export * from './modules/orders.js'

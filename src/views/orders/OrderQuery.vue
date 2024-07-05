@@ -1,68 +1,40 @@
 <script setup>
-/*const props = defineProps({
-  order: {
-    type: Object,
-    required: true
+import { ref, watch } from 'vue'
+import OrdersItem from '@/components/orders/OrdersItem.vue'
+import { useRoute } from 'vue-router'
+import { getOrderListByStudentIdService } from '@/api/orders.js'
+import { isNotBlank } from '@/utils/StringUtils.js'
+
+const route = useRoute()
+
+const orderList = ref([])
+
+const getOrderListByStudentId = async (studentId) => {
+  if (isNotBlank(studentId)) return
+  const resp = await getOrderListByStudentIdService(studentId)
+  if (resp.code === 1) {
+    orderList.value = resp.data
+    if (orderList.value.length === 0) alert('查无此人')
   }
-})*/
-import { ref } from 'vue'
-
-const order = ref({
-  id: '1802875163046363138',
-  createTime: '2024-05-30 08:00:00',
-  building: '26',
-  dormitory: '5036',
-  name: '余文锐',
-  status: '3',
-  describe: '通过插槽可以在分割线中间插入内容通过插槽可以在分割线中'
-})
-
-const handleClick = () => {
-  alert('成功')
 }
+
+watch(
+  () => route.query,
+  (newPath) => {
+    const { studentId } = newPath
+    getOrderListByStudentId(studentId)
+  },
+  { immediate: true }
+)
 </script>
 
 <template>
-  <div class="orders-item">
-    <div class="orders-row" @click="handleClick">
-      <nut-row>
-        <nut-col :span="24">
-          <div class="content-head">
-            {{ order.createTime }}
-            &nbsp;/&nbsp; 编号:
-            {{ order.id }}
-          </div>
-        </nut-col>
-      </nut-row>
-      <nut-row>
-        <nut-col :span="24">
-          <div class="content-body">
-            <span class="body-left">
-              {{ order.building }}#{{ order.dormitory }}
-              &nbsp;
-              {{ order.name }}
-            </span>
-            <span
-              v-if="order.status === '0'"
-              class="body-right"
-              style="color: #de2a18"
-            >
-              待接单
-            </span>
-            <span
-              v-else-if="order.status === '1'"
-              class="body-right"
-              style="color: #fecc11"
-              >维修中
-            </span>
-            <span v-else class="body-right" style="color: #41b349">
-              已完成
-            </span>
-          </div>
-        </nut-col>
-      </nut-row>
-      <nut-divider dashed />
-      <p>{{ order.describe }}</p>
+  <div v-if="orderList.length === 0">
+    <el-empty description="暂无维修记录请输入学号或姓名后尝试查询" />
+  </div>
+  <div v-else>
+    <div v-for="order in orderList" :key="order.id">
+      <orders-item :order="order"></orders-item>
     </div>
   </div>
 </template>
