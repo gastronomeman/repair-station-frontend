@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { getServerStatusService } from '@/api/repairStationStatus.js'
 import staffRoutes from './modules/staffRoutes.js'
 import adminRoutes from './modules/adminRoutes.js'
+import { useStaffState } from '@/stores/index.js'
 
 const routes = [
   {
@@ -34,7 +35,6 @@ const routes = [
   ...staffRoutes, // 导入 Staff 模块路由配置
   ...adminRoutes // 导入 Admin 模块路由配置
 ]
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes
@@ -50,6 +50,15 @@ router.beforeEach(async (to) => {
     if (resp.code === 1 && to.path === '/orders/announcements') return '/'
     else if (resp.code === 0 && to.path !== '/orders/announcements')
       return '/orders/announcements'
+  }
+
+  //后台逻辑
+  if (to.path.startsWith('/staff') && to.path !== '/staff/login') {
+    const staffState = useStaffState()
+    if (staffState.token === '') {
+      alert('请先登录后尝试吧')
+      return '/staff/login'
+    }
   }
 })
 export default router

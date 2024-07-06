@@ -1,9 +1,10 @@
 import axios from 'axios'
 import { useStaffState } from '@/stores'
-//import { useRouter } from 'vue-router'
-//
-//const router = useRouter()
-const baseURL = 'http://10.117.179.195:8080'
+import { useRouter } from 'vue-router'
+import { errorMsg } from '@/utils/SendMsgUtils.js'
+
+const router = useRouter()
+const baseURL = 'http://10.19.209.138:8080'
 
 const instance = axios.create({
   // 1. 基础地址，超时时间
@@ -32,11 +33,16 @@ instance.interceptors.response.use(
     if (res.data.code === 1) {
       return res.data
     }
-    // 3. 处理业务失败
-    //if (res.data.code === 0 && res.data.msg === 'NOT_LOGIN') {
-    //  router.push('/authentication')
-    //}
-    return res.data
+    //3. 处理业务失败
+    if (res.data.code === 0 && res.data.msg === 'not_login') {
+      router.push('/staff/login').then(() => alert('登录验证失效请重新登陆'))
+      return Promise.reject(res.data.msg)
+    }
+
+    if (res.data.code === 0) {
+      errorMsg(res.data.msg)
+      return Promise.reject(res.data.msg)
+    }
   },
   (err) => {
     if (err.response?.status === 401) {

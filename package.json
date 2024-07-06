@@ -18,6 +18,7 @@
     "@nutui/touch-emulator": "^1.0.0",
     "axios": "^1.7.2",
     "element-plus": "^2.7.6",
+    "js-md5": "^0.8.3",
     "pinia": "^2.1.7",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
