@@ -42,7 +42,7 @@ const router = createRouter({
 
 router.beforeEach(async (to) => {
   // 在导航之前设置页面标题
-  document.title = to.meta.title || 'IT维修站'
+  document.title = to.meta.title || 'ITeam维修站'
 
   //订单的逻辑
   if (to.path.startsWith('/orders')) {

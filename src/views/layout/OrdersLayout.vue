@@ -5,11 +5,21 @@ import { useRouter, useRoute } from 'vue-router'
 
 import '@/assets/orders/orders.scss'
 import OrdersFooter from '@/components/orders/OrdersFooter.vue'
+import { getOrderTitleService } from '@/api/repairStationStatus.js'
+import { isNotBlank } from '@/utils/StringUtils.js'
 
 const router = useRouter()
 const route = useRoute()
 
 const text = ref('')
+const getText = async () => {
+  const resp = await getOrderTitleService()
+  if (resp.code === 1) {
+    text.value = resp.data
+  }
+}
+getText()
+
 const title = ref('电脑报修')
 
 const search = ref({
@@ -58,7 +68,7 @@ watch(
 </script>
 
 <template>
-  <nut-noticebar :text="text" wrapable v-if="text !== ''">
+  <nut-noticebar :text="text" wrapable scrollable v-if="!isNotBlank(text)">
     <template #left-icon>
       <announcement theme="outline" size="20" />
     </template>
