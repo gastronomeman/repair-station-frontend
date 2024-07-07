@@ -1,8 +1,12 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { getOrdersListService } from '@/api/orders.js'
-import OrdersStaffItem from '@/components/orders/OrdersStaffItem.vue'
+import {
+  getOrdersListService,
+  getOrdersWithNameListService
+} from '@/api/orders.js'
+import OrdersStaffItem1 from '@/components/orders/OrdersStaffItem1.vue'
+import OrdersStaffItem2 from '@/components/orders/OrdersStaffItem2.vue'
 
 const router = useRouter()
 const route = useRoute()
@@ -31,7 +35,7 @@ const getOrdersList = async () => {
     if (resp1.code === 1) {
       ordersList1.value = resp1.data
     }
-    const resp2 = await getOrdersListService(orderType, 2)
+    const resp2 = await getOrdersWithNameListService(orderType, 2)
     if (resp2.code === 1) {
       ordersList2.value = resp2.data
     }
@@ -57,10 +61,10 @@ const refreshOrdersList = async () => getOrdersList()
     <nut-tab-pane title="待接单" :pane-key="1">
       <div class="br">&nbsp;</div>
       <div class="tab-pane-left" v-for="order in ordersList1" :key="order.id">
-        <orders-staff-item
+        <orders-staff-item1
           @refresh="refreshOrdersList"
           :order="order"
-        ></orders-staff-item>
+        ></orders-staff-item1>
         <div class="br">&nbsp;</div>
       </div>
       <el-empty v-if="ordersList1.length === 0" style="background: #f0f0f0">
@@ -75,7 +79,7 @@ const refreshOrdersList = async () => getOrdersList()
     <nut-tab-pane title="维修中" :pane-key="2">
       <div class="br">&nbsp;</div>
       <div class="tab-pane-left" v-for="order in ordersList2" :key="order.id">
-        <orders-staff-item :order="order"></orders-staff-item>
+        <orders-staff-item2 :order="order"></orders-staff-item2>
         <div class="br">&nbsp;</div>
       </div>
       <el-empty v-if="ordersList2.length === 0" style="background: #f0f0f0">

@@ -37,148 +37,207 @@ const staffOrder = ref({
   orderType31: '',
   orderType32: '',
   orderType41: '',
-  orderType42: ''
+  orderType42: '',
+  staffSemesterOrderCount: '',
+  staffWeekOrderCount: ''
 })
+const loading = ref(true)
 const getStaffOrder = async () => {
+  loading.value = true
   const resp = await getStaffOrderTotalService()
   staffOrder.value = resp.data
+  loading.value = false
 }
 getStaffOrder()
 </script>
 
 <template>
-  <nut-navbar title="站内维修统计">
-    <template #right>
-      <div class="title-right">
-        <p>当前在线人数</p>
-        <p>
-          <people
-            style="margin-right: 2px"
-            theme="outline"
-            size="10"
-            fill="#333"
-          />
-          {{ staffOrder.staffOnlineNum }}人
-        </p>
+  <div v-loading="loading">
+    <nut-navbar title="站内维修统计">
+      <template #right>
+        <div class="title-right">
+          <p>当前在线人数</p>
+          <p>
+            <people
+              style="margin-right: 2px"
+              theme="outline"
+              size="10"
+              fill="#333"
+            />
+            {{ staffOrder.staffOnlineNum }}人
+          </p>
+        </div>
+      </template>
+    </nut-navbar>
+    <div class="brief-row">
+      <nut-row>
+        <nut-col :span="4" :offset="1">
+          <div class="content">
+            <p>本学期</p>
+            <p>{{ staffOrder.semesterOrderCount }}</p>
+          </div>
+        </nut-col>
+        <nut-col :span="4">
+          <div class="content">
+            <p>上个月</p>
+            <p>{{ staffOrder.lastMonthOrderCount }}</p>
+          </div>
+        </nut-col>
+        <nut-col :span="3">
+          <div class="content">
+            <p>本月</p>
+            <p>{{ staffOrder.currentMonthOrderCount }}</p>
+          </div>
+        </nut-col>
+        <nut-col :span="4">
+          <div class="content">
+            <p>近7天</p>
+            <p>{{ staffOrder.currentWeekOrderCount }}</p>
+          </div>
+        </nut-col>
+        <nut-col :span="3">
+          <div class="content">
+            <p>昨天</p>
+            <p>{{ staffOrder.yesterdayOrderCount }}</p>
+          </div>
+        </nut-col>
+        <nut-col :span="3">
+          <div class="content">
+            <p>今天</p>
+            <p>{{ staffOrder.todayOrderCount }}</p>
+          </div>
+        </nut-col>
+      </nut-row>
+    </div>
+    <div class="brief-orders-type">
+      <div class="up">
+        <el-progress
+          class="first-up"
+          type="dashboard"
+          :percentage="(staffOrder.orderType11 + staffOrder.orderType12) * 10"
+          :color="colors"
+          @click="goToOrderList(1)"
+        >
+          <template #default>
+            <p
+              class="percentage-value"
+              v-if="staffOrder.orderType11 > 0"
+              style="color: red"
+            >
+              {{ staffOrder.orderType11 }} / {{ staffOrder.orderType12 }}
+            </p>
+            <p class="percentage-value" v-else>
+              {{ staffOrder.orderType11 }} / {{ staffOrder.orderType12 }}
+            </p>
+            <span
+              class="percentage-label"
+              v-if="staffOrder.orderType11 > 0"
+              style="color: red"
+              >软件类
+            </span>
+            <span class="percentage-label" v-else>软件类</span>
+          </template>
+        </el-progress>
+        <el-progress
+          type="dashboard"
+          :percentage="(staffOrder.orderType21 + staffOrder.orderType22) * 10"
+          :color="colors"
+          @click="goToOrderList(2)"
+        >
+          <template #default>
+            <p
+              class="percentage-value"
+              v-if="staffOrder.orderType21 > 0"
+              style="color: red"
+            >
+              {{ staffOrder.orderType21 }} / {{ staffOrder.orderType22 }}
+            </p>
+            <p class="percentage-value" v-else>
+              {{ staffOrder.orderType21 }} / {{ staffOrder.orderType22 }}
+            </p>
+            <span
+              class="percentage-label"
+              v-if="staffOrder.orderType21 > 0"
+              style="color: red"
+              >硬件类
+            </span>
+            <span class="percentage-label" v-else>硬件类 </span>
+          </template>
+        </el-progress>
       </div>
-    </template>
-  </nut-navbar>
-  <div class="brief-row">
-    <nut-row>
-      <nut-col :span="4" :offset="1">
-        <div class="content">
-          <p>本学期</p>
-          <p>{{ staffOrder.semesterOrderCount }}</p>
-        </div>
-      </nut-col>
-      <nut-col :span="4">
-        <div class="content">
-          <p>上个月</p>
-          <p>{{ staffOrder.lastMonthOrderCount }}</p>
-        </div>
-      </nut-col>
-      <nut-col :span="3">
-        <div class="content">
-          <p>本月</p>
-          <p>{{ staffOrder.currentMonthOrderCount }}</p>
-        </div>
-      </nut-col>
-      <nut-col :span="4">
-        <div class="content">
-          <p>近7天</p>
-          <p>{{ staffOrder.currentWeekOrderCount }}</p>
-        </div>
-      </nut-col>
-      <nut-col :span="3">
-        <div class="content">
-          <p>昨天</p>
-          <p>{{ staffOrder.yesterdayOrderCount }}</p>
-        </div>
-      </nut-col>
-      <nut-col :span="3">
-        <div class="content">
-          <p>今天</p>
-          <p>{{ staffOrder.todayOrderCount }}</p>
-        </div>
-      </nut-col>
-    </nut-row>
-  </div>
-  <div class="brief-orders-type">
-    <div class="up">
-      <el-progress
-        class="first-up"
-        type="dashboard"
-        :percentage="(staffOrder.orderType11 + staffOrder.orderType12) * 10"
-        :color="colors"
-        @click="goToOrderList(1)"
-      >
-        <template #default>
-          <p class="percentage-value">
-            {{ staffOrder.orderType11 }} / {{ staffOrder.orderType12 }}
-          </p>
-          <span class="percentage-label">软件类</span>
-        </template>
-      </el-progress>
-      <el-progress
-        type="dashboard"
-        :percentage="(staffOrder.orderType21 + staffOrder.orderType22) * 10"
-        :color="colors"
-        @click="goToOrderList(2)"
-      >
-        <template #default>
-          <p class="percentage-value">
-            {{ staffOrder.orderType21 }} / {{ staffOrder.orderType22 }}
-          </p>
-          <span class="percentage-label">硬件类</span>
-        </template>
-      </el-progress>
+      <div class="down">
+        <el-progress
+          class="first-up"
+          type="dashboard"
+          :percentage="(staffOrder.orderType31 + staffOrder.orderType32) * 10"
+          :color="colors"
+          @click="goToOrderList(3)"
+        >
+          <template #default>
+            <p
+              class="percentage-value"
+              v-if="staffOrder.orderType31 > 0"
+              style="color: red"
+            >
+              {{ staffOrder.orderType31 }} / {{ staffOrder.orderType32 }}
+            </p>
+            <p class="percentage-value" v-else>
+              {{ staffOrder.orderType31 }} / {{ staffOrder.orderType32 }}
+            </p>
+            <span
+              class="percentage-label"
+              v-if="staffOrder.orderType31 > 0"
+              style="color: red"
+              >网络类
+            </span>
+            <span class="percentage-label" v-else>网络类 </span>
+          </template>
+        </el-progress>
+        <el-progress
+          type="dashboard"
+          :percentage="(staffOrder.orderType41 + staffOrder.orderType42) * 10"
+          :color="colors"
+          @click="goToOrderList(4)"
+        >
+          <template #default>
+            <p
+              class="percentage-value"
+              v-if="staffOrder.orderType41 > 0"
+              style="color: red"
+            >
+              {{ staffOrder.orderType41 }} / {{ staffOrder.orderType42 }}
+            </p>
+            <p class="percentage-value" v-else>
+              {{ staffOrder.orderType41 }} / {{ staffOrder.orderType42 }}
+            </p>
+            <span
+              class="percentage-label"
+              v-if="staffOrder.orderType41 > 0"
+              style="color: red"
+              >手机类
+            </span>
+            <span class="percentage-label" v-else>手机类</span>
+          </template>
+        </el-progress>
+      </div>
     </div>
-    <div class="down">
-      <el-progress
-        class="first-up"
-        type="dashboard"
-        :percentage="(staffOrder.orderType31 + staffOrder.orderType32) * 10"
-        :color="colors"
-        @click="goToOrderList(3)"
-      >
-        <template #default>
-          <p class="percentage-value">
-            {{ staffOrder.orderType31 }} / {{ staffOrder.orderType32 }}
-          </p>
-          <span class="percentage-label">网络类</span>
-        </template>
-      </el-progress>
-      <el-progress
-        type="dashboard"
-        :percentage="(staffOrder.orderType41 + staffOrder.orderType42) * 10"
-        :color="colors"
-        @click="goToOrderList(4)"
-      >
-        <template #default>
-          <p class="percentage-value">
-            {{ staffOrder.orderType41 }} / {{ staffOrder.orderType42 }}
-          </p>
-          <span class="percentage-label">手机类</span>
-        </template>
-      </el-progress>
+    <div class="staff-orders-count">
+      <nut-divider dashed> 我的单量统计</nut-divider>
+      <nut-row>
+        <nut-col :span="12">
+          <div class="content">
+            <p>本学期已处理</p>
+            <p>{{ staffOrder.staffSemesterOrderCount }}单</p>
+          </div>
+        </nut-col>
+        <nut-col :span="12">
+          <div class="content">
+            <p>本周已处理</p>
+            <p>{{ staffOrder.staffWeekOrderCount }}单</p>
+          </div>
+        </nut-col>
+      </nut-row>
     </div>
-  </div>
-  <div class="staff-orders-count">
-    <nut-divider dashed> 我的单量统计</nut-divider>
-    <nut-row>
-      <nut-col :span="12">
-        <div class="content">
-          <p>本学期已处理</p>
-          <p>0单</p>
-        </div>
-      </nut-col>
-      <nut-col :span="12">
-        <div class="content">
-          <p>本周已处理</p>
-          <p>0单</p>
-        </div>
-      </nut-col>
-    </nut-row>
   </div>
 </template>
 

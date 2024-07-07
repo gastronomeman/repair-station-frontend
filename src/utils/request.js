@@ -3,7 +3,7 @@ import { useStaffState } from '@/stores'
 import router from '@/router'
 import { errorMsg } from '@/utils/SendMsgUtils.js'
 
-const baseURL = 'http://10.19.223.228:8080'
+const baseURL = 'http://192.168.142.15:8080'
 
 const instance = axios.create({
   // 1. 基础地址，超时时间

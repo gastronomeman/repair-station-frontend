@@ -2,6 +2,7 @@
 import { Announcement, Order, Me, Home } from '@icon-park/vue-next'
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import { getStaffTitleService } from '@/api/repairStationStatus.js'
 
 const route = useRoute()
 
@@ -23,14 +24,26 @@ const frame = ref(true)
 watch(
   () => route.fullPath,
   (newPath) => {
+    if (route.fullPath.includes('/staff/order-acceptance')) active.value = 0
+    else if (route.fullPath.includes('/staff/accepted-orders')) active.value = 1
+    else if (route.fullPath.includes('/staff/profile')) active.value = 2
+
     frame.value = !newPath.includes('/staff/login')
   },
   { immediate: true }
 )
+const title = ref('')
+const getTitle = async () => {
+  const resp = await getStaffTitleService()
+  if (resp.code === 1) {
+    title.value = resp.data
+  }
+}
+if (!route.fullPath.includes('/staff/login')) getTitle()
 </script>
 
 <template>
-  <nut-noticebar text="1111" scrollable v-if="frame">
+  <nut-noticebar :text="title" scrollable v-if="frame">
     <template #left-icon>
       <announcement theme="outline" size="20" />
     </template>

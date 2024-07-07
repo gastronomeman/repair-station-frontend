@@ -1,9 +1,6 @@
 <script setup>
-import { ref, defineEmits } from 'vue'
-import { finishOrderService } from '@/api/orders.js'
-import { successMsg } from '@/utils/SendMsgUtils.js'
+import { ref } from 'vue'
 
-const emit = defineEmits(['refresh'])
 const props = defineProps({
   order: {
     type: Object,
@@ -12,19 +9,7 @@ const props = defineProps({
 })
 const order = ref(props.order)
 const handleClick = async () => {
-  if (confirm('是否要结束修单？')) {
-    const resp = await finishOrderService(order.value)
-    if (resp.code === 1) {
-      successMsg(resp.data)
-      emit('refresh')
-    }
-  }
-}
-const callPhone = () => {
-  window.location.href = `tel:${order.value.phone}`
-}
-const sendSMS = () => {
-  window.location.href = `sms:${order.value.phone}`
+  alert(`${order.value.staffName}-正在维修中`)
 }
 </script>
 
@@ -70,14 +55,6 @@ const sendSMS = () => {
       <nut-divider dashed />
       <p>{{ order.orderDescribe }}</p>
     </div>
-    <nut-row>
-      <nut-col :span="12" @click="callPhone">
-        <div class="orders-row-footer">拨打电话</div>
-      </nut-col>
-      <nut-col :span="12">
-        <div class="orders-row-footer" @click="sendSMS">发送短信</div>
-      </nut-col>
-    </nut-row>
   </div>
 </template>
 
@@ -85,7 +62,7 @@ const sendSMS = () => {
 .orders-item {
   margin: 0 auto;
   max-width: 800px;
-  padding: 10px 0 0;
+  padding: 8px 0;
   background-color: white;
 
   .orders-row {
@@ -122,17 +99,9 @@ const sendSMS = () => {
       text-align: center;
       word-wrap: break-word;
       overflow-wrap: break-word;
-      margin: 2px auto;
+      margin: 15px auto;
       font-size: 18px;
     }
-  }
-  .orders-row-footer {
-    background-color: #74787a;
-    color: white;
-    font-weight: bold;
-    padding: 5px 0;
-    margin-top: 5px;
-    text-align: center;
   }
 }
 </style>
