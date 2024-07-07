@@ -2,10 +2,10 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { People } from '@icon-park/vue-next'
+import { getStaffOrderTotalService } from '@/api/orders.js'
 
 const router = useRouter()
 
-const percentage = ref(20)
 const colors = [
   { color: '#f56c6c', percentage: 100 },
   { color: '#e6a23c', percentage: 80 },
@@ -21,6 +21,29 @@ const goToOrderList = (orderType) => {
     query: { orderType }
   })
 }
+
+const staffOrder = ref({
+  staffOnlineNum: '',
+  semesterOrderCount: '',
+  lastMonthOrderCount: '',
+  currentMonthOrderCount: '',
+  currentWeekOrderCount: '',
+  yesterdayOrderCount: '',
+  todayOrderCount: '',
+  orderType11: '',
+  orderType12: '',
+  orderType21: '',
+  orderType22: '',
+  orderType31: '',
+  orderType32: '',
+  orderType41: '',
+  orderType42: ''
+})
+const getStaffOrder = async () => {
+  const resp = await getStaffOrderTotalService()
+  staffOrder.value = resp.data
+}
+getStaffOrder()
 </script>
 
 <template>
@@ -35,7 +58,7 @@ const goToOrderList = (orderType) => {
             size="10"
             fill="#333"
           />
-          100人
+          {{ staffOrder.staffOnlineNum }}人
         </p>
       </div>
     </template>
@@ -45,37 +68,37 @@ const goToOrderList = (orderType) => {
       <nut-col :span="4" :offset="1">
         <div class="content">
           <p>本学期</p>
-          <p>0</p>
+          <p>{{ staffOrder.semesterOrderCount }}</p>
         </div>
       </nut-col>
       <nut-col :span="4">
         <div class="content">
           <p>上个月</p>
-          <p>0</p>
+          <p>{{ staffOrder.lastMonthOrderCount }}</p>
         </div>
       </nut-col>
       <nut-col :span="3">
         <div class="content">
           <p>本月</p>
-          <p>0</p>
+          <p>{{ staffOrder.currentMonthOrderCount }}</p>
         </div>
       </nut-col>
       <nut-col :span="4">
         <div class="content">
           <p>近7天</p>
-          <p>0</p>
+          <p>{{ staffOrder.currentWeekOrderCount }}</p>
         </div>
       </nut-col>
       <nut-col :span="3">
         <div class="content">
           <p>昨天</p>
-          <p>0</p>
+          <p>{{ staffOrder.yesterdayOrderCount }}</p>
         </div>
       </nut-col>
       <nut-col :span="3">
         <div class="content">
           <p>今天</p>
-          <p>0</p>
+          <p>{{ staffOrder.todayOrderCount }}</p>
         </div>
       </nut-col>
     </nut-row>
@@ -85,23 +108,27 @@ const goToOrderList = (orderType) => {
       <el-progress
         class="first-up"
         type="dashboard"
-        :percentage="percentage"
+        :percentage="(staffOrder.orderType11 + staffOrder.orderType12) * 10"
         :color="colors"
         @click="goToOrderList(1)"
       >
         <template #default>
-          <p class="percentage-value">0 / 1</p>
+          <p class="percentage-value">
+            {{ staffOrder.orderType11 }} / {{ staffOrder.orderType12 }}
+          </p>
           <span class="percentage-label">软件类</span>
         </template>
       </el-progress>
       <el-progress
         type="dashboard"
-        :percentage="50"
+        :percentage="(staffOrder.orderType21 + staffOrder.orderType22) * 10"
         :color="colors"
         @click="goToOrderList(2)"
       >
         <template #default>
-          <p class="percentage-value">0 / 1</p>
+          <p class="percentage-value">
+            {{ staffOrder.orderType21 }} / {{ staffOrder.orderType22 }}
+          </p>
           <span class="percentage-label">硬件类</span>
         </template>
       </el-progress>
@@ -110,23 +137,27 @@ const goToOrderList = (orderType) => {
       <el-progress
         class="first-up"
         type="dashboard"
-        :percentage="percentage"
+        :percentage="(staffOrder.orderType31 + staffOrder.orderType32) * 10"
         :color="colors"
         @click="goToOrderList(3)"
       >
         <template #default>
-          <p class="percentage-value">0 / 1</p>
+          <p class="percentage-value">
+            {{ staffOrder.orderType31 }} / {{ staffOrder.orderType32 }}
+          </p>
           <span class="percentage-label">网络类</span>
         </template>
       </el-progress>
       <el-progress
         type="dashboard"
-        :percentage="percentage"
+        :percentage="(staffOrder.orderType41 + staffOrder.orderType42) * 10"
         :color="colors"
         @click="goToOrderList(4)"
       >
         <template #default>
-          <p class="percentage-value">0 / 1</p>
+          <p class="percentage-value">
+            {{ staffOrder.orderType41 }} / {{ staffOrder.orderType42 }}
+          </p>
           <span class="percentage-label">手机类</span>
         </template>
       </el-progress>

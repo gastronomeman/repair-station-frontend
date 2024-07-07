@@ -1,10 +1,9 @@
 import axios from 'axios'
 import { useStaffState } from '@/stores'
-import { useRouter } from 'vue-router'
+import router from '@/router'
 import { errorMsg } from '@/utils/SendMsgUtils.js'
 
-const router = useRouter()
-const baseURL = 'http://10.19.209.138:8080'
+const baseURL = 'http://10.19.223.228:8080'
 
 const instance = axios.create({
   // 1. 基础地址，超时时间
@@ -35,7 +34,11 @@ instance.interceptors.response.use(
     }
     //3. 处理业务失败
     if (res.data.code === 0 && res.data.msg === 'not_login') {
-      router.push('/staff/login').then(() => alert('登录验证失效请重新登陆'))
+      alert('登录验证失效请重新登陆')
+      const staffState = useStaffState()
+      staffState.clear()
+
+      router.push('/staff/login')
       return Promise.reject(res.data.msg)
     }
 

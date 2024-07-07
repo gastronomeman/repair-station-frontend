@@ -10,8 +10,9 @@ const active = ref(0)
 const refresh = ref(false)
 const refreshFun = () => {
   setTimeout(() => {
+    location.reload()
     refresh.value = false
-  }, 1000)
+  }, 800)
 }
 
 const tabSwitch = (item, index) => {
