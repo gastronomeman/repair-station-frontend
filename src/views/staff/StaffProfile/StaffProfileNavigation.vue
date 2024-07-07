@@ -1,8 +1,17 @@
 <script setup>
 import { useRouter, useRoute } from 'vue-router'
+import { logoutService } from '@/api/staff.js'
+import { useStaffState } from '@/stores/index.js'
 
 const router = useRouter()
 const route = useRoute()
+const staffState = useStaffState()
+
+const logout = async () => {
+  await logoutService()
+  await router.push('/staff/login')
+  staffState.clear()
+}
 </script>
 
 <template>
@@ -29,7 +38,7 @@ const route = useRoute()
     <nut-navbar style="cursor: pointer">
       <template #left><span class="nav-title">帮助</span></template>
     </nut-navbar>
-    <nut-navbar class="footer-navbar" title="退出"></nut-navbar>
+    <nut-navbar class="footer-navbar" title="退出" @click="logout"></nut-navbar>
   </div>
 
   <router-view></router-view>

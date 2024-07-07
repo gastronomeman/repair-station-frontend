@@ -26,9 +26,10 @@ const checkPassword = () => {
 const submit = async () => {
   if (isNotBlank(staff.value.studentId) || isNotBlank(staff.value.password)) {
     warningMsg('账号密码不能为空！')
+    staff.value.password = ''
     return
   }
-
+  console.log(staff.value)
   const resp = await staffLoginService(staff.value)
   if (resp.code === 1) {
     staffState.setToken(resp.data)
