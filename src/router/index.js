@@ -52,13 +52,27 @@ router.beforeEach(async (to) => {
       return '/orders/announcements'
   }
 
+  const staffState = useStaffState()
   //后台逻辑
-  if (to.path.startsWith('/staff') && to.path !== '/staff/login') {
-    const staffState = useStaffState()
+  if (
+    (to.path.startsWith('/staff') && to.path !== '/staff/login') ||
+    to.path.startsWith('/admin')
+  ) {
     if (staffState.token === '') {
       alert('请先登录后尝试吧')
       return '/staff/login'
     }
+  }
+
+  if (!to.path.includes('/staff/login') && to.path.startsWith('/staff')) {
+    if (staffState.name === 'admin') {
+      alert('管理员不能使用接单页面哦')
+      return '/staff/login'
+    }
+  }
+  if (to.path.startsWith('/admin') && staffState.name !== 'admin') {
+    alert('成员不能进管理员页面哦')
+    return '/staff/login'
   }
 })
 export default router

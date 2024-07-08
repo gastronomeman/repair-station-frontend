@@ -16,17 +16,13 @@ const refreshFun = () => {
   }, 800)
 }
 
-const tabSwitch = (item, index) => {
-  console.log(item, index)
-}
-
 const frame = ref(true)
 watch(
   () => route.fullPath,
   (newPath) => {
-    if (route.fullPath.includes('/staff/order-acceptance')) active.value = 0
-    else if (route.fullPath.includes('/staff/accepted-orders')) active.value = 1
-    else if (route.fullPath.includes('/staff/profile')) active.value = 2
+    if (newPath.includes('/staff/order-acceptance')) active.value = 0
+    else if (newPath.includes('/staff/accepted-orders')) active.value = 1
+    else if (newPath.includes('/staff/profile')) active.value = 2
 
     frame.value = !newPath.includes('/staff/login')
   },
@@ -54,7 +50,6 @@ if (!route.fullPath.includes('/staff/login')) getTitle()
   <nut-tabbar
     v-if="frame"
     v-model="active"
-    @tab-switch="tabSwitch"
     :bottom="true"
     :safe-area-inset-bottom="true"
   >

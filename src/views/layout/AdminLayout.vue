@@ -1,7 +1,50 @@
-<script setup></script>
+<script setup>
+import { Home, Me, Order } from '@icon-park/vue-next'
+import { ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
+
+const refresh = ref(false)
+const refreshFun = () => {
+  setTimeout(() => {
+    location.reload()
+    refresh.value = false
+  }, 800)
+}
+
+const route = useRoute()
+const active = ref(0)
+watch(
+  () => route.fullPath,
+  (newPath) => {
+    if (newPath.includes('/admin/monitor-staff')) active.value = 0
+    else if (newPath.includes('/admin/staff-list')) active.value = 1
+    else if (newPath.includes('/admin/profile')) active.value = 2
+  },
+  { immediate: true }
+)
+</script>
 
 <template>
-  <router-view></router-view>
+  <nut-pull-refresh v-model="refresh" @refresh="refreshFun">
+    <router-view></router-view>
+  </nut-pull-refresh>
+  <nut-tabbar v-model="active" :bottom="true" :safe-area-inset-bottom="true">
+    <nut-tabbar-item tab-title="首页" to="/admin">
+      <template #icon>
+        <home theme="outline" size="25" :strokeWidth="3" />
+      </template>
+    </nut-tabbar-item>
+    <nut-tabbar-item tab-title="订单查询" to="/admin/staff-list">
+      <template #icon>
+        <order theme="outline" size="25" :strokeWidth="3" />
+      </template>
+    </nut-tabbar-item>
+    <nut-tabbar-item tab-title="我的" to="/admin/profile">
+      <template #icon>
+        <me theme="outline" size="25" :strokeWidth="3" />
+      </template>
+    </nut-tabbar-item>
+  </nut-tabbar>
 </template>
 
 <style scoped></style>

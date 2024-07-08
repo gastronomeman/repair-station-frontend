@@ -3,7 +3,7 @@ import { useStaffState } from '@/stores'
 import router from '@/router'
 import { errorMsg } from '@/utils/SendMsgUtils.js'
 
-const baseURL = 'http://192.168.142.15:8080'
+const baseURL = 'http://localhost:8080'
 
 const instance = axios.create({
   // 1. 基础地址，超时时间
@@ -42,10 +42,10 @@ instance.interceptors.response.use(
       return Promise.reject(res.data.msg)
     }
 
-    if (res.data.code === 0) {
+    if (res.data.code === 0 && res.data.msg !== '停止接单') {
       errorMsg(res.data.msg)
-      return Promise.reject(res.data.msg)
     }
+    return res.data
   },
   (err) => {
     if (err.response?.status === 401) {

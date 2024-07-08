@@ -41,7 +41,7 @@ const staffOrder = ref({
   staffSemesterOrderCount: '',
   staffWeekOrderCount: ''
 })
-const loading = ref(true)
+const loading = ref(false)
 const getStaffOrder = async () => {
   loading.value = true
   const resp = await getStaffOrderTotalService()

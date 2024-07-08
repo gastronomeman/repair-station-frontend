@@ -9,12 +9,20 @@ export const useStaffState = defineStore(
       token.value = newValues
     }
 
+    const name = ref('')
+    const setName = (newValues) => {
+      name.value = newValues
+    }
+
     const clear = () => {
       token.value = ''
+      name.value = ''
     }
     return {
       token,
       setToken,
+      name,
+      setName,
       clear
     }
   },

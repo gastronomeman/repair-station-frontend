@@ -1,4 +1,8 @@
-<script setup></script>
+<script setup>
+import { errorMsg } from '@/utils/SendMsgUtils.js'
+
+errorMsg('停止接单！')
+</script>
 
 <template>
   <div class="new-order-container">

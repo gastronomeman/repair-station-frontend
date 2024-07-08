@@ -33,7 +33,13 @@ const submit = async () => {
   const resp = await staffLoginService(staff.value)
   if (resp.code === 1) {
     staffState.setToken(resp.data)
+    staffState.setName(staff.value.studentId)
+
     successMsg('登录成功！')
+    if (staff.value.studentId === 'admin') {
+      await router.push('/admin')
+      return
+    }
     await router.push('/staff')
   }
 }
