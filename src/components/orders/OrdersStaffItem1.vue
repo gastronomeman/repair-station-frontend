@@ -37,7 +37,16 @@ const handleClick = async () => {
       <nut-row>
         <nut-col :span="24">
           <div class="content-body">
-            <span class="body-left">
+            <span
+              class="body-left"
+              v-if="order.identity === 0"
+              style="color: #f1939c"
+            >
+              {{ order.building }}#{{ order.dormitory }}
+              &nbsp;
+              {{ order.name }}
+            </span>
+            <span class="body-left" v-else style="color: #5698c3">
               {{ order.building }}#{{ order.dormitory }}
               &nbsp;
               {{ order.name }}

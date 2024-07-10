@@ -1,5 +1,5 @@
 <script setup>
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { ref } from 'vue'
 import md5 from 'js-md5'
 import { successMsg, warningMsg } from '@/utils/SendMsgUtils.js'
@@ -9,9 +9,11 @@ import { changPasswordService, logoutService } from '@/api/staff.js'
 
 const staffState = useStaffState()
 const router = useRouter()
+const route = useRoute()
 
 const onClick = () => {
-  router.push('/staff/profile')
+  if (route.fullPath.includes('admin')) router.push('/admin/profile')
+  else router.push('/staff/profile')
 }
 
 const password = ref({

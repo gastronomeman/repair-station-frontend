@@ -1,11 +1,14 @@
 <script setup>
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { ref } from 'vue'
 import { staffLeaderboardService } from '@/api/staff.js'
 
 const router = useRouter()
+const route = useRoute()
+
 const onClick = () => {
-  router.push('/staff/profile')
+  if (route.fullPath.includes('admin')) router.push('/admin/profile')
+  else router.push('/staff/profile')
 }
 
 const leaderboard = ref([])

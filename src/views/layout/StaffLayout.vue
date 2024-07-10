@@ -16,18 +16,6 @@ const refreshFun = () => {
   }, 800)
 }
 
-const frame = ref(true)
-watch(
-  () => route.fullPath,
-  (newPath) => {
-    if (newPath.includes('/staff/order-acceptance')) active.value = 0
-    else if (newPath.includes('/staff/accepted-orders')) active.value = 1
-    else if (newPath.includes('/staff/profile')) active.value = 2
-
-    frame.value = !newPath.includes('/staff/login')
-  },
-  { immediate: true }
-)
 const title = ref('')
 const getTitle = async () => {
   const resp = await getStaffTitleService()
@@ -35,7 +23,21 @@ const getTitle = async () => {
     title.value = resp.data
   }
 }
-if (!route.fullPath.includes('/staff/login')) getTitle()
+
+const frame = ref(true)
+watch(
+  () => route.fullPath,
+  async (newPath) => {
+    if (newPath.includes('/staff/order-acceptance')) active.value = 0
+    else if (newPath.includes('/staff/accepted-orders')) active.value = 1
+    else if (newPath.includes('/staff/profile')) active.value = 2
+
+    if (!newPath.includes('/staff/login')) await getTitle()
+
+    frame.value = !newPath.includes('/staff/login')
+  },
+  { immediate: true }
+)
 </script>
 
 <template>
