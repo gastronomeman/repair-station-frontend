@@ -2,7 +2,7 @@
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 import { historyListService } from '@/api/orders.js'
-import OrdersStaffItem2 from '@/components/orders/OrdersStaffItem2.vue'
+import OrdersStaffItemSee from '@/components/orders/OrdersStaffItemSee.vue'
 
 const router = useRouter()
 const onClick = () => {
@@ -28,7 +28,7 @@ getHistoryOrdersList()
   </nut-navbar>
   <div v-for="orders in orderList" :key="orders.value">
     <br />
-    <orders-staff-item2 :order="orders"></orders-staff-item2>
+    <orders-staff-item-see :order="orders"></orders-staff-item-see>
   </div>
 </template>
 

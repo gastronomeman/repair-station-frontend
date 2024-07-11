@@ -1,6 +1,6 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import {
   addStaffService,
   getStaffListService,
@@ -74,6 +74,15 @@ const change = async () => {
 const searchStaff = async () => {
   await getStaffList()
 }
+
+const resetList = async () => {
+  search.value = ''
+  await getStaffList()
+}
+
+const filteredRecords = computed(() => {
+  return staffList.value.filter((record) => record.id !== '0')
+})
 </script>
 
 <template>
@@ -99,8 +108,11 @@ const searchStaff = async () => {
       placeholder="输入学号名字查询"
     />&nbsp;
     <nut-button type="info" size="small" @click="searchStaff">查询</nut-button>
+    &nbsp;
+    <nut-button type="info" size="small" @click="resetList">重置</nut-button>
+    <nut-divider />
   </div>
-  <div class="table" v-for="(item, index) in staffList" :key="index">
+  <div class="table" v-for="(item, index) in filteredRecords" :key="index">
     <nut-row>
       <nut-col :span="8">
         <div class="content">{{ item.studentId }}</div>
