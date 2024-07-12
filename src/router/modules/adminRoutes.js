@@ -4,7 +4,9 @@ import AdminStaffList from '@/views/admin/AdminStaffList.vue'
 import AdminProfileNavigation from '@/views/admin/AdminProfile/AdminProfileNavigation.vue'
 import AddMember from '@/views/admin/AdminProfile/AddMember.vue'
 import Leaderboard from '@/views/staff/StaffProfile/Leaderboard.vue'
+import AllOrderList from '@/views/admin/AdminProfile/AllOrderList.vue'
 import ChangePassword from '@/views/staff/StaffProfile/ChangePassword.vue'
+import TransferDatabase from '@/views/admin/AdminProfile/TransferDatabase.vue'
 import Help from '@/views/staff/StaffProfile/Help.vue'
 
 export default [
@@ -35,8 +37,16 @@ export default [
             component: Leaderboard
           },
           {
+            path: 'all-order-list',
+            component: AllOrderList
+          },
+          {
             path: 'change-password',
             component: ChangePassword
+          },
+          {
+            path: 'transfer-database',
+            component: TransferDatabase
           },
           {
             path: 'help',

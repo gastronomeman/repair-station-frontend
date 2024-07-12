@@ -31,6 +31,20 @@ const logout = async () => {
     </nut-navbar>
     <nut-navbar
       style="cursor: pointer"
+      @click="router.push('/admin/profile/all-order-list')"
+    >
+      <template #left><span class="nav-title">所有维修单</span></template>
+    </nut-navbar>
+    <nut-navbar
+      style="cursor: pointer"
+      @click="router.push('/admin/profile/transfer-database')"
+    >
+      <template #left>
+        <span class="nav-title">转存数据库（每一学年末必使用）</span>
+      </template>
+    </nut-navbar>
+    <nut-navbar
+      style="cursor: pointer"
       @click="router.push('/admin/profile/change-password')"
     >
       <template #left><span class="nav-title">修改登录密码</span></template>
@@ -56,6 +70,6 @@ const logout = async () => {
   }
 }
 .footer-navbar {
-  margin-top: 160px;
+  margin-top: 90px;
 }
 </style>
