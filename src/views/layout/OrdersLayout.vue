@@ -68,7 +68,7 @@ watch(
 </script>
 
 <template>
-  <nut-noticebar :text="text" wrapable scrollable v-if="!isNotBlank(text)">
+  <nut-noticebar :text="text" scrollable v-if="!isNotBlank(text)">
     <template #left-icon>
       <announcement theme="outline" size="20" />
     </template>

@@ -112,7 +112,7 @@ const updateClick = async () => {
 
 <style scoped>
 .chang-password-img {
-  width: 45%;
+  width: 30%;
   margin: 20px auto 0;
   text-align: center;
   img {
@@ -137,7 +137,7 @@ const updateClick = async () => {
 
 .change-password-button {
   width: 80%;
-  margin: 20px auto 50px;
+  margin: 20px auto 150px;
   text-align: center;
   p {
     width: 80%;
