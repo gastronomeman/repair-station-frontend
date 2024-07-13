@@ -7,6 +7,7 @@ import OrderHistory from '@/views/staff/StaffProfile/OrderHistory.vue'
 import Leaderboard from '@/views/staff/StaffProfile/Leaderboard.vue'
 import ChangePassword from '@/views/staff/StaffProfile/ChangePassword.vue'
 import Help from '@/views/staff/StaffProfile/Help.vue'
+import OrderDetails from '@/views/staff/StaffProfile/OrderDetails.vue'
 
 export default [
   {
@@ -53,6 +54,10 @@ export default [
           {
             path: 'help',
             component: Help
+          },
+          {
+            path: 'orders-details',
+            component: OrderDetails
           }
         ]
       }
