@@ -8,10 +8,20 @@ const props = defineProps({
   }
 })
 const order = ref(props.order)
+
+const handleClick = async () => {
+  if (order.value.status === 3) {
+    alert(`已在${order.value.completionTime}完成维修 (*^▽^*) `)
+  } else if (order.value.status === 2) {
+    alert('我们的工作人员正在处理，请留言手机短信哦 (*^▽^*) ')
+  } else {
+    alert('请耐心等待，工作人员正在赶来 (*^▽^*) ')
+  }
+}
 </script>
 
 <template>
-  <div class="orders-item">
+  <div class="orders-item" @click="handleClick">
     <div class="orders-row">
       <nut-row>
         <nut-col :span="24">
