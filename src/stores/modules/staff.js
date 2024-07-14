@@ -14,15 +14,23 @@ export const useStaffState = defineStore(
       name.value = newValues
     }
 
+    const order = ref({})
+    const setOrder = (newValues) => {
+      order.value = newValues
+    }
+
     const clear = () => {
       token.value = ''
       name.value = ''
+      order.value = ''
     }
     return {
       token,
       setToken,
       name,
       setName,
+      order,
+      setOrder,
       clear
     }
   },

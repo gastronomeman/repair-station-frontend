@@ -24,3 +24,8 @@ export const finishOrderService = (data) =>
 export const historyListService = () => request.get(`/orders/history-list`)
 
 export const getAdminOrderService = () => request.get('/orders/admin-orders')
+
+export const getFinishOrderService = (page, pageSize, name) =>
+  request.get(
+    `/orders/finish-order-list?page=${page}&pageSize=${pageSize}&name=${name}`
+  )

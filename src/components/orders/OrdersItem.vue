@@ -13,7 +13,7 @@ const handleClick = async () => {
   if (order.value.status === 3) {
     alert(`已在${order.value.completionTime}完成维修 (*^▽^*) `)
   } else if (order.value.status === 2) {
-    alert('我们的工作人员正在处理，请留言手机短信哦 (*^▽^*) ')
+    alert('我们的工作人员正在处理，请留意手机短信哦 (*^▽^*) ')
   } else {
     alert('请耐心等待，工作人员正在赶来 (*^▽^*) ')
   }

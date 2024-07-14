@@ -4,6 +4,7 @@ import router from '@/router'
 import { errorMsg } from '@/utils/SendMsgUtils.js'
 
 //103.40.13.71:40991
+//const baseURL = 'http://103.40.13.71:40991'
 const baseURL = 'http://localhost:8099'
 
 const instance = axios.create({

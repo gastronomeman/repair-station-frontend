@@ -8,6 +8,7 @@ import AllOrderList from '@/views/admin/AdminProfile/AllOrderList.vue'
 import ChangePassword from '@/views/staff/StaffProfile/ChangePassword.vue'
 import TransferDatabase from '@/views/admin/AdminProfile/TransferDatabase.vue'
 import Help from '@/views/staff/StaffProfile/Help.vue'
+import OrderDetails from '@/views/staff/StaffProfile/OrderDetails.vue'
 
 export default [
   {
@@ -39,6 +40,10 @@ export default [
           {
             path: 'all-order-list',
             component: AllOrderList
+          },
+          {
+            path: 'orders-details',
+            component: OrderDetails
           },
           {
             path: 'change-password',

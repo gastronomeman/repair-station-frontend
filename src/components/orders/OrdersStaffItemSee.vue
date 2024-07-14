@@ -1,5 +1,12 @@
 <script setup>
 import { ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { useStaffState } from '@/stores'
+
+const router = useRouter()
+const route = useRoute()
+
+const staffState = useStaffState()
 
 const props = defineProps({
   order: {
@@ -8,8 +15,13 @@ const props = defineProps({
   }
 })
 const order = ref(props.order)
-const handleClick = async () => {
-  alert(`维修完成`)
+const handleClick = () => {
+  staffState.setOrder(order.value)
+  if (route.fullPath.includes('admin')) {
+    router.push('/admin/profile/orders-details')
+    return
+  }
+  router.push('/staff/profile/orders-details')
 }
 </script>
 
