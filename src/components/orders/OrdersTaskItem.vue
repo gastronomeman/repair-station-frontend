@@ -2,6 +2,11 @@
 import { ref, defineEmits } from 'vue'
 import { finishOrderService } from '@/api/orders.js'
 import { successMsg } from '@/utils/SendMsgUtils.js'
+import { useStaffState } from '@/stores/index.js'
+import { useRouter } from 'vue-router'
+
+const staffState = useStaffState()
+const router = useRouter()
 
 const emit = defineEmits(['refresh'])
 const props = defineProps({
@@ -25,6 +30,10 @@ const callPhone = () => {
 }
 const sendSMS = () => {
   window.location.href = `sms:${order.value.phone}`
+}
+const signature = () => {
+  staffState.setOrder(order.value)
+  router.push('/signature')
 }
 </script>
 
@@ -80,11 +89,16 @@ const sendSMS = () => {
       <p>{{ order.orderDescribe }}</p>
     </div>
     <nut-row>
+      <nut-col :span="24" @click="signature">
+        <div class="orders-row-footer2">协议签订（拆机用）</div>
+      </nut-col>
+    </nut-row>
+    <nut-row>
       <nut-col :span="12" @click="callPhone">
-        <div class="orders-row-footer">拨打电话</div>
+        <div class="orders-row-footer1">拨打电话</div>
       </nut-col>
       <nut-col :span="12">
-        <div class="orders-row-footer" @click="sendSMS">发送短信</div>
+        <div class="orders-row-footer1" @click="sendSMS">发送短信</div>
       </nut-col>
     </nut-row>
   </div>
@@ -135,7 +149,15 @@ const sendSMS = () => {
       font-size: 18px;
     }
   }
-  .orders-row-footer {
+  .orders-row-footer1 {
+    background-color: #5e616d;
+    color: white;
+    font-weight: bold;
+    padding: 5px 0;
+    margin: 2px 1px;
+    text-align: center;
+  }
+  .orders-row-footer2 {
     background-color: #74787a;
     color: white;
     font-weight: bold;

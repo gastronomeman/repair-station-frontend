@@ -8,6 +8,7 @@ import Leaderboard from '@/views/staff/StaffProfile/Leaderboard.vue'
 import ChangePassword from '@/views/staff/StaffProfile/ChangePassword.vue'
 import Help from '@/views/staff/StaffProfile/Help.vue'
 import OrderDetails from '@/views/staff/StaffProfile/OrderDetails.vue'
+import Signature from '@/views/staff/SignaturePgae.vue'
 
 export default [
   {
@@ -34,6 +35,7 @@ export default [
         meta: { requiresAuth: true },
         component: StaffAcceptedOrders
       },
+
       {
         path: 'profile',
         component: StaffProfileNavigation,
@@ -62,5 +64,9 @@ export default [
         ]
       }
     ]
+  },
+  {
+    path: '/signature',
+    component: Signature
   }
 ]
