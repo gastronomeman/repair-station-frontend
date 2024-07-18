@@ -20,7 +20,9 @@ const order = ref({})
 order.value = staffState.order
 
 const getNameById = async () => {
-  let resp = await getNameByIdService(order.value.staffId)
+  if (!route.fullPath.includes('admin')) return
+  if (order.value.staffId == null) return
+  const resp = await getNameByIdService(order.value.staffId)
   if (resp.code === 1) {
     order.value.staffName = resp.data
   }
@@ -124,15 +126,17 @@ getNameById()
       </nut-col>
     </nut-row>
     <nut-divider dashed />
-    <nut-row>
-      <nut-col :span="12">
-        <div class="content-left">维修人员：</div>
-      </nut-col>
-      <nut-col :span="12">
-        <div class="content-right">{{ order.staffName }}</div>
-      </nut-col>
-    </nut-row>
-    <nut-divider dashed />
+    <div v-if="route.fullPath.includes('admin')">
+      <nut-row>
+        <nut-col :span="12">
+          <div class="content-left">维修人员：</div>
+        </nut-col>
+        <nut-col :span="12">
+          <div class="content-right">{{ order.staffName }}</div>
+        </nut-col>
+      </nut-row>
+      <nut-divider dashed />
+    </div>
     <div v-if="route.fullPath.includes('admin')">
       <nut-row>
         <nut-col :span="12">

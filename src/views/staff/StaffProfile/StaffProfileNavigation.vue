@@ -35,7 +35,10 @@ const logout = async () => {
     >
       <template #left><span class="nav-title">修改登录密码</span></template>
     </nut-navbar>
-    <nut-navbar style="cursor: pointer">
+    <nut-navbar
+      style="cursor: pointer"
+      @click="router.push('/staff/profile/help')"
+    >
       <template #left><span class="nav-title">帮助</span></template>
     </nut-navbar>
     <nut-navbar class="footer-navbar" title="退出" @click="logout"></nut-navbar>
