@@ -156,6 +156,7 @@ const signature = () => {
     padding: 5px 0;
     margin: 2px 1px;
     text-align: center;
+    cursor: pointer;
   }
   .orders-row-footer2 {
     background-color: #74787a;
@@ -164,6 +165,7 @@ const signature = () => {
     padding: 5px 0;
     margin-top: 5px;
     text-align: center;
+    cursor: pointer;
   }
 }
 </style>

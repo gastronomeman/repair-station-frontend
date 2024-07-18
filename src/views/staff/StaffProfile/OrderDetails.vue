@@ -2,6 +2,7 @@
 import { useRoute, useRouter } from 'vue-router'
 import { useStaffState } from '@/stores/index.js'
 import { ref } from 'vue'
+import { getNameByIdService } from '@/api/staff.js'
 
 const router = useRouter()
 const route = useRoute()
@@ -17,6 +18,14 @@ const onClick = () => {
 
 const order = ref({})
 order.value = staffState.order
+
+const getNameById = async () => {
+  let resp = await getNameByIdService(order.value.staffId)
+  if (resp.code === 1) {
+    order.value.staffName = resp.data
+  }
+}
+getNameById()
 </script>
 
 <template>
@@ -112,6 +121,15 @@ order.value = staffState.order
       </nut-col>
       <nut-col :span="12" v-if="order.orderType === 4">
         <div class="content-right">手机类</div>
+      </nut-col>
+    </nut-row>
+    <nut-divider dashed />
+    <nut-row>
+      <nut-col :span="12">
+        <div class="content-left">维修人员：</div>
+      </nut-col>
+      <nut-col :span="12">
+        <div class="content-right">{{ order.staffName }}</div>
       </nut-col>
     </nut-row>
     <nut-divider dashed />
