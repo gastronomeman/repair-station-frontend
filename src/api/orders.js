@@ -29,3 +29,5 @@ export const getFinishOrderService = (page, pageSize, name) =>
   request.get(
     `/orders/finish-order-list?page=${page}&pageSize=${pageSize}&name=${name}`
   )
+
+export const changSqlService = () => request.get(`/orders/change-sql`)

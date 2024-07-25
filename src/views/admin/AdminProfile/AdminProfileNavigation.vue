@@ -40,7 +40,7 @@ const logout = async () => {
       @click="router.push('/admin/profile/transfer-database')"
     >
       <template #left>
-        <span class="nav-title">转存数据库（每一学年末必使用）</span>
+        <span class="nav-title">转存数据库（每一学年末，必使用）</span>
       </template>
     </nut-navbar>
     <nut-navbar

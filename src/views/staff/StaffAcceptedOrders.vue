@@ -21,20 +21,27 @@ const refreshOrdersList = async () => getOrdersList()
 
 <template>
   <nut-navbar title="任务"></nut-navbar>
-  <div v-for="order in ordersList" :key="order.id" v-loading="loading">
-    <div class="br">&nbsp;</div>
-    <orders-task-item
-      @refresh="refreshOrdersList"
-      :order="order"
-    ></orders-task-item>
+  <div class="loading" v-loading="loading">
+    <div v-for="order in ordersList" :key="order.id">
+      <div class="br">&nbsp;</div>
+      <div class="br">&nbsp;</div>
+      <orders-task-item
+        @refresh="refreshOrdersList"
+        :order="order"
+      ></orders-task-item>
+    </div>
+    <el-empty style="background: #f0f0f0" v-if="ordersList.length === 0">
+      <template #description>
+        <p style="text-align: center; font-size: 20px">
+          修修你的<br />˚‧º·(˚ ˃̣̣̥᷄⌓˂̣̣̥᷅ )‧º·˚
+        </p>
+      </template>
+    </el-empty>
   </div>
-  <el-empty style="background: #f0f0f0" v-if="ordersList.length === 0">
-    <template #description>
-      <p style="text-align: center; font-size: 20px">
-        修修你的<br />˚‧º·(˚ ˃̣̣̥᷄⌓˂̣̣̥᷅ )‧º·˚
-      </p>
-    </template>
-  </el-empty>
 </template>
 
-<style scoped></style>
+<style scoped>
+.loading {
+  margin-bottom: 50px;
+}
+</style>

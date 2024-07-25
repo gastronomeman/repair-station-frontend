@@ -4,8 +4,8 @@ import router from '@/router'
 import { errorMsg } from '@/utils/SendMsgUtils.js'
 
 //103.40.13.71:40991
-//const baseURL = 'http://103.40.13.71:40991'
-const baseURL = 'http://192.168.0.104:8099'
+//const baseURL = 'http://127.0.0.1:8099'
+const baseURL = window.config.baseUrl
 
 const instance = axios.create({
   // 1. 基础地址，超时时间
