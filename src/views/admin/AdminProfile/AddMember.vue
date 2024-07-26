@@ -1,6 +1,6 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import {
   addStaffService,
   getStaffListService,
@@ -23,7 +23,7 @@ const staff = ref({
 
 const page = ref({
   currentPage: 1,
-  pageSize: 10,
+  pageSize: 15,
   total: 0
 })
 const search = ref('')
@@ -82,6 +82,22 @@ const resetList = async () => {
   search.value = ''
   await getStaffList()
 }
+
+const toTop = async () => {
+  page.value.currentPage = 1
+  search.value = ''
+  await getStaffList()
+}
+
+const toEnd = async () => {
+  page.value.currentPage = Math.ceil(page.value.total / page.value.pageSize)
+  search.value = ''
+  await getStaffList()
+}
+
+const totalPage = computed(() => {
+  return Math.ceil(page.value.total / page.value.pageSize)
+})
 </script>
 
 <template>
@@ -140,6 +156,12 @@ const resetList = async () => {
       @change="change"
     />
   </div>
+  <div class="page-footer">
+    <p>{{ page.currentPage }}/{{ totalPage }}页</p>
+    <nut-button size="small" type="default" @click="toTop">首页</nut-button>
+    &nbsp;
+    <nut-button size="small" type="default" @click="toEnd">尾页</nut-button>
+  </div>
 </template>
 
 <style scoped>
@@ -171,9 +193,17 @@ const resetList = async () => {
 
 .page {
   width: 90%;
-  margin: 0 auto 50px;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.page-footer {
+  text-align: center;
+  p {
+    color: #7a7374;
+    margin: 0 0 5px;
+  }
+  margin: 10px 0 60px;
 }
 </style>
