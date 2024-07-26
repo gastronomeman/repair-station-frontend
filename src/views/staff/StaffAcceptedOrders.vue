@@ -24,7 +24,6 @@ const refreshOrdersList = async () => getOrdersList()
   <div class="loading" v-loading="loading">
     <div v-for="order in ordersList" :key="order.id">
       <div class="br">&nbsp;</div>
-      <div class="br">&nbsp;</div>
       <orders-task-item
         @refresh="refreshOrdersList"
         :order="order"
@@ -33,7 +32,8 @@ const refreshOrdersList = async () => getOrdersList()
     <el-empty style="background: #f0f0f0" v-if="ordersList.length === 0">
       <template #description>
         <p style="text-align: center; font-size: 20px">
-          修修你的<br />˚‧º·(˚ ˃̣̣̥᷄⌓˂̣̣̥᷅ )‧º·˚
+          修修你的<br />˚‧º·(˚ ˃̣̣̥᷄⌓˂̣̣̥᷅ )‧º·˚<br /><br />
+          不会修，不敢接找师兄师姐呀 ❛‿˂̵✧
         </p>
       </template>
     </el-empty>

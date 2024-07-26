@@ -1,7 +1,7 @@
 <script setup>
 import { errorMsg } from '@/utils/SendMsgUtils.js'
 
-errorMsg('停止接单！')
+errorMsg('停止接单！૮ ˃̣̣̥⌓˂̣̣̥ა')
 </script>
 
 <template>
@@ -9,7 +9,7 @@ errorMsg('停止接单！')
     <div class="new-order-head">
       <img src="@/assets/orders/images/news_top.png" alt="图标" />
       <div class="new-order-from">
-        <h2>非常抱歉，维修服务暂时停止，开启时间请等待通知！</h2>
+        <h2>非常抱歉(╥_╥)，维修服务暂时停止，开启时间请等待通知！</h2>
         <p>
           &nbsp;&nbsp;&nbsp;&nbsp;服务具体开放通知，可关注下面公众号获取最新消息<br />
           &nbsp;&nbsp;&nbsp;&nbsp;如遇紧急情况，需要维修电脑可添加维修站QQ咨询群：790445318
