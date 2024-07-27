@@ -16,8 +16,9 @@ const toOrder = () => {
   <div>
     <img src="@/assets/rs_logo.png" alt="" />
     <nut-button @click="toOrder" size="large" type="danger">
-      点击跳转到报修页面（建议使用手机浏览器打开）
+      点击跳转到报修页面
     </nut-button>
+    （建议使用手机浏览器打开）
   </div>
   <orders-footer></orders-footer>
 </template>
