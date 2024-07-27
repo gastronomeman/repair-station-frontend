@@ -21,54 +21,40 @@ const handleClick = () => {
       <div>返回</div>
     </template>
   </nut-navbar>
-  <div class="bz">
-    <h2 align="center">1.0版操作说明</h2>
+  <div class="helpPage">
+    <h2 align="center">维修站报修系统操作说明</h2>
     <p>1.首页，查看当前故障报修数量、个人信息、公告以及更多。</p>
-    <img
-      src="@/assets/help/微信图片_202407181918153.jpg"
-      width="250px"
-      alt=""
-    /><br />
+    <img src="@/assets/help/help1.jpg" width="250px" alt="" /><br />
+    <nut-divider dashed />
     <p>2.点击按钮进来，点击“接单”为接手处理此故障，</p>
-    <img
-      src="@/assets/help/微信图片_20240718191815.jpg"
-      width="250px"
-      alt=""
-    /><br />
+    <img src="@/assets/help/help2.jpg" width="250px" alt="" /><br />
+    <nut-divider dashed />
     <p>3.点击上方“维修中”查看已接单</p>
-    <img src="@/assets/help/微信图片_20240718191814.jpg" width="250px" alt="" />
-    <img
-      src="@/assets/help/微信图片_202407181918141.jpg"
-      width="250px"
-      alt=""
-    /><br />
-    <p>4.这里是自己接的单。</p>
-    <img
-      src="@/assets/help/微信图片_202407181918152.jpg"
-      width="250px"
-      alt=""
-    /><br />
+    <img src="@/assets/help/help3.jpg" width="250px" alt="" />
+    <img src="@/assets/help/help4.jpg" width="250px" alt="" /><br />
+    <nut-divider dashed />
+    <p>4.这里是自己接的单。维修完成后点击黄字”维修中“结束维修单。</p>
+    <img src="@/assets/help/help5.jpg" width="250px" alt="" />
+    <img src="@/assets/help/help6.jpg" width="250px" alt="" /><br />
+    <nut-divider dashed />
     <p>
-      5.如果有拆机单在修单前需要点击“签订协议”，机主签完名之后记得自己截图保存
+      5.如果有“拆机”单在修单前，需要点击“签订协议”，同时需要给笔记本细节进行拍照。机主签完名之后记得自己截图保存<br />
+      <span style="color: red">
+        如自己没有保存照片及截图，后期纠纷社员自己承担
+      </span>
     </p>
-    <img
-      src="@/assets/help/微信图片_202407181918151.jpg"
-      width="250px"
-      alt=""
-    /><br />
+    <img src="@/assets/help/help7.jpg" width="250px" alt="" /><br />
+    <nut-divider dashed />
     <p>6.个人中心，可查看历史处理记录，修改口令等等。</p>
-    <img
-      src="@/assets/help/微信图片_202407181918154.jpg"
-      width="250px"
-      alt=""
-    /><br />
+    <img src="@/assets/help/help8.jpg" width="250px" alt="" /><br />
+    <nut-divider dashed />
     <p>*为了账号安全，退出前务必点击“退出”按钮，退出此次登陆状态。</p>
-    <img
-      v-if="route.fullPath.includes('admin')"
-      src="@/assets/help/微信图片_20240718193750.jpg"
-      width="250px"
-      alt=""
-    /><br /><br /><br /><br /><br /><br />
+    <nut-divider class="foot-line" />
+    <p style="margin: 0">
+      **如果觉得此系统不完善，或者是想继续改进，需要源码，请联系我。微信：L18218644665。
+    </p>
+    <p style="text-align: right">—— 22届师兄</p>
+    <br /><br /><br /><br /><br />
   </div>
   <nut-backtop
     el-id="elId1"
@@ -87,8 +73,16 @@ p {
   margin-inline-start: 0;
   margin-inline-end: 0;
 }
-.bz {
-  width: 254px;
+.helpPage {
+  width: 80%;
   margin: 0 auto;
+  text-align: center;
+  img {
+    border: 1px solid #7a7374;
+    border-radius: 10px;
+  }
+}
+.foot-line {
+  margin: 45px 0 10px;
 }
 </style>
