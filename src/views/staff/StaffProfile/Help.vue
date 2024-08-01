@@ -38,15 +38,25 @@ const handleClick = () => {
     <img src="@/assets/help/help6.jpg" width="250px" alt="" /><br />
     <nut-divider dashed />
     <p>
-      5.如果有“拆机”单在修单前，需要点击“签订协议”，同时需要给笔记本细节进行拍照。机主签完名之后记得自己截图保存<br />
+      5.1
+      如果有“拆机”单在修单前，需要点击“签订协议”，同时需要给笔记本细节进行拍照。机主签完名之后记得自己截图保存<br />
       <span style="color: red">
         如自己没有保存照片及截图，后期纠纷社员自己承担
       </span>
     </p>
     <img src="@/assets/help/help7.jpg" width="250px" alt="" /><br />
     <nut-divider dashed />
-    <p>6.个人中心，可查看历史处理记录，修改口令等等。</p>
+    <p>5.2 点击此处对拆机过程的图片进行上传<br /></p>
     <img src="@/assets/help/help8.jpg" width="250px" alt="" /><br />
+    <nut-divider dashed />
+    <p>5.3 在此处选择要上传的订单<br /></p>
+    <img src="@/assets/help/help9.jpg" width="250px" alt="" /><br />
+    <nut-divider dashed />
+    <p>5.4 按照所描述的规则进行上传填写<br /></p>
+    <img src="@/assets/help/help10.jpg" width="250px" alt="" /><br />
+    <nut-divider dashed />
+    <p>6.个人中心，可查看历史处理记录，修改口令等等。</p>
+    <img src="@/assets/help/help0.jpg" width="250px" alt="" /><br />
     <nut-divider dashed />
     <p>*为了账号安全，退出前务必点击“退出”按钮，退出此次登陆状态。</p>
     <nut-divider class="foot-line" />

@@ -9,6 +9,8 @@ import ChangePassword from '@/views/staff/StaffProfile/ChangePassword.vue'
 import Help from '@/views/staff/StaffProfile/Help.vue'
 import OrderDetails from '@/views/staff/StaffProfile/OrderDetails.vue'
 import Signature from '@/views/staff/SignaturePgae.vue'
+import UploadNavigation from '@/views/staff/StaffProfile/Upload/UploadNavigation.vue'
+import UploadPhoto from '@/views/staff/StaffProfile/Upload/UploadPhoto.vue'
 
 export default [
   {
@@ -60,6 +62,14 @@ export default [
           {
             path: 'orders-details',
             component: OrderDetails
+          },
+          {
+            path: 'uploader',
+            component: UploadNavigation
+          },
+          {
+            path: 'uploader-photo',
+            component: UploadPhoto
           }
         ]
       }

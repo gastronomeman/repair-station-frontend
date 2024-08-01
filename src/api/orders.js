@@ -18,6 +18,8 @@ export const takingOrdersService = (data) => request.put(`/orders/taking`, data)
 
 export const takingListService = () => request.get(`/orders/taking-list`)
 
+export const uploaderListService = () => request.get(`/orders/uploader-list`)
+
 export const finishOrderService = (data) =>
   request.put(`/orders/finish-order`, data)
 

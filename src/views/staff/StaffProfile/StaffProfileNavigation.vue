@@ -37,6 +37,12 @@ const logout = async () => {
     </nut-navbar>
     <nut-navbar
       style="cursor: pointer"
+      @click="router.push('/staff/profile/uploader')"
+    >
+      <template #left><span class="nav-title">拆机照片核对</span></template>
+    </nut-navbar>
+    <nut-navbar
+      style="cursor: pointer"
       @click="router.push('/staff/profile/help')"
     >
       <template #left><span class="nav-title">帮助</span></template>
@@ -55,8 +61,5 @@ const logout = async () => {
     color: black;
     font-size: 15px;
   }
-}
-.footer-navbar {
-  margin-top: 160px;
 }
 </style>

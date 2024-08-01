@@ -69,7 +69,4 @@ const logout = async () => {
     font-size: 15px;
   }
 }
-.footer-navbar {
-  margin-top: 90px;
-}
 </style>

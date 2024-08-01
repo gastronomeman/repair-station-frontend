@@ -54,7 +54,7 @@ const formRules = ref({
   orderType: [{ required: true, message: '维修类型要进行选择' }],
   orderDescribe: [
     { required: true, message: '问题描述不能为空' },
-    { regex: /^(?!.*\s).{5,}$/, message: '请详细点描述问题' }
+    { regex: /^(?!.*\s).{5,}$/, message: '请详细点描述问题，不能有空白' }
   ]
 })
 

@@ -1,0 +1,84 @@
+<script setup>
+import { useRouter } from 'vue-router'
+import { ref } from 'vue'
+import { uploaderListService } from '@/api/orders.js'
+import { isNotBlank } from '@/utils/StringUtils.js'
+import { warningMsg } from '@/utils/SendMsgUtils.js'
+
+const router = useRouter()
+const onClick = () => router.push('/staff/profile')
+
+const ordersList = ref([])
+const orders = ref('')
+const loading = ref(false)
+
+const getOrdersList = async () => {
+  loading.value = true
+  const resp = await uploaderListService()
+  if (resp.code === 1) {
+    ordersList.value = resp.data
+  }
+  loading.value = false
+}
+getOrdersList()
+
+const goToUPhoto = () => {
+  if (isNotBlank(orders.value)) {
+    warningMsg('没有选择订单号')
+    return
+  }
+  router.push(
+    `/staff/profile/uploader-photo?id=${orders.value.id}&name=${orders.value.orderDescribe}`
+  )
+}
+</script>
+
+<template>
+  <nut-navbar title="拆机照片核对" left-show @click-back="onClick">
+    <template #left>
+      <div>返回</div>
+    </template>
+  </nut-navbar>
+  <div class="upload">
+    <p style="color: red">
+      *图片没说非必填，都要提交，否则后期与机主发生纠纷，全由社员自身负责
+    </p>
+    <h4>选择维修单</h4>
+    <el-select
+      v-model="orders"
+      placeholder="选择需要拆机的订单"
+      size="large"
+      style="width: 240px"
+    >
+      <el-option
+        v-for="item in ordersList"
+        :key="item.id"
+        :label="`${item.name}：${item.studentId}`"
+        :value="item"
+      />
+    </el-select>
+    <nut-button @click="goToUPhoto" size="large" type="primary"
+      >上传图片</nut-button
+    >
+  </div>
+</template>
+
+<style scoped>
+.upload {
+  max-width: 800px;
+  width: 80%;
+  margin: 20px auto 60px;
+  text-align: center;
+  h4 {
+    margin: 5px 0;
+  }
+  p {
+    color: #7a7374;
+    font-size: 12px;
+    margin: 0 0 5px;
+  }
+  .nut-button {
+    margin: 15px 0;
+  }
+}
+</style>
