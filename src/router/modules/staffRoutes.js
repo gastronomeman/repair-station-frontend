@@ -20,28 +20,29 @@ export default [
     children: [
       {
         path: 'login',
+        meta: { title: '社员登录' },
         component: () => import('@/views/staff/StaffLogin.vue')
       },
       {
         path: 'order-acceptance',
-        meta: { requiresAuth: true },
+        meta: { title: '首页', requiresAuth: true },
         component: StaffOrderBrief
       },
       {
         path: 'order-acceptance/list',
-        meta: { requiresAuth: true },
+        meta: { title: '待接单列表', requiresAuth: true },
         component: StaffOrderList
       },
       {
         path: 'accepted-orders',
-        meta: { requiresAuth: true },
+        meta: { title: '报修订单', requiresAuth: true },
         component: StaffAcceptedOrders
       },
 
       {
         path: 'profile',
         component: StaffProfileNavigation,
-        meta: { requiresAuth: true },
+        meta: { title: '我的', requiresAuth: true },
         children: [
           {
             path: 'order-history',

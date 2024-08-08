@@ -20,7 +20,6 @@ const getOrdersList = async () => {
   }
   loading.value = false
 }
-getOrdersList()
 
 const goToUPhoto = () => {
   if (isNotBlank(orders.value)) {
@@ -45,6 +44,7 @@ const goToUPhoto = () => {
     </p>
     <h4>选择维修单</h4>
     <el-select
+      @click.prevent="getOrdersList"
       v-model="orders"
       placeholder="选择需要拆机的订单"
       size="large"

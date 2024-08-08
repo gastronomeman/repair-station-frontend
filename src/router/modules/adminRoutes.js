@@ -19,14 +19,17 @@ export default [
     children: [
       {
         path: 'monitor-staff',
+        meta: { title: '管理员首页' },
         component: AdminMonitorStaff
       },
       {
         path: 'staff-list',
+        meta: { title: '订单查询' },
         component: AdminStaffList
       },
       {
         path: 'profile',
+        meta: { title: '我的' },
         component: AdminProfileNavigation,
         children: [
           {

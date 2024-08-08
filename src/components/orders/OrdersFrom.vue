@@ -86,15 +86,25 @@ const submit = () => {
       }
       loading.value = true
 
-      setTimeout(async function () {
-        const resp = await ordersNewService(order.value)
+      const resp = await ordersNewService(order.value)
 
-        if (resp.code === 1) {
-          console.log(order.value)
-          emit('successStatus', true)
+      if (resp.code === 1) {
+        console.log(order.value)
+        emit('successStatus', true)
+
+        //重置状态
+        order.value = {
+          name: '',
+          studentId: '',
+          building: '点击选择宿舍号',
+          dormitory: '',
+          phone: '',
+          orderType: '',
+          orderDescribe: '',
+          identity: '1'
         }
-        loading.value = false
-      }, 800)
+      }
+      loading.value = false
     } else {
       console.warn('error:', errors)
     }
