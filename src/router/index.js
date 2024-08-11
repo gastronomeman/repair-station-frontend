@@ -47,6 +47,7 @@ router.beforeEach(async (to) => {
   //订单的逻辑
   if (to.path.startsWith('/orders')) {
     const resp = await getServerStatusService()
+    //如果resp.code === 1就是开启接单模式，=== 0 是停止接单
     if (resp.code === 1 && to.path === '/orders/announcements') return '/'
     else if (resp.code === 0 && to.path !== '/orders/announcements')
       return '/orders/announcements'

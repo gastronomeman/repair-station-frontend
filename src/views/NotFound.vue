@@ -1,13 +1,8 @@
 <script setup>
 import OrdersFooter from '@/components/orders/OrdersFooter.vue'
-import { useRouter } from 'vue-router'
+import router from '@/router'
 
-const router = useRouter()
-
-const toOrder = () => {
-  router.push('/')
-  return
-}
+const toOrder = () => router.push('/')
 </script>
 
 <template>

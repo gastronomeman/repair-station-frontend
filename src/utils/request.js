@@ -36,6 +36,9 @@ instance.interceptors.response.use(
     }
     //3. 处理业务失败
     if (res.data.code === 0 && res.data.msg === 'not_login') {
+      //如果已经登录就不会再次发起提示请求
+      if (router.currentRoute.value.path.includes('/staff/login')) return
+
       alert('登录验证失效请重新登陆')
       const staffState = useStaffState()
       staffState.clear()
