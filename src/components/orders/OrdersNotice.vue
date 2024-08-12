@@ -25,7 +25,7 @@ const handleAgree = () => {
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;五、我们既不销售任何电子产品，也不供提任何购买意见。<br />
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;六、如遇紧急情况，需要维修电脑可添加维修站QQ咨询群：790445318进行询问。<br />
       <span style="color: red">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;七、如有任何纠纷投诉，请扫描下方二维码与本公众号取得联系！
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;七、如有任何纠纷或需进行投诉，请扫描下方二维码与本公众号取得联系！
       </span>
       <br />
     </p>

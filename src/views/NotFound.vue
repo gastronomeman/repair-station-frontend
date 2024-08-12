@@ -13,7 +13,6 @@ const toOrder = () => router.push('/')
     <nut-button @click="toOrder" size="large" type="danger">
       点击跳转到报修页面
     </nut-button>
-    （建议使用手机浏览器打开）
   </div>
   <orders-footer></orders-footer>
 </template>
