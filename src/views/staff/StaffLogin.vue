@@ -6,6 +6,7 @@ import { successMsg, warningMsg } from '@/utils/SendMsgUtils.js'
 import { staffLoginService } from '@/api/staff.js'
 import { useStaffState } from '@/stores/index.js'
 import { useRouter } from 'vue-router'
+import { User, Key } from '@icon-park/vue-next'
 
 const router = useRouter()
 
@@ -58,7 +59,11 @@ const submit = async () => {
         v-model="staff.studentId"
         style="width: 260px"
         placeholder="管理员学号："
-      />
+      >
+        <template #prefix>
+          <el-icon class="input-icon"><user /></el-icon>
+        </template>
+      </el-input>
       <br />
       <el-input
         clearable
@@ -68,10 +73,14 @@ const submit = async () => {
         style="width: 260px"
         placeholder="管理员密码："
         @blur="checkPassword"
-      />
+      >
+        <template #prefix>
+          <el-icon class="input-icon"><key /></el-icon>
+        </template>
+      </el-input>
       <div>
         <nut-button shape="round" type="info" @click="submit">登录</nut-button>
-        <p>*仅限ITeam基地维修站成员使用，请妥善保管个人账号和密码。</p>
+        <p>*仅限ITeam基地维修站成员使用，请妥善保管个人账号和密码。(*^o^*)</p>
       </div>
     </div>
   </div>
@@ -107,7 +116,6 @@ const submit = async () => {
     .el-input:first-child {
       margin-bottom: 10px;
     }
-
     div {
       margin-top: 10px;
       text-align: center;
