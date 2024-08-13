@@ -28,7 +28,7 @@ const submitUpload = () => {
   uploadRef3.value.submit()
 
   router.push('/staff/profile/uploader')
-  successMsg('提交网页成功')
+  successMsg('提交图片成功')
 }
 const clearUpload = () => {
   uploadRef1.value.clearUploadQueue()
@@ -36,7 +36,7 @@ const clearUpload = () => {
   uploadRef3.value.clearUploadQueue()
 }
 const onOversize = () => {
-  warningMsg('照片大小不能超过1MB!')
+  warningMsg('照片大小不能超过2MB!')
 }
 </script>
 
@@ -48,7 +48,8 @@ const onOversize = () => {
   </nut-navbar>
   <div class="upload">
     <p style="color: red">
-      *图片没说非必填，都要提交，否则后期与机主发生纠纷，全由社员自身负责
+      *图片没说非必填，都要提交，否则后期与机主发生纠纷，全由社员自身负责。<br />
+      *选项是提醒作用不会保存在数据库，照片会上传服务器。
     </p>
     <h4>1.确认电脑有无保修（拆机前确认）</h4>
     <p>*有保修除加装固态，其余非必要不拆机</p>
@@ -66,7 +67,7 @@ const onOversize = () => {
       *5.屏幕有无破损
     </p>
     <nut-uploader
-      :maximize="1024 * 1024"
+      :maximize="1024 * 1024 * 2"
       @oversize="onOversize"
       :url="uploadUrl"
       maximum="6"
@@ -84,7 +85,7 @@ const onOversize = () => {
       *2.安装软件的记录
     </p>
     <nut-uploader
-      :maximize="1024 * 1024"
+      :maximize="1024 * 1024 * 2"
       @oversize="onOversize"
       :url="uploadUrl"
       maximum="6"
@@ -106,7 +107,7 @@ const onOversize = () => {
       拍一遍
     </p>
     <nut-uploader
-      :maximize="1024 * 1024"
+      :maximize="1024 * 1024 * 2"
       @oversize="onOversize"
       :url="uploadUrl"
       maximum="6"
