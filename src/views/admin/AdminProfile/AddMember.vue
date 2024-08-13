@@ -75,6 +75,7 @@ const change = async () => {
 }
 
 const searchStaff = async () => {
+  page.value.currentPage = 1
   await getStaffList()
 }
 

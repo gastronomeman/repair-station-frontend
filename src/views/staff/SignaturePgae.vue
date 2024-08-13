@@ -114,7 +114,7 @@ const clear = () => {
     </div>
   </div>
   <div class="signature" v-else>
-    <div style="text-align: right; margin-top: 5px">
+    <div style="text-align: right; margin-top: 3px">
       <span>：</span>
       <span>名</span>
       <span>签</span>
@@ -128,7 +128,6 @@ const clear = () => {
       <span>此</span>
       <span>按</span>
     </div>
-
     <nut-signature @confirm="confirm" @clear="clear"></nut-signature>
   </div>
 </template>
@@ -159,10 +158,10 @@ const clear = () => {
 .signature {
   height: 100vh;
   .nut-signature {
-    height: 95%;
+    height: 90%;
     text-align: center;
     .nut-signature-inner {
-      height: 95%;
+      height: 90%;
       margin-bottom: 2%;
     }
   }
