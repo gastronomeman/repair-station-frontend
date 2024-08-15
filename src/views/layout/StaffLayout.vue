@@ -3,6 +3,7 @@ import { Announcement, Order, Me, Home } from '@icon-park/vue-next'
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { getStaffTitleService } from '@/api/repairStationStatus.js'
+import Footer from '@/components/Footer.vue'
 
 const route = useRoute()
 
@@ -138,7 +139,9 @@ watch(
   </nut-noticebar>
   <nut-pull-refresh v-model="refresh" @refresh="refreshFun">
     <router-view></router-view>
+    <div class="footer"><Footer /></div>
   </nut-pull-refresh>
+
   <nut-tabbar
     v-if="frame"
     v-model="active"
@@ -163,4 +166,9 @@ watch(
   </nut-tabbar>
 </template>
 
-<style scoped></style>
+<style scoped>
+.footer {
+  margin-top: 25px;
+  margin-bottom: 60px;
+}
+</style>

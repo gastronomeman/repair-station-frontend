@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+import Footer from '@/components/Footer.vue'
+</script>
 
 <template>
   <br />
@@ -9,12 +11,13 @@
   </nut-divider>
   <div class="order-footer">
     <img src="@/assets/qr_code.jpg" alt="" />
+    <Footer></Footer>
   </div>
 </template>
 
 <style scoped>
 .order-footer {
-  margin: 0 auto 20px;
+  margin: 0 auto 15px;
   max-width: 450px;
   img {
     width: 100%;

@@ -2,6 +2,7 @@
 import { Home, Me, Order } from '@icon-park/vue-next'
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import Footer from '@/components/Footer.vue'
 
 const refresh = ref(false)
 const refreshFun = () => {
@@ -116,6 +117,7 @@ watch(
 -->
   <nut-pull-refresh v-model="refresh" @refresh="refreshFun">
     <router-view></router-view>
+    <div class="footer"><Footer /></div>
   </nut-pull-refresh>
   <nut-tabbar v-model="active" :bottom="true" :safe-area-inset-bottom="true">
     <nut-tabbar-item tab-title="首页" to="/admin">
@@ -136,4 +138,9 @@ watch(
   </nut-tabbar>
 </template>
 
-<style scoped></style>
+<style scoped>
+.footer {
+  margin-top: 25px;
+  margin-bottom: 60px;
+}
+</style>
