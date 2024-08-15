@@ -7,7 +7,6 @@ import { staffLoginService } from '@/api/staff.js'
 import { useStaffState } from '@/stores/index.js'
 import { useRouter } from 'vue-router'
 import { User, Key } from '@icon-park/vue-next'
-import Footer from '@/components/Footer.vue'
 
 const router = useRouter()
 
@@ -85,8 +84,6 @@ const submit = async () => {
       </div>
     </div>
   </div>
-
-  <Footer />
 </template>
 
 <style scoped>
@@ -95,7 +92,7 @@ const submit = async () => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 93vh;
+  height: 82vh;
   width: 100%;
 
   .login-img-logo {
@@ -109,7 +106,7 @@ const submit = async () => {
   }
 
   .login-input {
-    margin-bottom: 120px;
+    margin-bottom: 80px;
 
     h2 {
       text-align: center;

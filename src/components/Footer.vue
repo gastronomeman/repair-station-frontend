@@ -2,7 +2,7 @@
 const icp = window.config.icp
 
 const onClick = () => {
-  alert('邮箱：1305573134@qq,com')
+  alert('邮箱：1305573134@qq.com')
 }
 </script>
 
