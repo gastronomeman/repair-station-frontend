@@ -36,7 +36,7 @@ const clearUpload = () => {
   uploadRef3.value.clearUploadQueue()
 }
 const onOversize = () => {
-  warningMsg('照片大小不能超过2MB!')
+  warningMsg('照片大小不能超过20MB!')
 }
 </script>
 
@@ -67,7 +67,7 @@ const onOversize = () => {
       *5.屏幕有无破损
     </p>
     <nut-uploader
-      :maximize="1024 * 1024 * 2"
+      :maximize="1024 * 1024 * 20"
       @oversize="onOversize"
       :url="uploadUrl"
       maximum="6"
@@ -85,7 +85,7 @@ const onOversize = () => {
       *2.安装软件的记录
     </p>
     <nut-uploader
-      :maximize="1024 * 1024 * 2"
+      :maximize="1024 * 1024 * 20"
       @oversize="onOversize"
       :url="uploadUrl"
       maximum="6"
@@ -107,7 +107,7 @@ const onOversize = () => {
       拍一遍
     </p>
     <nut-uploader
-      :maximize="1024 * 1024 * 2"
+      :maximize="1024 * 1024 * 20"
       @oversize="onOversize"
       :url="uploadUrl"
       maximum="6"
