@@ -2,6 +2,7 @@
 import { ref, defineEmits } from 'vue'
 import { takingOrdersService } from '@/api/orders.js'
 import { successMsg } from '@/utils/SendMsgUtils.js'
+import { getNameByIdService } from '@/api/staff.js'
 
 const emit = defineEmits(['refresh'])
 const props = defineProps({
@@ -20,6 +21,13 @@ const handleClick = async () => {
     }
   }
 }
+
+const assignor = ref('')
+const getAssignorName = async () => {
+  const resp = await getNameByIdService(order.value.assignor)
+  assignor.value = resp.data
+}
+if (order.value.assignor !== null) getAssignorName()
 </script>
 
 <template>
@@ -52,26 +60,37 @@ const handleClick = async () => {
               {{ order.name }}
             </span>
             <span
-              v-if="order.status === 1"
+              v-if="order.status === 1 && order.assignor !== null"
               class="body-right"
-              style="color: #de2a18"
+              style="color: #f86b1d"
             >
-              待接单
+              接受转单
             </span>
             <span
-              v-else-if="order.status === 2"
+              v-else-if="order.status === 1"
               class="body-right"
-              style="color: #fecc11"
-              >维修中
-            </span>
-            <span v-else class="body-right" style="color: #41b349">
-              已完成
+              style="color: #ee3f4d"
+            >
+              抢单
             </span>
           </div>
         </nut-col>
       </nut-row>
       <nut-divider dashed />
-      <p>{{ order.orderDescribe }}</p>
+      <p
+        v-if="order.status === 1 && order.assignor !== null"
+        class="body-right"
+        style="
+          color: #f86b1d;
+          margin: 0;
+          text-align: right;
+          font-size: 12px;
+          font-weight: bold;
+        "
+      >
+        ---由{{ assignor }}转出
+      </p>
+      <p class="order-describe">{{ order.orderDescribe }}</p>
     </div>
   </div>
 </template>
@@ -104,6 +123,7 @@ const handleClick = async () => {
       .body-left {
         flex: 1;
       }
+
       .body-right {
         flex-shrink: 0;
       }
@@ -113,11 +133,11 @@ const handleClick = async () => {
       margin: 0;
     }
 
-    p {
+    .order-describe {
       text-align: center;
       word-wrap: break-word;
       overflow-wrap: break-word;
-      margin: 15px auto;
+      margin: 8px auto;
       font-size: 18px;
     }
   }

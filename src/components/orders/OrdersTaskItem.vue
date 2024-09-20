@@ -1,6 +1,6 @@
 <script setup>
-import { ref, defineEmits } from 'vue'
-import { finishOrderService } from '@/api/orders.js'
+import { ref } from 'vue'
+import { finishOrderService, transferOrderService } from '@/api/orders.js'
 import { successMsg } from '@/utils/SendMsgUtils.js'
 import { useStaffState } from '@/stores/index.js'
 import { useRouter } from 'vue-router'
@@ -35,6 +35,16 @@ const signature = () => {
   staffState.setOrder(order.value)
   router.push('/signature')
 }
+
+const transferOrder = async () => {
+  if (confirm('是否确认转出订单？')) {
+    const resp = await transferOrderService(order.value.id)
+    if (resp.code === 1) {
+      successMsg(resp.data)
+      emit('refresh')
+    }
+  }
+}
 </script>
 
 <template>
@@ -67,20 +77,10 @@ const signature = () => {
               {{ order.name }}
             </span>
             <span
-              v-if="order.status === 1"
+              v-if="order.status === 2"
               class="body-right"
-              style="color: #de2a18"
-            >
-              待接单
-            </span>
-            <span
-              v-else-if="order.status === 2"
-              class="body-right"
-              style="color: #fecc11"
+              style="color: #e8b004"
               >维修中
-            </span>
-            <span v-else class="body-right" style="color: #41b349">
-              已完成
             </span>
           </div>
         </nut-col>
@@ -89,8 +89,11 @@ const signature = () => {
       <p>{{ order.orderDescribe }}</p>
     </div>
     <nut-row>
-      <nut-col :span="24" @click="signature">
+      <nut-col :span="12" @click="signature">
         <div class="orders-row-footer2">协议签订（拆机用）</div>
+      </nut-col>
+      <nut-col :span="12" @click="transferOrder"
+        ><div class="orders-row-footer2">转单</div>
       </nut-col>
     </nut-row>
     <nut-row>
@@ -153,7 +156,7 @@ const signature = () => {
     background-color: #5e616d;
     color: white;
     font-weight: bold;
-    padding: 5px 0;
+    padding: 6px 0;
     margin: 2px 1px;
     text-align: center;
     cursor: pointer;
@@ -162,8 +165,8 @@ const signature = () => {
     background-color: #74787a;
     color: white;
     font-weight: bold;
-    padding: 5px 0;
-    margin-top: 5px;
+    padding: 6px 0;
+    margin: 5px 1px 0;
     text-align: center;
     cursor: pointer;
   }

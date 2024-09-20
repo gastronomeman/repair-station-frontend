@@ -33,3 +33,6 @@ export const getFinishOrderService = (page, pageSize, name) =>
   )
 
 export const changSqlService = () => request.get(`/orders/change-sql`)
+
+export const transferOrderService = (id) =>
+  request.put(`/orders/transfer-order/${id}`)

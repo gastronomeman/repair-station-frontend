@@ -43,20 +43,10 @@ const handleClick = async () => {
               {{ order.name }}
             </span>
             <span
-              v-if="order.status === 1"
+              v-if="order.status === 2"
               class="body-right"
-              style="color: #de2a18"
-            >
-              待接单
-            </span>
-            <span
-              v-else-if="order.status === 2"
-              class="body-right"
-              style="color: #fecc11"
+              style="color: #e8b004"
               >维修中
-            </span>
-            <span v-else class="body-right" style="color: #41b349">
-              已完成
             </span>
           </div>
         </nut-col>

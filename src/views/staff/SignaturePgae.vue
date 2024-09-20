@@ -114,7 +114,7 @@ const clear = () => {
     </div>
   </div>
   <div class="signature" v-else>
-    <div style="text-align: right; margin-top: 3px">
+    <div style="text-align: right; margin-top: 3px; font-size: 18px">
       <span>：</span>
       <span>名</span>
       <span>签</span>
@@ -129,6 +129,20 @@ const clear = () => {
       <span>按</span>
     </div>
     <nut-signature @confirm="confirm" @clear="clear"></nut-signature>
+    <div style="text-align: right; margin-top: 3px; font-size: 18px">
+      <span>&nbsp;</span>
+      <span>名</span>
+      <span>签</span>
+      <span>行</span>
+      <span>进</span>
+      <span>向</span>
+      <span>正</span>
+      <span>为</span>
+      <span>向</span>
+      <span>方</span>
+      <span>此</span>
+      <span>按</span>
+    </div>
   </div>
 </template>
 
