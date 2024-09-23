@@ -159,7 +159,7 @@ getNameById()
         <div class="content-left">报修描述：</div>
       </nut-col>
       <nut-col :span="12">
-        <div class="content-right1">{{ order.orderDescribe }}</div>
+        <div class="content-right">{{ order.orderDescribe }}</div>
       </nut-col>
     </nut-row>
     <nut-divider dashed />
@@ -180,7 +180,7 @@ getNameById()
   }
   .content-right {
     line-height: 21px;
-    height: 21px;
+    height: auto;
   }
 }
 </style>

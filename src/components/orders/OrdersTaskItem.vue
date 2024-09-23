@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { finishOrderService, transferOrderService } from '@/api/orders.js'
-import { successMsg } from '@/utils/SendMsgUtils.js'
+import { errorMsg, successMsg } from '@/utils/SendMsgUtils.js'
 import { useStaffState } from '@/stores/index.js'
 import { useRouter } from 'vue-router'
 
@@ -37,6 +37,10 @@ const signature = () => {
 }
 
 const transferOrder = async () => {
+  if (order.value.assignor !== null) {
+    errorMsg('此订单为转单，不可再次转出！')
+    return
+  }
   if (confirm('是否确认转出订单？')) {
     const resp = await transferOrderService(order.value.id)
     if (resp.code === 1) {
