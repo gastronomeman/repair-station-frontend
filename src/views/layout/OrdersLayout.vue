@@ -68,15 +68,17 @@ watch(
 </script>
 
 <template>
-  <nut-noticebar :text="text" scrollable v-if="!isNotBlank(text)">
-    <template #left-icon>
-      <announcement theme="outline" size="20" />
-    </template>
-  </nut-noticebar>
+  <nut-sticky>
+    <nut-noticebar :text="text" scrollable v-if="!isNotBlank(text)">
+      <template #left-icon>
+        <announcement theme="outline" size="20" />
+      </template>
+    </nut-noticebar>
+  </nut-sticky>
   <div class="orders-head">
     <h1>{{ title }}</h1>
     <h3>- Repair Station -</h3>
-    <nut-sticky @change="sticky">
+    <nut-sticky @change="sticky" top="40">
       <nut-searchbar
         @click="focusSearchbar"
         ref="searchbarRef"
@@ -103,12 +105,8 @@ watch(
         <nut-row>
           <nut-col :span="12">
             <div class="text" @click="router.push('/orders/new')">
-              电脑报修<tool
-                class="search-icon"
-                theme="outline"
-                size="20"
-                fill="#333"
-              />
+              电脑报修
+              <tool class="search-icon" theme="outline" size="20" fill="#333" />
             </div>
           </nut-col>
           <nut-col :span="12">
