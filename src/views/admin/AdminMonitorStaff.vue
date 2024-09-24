@@ -226,7 +226,6 @@ const changeStaffNotice = async () => {
           >
         </div>
       </div>
-      <br />
       <div class="content">
         <span>社员页公告：</span>
         <el-input
