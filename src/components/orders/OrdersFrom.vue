@@ -259,14 +259,17 @@ const submit = () => {
         />
       </nut-form-item>
     </nut-form>
+
     <nut-button shape="round" size="large" type="primary" @click="submit"
-      >报修</nut-button
-    >
+      >报修
+    </nut-button>
   </div>
 </template>
 
 <style scoped>
 .order-from {
+  padding: 10px;
+  border-radius: 10px;
   .nut-input-text {
     width: 100%;
     outline: 0 none;
@@ -276,7 +279,7 @@ const submit = () => {
     text-align: left !important;
   }
   .nut-button {
-    margin: 20px 0 0;
+    margin: 10px 0 0;
   }
 }
 </style>

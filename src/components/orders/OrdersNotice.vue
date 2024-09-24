@@ -34,6 +34,9 @@ const handleAgree = () => {
         <input type="checkbox" v-model="isAgreed" />
         已阅读，并了解其风险
       </label>
+      <p style="margin: 5px; font-size: 12px; color: #7a7374">
+        *同意须知后方可以进行报修
+      </p>
     </div>
     <nut-button size="small" shape="round" type="info" @click="handleAgree"
       >同意须知
@@ -57,7 +60,9 @@ const handleAgree = () => {
   }
 
   .nut-button {
-    margin: 20px 0;
+    margin: 5px 0 15px 0;
+    width: 50%;
+    height: 40px;
   }
 }
 </style>
