@@ -216,7 +216,7 @@ const changeStaffNotice = async () => {
         <el-input
           v-model="adminOrder.orderNotice"
           style="width: 180px"
-          :rows="5"
+          :rows="4"
           type="textarea"
           placeholder="谨慎发言"
         />
@@ -232,7 +232,7 @@ const changeStaffNotice = async () => {
         <el-input
           v-model="adminOrder.staffNotice"
           style="width: 180px"
-          :rows="5"
+          :rows="4"
           type="textarea"
           placeholder="谨慎发言"
         />
