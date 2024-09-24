@@ -61,8 +61,8 @@ const handleAgree = () => {
 
   .nut-button {
     margin: 5px 0 15px 0;
-    width: 50%;
-    height: 40px;
+    width: 80%;
+    height: 45px;
   }
 }
 </style>
