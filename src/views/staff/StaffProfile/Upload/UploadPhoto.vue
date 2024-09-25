@@ -1,8 +1,9 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
 import { ref } from 'vue'
-import { baseURL } from '@/utils/request.js'
+import { CloseOne } from '@icon-park/vue-next'
 import { successMsg, warningMsg } from '@/utils/SendMsgUtils.js'
+import { uploadsService } from '@/api/common.js'
 
 const router = useRouter()
 const route = useRoute()
@@ -12,28 +13,53 @@ const radio1 = ref('')
 const radio2 = ref('')
 const radio3 = ref('')
 
-const uploadUrl = ref(baseURL + '/common/upload/' + route.query.id)
-const uploadRef1 = ref(null)
-const uploadRef2 = ref(null)
-const uploadRef3 = ref(null)
+const fileList1 = ref([])
+const fileList2 = ref([])
+const fileList3 = ref([])
 
-const submitUpload = () => {
+const submitUpload = async () => {
   if (radio1.value === '' || radio2.value === '' || radio3.value === '') {
     warningMsg('单选选项不能为空')
     return
   }
   if (!confirm(`是否确认提交：“${route.query.name}”的图片？`)) return
-  uploadRef1.value.submit()
-  uploadRef2.value.submit()
-  uploadRef3.value.submit()
 
-  router.push('/staff/profile/uploader')
-  successMsg('提交图片成功')
+  const toast = showLoadingToast({
+    message: '加载中...',
+    forbidClick: true,
+    loadingType: 'spinner',
+    duration: 0
+  })
+
+  //文件存入FormData
+  const formData = new FormData()
+  if (fileList1.value.length > 0)
+    fileList1.value.forEach((item) => {
+      formData.append('files', item.file)
+    })
+
+  if (fileList2.value.length > 0)
+    fileList2.value.forEach((item) => {
+      formData.append('files', item.file)
+    })
+
+  if (fileList3.value.length > 0)
+    fileList3.value.forEach((item) => {
+      formData.append('files', item.file)
+    })
+
+  const resp = await uploadsService(formData, route.query.id)
+
+  if (resp.code === 1) {
+    successMsg('提交图片成功')
+    await router.push('/staff/profile/uploader')
+  }
+  toast.close()
 }
 const clearUpload = () => {
-  uploadRef1.value.clearUploadQueue()
-  uploadRef2.value.clearUploadQueue()
-  uploadRef3.value.clearUploadQueue()
+  fileList1.value = []
+  fileList2.value = []
+  fileList3.value = []
 }
 const onOversize = () => {
   warningMsg('照片大小不能超过20MB!')
@@ -66,14 +92,24 @@ const onOversize = () => {
       *4.检查全机有无缝隙<br />
       *5.屏幕有无破损
     </p>
-    <nut-uploader
-      :maximize="1024 * 1024 * 20"
+    <van-uploader
+      v-model="fileList1"
       @oversize="onOversize"
-      :url="uploadUrl"
-      maximum="6"
-      :auto-upload="false"
-      ref="uploadRef1"
-    ></nut-uploader>
+      :max-size="1024 * 1024 * 20"
+      :max-count="6"
+      preview-size="100px"
+      accept="image/jpeg, image/png"
+      multiple
+    >
+      <template #preview-delete>
+        <close-one
+          theme="outline"
+          size="25"
+          fill="#ffffff"
+          strokeLinejoin="miter"
+        />
+      </template>
+    </van-uploader>
     <h4>3.和机主确认“修单前确认电脑状态”的拍照确认电脑状态有无问题</h4>
     <el-radio-group v-model="radio2">
       <el-radio value="0" size="large">有问题</el-radio>
@@ -84,14 +120,24 @@ const onOversize = () => {
       *1.拆机拍下主板等<br />
       *2.安装软件的记录
     </p>
-    <nut-uploader
-      :maximize="1024 * 1024 * 20"
+    <van-uploader
+      v-model="fileList2"
       @oversize="onOversize"
-      :url="uploadUrl"
-      maximum="6"
-      :auto-upload="false"
-      ref="uploadRef2"
-    ></nut-uploader>
+      :max-size="1024 * 1024 * 20"
+      :max-count="6"
+      preview-size="100px"
+      accept="image/jpeg, image/png"
+      multiple
+    >
+      <template #preview-delete>
+        <close-one
+          theme="outline"
+          size="25"
+          fill="#ffffff"
+          strokeLinejoin="miter"
+        />
+      </template>
+    </van-uploader>
     <h4>5.修完后再三和机主确定机子有无问题</h4>
     <p>*多次开机测试后再询问</p>
     <el-radio-group v-model="radio3">
@@ -106,22 +152,33 @@ const onOversize = () => {
       *4.电脑屏幕<br />
       拍一遍
     </p>
-    <nut-uploader
-      :maximize="1024 * 1024 * 20"
+    <van-uploader
+      v-model="fileList3"
       @oversize="onOversize"
-      :url="uploadUrl"
-      maximum="6"
-      :auto-upload="false"
-      ref="uploadRef3"
-    ></nut-uploader>
-    <br />
-    <nut-button type="success" size="small" @click="submitUpload">
-      提交核对图片
-    </nut-button>
-    &nbsp;
-    <nut-button type="danger" size="small" @click="clearUpload">
-      手动清空全部
-    </nut-button>
+      :max-size="1024 * 1024 * 20"
+      :max-count="6"
+      preview-size="100px"
+      accept="image/jpeg, image/png"
+      multiple
+    >
+      <template #preview-delete>
+        <close-one
+          theme="outline"
+          size="25"
+          fill="#ffffff"
+          strokeLinejoin="miter"
+        />
+      </template>
+    </van-uploader>
+    <div style="text-align: center; margin: 15px auto">
+      <nut-button type="success" size="small" @click="submitUpload">
+        提交核对图片
+      </nut-button>
+      &nbsp;
+      <nut-button type="danger" size="small" @click="clearUpload">
+        手动清空全部
+      </nut-button>
+    </div>
   </div>
 </template>
 
@@ -129,7 +186,7 @@ const onOversize = () => {
 .upload {
   max-width: 800px;
   width: 80%;
-  margin: 20px auto 70px;
+  margin: 20px auto;
   h4 {
     margin: 5px 0 0;
   }
