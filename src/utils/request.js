@@ -10,7 +10,7 @@ const baseURL = window.config.baseUrl
 const instance = axios.create({
   // 1. 基础地址，超时时间
   baseURL,
-  timeout: 10000,
+  timeout: 30000,
   withCredentials: true
 })
 

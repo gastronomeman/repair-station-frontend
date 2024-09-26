@@ -37,30 +37,47 @@ const submitUpload = async () => {
   })
 
   //文件存入FormData
-  const formData = new FormData()
+  let resp0 = { code: 1 }
+  let resp1 = { code: 1 }
+  let resp2 = { code: 1 }
+  let resp3 = { code: 1 }
+
+  const formData0 = new FormData()
   fileList0.value.forEach((item) => {
-    formData.append('files', item.file)
+    formData0.append('files', item.file)
   })
+  resp0 = await uploadsService(formData0, route.query.id)
 
   if (fileList1.value.length > 0) {
+    const formData1 = new FormData()
     fileList1.value.forEach((item) => {
-      formData.append('files', item.file)
+      formData1.append('files', item.file)
     })
+    resp1 = await uploadsService(formData1, route.query.id)
   }
 
   if (fileList2.value.length > 0) {
+    const formData2 = new FormData()
     fileList2.value.forEach((item) => {
-      formData.append('files', item.file)
+      formData2.append('files', item.file)
     })
+    resp2 = await uploadsService(formData2, route.query.id)
   }
 
   if (fileList3.value.length > 0) {
+    const formData3 = new FormData()
     fileList3.value.forEach((item) => {
-      formData.append('files', item.file)
+      formData3.append('files', item.file)
     })
+    resp3 = await uploadsService(formData3, route.query.id)
   }
-  const resp = await uploadsService(formData, route.query.id)
-  if (resp.code === 1) {
+
+  if (
+    resp0.code === 1 &&
+    resp1.code === 1 &&
+    resp2.code === 1 &&
+    resp3.code === 1
+  ) {
     successMsg('提交图片成功')
     await router.push('/staff/profile/uploader')
   }
