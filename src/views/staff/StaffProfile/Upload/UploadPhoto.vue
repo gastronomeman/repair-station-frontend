@@ -4,6 +4,7 @@ import { ref } from 'vue'
 import { CloseOne } from '@icon-park/vue-next'
 import { successMsg, warningMsg } from '@/utils/SendMsgUtils.js'
 import { uploadsService } from '@/api/common.js'
+import Compressor from 'compressorjs'
 
 const router = useRouter()
 const route = useRoute()
@@ -13,6 +14,8 @@ const radio1 = ref('')
 const radio2 = ref('')
 const radio3 = ref('')
 
+//文件存入FormData
+const formData = new FormData()
 const fileList0 = ref([])
 const fileList1 = ref([])
 const fileList2 = ref([])
@@ -36,29 +39,6 @@ const submitUpload = async () => {
     duration: 0
   })
 
-  //文件存入FormData
-  const formData = new FormData()
-  fileList0.value.forEach((item) => {
-    formData.append('files', item.file)
-  })
-
-  if (fileList1.value.length > 0) {
-    fileList1.value.forEach((item) => {
-      formData.append('files', item.file)
-    })
-  }
-
-  if (fileList2.value.length > 0) {
-    fileList2.value.forEach((item) => {
-      formData.append('files', item.file)
-    })
-  }
-
-  if (fileList3.value.length > 0) {
-    fileList3.value.forEach((item) => {
-      formData.append('files', item.file)
-    })
-  }
   const resp = await uploadsService(formData, route.query.id)
   if (resp.code === 1) {
     successMsg('提交图片成功')
@@ -74,6 +54,40 @@ const clearUpload = () => {
 }
 const onOversize = () => {
   warningMsg('照片大小不能超过20MB!')
+}
+const afterRead0 = async () => {
+  await compressAndAppend(fileList0.value)
+}
+const afterRead1 = async () => {
+  await compressAndAppend(fileList1.value)
+}
+const afterRead2 = async () => {
+  await compressAndAppend(fileList2.value)
+}
+const afterRead3 = async () => {
+  await compressAndAppend(fileList3.value)
+}
+const compressAndAppend = async (fileList) => {
+  for (const item of fileList) {
+    await new Promise((resolve) => {
+      new Compressor(item.file, {
+        quality: 0.5, // 压缩质量
+        success(result) {
+          // 创建一个 File 对象
+          const file = new File([result], item.file.name, {
+            type: result.type,
+            lastModified: Date.now()
+          })
+          formData.append('files', file)
+          resolve()
+        },
+        error(err) {
+          console.error(err.message)
+          resolve() // 继续处理其他文件
+        }
+      })
+    })
+  }
 }
 </script>
 
@@ -99,6 +113,7 @@ const onOversize = () => {
       :max-count="1"
       preview-size="100px"
       accept="image/jpeg, image/png"
+      :after-read="afterRead0"
       multiple
     >
       <template #preview-delete>
@@ -124,6 +139,7 @@ const onOversize = () => {
       :max-count="6"
       preview-size="100px"
       accept="image/jpeg, image/png"
+      :after-read="afterRead1"
       multiple
     >
       <template #preview-delete>
@@ -152,6 +168,7 @@ const onOversize = () => {
       :max-count="6"
       preview-size="100px"
       accept="image/jpeg, image/png"
+      :after-read="afterRead2"
       multiple
     >
       <template #preview-delete>
@@ -169,7 +186,7 @@ const onOversize = () => {
       <el-radio value="0" size="large">有问题</el-radio>
       <el-radio value="1" size="large">没问题</el-radio>
     </el-radio-group>
-    <h4>6.修完后</h4>
+    <h4>7.修完后</h4>
     <p>
       *1.电脑bc面<br />
       *2.触摸板<br />
@@ -184,6 +201,7 @@ const onOversize = () => {
       :max-count="6"
       preview-size="100px"
       accept="image/jpeg, image/png"
+      :after-read="afterRead3"
       multiple
     >
       <template #preview-delete>

@@ -17,6 +17,7 @@
     "@nutui/nutui": "^4.3.10",
     "@nutui/touch-emulator": "^1.0.0",
     "axios": "^1.7.2",
+    "compressorjs": "^1.2.1",
     "element-plus": "^2.7.6",
     "js-md5": "^0.8.3",
     "pinia": "^2.1.7",
