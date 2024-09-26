@@ -71,7 +71,7 @@ const compressAndAppend = async (fileList) => {
   for (const item of fileList) {
     await new Promise((resolve) => {
       new Compressor(item.file, {
-        quality: 0.5, // 压缩质量
+        quality: 0.3, // 压缩质量
         success(result) {
           // 创建一个 File 对象
           const file = new File([result], item.file.name, {
