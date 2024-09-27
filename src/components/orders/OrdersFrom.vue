@@ -274,6 +274,7 @@ const submit = () => {
     width: 100%;
     outline: 0 none;
     border: 0;
+    color: black;
   }
   .nut-form-item__body__tips {
     text-align: left !important;
