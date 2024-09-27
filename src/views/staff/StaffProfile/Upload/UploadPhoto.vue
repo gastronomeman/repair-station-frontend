@@ -48,6 +48,7 @@ const submitUpload = async () => {
 }
 
 const clearUpload = () => {
+  fileList0.value = []
   fileList1.value = []
   fileList2.value = []
   fileList3.value = []
@@ -69,7 +70,7 @@ const afterRead3 = async () => {
 }
 const compressAndAppend = async (fileList) => {
   for (const item of fileList) {
-    if (item.file.size > 1024 * 1024 * 2) {
+    if (item.file.size > 1024 * 1024 * 3) {
       await new Promise((resolve) => {
         new Compressor(item.file, {
           quality: 0.5, // 压缩质量
