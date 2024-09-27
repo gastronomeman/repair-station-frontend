@@ -69,24 +69,28 @@ const afterRead3 = async () => {
 }
 const compressAndAppend = async (fileList) => {
   for (const item of fileList) {
-    await new Promise((resolve) => {
-      new Compressor(item.file, {
-        quality: 0.3, // 压缩质量
-        success(result) {
-          // 创建一个 File 对象
-          const file = new File([result], item.file.name, {
-            type: result.type,
-            lastModified: Date.now()
-          })
-          formData.append('files', file)
-          resolve()
-        },
-        error(err) {
-          console.error(err.message)
-          resolve() // 继续处理其他文件
-        }
+    if (item.file.size > 1024 * 1024 * 2) {
+      await new Promise((resolve) => {
+        new Compressor(item.file, {
+          quality: 0.5, // 压缩质量
+          success(result) {
+            // 创建一个 File 对象
+            const file = new File([result], item.file.name, {
+              type: result.type,
+              lastModified: Date.now()
+            })
+            formData.append('files', file)
+            resolve()
+          },
+          error(err) {
+            console.error(err.message)
+            resolve() // 继续处理其他文件
+          }
+        })
       })
-    })
+    } else {
+      formData.append('files', item.file)
+    }
   }
 }
 </script>
