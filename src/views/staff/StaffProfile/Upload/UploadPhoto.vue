@@ -40,16 +40,16 @@ const submitUpload = async () => {
   })
 
   fileList0.value.forEach((file) => {
-    formData.append('files', file.file) // 将每个文件添加到 FormData
+    formData.append('files', file.file)
   })
   fileList1.value.forEach((file) => {
-    formData.append('files', file.file) // 将每个文件添加到 FormData
+    formData.append('files', file.file)
   })
   fileList2.value.forEach((file) => {
-    formData.append('files', file.file) // 将每个文件添加到 FormData
+    formData.append('files', file.file)
   })
   fileList3.value.forEach((file) => {
-    formData.append('files', file.file) // 将每个文件添加到 FormData
+    formData.append('files', file.file)
   })
 
   const resp = await uploadsService(formData, route.query.id)
@@ -66,12 +66,12 @@ const clearUpload = () => {
   fileList2.value = []
   fileList3.value = []
   formData.delete('files')
+  successMsg('图片清除成功')
 }
 const onOversize = () => {
   warningMsg('照片大小不能超过20MB!')
 }
 const afterRead0 = async () => {
-  console.log(fileList0.value[0])
   fileList0.value = await compressAndAppend(fileList0.value)
 }
 const afterRead1 = async () => {
