@@ -40,7 +40,7 @@ const goToUPhoto = () => {
   </nut-navbar>
   <div class="upload">
     <p style="color: red">
-      *图片没说非必填，都要提交，否则后期与机主发生纠纷，全由社员自身负责
+      *图片都需要提交，否则后期与机主发生纠纷，全由社员自身负责
     </p>
     <h4>选择维修单</h4>
     <el-select

@@ -15,7 +15,7 @@ const radio2 = ref('')
 const radio3 = ref('')
 
 //文件存入FormData
-const formData = new FormData()
+let formData = new FormData()
 const fileList0 = ref([])
 const fileList1 = ref([])
 const fileList2 = ref([])
@@ -33,10 +33,23 @@ const submitUpload = async () => {
   if (!confirm(`是否确认提交：“${route.query.name}”的图片？`)) return
 
   const toast = showLoadingToast({
-    message: '加载中...',
+    message: '上传中...',
     forbidClick: true,
     loadingType: 'spinner',
     duration: 0
+  })
+
+  fileList0.value.forEach((file) => {
+    formData.append('files', file.file) // 将每个文件添加到 FormData
+  })
+  fileList1.value.forEach((file) => {
+    formData.append('files', file.file) // 将每个文件添加到 FormData
+  })
+  fileList2.value.forEach((file) => {
+    formData.append('files', file.file) // 将每个文件添加到 FormData
+  })
+  fileList3.value.forEach((file) => {
+    formData.append('files', file.file) // 将每个文件添加到 FormData
   })
 
   const resp = await uploadsService(formData, route.query.id)
@@ -52,26 +65,29 @@ const clearUpload = () => {
   fileList1.value = []
   fileList2.value = []
   fileList3.value = []
+  formData.delete('files')
 }
 const onOversize = () => {
   warningMsg('照片大小不能超过20MB!')
 }
 const afterRead0 = async () => {
-  await compressAndAppend(fileList0.value)
+  console.log(fileList0.value[0])
+  fileList0.value = await compressAndAppend(fileList0.value)
 }
 const afterRead1 = async () => {
-  await compressAndAppend(fileList1.value)
+  fileList1.value = await compressAndAppend(fileList1.value)
 }
 const afterRead2 = async () => {
-  await compressAndAppend(fileList2.value)
+  fileList2.value = await compressAndAppend(fileList2.value)
 }
 const afterRead3 = async () => {
-  await compressAndAppend(fileList3.value)
+  fileList3.value = await compressAndAppend(fileList3.value)
 }
 const compressAndAppend = async (fileList) => {
+  const compressedFiles = [] // 创建一个数组用于存储压缩后的文件
   for (const item of fileList) {
     if (item.file.size > 1024 * 1024) {
-      await new Promise((resolve) => {
+      item.file = await new Promise((resolve) => {
         new Compressor(item.file, {
           quality: 0.5, // 压缩质量
           success(result) {
@@ -80,19 +96,21 @@ const compressAndAppend = async (fileList) => {
               type: result.type,
               lastModified: Date.now()
             })
-            formData.append('files', file)
-            resolve()
+            resolve(file) // 返回压缩后的文件
           },
           error(err) {
             console.error(err.message)
-            resolve() // 继续处理其他文件
+            resolve(item.file) // 如果压缩失败，返回原始文件
           }
         })
       })
+      compressedFiles.push(item) // 添加到压缩文件数组
     } else {
-      formData.append('files', item.file)
+      compressedFiles.push(item) // 添加原始文件
     }
   }
+
+  return compressedFiles // 返回压缩后的文件数组
 }
 </script>
 
