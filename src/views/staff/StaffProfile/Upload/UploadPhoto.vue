@@ -72,27 +72,33 @@ const onOversize = () => {
   warningMsg('照片大小不能超过20MB!')
 }
 const afterRead0 = async () => {
-  fileList0.value = await compressAndAppend(fileList0.value)
+  fileList0.value = await compressAndAppend(fileList0.value, 0)
 }
 const afterRead1 = async () => {
-  fileList1.value = await compressAndAppend(fileList1.value)
+  fileList1.value = await compressAndAppend(fileList1.value, 1)
 }
 const afterRead2 = async () => {
-  fileList2.value = await compressAndAppend(fileList2.value)
+  fileList2.value = await compressAndAppend(fileList2.value, 2)
 }
 const afterRead3 = async () => {
-  fileList3.value = await compressAndAppend(fileList3.value)
+  fileList3.value = await compressAndAppend(fileList3.value, 3)
 }
-const compressAndAppend = async (fileList) => {
+const compressAndAppend = async (fileList, index) => {
   const compressedFiles = [] // 创建一个数组用于存储压缩后的文件
+  let i = 0
   for (const item of fileList) {
+    // 获取文件的后缀名
+    const extension = item.file.name.substring(item.file.name.lastIndexOf('.'))
+    // 生成新的文件名：index-顺序号.后缀
+    const newFileName = `${index}_${i}${extension}`
+
     if (item.file.size > 1024 * 1024) {
       item.file = await new Promise((resolve) => {
         new Compressor(item.file, {
           quality: 0.5, // 压缩质量
           success(result) {
             // 创建一个 File 对象
-            const file = new File([result], item.file.name, {
+            const file = new File([result], newFileName, {
               type: result.type,
               lastModified: Date.now()
             })
@@ -106,8 +112,15 @@ const compressAndAppend = async (fileList) => {
       })
       compressedFiles.push(item) // 添加到压缩文件数组
     } else {
+      // 文件小于1MB，直接使用新的文件名并添加到文件列表
+      item.file = new File([item.file], newFileName, {
+        type: item.file.type,
+        lastModified: Date.now()
+      })
       compressedFiles.push(item) // 添加原始文件
     }
+    console.log(item)
+    i++
   }
 
   return compressedFiles // 返回压缩后的文件数组
@@ -153,7 +166,7 @@ const compressAndAppend = async (fileList) => {
       *1.合页朝下竖起来看b面和c面的松紧程度(拍出松的缝隙)<br />
       *2.触摸板下摁，两边(拍出凹陷程度)<br />
       *3.检查全机有无缝隙<br />
-      *4.屏幕有无破损
+      *4.屏幕是否开机后无破损
     </p>
     <van-uploader
       v-model="fileList1"
