@@ -26,10 +26,12 @@ const submitUpload = async () => {
     warningMsg('单选选项不能为空')
     return
   }
+
   if (!fileList0.value.length > 0) {
     warningMsg('签名照片没有上传！')
     return
   }
+
   if (!confirm(`是否确认提交：“${route.query.name}”的图片？`)) return
 
   const toast = showLoadingToast({
@@ -39,25 +41,35 @@ const submitUpload = async () => {
     duration: 0
   })
 
-  fileList0.value.forEach((file) => {
-    formData.append('files', file.file)
-  })
-  fileList1.value.forEach((file) => {
-    formData.append('files', file.file)
-  })
-  fileList2.value.forEach((file) => {
-    formData.append('files', file.file)
-  })
-  fileList3.value.forEach((file) => {
-    formData.append('files', file.file)
-  })
+  try {
+    // 使用 Promise.all 等待所有压缩任务完成
+    await Promise.all([afterRead0(), afterRead1(), afterRead2(), afterRead3()])
 
-  const resp = await uploadsService(formData, route.query.id)
-  if (resp.code === 1) {
-    successMsg('提交图片成功')
-    await router.push('/staff/profile/uploader')
+    // 压缩任务完成后再提交表单
+    fileList0.value.forEach((file) => {
+      formData.append('files', file.file)
+    })
+    fileList1.value.forEach((file) => {
+      formData.append('files', file.file)
+    })
+    fileList2.value.forEach((file) => {
+      formData.append('files', file.file)
+    })
+    fileList3.value.forEach((file) => {
+      formData.append('files', file.file)
+    })
+
+    const resp = await uploadsService(formData, route.query.id)
+    if (resp.code === 1) {
+      successMsg('提交图片成功')
+      await router.push('/staff/profile/uploader')
+    }
+    toast.close()
+  } catch (error) {
+    console.error(error)
+    toast.close()
+    warningMsg('上传失败，请重试')
   }
-  toast.close()
 }
 
 const clearUpload = () => {
@@ -72,54 +84,60 @@ const onOversize = () => {
   warningMsg('照片大小不能超过20MB!')
 }
 const afterRead0 = async () => {
-  fileList0.value = await compressAndAppend(fileList0.value, 0)
+  return compressAndAppend(fileList0.value, 0).then((result) => {
+    fileList0.value = result
+  })
 }
 const afterRead1 = async () => {
-  fileList1.value = await compressAndAppend(fileList1.value, 1)
+  return compressAndAppend(fileList1.value, 1).then((result) => {
+    fileList1.value = result
+  })
 }
 const afterRead2 = async () => {
-  fileList2.value = await compressAndAppend(fileList2.value, 2)
+  return compressAndAppend(fileList2.value, 2).then((result) => {
+    fileList2.value = result
+  })
 }
 const afterRead3 = async () => {
-  fileList3.value = await compressAndAppend(fileList3.value, 3)
+  return compressAndAppend(fileList3.value, 3).then((result) => {
+    fileList3.value = result
+  })
 }
 const compressAndAppend = async (fileList, index) => {
   const compressedFiles = [] // 创建一个数组用于存储压缩后的文件
   let i = 0
   for (const item of fileList) {
-    // 获取文件的后缀名
-    const extension = item.file.name.substring(item.file.name.lastIndexOf('.'))
-    // 生成新的文件名：index-顺序号.后缀
-    const newFileName = `${index}_${i}${extension}`
-
     if (item.file.size > 1024 * 1024) {
       item.file = await new Promise((resolve) => {
         new Compressor(item.file, {
           quality: 0.5, // 压缩质量
           success(result) {
             // 创建一个 File 对象
-            const file = new File([result], newFileName, {
+            const file = new File([result], result.name, {
               type: result.type,
               lastModified: Date.now()
             })
             resolve(file) // 返回压缩后的文件
           },
           error(err) {
-            console.error(err.message)
+            console.log(err)
             resolve(item.file) // 如果压缩失败，返回原始文件
           }
         })
       })
-      compressedFiles.push(item) // 添加到压缩文件数组
-    } else {
-      // 文件小于1MB，直接使用新的文件名并添加到文件列表
-      item.file = new File([item.file], newFileName, {
-        type: item.file.type,
-        lastModified: Date.now()
-      })
-      compressedFiles.push(item) // 添加原始文件
     }
-    console.log(item)
+
+    // 获取文件的后缀名
+    const extension =
+      item.file.name.substring(item.file.name.lastIndexOf('.')) || ''
+    // 生成新的文件名：index-顺序号.后缀
+    const newFileName = `${index}_${i}${extension}`
+    // 文件小于1MB，直接使用新的文件名并添加到文件列表
+    item.file = new File([item.file], newFileName, {
+      type: item.file.type,
+      lastModified: Date.now()
+    })
+    compressedFiles.push(item) // 添加到压缩文件列表
     i++
   }
 
