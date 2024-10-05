@@ -4,6 +4,7 @@ import { getAdminOrderService } from '@/api/orders.js'
 import {
   changeOrderNoService,
   changeStaffNoService,
+  changeStopNoService,
   changStatusService
 } from '@/api/repairStationStatus.js'
 import { successMsg } from '@/utils/SendMsgUtils.js'
@@ -28,7 +29,8 @@ const adminOrder = ref({
   orderType4: 0,
   serverStatus: true,
   orderNotice: '',
-  staffNotice: ''
+  staffNotice: '',
+  stopNotice: ''
 })
 
 const totalOrder = computed(() => {
@@ -71,6 +73,12 @@ const change = async () => {
 
 const changeOrderNotice = async () => {
   const resp = await changeOrderNoService(adminOrder.value.orderNotice)
+  if (resp.code === 1) {
+    successMsg(resp.data)
+  }
+}
+const changeStopNotice = async () => {
+  const resp = await changeStopNoService(adminOrder.value.stopNotice)
   if (resp.code === 1) {
     successMsg(resp.data)
   }
@@ -211,9 +219,11 @@ const changeStaffNotice = async () => {
       </span>
       <p class="setting-p">*关闭就是暂停维修服务了</p>
 
-      <div class="content">
+      <div class="content" v-if="adminOrder.serverStatus">
         <span>报修页公告：</span>
         <el-input
+          :maxlength="50"
+          show-word-limit
           v-model="adminOrder.orderNotice"
           style="width: 180px"
           :rows="4"
@@ -226,9 +236,28 @@ const changeStaffNotice = async () => {
           >
         </div>
       </div>
+      <div class="content" v-else>
+        <span>停修页公告：</span>
+        <el-input
+          :maxlength="50"
+          show-word-limit
+          v-model="adminOrder.stopNotice"
+          style="width: 180px"
+          :rows="4"
+          type="textarea"
+          placeholder="谨慎发言"
+        />
+        <div class="setting-button">
+          <nut-button type="info" size="small" @click="changeStopNotice"
+            >更新公告</nut-button
+          >
+        </div>
+      </div>
       <div class="content">
         <span>社员页公告：</span>
         <el-input
+          :maxlength="50"
+          show-word-limit
           v-model="adminOrder.staffNotice"
           style="width: 180px"
           :rows="4"
