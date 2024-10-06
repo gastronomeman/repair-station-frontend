@@ -1,7 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import { orderCountService } from '@/api/staff.js'
-
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const value1 = ref('')
 const value2 = ref('')
 
@@ -13,6 +14,10 @@ const getOrdersList = async () => {
   }
 }
 getOrdersList()
+
+const toStaffOrders = (id) => {
+  router.push('/admin/list/orders?id=' + id)
+}
 </script>
 
 <template>
@@ -39,7 +44,7 @@ getOrdersList()
     <nut-divider dashed></nut-divider>
   </div>
   <div v-for="(l, index) in leaderboard" :key="index" class="leaderboard">
-    <nut-navbar>
+    <nut-navbar @click="toStaffOrders(l.id)" style="cursor: pointer">
       <template #left>
         <span class="nav-title">{{ l.name }}</span>
       </template>

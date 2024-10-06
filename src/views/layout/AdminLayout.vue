@@ -18,7 +18,7 @@ watch(
   () => route.fullPath,
   (newPath) => {
     if (newPath.includes('/admin/monitor-staff')) active.value = 0
-    else if (newPath.includes('/admin/staff-list')) active.value = 1
+    else if (newPath.includes('/admin/list')) active.value = 1
     else if (newPath.includes('/admin/profile')) active.value = 2
   },
   { immediate: true }
@@ -36,7 +36,7 @@ watch(
         <home theme="outline" size="25" :strokeWidth="3" />
       </template>
     </nut-tabbar-item>
-    <nut-tabbar-item tab-title="订单查询" to="/admin/staff-list">
+    <nut-tabbar-item tab-title="订单查询" to="/admin/list">
       <template #icon>
         <order theme="outline" size="25" :strokeWidth="3" />
       </template>

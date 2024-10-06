@@ -6,3 +6,6 @@ export const uploadsService = (formData, id) =>
       'content-type': 'multipart/form-data'
     }
   })
+
+export const checkPhotoService = (data) =>
+  request.post(`/common/check-dir`, data)

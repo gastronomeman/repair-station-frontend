@@ -7,17 +7,12 @@ import { getNameByIdService } from '@/api/staff.js'
 const router = useRouter()
 const route = useRoute()
 const staffState = useStaffState()
-
-const onClick = () => {
-  if (route.fullPath.includes('admin')) {
-    router.push('/admin/profile/all-order-list')
-  } else {
-    router.push('/staff/profile/order-history')
-  }
-}
-
 const order = ref({})
 order.value = staffState.order
+
+const onClick = () => {
+  router.go(-1)
+}
 
 const getNameById = async () => {
   if (!route.fullPath.includes('admin')) return

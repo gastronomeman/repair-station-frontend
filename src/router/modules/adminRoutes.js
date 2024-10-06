@@ -1,14 +1,15 @@
 import AdminLayout from '@/views/layout/AdminLayout.vue'
 import AdminMonitorStaff from '@/views/admin/AdminMonitorStaff.vue'
-import AdminStaffList from '@/views/admin/AdminStaffList.vue'
+import AdminStaffList from '@/views/admin/AdminStaffList/StaffList.vue'
 import AdminProfileNavigation from '@/views/admin/AdminProfile/AdminProfileNavigation.vue'
 import AddMember from '@/views/admin/AdminProfile/AddMember.vue'
-import Leaderboard from '@/views/staff/StaffProfile/Leaderboard.vue'
 import AllOrderList from '@/views/admin/AdminProfile/AllOrderList.vue'
 import ChangePassword from '@/views/staff/StaffProfile/ChangePassword.vue'
 import TransferDatabase from '@/views/admin/AdminProfile/TransferDatabase.vue'
 import Help from '@/views/staff/StaffProfile/Help.vue'
 import OrderDetails from '@/views/staff/StaffProfile/OrderDetails.vue'
+import StaffOrders from '@/views/admin/AdminStaffList/StaffOrders.vue'
+import AdminListLayout from '@/views/admin/AdminStaffList/Layout.vue'
 
 export default [
   {
@@ -23,9 +24,24 @@ export default [
         component: AdminMonitorStaff
       },
       {
-        path: 'staff-list',
+        path: 'list',
         meta: { title: '订单查询' },
-        component: AdminStaffList
+        component: AdminListLayout,
+        redirect: '/admin/list/leaderboard',
+        children: [
+          {
+            path: 'leaderboard',
+            component: AdminStaffList
+          },
+          {
+            path: 'orders',
+            component: StaffOrders
+          },
+          {
+            path: 'orders-details',
+            component: OrderDetails
+          }
+        ]
       },
       {
         path: 'profile',
@@ -35,10 +51,6 @@ export default [
           {
             path: 'add-member',
             component: AddMember
-          },
-          {
-            path: 'leaderboard',
-            component: Leaderboard
           },
           {
             path: 'all-order-list',
