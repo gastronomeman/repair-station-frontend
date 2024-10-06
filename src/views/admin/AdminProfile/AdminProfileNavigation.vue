@@ -19,15 +19,15 @@ const logout = async () => {
     <nut-navbar title="我的"></nut-navbar>
     <nut-navbar
       style="cursor: pointer"
-      @click="router.push('/admin/profile/add-member')"
-    >
-      <template #left><span class="nav-title">添加社员</span></template>
-    </nut-navbar>
-    <nut-navbar
-      style="cursor: pointer"
       @click="router.push('/admin/profile/leaderboard')"
     >
       <template #left><span class="nav-title">成员修单排行榜</span></template>
+    </nut-navbar>
+    <nut-navbar
+      style="cursor: pointer"
+      @click="router.push('/admin/profile/add-member')"
+    >
+      <template #left><span class="nav-title">添加社员</span></template>
     </nut-navbar>
     <nut-navbar
       style="cursor: pointer"
