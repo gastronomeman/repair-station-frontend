@@ -50,6 +50,7 @@ watch(
   <nut-pull-refresh v-model="refresh" @refresh="refreshFun">
     <router-view></router-view>
     <div class="footer"><Footer /></div>
+    <nut-backtop el-id="elId1" :distance="100" :bottom="60"></nut-backtop>
   </nut-pull-refresh>
 
   <nut-tabbar

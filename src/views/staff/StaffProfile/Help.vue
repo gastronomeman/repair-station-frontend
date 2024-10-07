@@ -10,9 +10,6 @@ const onClick = () => {
     router.push('/staff/profile')
   }
 }
-const handleClick = () => {
-  console.log('back to top')
-}
 </script>
 
 <template>
@@ -66,12 +63,6 @@ const handleClick = () => {
     <p style="text-align: right">—— 22届师兄</p>
     <br /><br /><br /><br /><br />
   </div>
-  <nut-backtop
-    el-id="elId1"
-    @click="handleClick"
-    :distance="100"
-    :bottom="60"
-  ></nut-backtop>
 </template>
 
 <style scoped>
