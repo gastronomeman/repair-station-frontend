@@ -25,8 +25,10 @@ export const finishOrderService = (data) =>
 
 export const historyListService = () => request.get(`/orders/history-list`)
 
-export const staffListService = (id) =>
-  request.get(`/orders/staff-list?id=${id}`)
+export const staffListService = (id, startTime, endTime) =>
+  request.get(
+    `/orders/staff-list?id=${id}&startTime=${startTime}&endTime=${endTime}`
+  )
 
 export const getAdminOrderService = () => request.get('/orders/admin-orders')
 

@@ -2,12 +2,17 @@
 import { ref } from 'vue'
 import { orderCountService } from '@/api/staff.js'
 import { useRouter } from 'vue-router'
+import { useAdminState } from '@/stores/index.js'
+
 const router = useRouter()
-const value1 = ref('')
-const value2 = ref('')
+const adminState = useAdminState()
+const value1 = ref(adminState.startTime)
+const value2 = ref(adminState.endTime)
 
 const leaderboard = ref([])
 const getOrdersList = async () => {
+  adminState.setStartTime(value1.value)
+  adminState.setEndTime(value2.value)
   const resp = await orderCountService(value1.value, value2.value)
   if (resp.code === 1) {
     leaderboard.value = resp.data
@@ -16,7 +21,15 @@ const getOrdersList = async () => {
 getOrdersList()
 
 const toStaffOrders = (id) => {
-  router.push('/admin/list/orders?id=' + id)
+  router.push(
+    `/admin/list/orders?id=${id}&start=${value1.value}&end=${value2.value}`
+  )
+}
+
+const resetList = () => {
+  value1.value = ''
+  value2.value = ''
+  getOrdersList()
 }
 </script>
 
@@ -27,6 +40,7 @@ const toStaffOrders = (id) => {
     <el-date-picker
       v-model="value1"
       type="datetime"
+      :editable="false"
       placeholder="开始日期"
       value-format="YYYY-MM-DD HH:mm:ss"
     />
@@ -34,12 +48,15 @@ const toStaffOrders = (id) => {
     <span class="demonstration">结束日期：</span>
     <el-date-picker
       v-model="value2"
+      :editable="false"
       type="datetime"
       placeholder="结束日期"
       value-format="YYYY-MM-DD HH:mm:ss"
     />
     <div class="list-button">
       <nut-button type="info" @click="getOrdersList">查找</nut-button>
+      &nbsp;&nbsp;
+      <nut-button type="info" @click="resetList">重置</nut-button>
     </div>
     <nut-divider dashed></nut-divider>
   </div>
@@ -65,7 +82,7 @@ const toStaffOrders = (id) => {
     margin: 10px 0;
   }
   .list-button {
-    margin: 5px 0;
+    margin: 8px 0;
   }
   .nut-divider {
     margin: 5px 0;

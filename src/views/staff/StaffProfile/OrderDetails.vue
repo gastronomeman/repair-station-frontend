@@ -98,7 +98,7 @@ getNameById()
       </nut-col>
       <nut-col :span="12">
         <div class="content-right">
-          {{ order.building }},{{ order.dormitory }}
+          {{ order.building }}#{{ order.dormitory }}
         </div>
       </nut-col>
     </nut-row>

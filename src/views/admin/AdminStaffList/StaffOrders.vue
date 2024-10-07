@@ -8,13 +8,15 @@ const router = useRouter()
 const route = useRoute()
 
 const onClick = () => {
-  router.push('/admin/list')
+  router.back()
 }
 const id = route.query.id
+const starTime = route.query.start
+const endTime = route.query.end
 
 const orderList = ref([])
 const getHistoryOrdersList = async () => {
-  const resp = await staffListService(id)
+  const resp = await staffListService(id, starTime, endTime)
   if (resp.code === 1) {
     orderList.value = resp.data
   }
