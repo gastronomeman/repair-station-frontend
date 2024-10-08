@@ -41,3 +41,10 @@ export const changSqlService = () => request.get(`/orders/change-sql`)
 
 export const transferOrderService = (id) =>
   request.put(`/orders/transfer-order/${id}`)
+
+export const changStatusService = (n, id) =>
+  request.put(`/orders/chang-status${n}`, id, {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })

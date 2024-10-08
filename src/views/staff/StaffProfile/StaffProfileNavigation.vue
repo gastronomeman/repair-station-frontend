@@ -43,6 +43,12 @@ const logout = async () => {
     </nut-navbar>
     <nut-navbar
       style="cursor: pointer"
+      @click="router.push('/staff/profile/photo-dir')"
+    >
+      <template #left><span class="nav-title">上传照片文件夹</span></template>
+    </nut-navbar>
+    <nut-navbar
+      style="cursor: pointer"
       @click="router.push('/staff/profile/help')"
     >
       <template #left><span class="nav-title">帮助</span></template>

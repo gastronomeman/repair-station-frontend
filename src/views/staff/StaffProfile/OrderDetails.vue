@@ -3,6 +3,8 @@ import { useRoute, useRouter } from 'vue-router'
 import { useStaffState } from '@/stores/index.js'
 import { ref } from 'vue'
 import { getNameByIdService } from '@/api/staff.js'
+import { changStatusService } from '@/api/orders.js'
+import { successMsg } from '@/utils/SendMsgUtils.js'
 
 const router = useRouter()
 const route = useRoute()
@@ -23,6 +25,14 @@ const getNameById = async () => {
   }
 }
 getNameById()
+
+const changeStatus = async (n, id) => {
+  const resp = await changStatusService(n, id)
+  if (resp.code === 1) {
+    router.go(-1)
+    successMsg(resp.data)
+  }
+}
 </script>
 
 <template>
@@ -158,6 +168,14 @@ getNameById()
       </nut-col>
     </nut-row>
     <nut-divider dashed />
+    <div v-if="route.fullPath.includes('admin')" style="text-align: center">
+      <nut-button @click="changeStatus(1, order.id)" type="danger"
+        >恢复待接单 </nut-button
+      >&nbsp;
+      <nut-button @click="changeStatus(2, order.id)" type="warning"
+        >恢复维修中
+      </nut-button>
+    </div>
   </div>
 </template>
 

@@ -1,10 +1,11 @@
 <script setup>
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { checkPhotoService, deletePhotoService } from '@/api/common.js'
 import { ref } from 'vue'
 import { errorMsg, successMsg } from '@/utils/SendMsgUtils.js'
 
 const router = useRouter()
+const route = useRoute()
 
 const onClick = () => {
   router.go(-1)
@@ -19,8 +20,11 @@ const getPhotoDir = async () => {
 }
 
 const showPhoto = async (str) => {
-  //const id = str.split('-')[0]
-  await router.push('/admin/profile/show-photo?dir=' + str.name)
+  if (route.fullPath.includes('admin')) {
+    await router.push('/admin/profile/show-photo?dir=' + str.name)
+  } else {
+    await router.push('/staff/profile/show-photo?dir=' + str.name)
+  }
 }
 getPhotoDir()
 
@@ -60,7 +64,7 @@ const deletePhoto = async (name) => {
           {{ item.date }}
         </div>
       </nut-col>
-      <nut-col :span="6">
+      <nut-col :span="6" v-if="route.fullPath.includes('admin')">
         <div style="text-align: right">
           <nut-button type="warning" size="mini" @click="deletePhoto(item.name)"
             >删除
