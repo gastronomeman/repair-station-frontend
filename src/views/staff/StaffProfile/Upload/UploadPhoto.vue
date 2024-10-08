@@ -210,7 +210,7 @@ const compressAndAppend = async (fileList, index) => {
       <el-radio value="0" size="large">有问题</el-radio>
       <el-radio value="1" size="large">确认无疑</el-radio>
     </el-radio-group>
-    <h4>5.修单中</h4>
+    <h4>5.维修过程中</h4>
     <p>
       *1.拆机拍下主板等<br />
       *2.安装软件的记录
@@ -240,7 +240,7 @@ const compressAndAppend = async (fileList, index) => {
       <el-radio value="0" size="large">有问题</el-radio>
       <el-radio value="1" size="large">没问题</el-radio>
     </el-radio-group>
-    <h4>7.修完后</h4>
+    <h4>7.维修完成后</h4>
     <p>
       *1.电脑bc面<br />
       *2.触摸板<br />

@@ -10,6 +10,8 @@ import Help from '@/views/staff/StaffProfile/Help.vue'
 import OrderDetails from '@/views/staff/StaffProfile/OrderDetails.vue'
 import StaffOrders from '@/views/admin/AdminStaffList/StaffOrders.vue'
 import AdminListLayout from '@/views/admin/AdminStaffList/Layout.vue'
+import PhotoDir from '@/views/admin/AdminProfile/PhotoDir.vue'
+import ShowPhoto from '@/views/admin/AdminProfile/ShowPhoto.vue'
 
 export default [
   {
@@ -59,6 +61,14 @@ export default [
           {
             path: 'orders-details',
             component: OrderDetails
+          },
+          {
+            path: 'photo-dir',
+            component: PhotoDir
+          },
+          {
+            path: 'show-photo',
+            component: ShowPhoto
           },
           {
             path: 'change-password',

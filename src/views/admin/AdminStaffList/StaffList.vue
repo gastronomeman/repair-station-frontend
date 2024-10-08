@@ -6,17 +6,21 @@ import { useAdminState } from '@/stores/index.js'
 
 const router = useRouter()
 const adminState = useAdminState()
+
+const loading = ref(false)
 const value1 = ref(adminState.startTime)
 const value2 = ref(adminState.endTime)
 
 const leaderboard = ref([])
 const getOrdersList = async () => {
+  loading.value = true
   adminState.setStartTime(value1.value)
   adminState.setEndTime(value2.value)
   const resp = await orderCountService(value1.value, value2.value)
   if (resp.code === 1) {
     leaderboard.value = resp.data
   }
+  loading.value = false
 }
 getOrdersList()
 
@@ -60,7 +64,12 @@ const resetList = () => {
     </div>
     <nut-divider dashed></nut-divider>
   </div>
-  <div v-for="(l, index) in leaderboard" :key="index" class="leaderboard">
+  <div
+    v-for="(l, index) in leaderboard"
+    :key="index"
+    class="leaderboard"
+    v-loading="loading"
+  >
     <nut-navbar @click="toStaffOrders(l.id)" style="cursor: pointer">
       <template #left>
         <span class="nav-title">{{ l.name }}</span>

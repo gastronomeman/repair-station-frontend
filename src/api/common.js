@@ -7,5 +7,10 @@ export const uploadsService = (formData, id) =>
     }
   })
 
-export const checkPhotoService = (data) =>
-  request.post(`/common/check-dir`, data)
+export const checkPhotoService = () => request.post(`/common/check-dir`)
+
+export const getPhotoListService = (dirName) =>
+  request.get(`/common/getPhotoList?dirName=${dirName}`)
+
+export const deletePhotoService = (name) =>
+  request.delete(`/common/del?name=${name}`)

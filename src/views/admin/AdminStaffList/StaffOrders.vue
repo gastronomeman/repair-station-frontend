@@ -6,6 +6,7 @@ import OrdersStaffItemSee from '@/components/orders/OrdersStaffItemSee.vue'
 
 const router = useRouter()
 const route = useRoute()
+const loading = ref(false)
 
 const onClick = () => {
   router.back()
@@ -15,14 +16,16 @@ const starTime = route.query.start
 const endTime = route.query.end
 
 const orderList = ref([])
-const getHistoryOrdersList = async () => {
+const getOrdersList = async () => {
+  loading.value = true
   const resp = await staffListService(id, starTime, endTime)
   if (resp.code === 1) {
     orderList.value = resp.data
   }
+  loading.value = false
 }
 
-getHistoryOrdersList()
+getOrdersList()
 </script>
 
 <template>
@@ -31,7 +34,7 @@ getHistoryOrdersList()
       <div>返回</div>
     </template>
   </nut-navbar>
-  <div v-for="orders in orderList" :key="orders.value">
+  <div v-for="orders in orderList" :key="orders.value" v-loading="loading">
     <br />
     <orders-staff-item-see :order="orders"></orders-staff-item-see>
   </div>
