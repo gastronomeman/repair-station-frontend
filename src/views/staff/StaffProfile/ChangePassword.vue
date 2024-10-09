@@ -66,11 +66,13 @@ const updateClick = async () => {
 </script>
 
 <template>
-  <nut-navbar title="修改密码" left-show @click-back="onClick">
-    <template #left>
-      <div>返回</div>
-    </template>
-  </nut-navbar>
+  <nut-sticky>
+    <nut-navbar title="修改密码" left-show @click-back="onClick">
+      <template #left>
+        <div>返回</div>
+      </template>
+    </nut-navbar>
+  </nut-sticky>
   <div class="chang-password-img">
     <img src="@/assets/rs_logo.png" alt="Logo" />
   </div>

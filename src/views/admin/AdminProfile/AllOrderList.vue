@@ -61,11 +61,13 @@ const totalPage = computed(() => {
 </script>
 
 <template>
-  <nut-navbar title="所有维修单" left-show @click-back="onClick">
-    <template #left>
-      <div>返回</div>
-    </template>
-  </nut-navbar>
+  <nut-sticky>
+    <nut-navbar title="所有维修单" left-show @click-back="onClick">
+      <template #left>
+        <div>返回</div>
+      </template>
+    </nut-navbar>
+  </nut-sticky>
   <div class="search">
     <el-input
       v-model="search"

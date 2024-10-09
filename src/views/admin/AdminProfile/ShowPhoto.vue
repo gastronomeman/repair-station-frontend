@@ -58,7 +58,9 @@ const imagePreview = (x) => {
     <div v-for="dir in list0" :key="dir">
       <van-image
         @click="imagePreview(url + dir)"
-        width="50%"
+        width="150"
+        height="150"
+        radius="4"
         :src="url + dir"
       />
     </div>
@@ -67,7 +69,9 @@ const imagePreview = (x) => {
     <div v-for="dir in list1" :key="dir">
       <van-image
         @click="imagePreview(url + dir)"
-        width="50%"
+        width="150"
+        height="150"
+        radius="4"
         :src="url + dir"
       />
     </div>
@@ -76,7 +80,9 @@ const imagePreview = (x) => {
     <div v-for="dir in list2" :key="dir">
       <van-image
         @click="imagePreview(url + dir)"
-        width="50%"
+        width="150"
+        height="150"
+        radius="4"
         :src="url + dir"
       />
     </div>
@@ -85,7 +91,9 @@ const imagePreview = (x) => {
     <div v-for="dir in list3" :key="dir">
       <van-image
         @click="imagePreview(url + dir)"
-        width="50%"
+        width="150"
+        height="150"
+        radius="4"
         :src="url + dir"
       />
     </div>

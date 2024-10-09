@@ -21,11 +21,13 @@ getHistoryOrdersList()
 </script>
 
 <template>
-  <nut-navbar title="我的历史" left-show @click-back="onClick">
-    <template #left>
-      <div>返回</div>
-    </template>
-  </nut-navbar>
+  <nut-sticky>
+    <nut-navbar title="我的历史" left-show @click-back="onClick">
+      <template #left>
+        <div>返回</div>
+      </template>
+    </nut-navbar>
+  </nut-sticky>
   <div v-for="orders in orderList" :key="orders.value">
     <br />
     <orders-staff-item-see :order="orders"></orders-staff-item-see>

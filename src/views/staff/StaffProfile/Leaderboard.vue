@@ -22,11 +22,13 @@ getLeaderboard()
 </script>
 
 <template>
-  <nut-navbar title="排行榜" left-show @click-back="onClick">
-    <template #left>
-      <div>返回</div>
-    </template>
-  </nut-navbar>
+  <nut-sticky>
+    <nut-navbar title="排行榜" left-show @click-back="onClick">
+      <template #left>
+        <div>返回</div>
+      </template>
+    </nut-navbar>
+  </nut-sticky>
   <br />
   <div v-for="(l, index) in leaderboard" :key="index">
     <nut-navbar>

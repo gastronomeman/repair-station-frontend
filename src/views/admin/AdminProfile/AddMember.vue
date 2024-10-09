@@ -102,11 +102,13 @@ const totalPage = computed(() => {
 </script>
 
 <template>
-  <nut-navbar title="添加新社员" left-show @click-back="onClick">
-    <template #left>
-      <div>返回</div>
-    </template>
-  </nut-navbar>
+  <nut-sticky>
+    <nut-navbar title="添加新社员" left-show @click-back="onClick">
+      <template #left>
+        <div>返回</div>
+      </template>
+    </nut-navbar>
+  </nut-sticky>
   <div class="staff-from">
     <el-input
       v-model="staff.studentId"

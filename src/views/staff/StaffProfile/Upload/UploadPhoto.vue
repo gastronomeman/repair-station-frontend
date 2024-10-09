@@ -146,11 +146,13 @@ const compressAndAppend = async (fileList, index) => {
 </script>
 
 <template>
-  <nut-navbar title="拆机照片核对" left-show @click-back="onClick">
-    <template #left>
-      <div>返回</div>
-    </template>
-  </nut-navbar>
+  <nut-sticky>
+    <nut-navbar title="拆机照片核对" left-show @click-back="onClick">
+      <template #left>
+        <div>返回</div>
+      </template>
+    </nut-navbar>
+  </nut-sticky>
   <div class="upload">
     <h4>1.确认电脑有无保修（拆机前确认）</h4>
     <p>*有保修除加装固态，其余非必要不拆机</p>

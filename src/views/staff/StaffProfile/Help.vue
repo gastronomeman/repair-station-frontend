@@ -13,11 +13,13 @@ const onClick = () => {
 </script>
 
 <template>
-  <nut-navbar title="帮助" left-show @click-back="onClick">
-    <template #left>
-      <div>返回</div>
-    </template>
-  </nut-navbar>
+  <nut-sticky>
+    <nut-navbar title="帮助" left-show @click-back="onClick">
+      <template #left>
+        <div>返回</div>
+      </template>
+    </nut-navbar>
+  </nut-sticky>
   <div class="helpPage">
     <h2 align="center">维修站报修系统操作说明</h2>
     <p>1.首页，查看当前故障报修数量、个人信息、公告以及更多。</p>

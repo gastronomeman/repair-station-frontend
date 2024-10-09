@@ -46,11 +46,13 @@ const deletePhoto = async (name) => {
 </script>
 
 <template>
-  <nut-navbar title="上传照片文件夹" left-show @click-back="onClick">
-    <template #left>
-      <div>返回</div>
-    </template>
-  </nut-navbar>
+  <nut-sticky>
+    <nut-navbar title="上传照片文件夹" left-show @click-back="onClick">
+      <template #left>
+        <div>返回</div>
+      </template>
+    </nut-navbar>
+  </nut-sticky>
   <br />
   <div class="table" v-for="(item, index) in dirList" :key="index">
     <nut-row>
