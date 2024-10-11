@@ -48,11 +48,13 @@ const imagePreview = (x) => {
 </script>
 
 <template>
-  <nut-navbar title="查看照片" left-show @click-back="onClick">
-    <template #left>
-      <div>返回</div>
-    </template>
-  </nut-navbar>
+  <nut-sticky>
+    <nut-navbar title="查看照片" left-show @click-back="onClick">
+      <template #left>
+        <div>返回</div>
+      </template>
+    </nut-navbar>
+  </nut-sticky>
   <div class="photo-box" v-if="dirList.length > 0">
     <h3>1.机主签名截图</h3>
     <div v-for="dir in list0" :key="dir">
