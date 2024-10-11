@@ -5,14 +5,14 @@ import StaffAcceptedOrders from '@/views/staff/StaffAcceptedOrders.vue'
 import StaffProfileNavigation from '@/views/staff/StaffProfile/StaffProfileNavigation.vue'
 import OrderHistory from '@/views/staff/StaffProfile/OrderHistory.vue'
 import Leaderboard from '@/views/staff/StaffProfile/Leaderboard.vue'
-import ChangePassword from '@/views/staff/StaffProfile/ChangePassword.vue'
-import Help from '@/views/staff/StaffProfile/Help.vue'
-import OrderDetails from '@/views/staff/StaffProfile/OrderDetails.vue'
+import ChangePassword from '@/views/common/ChangePassword.vue'
+import Help from '@/views/common/Help.vue'
+import OrderDetails from '@/views/common/OrderDetails.vue'
 import Signature from '@/views/staff/SignaturePgae.vue'
 import UploadNavigation from '@/views/staff/StaffProfile/Upload/UploadNavigation.vue'
 import UploadPhoto from '@/views/staff/StaffProfile/Upload/UploadPhoto.vue'
-import PhotoDir from '@/views/admin/AdminProfile/PhotoDir.vue'
-import ShowPhoto from '@/views/admin/AdminProfile/ShowPhoto.vue'
+import PhotoDir from '@/views/common/PhotoDir.vue'
+import ShowPhoto from '@/views/common/ShowPhoto.vue'
 
 export default [
   {
@@ -23,7 +23,7 @@ export default [
       {
         path: 'login',
         meta: { title: '社员登录' },
-        component: () => import('@/views/staff/StaffLogin.vue')
+        component: () => import('@/views/common/StaffLogin.vue')
       },
       {
         path: 'order-acceptance',
