@@ -9,7 +9,6 @@ import TransferDatabase from '@/views/admin/AdminProfile/TransferDatabase.vue'
 import Help from '@/views/common/Help.vue'
 import OrderDetails from '@/views/common/OrderDetails.vue'
 import StaffOrders from '@/views/admin/AdminStaffList/StaffOrders.vue'
-import AdminListLayout from '@/views/admin/AdminStaffList/Layout.vue'
 import PhotoDir from '@/views/common/PhotoDir.vue'
 import ShowPhoto from '@/views/common/ShowPhoto.vue'
 
@@ -26,24 +25,19 @@ export default [
         component: AdminMonitorStaff
       },
       {
-        path: 'list',
-        meta: { title: '订单查询' },
-        component: AdminListLayout,
-        redirect: '/admin/list/leaderboard',
-        children: [
-          {
-            path: 'leaderboard',
-            component: AdminStaffList
-          },
-          {
-            path: 'orders',
-            component: StaffOrders
-          },
-          {
-            path: 'orders-details',
-            component: OrderDetails
-          }
-        ]
+        path: 'orders-list',
+        meta: { title: '订单统计' },
+        component: AdminStaffList
+      },
+      {
+        path: 'orders',
+        meta: { title: '订单统计' },
+        component: StaffOrders
+      },
+      {
+        path: 'orders-details',
+        meta: { title: '订单列表' },
+        component: OrderDetails
       },
       {
         path: 'profile',

@@ -8,7 +8,7 @@ const routes = [
   {
     path: '/:pathMatch(.*)*', // 捕获所有未匹配路径
     name: 'NotFound',
-    component: () => import('@/views/NotFound.vue')
+    component: () => import('@/views/common/NotFound.vue')
   },
   {
     path: '/',

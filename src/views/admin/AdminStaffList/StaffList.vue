@@ -26,7 +26,7 @@ getOrdersList()
 
 const toStaffOrders = (id) => {
   router.push(
-    `/admin/list/orders?id=${id}&start=${value1.value}&end=${value2.value}`
+    `/admin/orders?id=${id}&start=${value1.value}&end=${value2.value}`
   )
 }
 
