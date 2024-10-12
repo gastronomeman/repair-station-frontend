@@ -60,7 +60,12 @@ watch(
   () => route.fullPath,
   (newPath) => {
     if (newPath.includes('/orders/query')) title.value = '报修查询'
-    else if (newPath === '/orders/new') title.value = '电脑报修'
+    else if (
+      newPath === '/orders/notice' ||
+      newPath === '/orders/from' ||
+      newPath === '/orders/wait'
+    )
+      title.value = '电脑报修'
     else title.value = '维修公告'
   },
   { immediate: true }
@@ -104,7 +109,7 @@ watch(
       <div v-if="title !== '维修公告'">
         <nut-row>
           <nut-col :span="12">
-            <div class="text" @click="router.push('/orders/new')">
+            <div class="text" @click="router.push('/')">
               电脑报修
               <tool class="search-icon" theme="outline" size="20" fill="#333" />
             </div>
