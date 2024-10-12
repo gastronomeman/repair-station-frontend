@@ -8,3 +8,4 @@ export default pinia
 
 export * from './modules/staff.js'
 export * from './modules/admin.js'
+export * from './modules/order.js'

@@ -1,8 +1,11 @@
 <script setup>
 import { ref } from 'vue'
 import { ordersNewService } from '@/api/orders.js'
+import { useOrderState } from '@/stores/index.js'
+import { useRouter } from 'vue-router'
 
-const emit = defineEmits(['agreementStatus'])
+const router = useRouter()
+const orderState = useOrderState()
 
 const show = ref(false)
 const val = ref()
@@ -59,13 +62,7 @@ const formRules = ref({
 })
 
 const customBlurValidate = (prop) => {
-  formRef.value?.validate(prop).then(({ valid }) => {
-    if (valid) {
-      //console.log('success:', order.value)
-    } else {
-      //console.warn('error:', errors)
-    }
-  })
+  formRef.value?.validate(prop)
 }
 
 const confirmShow = ({ selectedValue }) => {
@@ -90,8 +87,6 @@ const submit = () => {
 
       if (resp.code === 1) {
         console.log(order.value)
-        emit('successStatus', true)
-
         //重置状态
         order.value = {
           name: '',
@@ -104,12 +99,20 @@ const submit = () => {
           identity: '1'
         }
       }
+      await router.push('/orders/wait')
       loading.value = false
     } else {
       console.warn('error:', errors)
     }
   })
 }
+
+const checkAgreed = () => {
+  if (!orderState.agreed) {
+    router.push('/')
+  }
+}
+checkAgreed()
 </script>
 
 <template>

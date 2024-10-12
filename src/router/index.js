@@ -13,12 +13,27 @@ const routes = [
   {
     path: '/',
     component: () => import('@/views/layout/OrdersLayout.vue'),
-    redirect: '/orders/new',
+    redirect: '/orders',
     children: [
       {
-        path: 'orders/new',
+        path: 'orders',
         meta: { title: '电脑报修' },
-        component: () => import('@/views/orders/NewOrder.vue')
+        component: () => import('@/views/orders/newOrders/NewOrderLayout.vue'),
+        redirect: '/orders/notice',
+        children: [
+          {
+            path: 'notice',
+            component: () => import('@/views/orders/newOrders/OrdersNotice.vue')
+          },
+          {
+            path: 'from',
+            component: () => import('@/views/orders/newOrders/OrdersFrom.vue')
+          },
+          {
+            path: 'wait',
+            component: () => import('@/views/orders/newOrders/OrdersWait.vue')
+          }
+        ]
       },
       {
         path: 'orders/announcements',
