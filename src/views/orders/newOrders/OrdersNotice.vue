@@ -7,9 +7,16 @@ const orderState = useOrderState()
 
 const router = useRouter()
 
-const handleAgree = () => {
+const handleAgree = async () => {
   if (orderState.agreed) {
-    router.push('/orders/from')
+    const toast = showLoadingToast({
+      message: '跳转中...',
+      forbidClick: true,
+      loadingType: 'spinner',
+      duration: 0
+    })
+    await router.push('/orders/from')
+    toast.close()
   } else {
     alert('请先认真阅读，服务须知')
   }
@@ -19,7 +26,12 @@ const show = ref(false)
 </script>
 
 <template>
-  <van-overlay :show="show" @click="show = false">
+  <van-overlay
+    :show="show"
+    @click="show = false"
+    z-index="999"
+    :lock-scroll="false"
+  >
     <div class="wrapper">
       <div class="orders-notice" @click.stop>
         <h2>服务须知</h2>
@@ -77,11 +89,15 @@ const show = ref(false)
   .orders-notice {
     text-align: center;
     background-color: white;
-    width: 90%;
+    width: 85%;
+    max-height: 80vh;
     margin: 0 auto;
     border-radius: 10px;
+    padding: 20px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* 使iOS设备上的滚动更加平滑 */
+
     .notice {
-      width: 90%;
       text-align: left;
       padding-bottom: 30px;
       margin: 0 auto;
