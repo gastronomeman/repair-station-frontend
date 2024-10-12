@@ -10,7 +10,6 @@ const onClickStep = (index) => {
   if (index < current.value && index !== 3) {
     current.value = index
     if (index === 1) router.push('/')
-    else if (index === 2) router.push('/orders/from')
   }
 }
 watch(
