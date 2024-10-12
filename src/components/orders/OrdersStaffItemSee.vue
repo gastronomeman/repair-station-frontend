@@ -18,8 +18,8 @@ const order = ref(props.order)
 const handleClick = () => {
   staffState.setOrder(order.value)
   if (route.fullPath.includes('admin')) {
-    if (route.fullPath.includes('/admin/list/orders')) {
-      router.push('/admin/list/orders-details')
+    if (route.fullPath.includes('/admin/orders')) {
+      router.push('/admin/orders-details')
       return
     }
     router.push('/admin/profile/orders-details')

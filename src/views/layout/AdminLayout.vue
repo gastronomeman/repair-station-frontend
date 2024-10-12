@@ -18,7 +18,7 @@ watch(
   () => route.fullPath,
   (newPath) => {
     if (newPath.includes('/admin/monitor-staff')) active.value = 0
-    else if (newPath.includes('/admin/orders-list')) active.value = 1
+    else if (newPath.includes('/admin/orders')) active.value = 1
     else if (newPath.includes('/admin/profile')) active.value = 2
   },
   { immediate: true }
