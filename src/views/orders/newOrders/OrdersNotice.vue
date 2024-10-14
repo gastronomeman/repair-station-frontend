@@ -90,19 +90,21 @@ const show = ref(false)
   height: 100%;
   .orders-notice {
     text-align: center;
-    background-color: white;
     width: 85%;
     margin: 0 auto;
     border-radius: 10px;
     padding: 20px;
+    background-color: #f0f0f0;
 
     .text {
+      border-radius: 10px;
+      padding: 10px;
+      background-color: white;
       overflow-y: auto;
       max-height: 50vh;
       -webkit-overflow-scrolling: touch; /* 使iOS设备上的滚动更加平滑 */
       .notice {
         text-align: left;
-        padding-bottom: 10px;
         margin: 0 auto;
       }
     }
