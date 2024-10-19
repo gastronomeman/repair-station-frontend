@@ -13,17 +13,13 @@ const list1 = ref([])
 const list2 = ref([])
 const list3 = ref([])
 
+const loading = ref(true)
+
 const onClick = () => {
   router.go(-1)
 }
 const getPhotoList = async () => {
-  const toast = showLoadingToast({
-    message: '加载中...',
-    forbidClick: true,
-    loadingType: 'spinner',
-    duration: 0
-  })
-
+  loading.value = true
   const resp = await getPhotoListService(dir)
   if (resp.code === 1) {
     dirList.value = resp.data
@@ -45,8 +41,7 @@ const getPhotoList = async () => {
       }
     }
   })
-
-  toast.close
+  loading.value = false
 }
 const url = baseURL + '/common/download?name='
 getPhotoList()
@@ -64,52 +59,54 @@ const imagePreview = (x) => {
       </template>
     </nut-navbar>
   </nut-sticky>
-  <div class="photo-box" v-if="dirList.length > 0">
-    <h3>1.机主签名截图</h3>
-    <div v-for="dir in list0" :key="dir">
-      <van-image
-        @click="imagePreview(url + dir)"
-        width="150"
-        height="150"
-        radius="4"
-        :src="url + dir"
-      />
+  <el-skeleton :rows="5" animated :loading="loading">
+    <div class="photo-box" v-if="dirList.length > 0">
+      <h3>1.机主签名截图</h3>
+      <div v-for="dir in list0" :key="dir">
+        <van-image
+          @click="imagePreview(url + dir)"
+          width="150"
+          height="150"
+          radius="4"
+          :src="url + dir"
+        />
+      </div>
+      <nut-divider style="margin: 5px" dashed />
+      <h3>2.修单前确认电脑状态</h3>
+      <div v-for="dir in list1" :key="dir">
+        <van-image
+          @click="imagePreview(url + dir)"
+          width="150"
+          height="150"
+          radius="4"
+          :src="url + dir"
+        />
+      </div>
+      <nut-divider style="margin: 5px" dashed />
+      <h3>3.维修过程</h3>
+      <div v-for="dir in list2" :key="dir">
+        <van-image
+          @click="imagePreview(url + dir)"
+          width="150"
+          height="150"
+          radius="4"
+          :src="url + dir"
+        />
+      </div>
+      <nut-divider style="margin: 5px" dashed />
+      <h3>4.修完拍照</h3>
+      <div v-for="dir in list3" :key="dir">
+        <van-image
+          @click="imagePreview(url + dir)"
+          width="150"
+          height="150"
+          radius="4"
+          :src="url + dir"
+        />
+      </div>
+      <nut-divider style="margin: 5px" dashed />
     </div>
-    <nut-divider style="margin: 5px" dashed />
-    <h3>2.修单前确认电脑状态</h3>
-    <div v-for="dir in list1" :key="dir">
-      <van-image
-        @click="imagePreview(url + dir)"
-        width="150"
-        height="150"
-        radius="4"
-        :src="url + dir"
-      />
-    </div>
-    <nut-divider style="margin: 5px" dashed />
-    <h3>3.维修过程</h3>
-    <div v-for="dir in list2" :key="dir">
-      <van-image
-        @click="imagePreview(url + dir)"
-        width="150"
-        height="150"
-        radius="4"
-        :src="url + dir"
-      />
-    </div>
-    <nut-divider style="margin: 5px" dashed />
-    <h3>4.修完拍照</h3>
-    <div v-for="dir in list3" :key="dir">
-      <van-image
-        @click="imagePreview(url + dir)"
-        width="150"
-        height="150"
-        radius="4"
-        :src="url + dir"
-      />
-    </div>
-    <nut-divider style="margin: 5px" dashed />
-  </div>
+  </el-skeleton>
 </template>
 
 <style scoped>
