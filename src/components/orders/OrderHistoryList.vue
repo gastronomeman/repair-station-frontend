@@ -70,7 +70,6 @@ const totalPage = computed(() => {
     <nut-divider />
   </div>
   <el-empty
-    style="background: #f0f0f0; width: 80%; margin: 0 auto"
     v-if="ordersList.length === 0"
     description="期待你在维修站的历史上留下一笔痕迹哦！^o^！"
     v-loading="loading"
