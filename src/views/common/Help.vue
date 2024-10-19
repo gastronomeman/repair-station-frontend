@@ -59,7 +59,7 @@ const onClick = () => {
     <img src="@/assets/help/help11.jpg" width="250px" alt="" /><br />
     <nut-divider dashed />
     <p>*为了账号安全，退出前务必点击“退出”按钮，退出此次登陆状态。</p>
-    <p style="margin: 0; color: red">此页面由23届隽隽师兄编写</p>
+    <p style="margin: 0; color: red">此帮助页面由23届隽隽师兄编写</p>
     <nut-divider class="foot-line" />
     <p style="margin: 0">
       如果觉得此系统不完善，或者是想继续改进，需要源码，请联系我。微信：L18218644665。
