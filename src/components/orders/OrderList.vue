@@ -58,12 +58,6 @@ const totalPage = computed(() => {
 </script>
 
 <template>
-  <el-empty
-    style="background: #f0f0f0"
-    v-if="ordersList.length === 0"
-    description="列表空空如也。。。"
-    v-loading="loading"
-  />
   <div class="search">
     <el-input
       v-model="search"
@@ -76,6 +70,12 @@ const totalPage = computed(() => {
     <nut-button type="info" size="small" @click="resetList">重置</nut-button>
     <nut-divider />
   </div>
+  <el-empty
+    style="background: #f0f0f0; width: 80%; margin: 0 auto"
+    v-if="ordersList.length === 0"
+    description="没什么好怕的，去接一下单，修一下电脑吧，不会的还有师兄师姐们帮你呢！(*๓´╰╯`๓)♡"
+    v-loading="loading"
+  />
   <div v-for="orders in ordersList" :key="orders.id" class="br">
     <orders-staff-item-see :order="orders"></orders-staff-item-see>
     <div class="br">&nbsp;</div>
