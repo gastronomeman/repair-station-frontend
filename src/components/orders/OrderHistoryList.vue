@@ -9,11 +9,12 @@ const page = ref({
   total: 0
 })
 
-const loading = ref(true)
+const loading = ref(false)
 
 const search = ref('')
 const ordersList = ref('')
 const getOrderList = async () => {
+  loading.value = true
   const resp = await getHistoryListService(
     page.value.currentPage,
     page.value.pageSize,
@@ -23,6 +24,7 @@ const getOrderList = async () => {
     ordersList.value = resp.data.records
     page.value.total = resp.data.total
   }
+  loading.value = false
 }
 getOrderList()
 
