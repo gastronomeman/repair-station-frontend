@@ -17,6 +17,13 @@ const onClick = () => {
   router.go(-1)
 }
 const getPhotoList = async () => {
+  const toast = showLoadingToast({
+    message: '加载中...',
+    forbidClick: true,
+    loadingType: 'spinner',
+    duration: 0
+  })
+
   const resp = await getPhotoListService(dir)
   if (resp.code === 1) {
     dirList.value = resp.data
@@ -38,6 +45,8 @@ const getPhotoList = async () => {
       }
     }
   })
+
+  toast.close
 }
 const url = baseURL + '/common/download?name='
 getPhotoList()

@@ -11,10 +11,10 @@ export const getStopTitleService = () => request.get('/wxzStatus/stopTitle')
 export const changStatusService = () => request.get('/wxzStatus/chang-status')
 
 export const changeOrderNoService = (str) =>
-  request.get('/wxzStatus/chang-order-notice?orderNo=' + str)
+  request.put('/wxzStatus/chang-order-notice', { orderNotice: str })
 
 export const changeStaffNoService = (str) =>
-  request.get('/wxzStatus/chang-staff-notice?staffNo=' + str)
+  request.put('/wxzStatus/chang-staff-notice', { staffNotice: str })
 
 export const changeStopNoService = (str) =>
-  request.get('/wxzStatus/chang-stop-notice?stopNo=' + str)
+  request.put('/wxzStatus/chang-stop-notice', { stopNotice: str })

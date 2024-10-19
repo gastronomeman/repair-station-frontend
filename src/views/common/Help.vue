@@ -25,16 +25,15 @@ const onClick = () => {
     <p>1.首页，查看当前故障报修数量、个人信息、公告以及更多。</p>
     <img src="@/assets/help/help1.jpg" width="250px" alt="" /><br />
     <nut-divider dashed />
-    <p>2.点击按钮进来，点击“接单”为接手处理此故障，</p>
+    <p>2.点击按钮进来，点击“抢单”为接手处理此故障订单。</p>
     <img src="@/assets/help/help2.jpg" width="250px" alt="" /><br />
     <nut-divider dashed />
-    <p>3.点击上方“维修中”查看已接单</p>
+    <p>3.点击上方“维修中”可以查看已接单</p>
     <img src="@/assets/help/help3.jpg" width="250px" alt="" />
     <img src="@/assets/help/help4.jpg" width="250px" alt="" /><br />
     <nut-divider dashed />
     <p>4.这里是自己接的单。维修完成后点击黄字”维修中“结束维修单。</p>
-    <img src="@/assets/help/help5.jpg" width="250px" alt="" />
-    <img src="@/assets/help/help6.jpg" width="250px" alt="" /><br />
+    <img src="@/assets/help/help5.jpg" width="250px" alt="" /><br />
     <nut-divider dashed />
     <p>
       5.1
@@ -43,7 +42,9 @@ const onClick = () => {
         如自己没有保存照片及截图，后期纠纷社员自己承担
       </span>
     </p>
-    <img src="@/assets/help/help7.jpg" width="250px" alt="" /><br />
+    <img src="@/assets/help/help6.jpg" width="250px" alt="" />
+    <img src="@/assets/help/help7.jpg" width="250px" alt="" />
+    <br />
     <nut-divider dashed />
     <p>5.2 点击此处对拆机过程的图片进行上传<br /></p>
     <img src="@/assets/help/help8.jpg" width="250px" alt="" /><br />
@@ -54,16 +55,16 @@ const onClick = () => {
     <p>5.4 按照所描述的规则进行上传填写<br /></p>
     <img src="@/assets/help/help10.jpg" width="250px" alt="" /><br />
     <nut-divider dashed />
-    <p>6.个人中心，可查看历史处理记录，修改口令等等。</p>
-    <img src="@/assets/help/help0.jpg" width="250px" alt="" /><br />
+    <p>6.个人中心，可查看历史处理记录，修改登陆密码等等。</p>
+    <img src="@/assets/help/help11.jpg" width="250px" alt="" /><br />
     <nut-divider dashed />
     <p>*为了账号安全，退出前务必点击“退出”按钮，退出此次登陆状态。</p>
+    <p style="margin: 0; color: red">此页面由23届隽隽师兄编写</p>
     <nut-divider class="foot-line" />
     <p style="margin: 0">
-      **如果觉得此系统不完善，或者是想继续改进，需要源码，请联系我。微信：L18218644665。
+      如果觉得此系统不完善，或者是想继续改进，需要源码，请联系我。微信：L18218644665。
     </p>
     <p style="text-align: right">—— 22届师兄</p>
-    <br /><br /><br /><br /><br />
   </div>
 </template>
 
@@ -86,6 +87,6 @@ p {
   }
 }
 .foot-line {
-  margin: 45px 0 10px;
+  margin: 20px 0 10px;
 }
 </style>

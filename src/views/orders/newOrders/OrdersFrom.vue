@@ -135,7 +135,7 @@ checkAgreed()
       <nut-form-item label="身份" prop="identity" required>
         <nut-radio-group v-model="order.identity" direction="horizontal">
           <nut-radio label="1">学生</nut-radio>
-          <nut-radio label="0">教师</nut-radio>
+          <nut-radio label="0">教师 / 职工</nut-radio>
         </nut-radio-group>
       </nut-form-item>
       <nut-form-item
