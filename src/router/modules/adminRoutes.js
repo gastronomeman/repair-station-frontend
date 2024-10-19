@@ -3,14 +3,14 @@ import AdminMonitorStaff from '@/views/admin/AdminMonitorStaff.vue'
 import AdminStaffList from '@/views/admin/AdminStaffList/StaffList.vue'
 import AdminProfileNavigation from '@/views/admin/AdminProfile/AdminProfileNavigation.vue'
 import AddMember from '@/views/admin/AdminProfile/AddMember.vue'
-import AllOrderList from '@/views/admin/AdminProfile/AllOrderList.vue'
+import AllOrderList from '@/views/common/OrderListShow.vue'
 import ChangePassword from '@/views/common/ChangePassword.vue'
 import TransferDatabase from '@/views/admin/AdminProfile/TransferDatabase.vue'
 import Help from '@/views/common/Help.vue'
 import OrderDetails from '@/views/common/OrderDetails.vue'
 import StaffOrders from '@/views/admin/AdminStaffList/StaffOrders.vue'
-import PhotoDir from '@/views/common/PhotoDir.vue'
-import ShowPhoto from '@/views/common/ShowPhoto.vue'
+import PhotoDir from '@/views/common/photo/PhotoDir.vue'
+import ShowPhoto from '@/views/common/photo/ShowPhoto.vue'
 
 export default [
   {
@@ -49,7 +49,7 @@ export default [
             component: AddMember
           },
           {
-            path: 'all-order-list',
+            path: 'order-list',
             component: AllOrderList
           },
           {

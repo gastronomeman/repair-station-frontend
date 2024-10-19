@@ -19,7 +19,7 @@ const logout = async () => {
     <nut-navbar title="我的"></nut-navbar>
     <nut-navbar
       style="cursor: pointer"
-      @click="router.push('/admin/profile/all-order-list')"
+      @click="router.push('/admin/profile/order-list')"
     >
       <template #left><span class="nav-title">所有维修单</span></template>
     </nut-navbar>

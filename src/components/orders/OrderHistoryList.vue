@@ -1,15 +1,7 @@
 <script setup>
-import { useRoute, useRouter } from 'vue-router'
-import { computed, ref } from 'vue'
-import { getFinishOrderService } from '@/api/orders.js'
 import OrdersStaffItemSee from '@/components/orders/OrdersStaffItemSee.vue'
-
-const router = useRouter()
-const route = useRoute()
-const onClick = () => {
-  if (route.fullPath.includes('admin')) router.push('/admin/profile')
-  else router.push('/staff/profile')
-}
+import { computed, ref } from 'vue'
+import { getHistoryListService } from '@/api/orders.js'
 
 const page = ref({
   currentPage: 1,
@@ -17,10 +9,12 @@ const page = ref({
   total: 0
 })
 
+const loading = ref(true)
+
 const search = ref('')
 const ordersList = ref('')
 const getOrderList = async () => {
-  const resp = await getFinishOrderService(
+  const resp = await getHistoryListService(
     page.value.currentPage,
     page.value.pageSize,
     search.value
@@ -61,13 +55,12 @@ const totalPage = computed(() => {
 </script>
 
 <template>
-  <nut-sticky>
-    <nut-navbar title="所有维修单" left-show @click-back="onClick">
-      <template #left>
-        <div>返回</div>
-      </template>
-    </nut-navbar>
-  </nut-sticky>
+  <el-empty
+    style="background: #f0f0f0"
+    v-if="ordersList.length === 0"
+    description="期待你在维修站的历史上留下一笔痕迹哦！^o^！"
+    v-loading="loading"
+  />
   <div class="search">
     <el-input
       v-model="search"
@@ -80,8 +73,9 @@ const totalPage = computed(() => {
     <nut-button type="info" size="small" @click="resetList">重置</nut-button>
     <nut-divider />
   </div>
-  <div v-for="orders in ordersList" :key="orders.id" class="content">
+  <div v-for="orders in ordersList" :key="orders.id" class="br">
     <orders-staff-item-see :order="orders"></orders-staff-item-see>
+    <div class="br">&nbsp;</div>
   </div>
   <div class="page">
     <nut-pagination
@@ -105,12 +99,6 @@ const totalPage = computed(() => {
   margin: 15px auto;
   text-align: center;
 }
-.content {
-  margin-bottom: 5px;
-}
-.br {
-  margin-bottom: 50px;
-}
 .page {
   width: 90%;
   margin: 10px auto;
@@ -124,6 +112,5 @@ const totalPage = computed(() => {
     color: #7a7374;
     margin: 0 0 5px;
   }
-  margin: 0 0 30px;
 }
 </style>

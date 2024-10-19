@@ -23,8 +23,6 @@ export const uploaderListService = () => request.get(`/orders/uploader-list`)
 export const finishOrderService = (data) =>
   request.put(`/orders/finish-order`, data)
 
-export const historyListService = () => request.get(`/orders/history-list`)
-
 export const staffListService = (id, startTime, endTime) =>
   request.get(
     `/orders/staff-list?id=${id}&startTime=${startTime}&endTime=${endTime}`
@@ -32,9 +30,14 @@ export const staffListService = (id, startTime, endTime) =>
 
 export const getAdminOrderService = () => request.get('/orders/admin-orders')
 
-export const getFinishOrderService = (page, pageSize, name) =>
+export const getOrderListService = (page, pageSize, name) =>
   request.get(
-    `/orders/finish-order-list?page=${page}&pageSize=${pageSize}&name=${name}`
+    `/orders/order-list?page=${page}&pageSize=${pageSize}&name=${name}`
+  )
+
+export const getHistoryListService = (page, pageSize, name) =>
+  request.get(
+    `/orders/history-list?page=${page}&pageSize=${pageSize}&name=${name}`
   )
 
 export const changSqlService = () => request.get(`/orders/change-sql`)

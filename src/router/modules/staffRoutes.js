@@ -3,7 +3,7 @@ import StaffOrderBrief from '@/views/staff/StaffOrderAcceptance/StaffOrderBrief.
 import StaffOrderList from '@/views/staff/StaffOrderAcceptance/StaffOrderList.vue'
 import StaffAcceptedOrders from '@/views/staff/StaffAcceptedOrders.vue'
 import StaffProfileNavigation from '@/views/staff/StaffProfile/StaffProfileNavigation.vue'
-import OrderHistory from '@/views/staff/StaffProfile/OrderHistory.vue'
+import OrderHistory from '@/views/common/OrderListShow.vue'
 import Leaderboard from '@/views/staff/StaffProfile/Leaderboard.vue'
 import ChangePassword from '@/views/common/ChangePassword.vue'
 import Help from '@/views/common/Help.vue'
@@ -11,8 +11,8 @@ import OrderDetails from '@/views/common/OrderDetails.vue'
 import Signature from '@/views/staff/SignaturePgae.vue'
 import UploadNavigation from '@/views/staff/StaffProfile/Upload/UploadNavigation.vue'
 import UploadPhoto from '@/views/staff/StaffProfile/Upload/UploadPhoto.vue'
-import PhotoDir from '@/views/common/PhotoDir.vue'
-import ShowPhoto from '@/views/common/ShowPhoto.vue'
+import PhotoDir from '@/views/common/photo/PhotoDir.vue'
+import ShowPhoto from '@/views/common/photo/ShowPhoto.vue'
 
 export default [
   {

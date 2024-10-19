@@ -57,7 +57,7 @@ const refreshOrdersList = async () => getOrdersList()
       <div>返回</div>
     </template>
   </nut-navbar>
-  <nut-tabs v-model="value" v-loading="loading">
+  <nut-tabs v-model="value" v-loading="loading" auto-height>
     <nut-tab-pane title="待接单" :pane-key="1">
       <div class="br">&nbsp;</div>
       <div class="tab-pane-left" v-for="order in ordersList1" :key="order.id">
