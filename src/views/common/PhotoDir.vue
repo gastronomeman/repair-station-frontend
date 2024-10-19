@@ -6,17 +6,21 @@ import { errorMsg, successMsg } from '@/utils/SendMsgUtils.js'
 
 const router = useRouter()
 const route = useRoute()
+const loading = ref(true)
 
 const onClick = () => {
   router.go(-1)
 }
 const dirList = ref('')
+
 const getPhotoDir = async () => {
+  loading.value = true
   const resp = await checkPhotoService()
   console.log(resp)
   if (resp.code === 1) {
     dirList.value = resp.data
   }
+  loading.value = false
 }
 
 const showPhoto = async (str) => {
@@ -53,6 +57,11 @@ const deletePhoto = async (name) => {
       </template>
     </nut-navbar>
   </nut-sticky>
+  <el-empty
+    v-if="dirList.length === 0"
+    description="列表空空如也。。。"
+    v-loading="loading"
+  />
   <br />
   <div class="table" v-for="(item, index) in dirList" :key="index">
     <nut-row>

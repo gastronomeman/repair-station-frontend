@@ -32,12 +32,15 @@ getHistoryOrdersList()
       </template>
     </nut-navbar>
   </nut-sticky>
-  <el-skeleton :rows="5" animated :loading="loading">
-    <div v-for="orders in orderList" :key="orders.value">
-      <br />
-      <orders-staff-item-see :order="orders"></orders-staff-item-see>
-    </div>
-  </el-skeleton>
+  <el-empty
+    v-if="orderList.length === 0"
+    description="列表空空如也。。。"
+    v-loading="loading"
+  />
+  <div v-for="orders in orderList" :key="orders.value">
+    <br />
+    <orders-staff-item-see :order="orders"></orders-staff-item-see>
+  </div>
 </template>
 
 <style scoped></style>
