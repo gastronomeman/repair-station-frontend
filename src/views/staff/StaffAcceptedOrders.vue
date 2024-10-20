@@ -32,7 +32,7 @@ const refreshOrdersList = async () => getOrdersList()
     <el-empty style="background: #f0f0f0" v-if="ordersList.length === 0">
       <template #description>
         <p>
-          修单其实不难哦，去试一下吧！<br />不会的可以去找师兄师姐们帮助你哦！<br />
+          修单其实并不难哦，快去尝试一下吧！<br />遇到困难可以去寻求师兄师姐的帮助哦！<br />
           (*๓´╰╯`๓)♡
         </p>
       </template>

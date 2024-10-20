@@ -81,12 +81,12 @@ router.beforeEach(async (to) => {
   }
 
   if (!to.path.includes('/staff/login') && to.path.startsWith('/staff')) {
-    if (staffState.name === 'admin') {
+    if (staffState.studentId === 'admin') {
       alert('管理员不能使用接单页面哦')
       return '/staff/login'
     }
   }
-  if (to.path.startsWith('/admin') && staffState.name !== 'admin') {
+  if (to.path.startsWith('/admin') && staffState.studentId !== 'admin') {
     alert('成员不能进管理员页面哦')
     return '/staff/login'
   }

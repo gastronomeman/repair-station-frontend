@@ -8,6 +8,8 @@ import { useStaffState } from '@/stores/index.js'
 import { useRouter } from 'vue-router'
 import { User, Key } from '@icon-park/vue-next'
 
+import jwt from 'jsonwebtoken'
+
 const router = useRouter()
 
 const staffState = useStaffState()
@@ -30,11 +32,12 @@ const submit = async () => {
     staff.value.password = ''
     return
   }
-  console.log(staff.value)
   const resp = await staffLoginService(staff.value)
   if (resp.code === 1) {
     staffState.setToken(resp.data)
-    staffState.setName(staff.value.studentId)
+    staffState.setStudentId(staff.value.studentId)
+    //jwt.decode(token)
+    alert(JSON.stringify(jwt.decode(staffState.token)))
 
     successMsg('登录成功！')
     if (staff.value.studentId === 'admin') {
