@@ -8,7 +8,7 @@ import { useStaffState } from '@/stores/index.js'
 import { useRouter } from 'vue-router'
 import { User, Key } from '@icon-park/vue-next'
 
-import jwt from 'jsonwebtoken'
+import { jwtDecode } from 'jwt-decode'
 
 const router = useRouter()
 
@@ -36,15 +36,24 @@ const submit = async () => {
   if (resp.code === 1) {
     staffState.setToken(resp.data)
     staffState.setStudentId(staff.value.studentId)
-    //jwt.decode(token)
-    alert(JSON.stringify(jwt.decode(staffState.token)))
+    staffState.setName(jwtDecode(resp.data).name)
 
-    successMsg('登录成功！')
+    let name = jwtDecode(resp.data).name
+
     if (staff.value.studentId === 'admin') {
+      successMsg('登陆成功！')
       await router.push('/admin')
-      return
+    } else {
+      if (name.length === 3) name = name.slice(-2)
+
+      if (+staff.value.studentId.slice(0, 4) > 2022) {
+        successMsg(`Hi,${name}师弟^o^!`)
+      } else {
+        successMsg(`Hi,${name}师兄^o^!`)
+      }
+
+      await router.push('/staff')
     }
-    await router.push('/staff')
   }
 }
 </script>
@@ -54,7 +63,7 @@ const submit = async () => {
     <div class="login-img-logo">
       <img src="@/assets/rs_logo.png" alt="Logo" />
     </div>
-    <div class="login-input">
+    <form class="login-input">
       <h2>维修站后台管理系统</h2>
       <el-input
         clearable
@@ -85,7 +94,7 @@ const submit = async () => {
         <nut-button shape="round" type="info" @click="submit">登录</nut-button>
         <p>*仅限ITeam基地维修站成员使用，请妥善保管个人账号和密码。(*^o^*)</p>
       </div>
-    </div>
+    </form>
   </div>
 </template>
 
