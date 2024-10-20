@@ -29,7 +29,7 @@ getLeaderboard()
       </template>
     </nut-navbar>
   </nut-sticky>
-  <br />
+  <nut-divider dashed />
   <div v-for="(l, index) in leaderboard" :key="index">
     <nut-navbar>
       <template #left>
@@ -49,8 +49,9 @@ getLeaderboard()
   color: black;
   font-size: 15px;
 }
+
 .nut-divider {
-  background-color: white;
+  background-color: #f0f0f0;
   margin: 0;
 }
 </style>

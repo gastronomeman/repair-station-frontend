@@ -57,41 +57,52 @@ const totalPage = computed(() => {
 </script>
 
 <template>
-  <div class="search">
-    <el-input
-      v-model="search"
-      clearable
-      style="width: 150px"
-      placeholder="输入学号名字查询"
-    />&nbsp;
-    <nut-button type="info" size="small" @click="searchStaff">查询</nut-button>
-    &nbsp;
-    <nut-button type="info" size="small" @click="resetList">重置</nut-button>
-    <nut-divider />
-  </div>
   <el-empty
     style="background: #f0f0f0; width: 80%; margin: 0 auto"
     v-if="ordersList.length === 0"
-    description="期待你在维修站的历史上留下一笔痕迹哦！^o^！"
     v-loading="loading"
-  />
-  <div v-for="orders in ordersList" :key="orders.id" class="br">
-    <orders-staff-item-see :order="orders"></orders-staff-item-see>
-    <div class="br">&nbsp;</div>
-  </div>
-  <div class="page">
-    <nut-pagination
-      v-model="page.currentPage"
-      :total-items="page.total"
-      :items-per-page="page.pageSize"
-      @change="change"
-    />
-  </div>
-  <div class="page-footer">
-    <p>{{ page.currentPage }}/{{ totalPage }}页</p>
-    <nut-button size="small" type="default" @click="toTop">首页</nut-button>
-    &nbsp;
-    <nut-button size="small" type="default" @click="toEnd">尾页</nut-button>
+  >
+    <template #description>
+      <p>
+        期待你在维修站留下一笔痕迹哦！<br />
+        ៷&gt;ᴗ&lt;៷
+      </p>
+    </template>
+  </el-empty>
+  <div v-else>
+    <div class="search">
+      <el-input
+        v-model="search"
+        clearable
+        style="width: 150px"
+        placeholder="输入学号名字查询"
+      />&nbsp;
+      <nut-button type="info" size="small" @click="searchStaff"
+        >查询</nut-button
+      >
+      &nbsp;
+      <nut-button type="info" size="small" @click="resetList">重置</nut-button>
+      <nut-divider />
+    </div>
+
+    <div v-for="orders in ordersList" :key="orders.id" class="br">
+      <orders-staff-item-see :order="orders"></orders-staff-item-see>
+      <div class="br">&nbsp;</div>
+    </div>
+    <div class="page">
+      <nut-pagination
+        v-model="page.currentPage"
+        :total-items="page.total"
+        :items-per-page="page.pageSize"
+        @change="change"
+      />
+    </div>
+    <div class="page-footer">
+      <p>{{ page.currentPage }}/{{ totalPage }}页</p>
+      <nut-button size="small" type="default" @click="toTop">首页</nut-button>
+      &nbsp;
+      <nut-button size="small" type="default" @click="toEnd">尾页</nut-button>
+    </div>
   </div>
 </template>
 

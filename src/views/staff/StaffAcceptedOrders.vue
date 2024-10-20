@@ -31,9 +31,9 @@ const refreshOrdersList = async () => getOrdersList()
     </div>
     <el-empty style="background: #f0f0f0" v-if="ordersList.length === 0">
       <template #description>
-        <p style="text-align: center; font-size: 20px">
-          修修你的<br />˚‧º·(˚ ˃̣̣̥᷄⌓˂̣̣̥᷅ )‧º·˚<br /><br />
-          不会修，不敢接找师兄师姐呀 ❛‿˂̵✧
+        <p>
+          修单其实不难哦，去试一下吧！<br />不会的可以去找师兄师姐们帮助你哦！<br />
+          (*๓´╰╯`๓)♡
         </p>
       </template>
     </el-empty>
