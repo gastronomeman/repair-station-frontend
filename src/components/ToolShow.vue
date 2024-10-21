@@ -22,7 +22,7 @@ const s = computed(() => {
 })
 
 const onClick = (url) => {
-  window.location.href = url
+  window.open(url)
 }
 </script>
 

@@ -103,12 +103,17 @@ const appList = ref([
       },
       {
         name: 'sublime',
-        url: 'https://www.sublime.com/',
+        url: 'https://www.sublimetext.com/',
         photo: 'https://www.sublimehq.com/images/sublime_text.png'
       },
       {
         name: 'IDEA',
         url: 'https://www.jetbrains.com/idea/download/#section=windows',
+        photo: 'https://www.jetbrains.com/icon.svg?r=1234'
+      },
+      {
+        name: 'pycharm',
+        url: 'https://www.jetbrains.com.cn/pycharm/',
         photo: 'https://www.jetbrains.com/icon.svg?r=1234'
       },
       {
@@ -121,6 +126,17 @@ const appList = ref([
         name: 'nodejs',
         url: 'https://nodejs.cn/download/',
         photo: 'https://img.nodejs.cn/favicon.png'
+      },
+      {
+        name: 'MySQL',
+        url: 'https://dev.mysql.com/downloads/mysql/',
+        photo: 'https://labs.mysql.com/common/themes/sakila/favicon.ico'
+      },
+      {
+        name: '微信小程序开发',
+        url: 'https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html',
+        photo:
+          'https://p0.meituan.net/csc/2729b5c1c19758c68dc9ab7a242d362d1378.png'
       }
     ]
   }
