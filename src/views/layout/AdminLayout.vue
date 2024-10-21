@@ -4,15 +4,8 @@ import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import Footer from '@/components/Footer.vue'
 
-const refresh = ref(false)
-const refreshFun = () => {
-  setTimeout(() => {
-    location.reload()
-    refresh.value = false
-  }, 800)
-}
-
 const route = useRoute()
+
 const active = ref(0)
 watch(
   () => route.fullPath,
@@ -26,11 +19,10 @@ watch(
 </script>
 
 <template>
-  <nut-pull-refresh v-model="refresh" @refresh="refreshFun">
-    <router-view></router-view>
-    <div class="footer"><Footer /></div>
-    <nut-backtop el-id="elId1" :distance="100" :bottom="60"></nut-backtop>
-  </nut-pull-refresh>
+  <router-view></router-view>
+  <div class="footer"><Footer /></div>
+  <nut-backtop el-id="elId1" :distance="100" :bottom="60"></nut-backtop>
+
   <nut-tabbar v-model="active" :bottom="true" :safe-area-inset-bottom="true">
     <nut-tabbar-item tab-title="首页" to="/admin">
       <template #icon>

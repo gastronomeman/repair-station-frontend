@@ -9,14 +9,6 @@ const route = useRoute()
 
 const active = ref(0)
 
-const refresh = ref(false)
-const refreshFun = () => {
-  setTimeout(() => {
-    location.reload()
-    refresh.value = false
-  }, 800)
-}
-
 const title = ref('')
 const getTitle = async () => {
   const resp = await getStaffTitleService()
@@ -47,11 +39,9 @@ watch(
       <announcement theme="outline" size="20" />
     </template>
   </nut-noticebar>
-  <nut-pull-refresh v-model="refresh" @refresh="refreshFun">
-    <router-view></router-view>
-    <div class="footer"><Footer /></div>
-    <nut-backtop el-id="elId1" :distance="100" :bottom="60"></nut-backtop>
-  </nut-pull-refresh>
+  <router-view></router-view>
+  <div class="footer"><Footer /></div>
+  <nut-backtop el-id="elId1" :distance="100" :bottom="60"></nut-backtop>
 
   <nut-tabbar
     v-if="frame"
