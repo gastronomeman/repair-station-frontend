@@ -58,7 +58,7 @@ const logoutUser = async () => {
       style="cursor: pointer"
       @click="router.push('/admin/profile/photo-dir')"
     >
-      <template #left><span class="nav-title">上传照片文件夹</span></template>
+      <template #left><span class="nav-title">拆机照片文件夹</span></template>
       <template #right
         ><right
           class="icon-center"

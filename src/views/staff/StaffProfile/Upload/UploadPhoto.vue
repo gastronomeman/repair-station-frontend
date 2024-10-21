@@ -147,7 +147,7 @@ const compressAndAppend = async (fileList, index) => {
 
 <template>
   <nut-sticky>
-    <nut-navbar title="拆机照片核对" left-show @click-back="onClick">
+    <nut-navbar title="上传拆机照片" left-show @click-back="onClick">
       <template #left>
         <div>返回</div>
       </template>

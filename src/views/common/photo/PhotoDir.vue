@@ -51,7 +51,7 @@ const deletePhoto = async (name) => {
 
 <template>
   <nut-sticky>
-    <nut-navbar title="上传照片文件夹" left-show @click-back="onClick">
+    <nut-navbar title="拆机照片文件夹" left-show @click-back="onClick">
       <template #left>
         <div>返回</div>
       </template>

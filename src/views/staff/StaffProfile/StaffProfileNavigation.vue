@@ -79,7 +79,7 @@ const name = computed(() => {
       style="cursor: pointer"
       @click="router.push('/staff/profile/uploader')"
     >
-      <template #left><span class="nav-title">拆机照片核对</span></template>
+      <template #left><span class="nav-title">上传拆机照片</span></template>
       <template #right
         ><right
           class="icon-center"
@@ -92,7 +92,7 @@ const name = computed(() => {
       style="cursor: pointer"
       @click="router.push('/staff/profile/photo-dir')"
     >
-      <template #left><span class="nav-title">上传照片文件夹</span></template>
+      <template #left><span class="nav-title">拆机照片文件夹</span></template>
       <template #right
         ><right
           class="icon-center"
