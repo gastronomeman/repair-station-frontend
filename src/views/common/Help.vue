@@ -14,6 +14,7 @@ const onClick = () => {
 
 const activeName = ref(null)
 const scrollToTop = (index) => {
+  if (activeName.value === '') return
   window.scrollTo({
     top: 75 + 44 * index,
     behavior: 'smooth'
