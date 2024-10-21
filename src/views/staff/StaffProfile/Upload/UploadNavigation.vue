@@ -40,9 +40,6 @@ const goToUPhoto = () => {
     </template>
   </nut-navbar>
   <div class="upload">
-    <p style="color: red">
-      *图片都需要提交，否则后期与机主发生纠纷，全由社员自身负责
-    </p>
     <h4>选择维修单</h4>
     <el-select
       @click.prevent="getOrdersList"
@@ -58,6 +55,9 @@ const goToUPhoto = () => {
         :value="item"
       />
     </el-select>
+    <p style="color: red">
+      *图片都需要提交，否则后期与机主发生纠纷，全由社员自身负责
+    </p>
     <nut-button @click="goToUPhoto" size="large" type="primary"
       >上传图片</nut-button
     >
@@ -79,10 +79,10 @@ const goToUPhoto = () => {
   p {
     color: #7a7374;
     font-size: 12px;
-    margin: 0 0 5px;
+    margin: 8px 0;
   }
   .nut-button {
-    margin: 15px 0;
+    margin-bottom: 15px;
   }
 }
 </style>

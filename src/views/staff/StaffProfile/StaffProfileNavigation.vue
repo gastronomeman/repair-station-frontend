@@ -89,19 +89,6 @@ const name = computed(() => {
       /></template>
     </nut-navbar>
     <nut-navbar
-      style="cursor: pointer"
-      @click="router.push('/staff/profile/photo-dir')"
-    >
-      <template #left><span class="nav-title">拆机照片文件夹</span></template>
-      <template #right
-        ><right
-          class="icon-center"
-          theme="two-tone"
-          size="25"
-          strokeLinejoin="miter"
-      /></template>
-    </nut-navbar>
-    <nut-navbar
       style="cursor: pointer; border: 0"
       @click="router.push('/staff/profile/help')"
     >

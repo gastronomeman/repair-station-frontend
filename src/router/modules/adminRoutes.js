@@ -9,8 +9,8 @@ import TransferDatabase from '@/views/admin/AdminProfile/TransferDatabase.vue'
 import Help from '@/views/common/Help.vue'
 import OrderDetails from '@/views/common/OrderDetails.vue'
 import StaffOrders from '@/views/admin/AdminStaffList/StaffOrders.vue'
-import PhotoDir from '@/views/common/photo/PhotoDir.vue'
-import ShowPhoto from '@/views/common/photo/ShowPhoto.vue'
+import PhotoDir from '@/views/admin/AdminProfile/PhotoDir.vue'
+import ShowPhoto from '@/views/common/ShowPhoto.vue'
 
 export default [
   {

@@ -47,7 +47,9 @@ const deletePhoto = async (name) => {
 </script>
 
 <template>
-  <nut-divider> 拆机照片文件夹 </nut-divider>
+  <nut-divider v-if="route.fullPath.includes('staff')">
+    拆机照片文件夹
+  </nut-divider>
   <el-empty
     v-if="dirList.length === 0"
     description="列表空空如也。。。"

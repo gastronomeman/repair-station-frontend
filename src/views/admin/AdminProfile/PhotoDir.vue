@@ -22,4 +22,8 @@ const onClick = () => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.list {
+  margin-top: 30px;
+}
+</style>

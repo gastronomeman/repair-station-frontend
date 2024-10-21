@@ -11,8 +11,7 @@ import OrderDetails from '@/views/common/OrderDetails.vue'
 import Signature from '@/views/staff/SignaturePgae.vue'
 import UploadNavigation from '@/views/staff/StaffProfile/Upload/UploadNavigation.vue'
 import UploadPhoto from '@/views/staff/StaffProfile/Upload/UploadPhoto.vue'
-import PhotoDir from '@/views/common/photo/PhotoDir.vue'
-import ShowPhoto from '@/views/common/photo/ShowPhoto.vue'
+import ShowPhoto from '@/views/common/ShowPhoto.vue'
 
 export default [
   {
@@ -73,10 +72,6 @@ export default [
           {
             path: 'uploader-photo',
             component: UploadPhoto
-          },
-          {
-            path: 'photo-dir',
-            component: PhotoDir
           },
           {
             path: 'show-photo',
