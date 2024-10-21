@@ -91,7 +91,7 @@ const appList = ref([
         photo: 'https://code.visualstudio.com/favicon.ico'
       },
       {
-        name: 'sublimetext',
+        name: 'sublime',
         url: 'https://www.sublime.com/',
         photo: 'https://www.sublimehq.com/images/sublime_text.png'
       },
