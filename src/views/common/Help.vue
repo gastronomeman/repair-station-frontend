@@ -13,9 +13,9 @@ const onClick = () => {
 }
 
 const activeName = ref(null)
-const scrollToTop = () => {
+const scrollToTop = (index) => {
   window.scrollTo({
-    top: 0,
+    top: 75 + 44 * index,
     behavior: 'smooth'
   })
 }
@@ -32,14 +32,14 @@ const scrollToTop = () => {
   <div class="helpPage">
     <h2 align="center">维修站报修系统操作说明</h2>
     <van-collapse v-model="activeName" accordion>
-      <van-collapse-item title="首页介绍" name="1" @click="scrollToTop">
+      <van-collapse-item title="首页介绍" name="1" @click="scrollToTop(0)">
         <div class="text">
           <p>首页，查看当前故障报修数量、个人信息、公告以及更多。</p>
           <img src="@/assets/help/help1.jpg" width="250px" alt="" /><br />
           <nut-divider dashed />
         </div>
       </van-collapse-item>
-      <van-collapse-item title="如何接单" name="2" @click="scrollToTop">
+      <van-collapse-item title="如何接单" name="2" @click="scrollToTop(1)">
         <div class="text">
           <p>点击按钮进来，点击“抢单”为接手处理此故障订单。</p>
           <img src="@/assets/help/help2.1.png" width="250px" alt="" /><br />
@@ -47,7 +47,11 @@ const scrollToTop = () => {
           <nut-divider dashed />
         </div>
       </van-collapse-item>
-      <van-collapse-item title="接单后的各项操作" name="3" @click="scrollToTop">
+      <van-collapse-item
+        title="接单后的各项操作"
+        name="3"
+        @click="scrollToTop(2)"
+      >
         <div class="text">
           <p>点击上方“维修中”可以查看已接单</p>
           <img src="@/assets/help/help3.jpg" width="250px" alt="" />
@@ -61,7 +65,7 @@ const scrollToTop = () => {
       <van-collapse-item
         title="拆机维修流程（特殊）"
         name="4"
-        @click="scrollToTop"
+        @click="scrollToTop(3)"
       >
         <div class="text">
           <p>
@@ -85,7 +89,7 @@ const scrollToTop = () => {
           <nut-divider dashed />
         </div>
       </van-collapse-item>
-      <van-collapse-item title="个人中心" name="5" @click="scrollToTop">
+      <van-collapse-item title="个人中心" name="5" @click="scrollToTop(4)">
         <div class="text">
           <p>个人中心，可查看历史处理记录，修改登陆密码等等。</p>
           <img src="@/assets/help/help11.jpg" width="250px" alt="" /><br />
