@@ -2,10 +2,11 @@
 import ToolShow from '@/components/ToolShow.vue'
 import Footer from '@/components/Footer.vue'
 import { useRouter } from 'vue-router'
+import { ref } from 'vue'
 
 const router = useRouter()
 
-const appList = window.config.appList
+const appList = ref(window.config.appList)
 
 const back = () => {
   router.go(-1)
