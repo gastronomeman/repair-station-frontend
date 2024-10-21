@@ -59,7 +59,7 @@ watch(
             :fill="['#9b9b9b', '#4a90e2']"
             strokeLinejoin="miter"
           />
-          <span>网站工具箱</span>
+          <span>软件工具箱</span>
         </div>
       </div>
     </div>
