@@ -31,18 +31,31 @@ watch(
   },
   { immediate: true }
 )
+
+const loading = ref(false)
+const onRefresh = () => {
+  setTimeout(() => {
+    loading.value = false
+    location.reload()
+  }, 1000)
+}
 </script>
 
 <template>
-  <nut-noticebar :text="title" scrollable v-if="frame">
-    <template #left-icon>
-      <announcement theme="outline" size="20" />
-    </template>
-  </nut-noticebar>
-  <router-view></router-view>
-  <div class="footer"><Footer /></div>
-  <nut-backtop el-id="elId1" :distance="100" :bottom="60"></nut-backtop>
-
+  <van-pull-refresh
+    v-model="loading"
+    success-text="刷新成功"
+    @refresh="onRefresh"
+  >
+    <nut-noticebar :text="title" scrollable v-if="frame">
+      <template #left-icon>
+        <announcement theme="outline" size="20" />
+      </template>
+    </nut-noticebar>
+    <router-view></router-view>
+    <div class="footer"><Footer /></div>
+    <nut-backtop el-id="elId1" :distance="100" :bottom="60"></nut-backtop>
+  </van-pull-refresh>
   <nut-tabbar
     v-if="frame"
     v-model="active"

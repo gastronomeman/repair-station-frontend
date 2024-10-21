@@ -16,13 +16,26 @@ watch(
   },
   { immediate: true }
 )
+
+const loading = ref(false)
+const onRefresh = () => {
+  setTimeout(() => {
+    loading.value = false
+    location.reload()
+  }, 1000)
+}
 </script>
 
 <template>
-  <router-view></router-view>
-  <div class="footer"><Footer /></div>
-  <nut-backtop el-id="elId1" :distance="100" :bottom="60"></nut-backtop>
-
+  <van-pull-refresh
+    v-model="loading"
+    success-text="刷新成功"
+    @refresh="onRefresh"
+  >
+    <router-view></router-view>
+    <div class="footer"><Footer /></div>
+    <nut-backtop el-id="elId1" :distance="100" :bottom="60"></nut-backtop>
+  </van-pull-refresh>
   <nut-tabbar v-model="active" :bottom="true" :safe-area-inset-bottom="true">
     <nut-tabbar-item tab-title="首页" to="/admin">
       <template #icon>
