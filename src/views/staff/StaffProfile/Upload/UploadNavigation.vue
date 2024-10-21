@@ -56,7 +56,7 @@ const goToUPhoto = () => {
       />
     </el-select>
     <p style="color: red">
-      *图片都需要提交，否则后期与机主发生纠纷，全由社员自身负责
+      *图片都需要提交，切勿弄虚作假，否则后期与机主发生纠纷，全由社员自身负责
     </p>
     <nut-button @click="goToUPhoto" size="large" type="primary"
       >上传图片</nut-button
