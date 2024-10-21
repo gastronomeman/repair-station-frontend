@@ -96,7 +96,7 @@ const logoutUser = async () => {
       /></template>
     </nut-navbar>
     <nut-navbar
-      style="cursor: pointer"
+      style="cursor: pointer; border: 0"
       @click="router.push('/admin/profile/help')"
     >
       <template #left><span class="nav-title">帮助</span></template>
@@ -134,7 +134,6 @@ const logoutUser = async () => {
 
 <style scoped>
 .nut-navbar--placeholder {
-  border-top: 1px solid #9b9b9b;
   border-bottom: 1px solid #9b9b9b;
   .nav-title {
     margin-left: 8px;
