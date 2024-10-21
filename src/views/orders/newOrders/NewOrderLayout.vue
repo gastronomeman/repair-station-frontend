@@ -14,7 +14,7 @@ const onClickStep = (index) => {
 }
 
 const toTool = () => {
-  alert('建议使用电脑浏览器打开最佳')
+  alert('此网页只为帮助大家找到各大软件官网')
   router.push('/tool')
 }
 watch(
