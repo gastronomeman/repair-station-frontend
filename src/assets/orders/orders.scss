@@ -51,6 +51,8 @@
       }
     }
   }
+
+
 }
 
 .new-order-container {
@@ -73,23 +75,46 @@
     background-color: white;
     margin-right: 2%;
     border-radius: 0 0 20px 20px;
+
     .step-icon {
       display: inline-flex;
       align-items: center;
       justify-content: center;
     }
+
     .order-success {
       h2 {
         color: #7a7374;
         text-align: center;
         margin: 0;
       }
+
       p {
         font-size: 18px;
         padding: 0 8px 25px;
         word-wrap: break-word;
         overflow-wrap: break-word;
       }
+    }
+
+    .tool {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-bottom: 15px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .icon-center {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    span {
+      margin-left: 5px;
     }
   }
 

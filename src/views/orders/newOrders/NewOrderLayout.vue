@@ -1,5 +1,5 @@
 <script setup>
-import { Agreement, EditOne, Tool } from '@icon-park/vue-next'
+import { Agreement, EditOne, Tool, Toolkit } from '@icon-park/vue-next'
 import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 const route = useRoute()
@@ -11,6 +11,11 @@ const onClickStep = (index) => {
     current.value = index
     if (index === 1) router.push('/')
   }
+}
+
+const toTool = () => {
+  alert('建议使用电脑浏览器打开最佳')
+  router.push('/tool')
 }
 watch(
   () => route.fullPath, // 监视的属性
@@ -46,6 +51,16 @@ watch(
           </nut-step>
         </nut-steps>
         <router-view></router-view>
+        <div class="tool" @click="toTool">
+          <toolkit
+            class="icon-center"
+            theme="two-tone"
+            size="20"
+            :fill="['#9b9b9b', '#4a90e2']"
+            strokeLinejoin="miter"
+          />
+          <span>网站工具箱</span>
+        </div>
       </div>
     </div>
   </div>

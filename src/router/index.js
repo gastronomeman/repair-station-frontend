@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { getServerStatusService } from '@/api/repairStationStatus.js'
 import staffRoutes from './modules/staffRoutes.js'
 import adminRoutes from './modules/adminRoutes.js'
+import ordersRoutes from './modules/ordersRoutes.js'
 import { useStaffState } from '@/stores/index.js'
 
 const routes = [
@@ -11,42 +12,10 @@ const routes = [
     component: () => import('@/views/common/NotFound.vue')
   },
   {
-    path: '/',
-    component: () => import('@/views/layout/OrdersLayout.vue'),
-    redirect: '/orders',
-    children: [
-      {
-        path: 'orders',
-        meta: { title: '电脑报修' },
-        component: () => import('@/views/orders/newOrders/NewOrderLayout.vue'),
-        redirect: '/orders/notice',
-        children: [
-          {
-            path: 'notice',
-            component: () => import('@/views/orders/newOrders/OrdersNotice.vue')
-          },
-          {
-            path: 'from',
-            component: () => import('@/views/orders/newOrders/OrdersFrom.vue')
-          },
-          {
-            path: 'wait',
-            component: () => import('@/views/orders/newOrders/OrdersWait.vue')
-          }
-        ]
-      },
-      {
-        path: 'orders/announcements',
-        meta: { title: '维修公告' },
-        component: () => import('@/views/orders/Announcements.vue')
-      },
-      {
-        path: 'orders/query',
-        meta: { title: '报修查询' },
-        component: () => import('@/views/orders/OrderQuery.vue')
-      }
-    ]
+    path: '/tool',
+    component: () => import('@/views/tool/Tool.vue')
   },
+  ...ordersRoutes, // 导入 Orders 模块路由配置
   ...staffRoutes, // 导入 Staff 模块路由配置
   ...adminRoutes // 导入 Admin 模块路由配置
 ]
