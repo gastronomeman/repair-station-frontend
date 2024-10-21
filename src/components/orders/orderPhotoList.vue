@@ -51,6 +51,7 @@ const deletePhoto = async (name) => {
     拆机照片文件夹
   </nut-divider>
   <el-empty
+    style="background-color: #f0f0f0"
     v-if="dirList.length === 0"
     description="列表空空如也。。。"
     v-loading="loading"

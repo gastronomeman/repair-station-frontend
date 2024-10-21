@@ -60,6 +60,7 @@ const imagePreview = (x) => {
     </nut-navbar>
   </nut-sticky>
   <el-empty
+    style="background-color: #f0f0f0"
     v-if="dirList.length === 0"
     description="列表空空如也。。。"
     v-loading="loading"
