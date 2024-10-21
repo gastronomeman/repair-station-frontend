@@ -4,6 +4,7 @@ import { ref } from 'vue'
 import { uploaderListService } from '@/api/orders.js'
 import { isNotBlank } from '@/utils/StringUtils.js'
 import { warningMsg } from '@/utils/SendMsgUtils.js'
+import OrderPhotoList from '@/components/orders/orderPhotoList.vue'
 
 const router = useRouter()
 const onClick = () => router.push('/staff/profile')
@@ -61,13 +62,16 @@ const goToUPhoto = () => {
       >上传图片</nut-button
     >
   </div>
+  <div class="list">
+    <OrderPhotoList></OrderPhotoList>
+  </div>
 </template>
 
 <style scoped>
 .upload {
   max-width: 800px;
   width: 80%;
-  margin: 20px auto 60px;
+  margin: 20px auto 0;
   text-align: center;
   h4 {
     margin: 5px 0;
