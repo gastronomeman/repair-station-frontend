@@ -59,7 +59,7 @@ const totalPage = computed(() => {
 
 <template>
   <el-empty
-    style="background: #f0f0f0; width: 80%; margin: 0 auto"
+    style="background: #f0f0f0"
     v-if="ordersList.length === 0"
     v-loading="loading"
   >

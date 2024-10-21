@@ -46,11 +46,7 @@ const submit = async () => {
     } else {
       if (name.length === 3) name = name.slice(-2)
 
-      if (+staff.value.studentId.slice(0, 4) > 2022) {
-        successMsg(`Hi,${name}师弟^o^!`)
-      } else {
-        successMsg(`Hi,${name}师兄^o^!`)
-      }
+      successMsg(`Hi,${name}同学 ^o^ !`)
 
       await router.push('/staff')
     }

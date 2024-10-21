@@ -1,5 +1,5 @@
 <script setup>
-import { Announcement, Order, Me, Home } from '@icon-park/vue-next'
+import { Announcement, Order, People, Home } from '@icon-park/vue-next'
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { getStaffTitleService } from '@/api/repairStationStatus.js'
@@ -71,7 +71,7 @@ watch(
     </nut-tabbar-item>
     <nut-tabbar-item tab-title="我的" to="/staff/profile">
       <template #icon>
-        <me theme="outline" size="25" :strokeWidth="3" />
+        <people theme="outline" size="25" :strokeWidth="3" />
       </template>
     </nut-tabbar-item>
   </nut-tabbar>

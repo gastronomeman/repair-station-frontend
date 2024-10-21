@@ -1,5 +1,5 @@
 <script setup>
-import { Home, Me, Order } from '@icon-park/vue-next'
+import { Home, People, Order } from '@icon-park/vue-next'
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import Footer from '@/components/Footer.vue'
@@ -44,7 +44,7 @@ watch(
     </nut-tabbar-item>
     <nut-tabbar-item tab-title="我的" to="/admin/profile">
       <template #icon>
-        <me theme="outline" size="25" :strokeWidth="3" />
+        <people theme="outline" size="25" :strokeWidth="3" />
       </template>
     </nut-tabbar-item>
   </nut-tabbar>
