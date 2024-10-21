@@ -3,10 +3,21 @@ import ToolShow from '@/components/ToolShow.vue'
 import Footer from '@/components/Footer.vue'
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
+import { errorMsg, successMsg } from '@/utils/SendMsgUtils.js'
 
 const router = useRouter()
 
 const appList = ref([
+  {
+    title: '学习网站',
+    list: [
+      {
+        name: '哔哩哔哩',
+        url: 'https://www.bilibili.com/',
+        photo: 'https://www.bilibili.com/favicon.ico'
+      }
+    ]
+  },
   {
     title: '日常软件',
     list: [
@@ -118,11 +129,29 @@ const appList = ref([
 const back = () => {
   router.go(-1)
 }
+
+const textColor = ref('black')
+
+const copyToClipboard = () => {
+  if (navigator.clipboard) {
+    navigator.clipboard
+      .writeText(window.location.href)
+      .then(() => {
+        textColor.value = '#939393'
+        successMsg('复制成功！')
+      })
+      .catch(() => {
+        errorMsg('复制失败')
+      })
+  } else {
+    alert('不支持剪贴板功能')
+  }
+}
 </script>
 
 <template>
   <nut-sticky>
-    <nut-navbar title="网站工具箱" left-show @click-back="back">
+    <nut-navbar title="软件工具箱" left-show @click-back="back">
       <template #left>
         <div>返回</div>
       </template>
@@ -132,7 +161,10 @@ const back = () => {
     **此网页的工具是为了帮助同学们更好的找到各个软件的官网，用作学习之用，如遇不会安装可以点击<a
       href="/"
       >报修</a
-    >，让我们帮助你！
+    >，让我们帮助你！<br />
+    <p @click="copyToClipboard" :style="{ color: textColor }">
+      点击此处，复制网址<br />（复制网址到电脑浏览更佳哦）
+    </p>
   </div>
   <div v-for="(app, index) in appList" :key="index">
     <ToolShow :app-list="app.list" :title="app.title"></ToolShow>
@@ -152,5 +184,13 @@ const back = () => {
   text-align: center;
   width: 80%;
   margin: 20px auto 0;
+  p {
+    margin: 0;
+    padding: 3px;
+    cursor: pointer;
+    color: black;
+    border-radius: 4px;
+    border: 1px solid #939393;
+  }
 }
 </style>
