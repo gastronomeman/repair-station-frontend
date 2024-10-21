@@ -101,7 +101,7 @@ const updateClick = async () => {
       type="password"
       v-model="password.newPasswordConfirm"
       style="width: 260px"
-      placeholder="新密码不能少于6个，多于18个字"
+      placeholder="新密码不能少于6位，多于18位"
       clearable
       @blur="checkNewPasswordConfirm"
     />
