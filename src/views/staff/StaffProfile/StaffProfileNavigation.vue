@@ -140,7 +140,7 @@ const name = computed(() => {
 
 <style scoped>
 .nut-navbar--placeholder {
-  border-bottom: 1px solid #9b9b9b;
+  border-bottom: 1px solid #f0f0f0;
   .nav-title {
     margin-left: 8px;
     color: black;
