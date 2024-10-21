@@ -65,6 +65,7 @@ const imagePreview = (x) => {
     description="列表空空如也。。。"
     v-loading="loading"
   />
+
   <div class="photo-box" v-if="dirList.length > 0">
     <h3>1.机主签名截图</h3>
     <div v-for="dir in list0" :key="dir">
