@@ -15,6 +15,11 @@ const appList = ref([
         name: '哔哩哔哩',
         url: 'https://www.bilibili.com/',
         photo: 'https://www.bilibili.com/favicon.ico'
+      },
+      {
+        name: '学习 Web 开发',
+        url: 'https://developer.mozilla.org/zh-CN/docs/Learn',
+        photo: 'https://developer.mozilla.org/favicon-192x192.png'
       }
     ]
   },
@@ -237,6 +242,22 @@ const appList = ref([
         photo: 'https://www.mongodb.com/assets/images/global/favicon.ico'
       },
       {
+        name: 'MVN Repository',
+        url: 'https://v2.cn.vuejs.org/',
+        photo:
+          'https://mvnrepository.com/assets/images/7080b8b0f6f48e6fbaffd5f9d85fcc7f-favicon.ico'
+      },
+      {
+        name: 'Vue2',
+        url: 'https://mvnrepository.com/',
+        photo: 'https://cn.vuejs.org/logo.svg'
+      },
+      {
+        name: 'Vue3',
+        url: 'https://cn.vuejs.org/',
+        photo: 'https://cn.vuejs.org/logo.svg'
+      },
+      {
         name: '小程序开发',
         url: 'https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html',
         photo:
@@ -257,6 +278,26 @@ const appList = ref([
         url: 'https://wormhole.app/',
         photo:
           'https://www.zhizhudh.com/wp-content/uploads/2024/03/PmVgYWM1_400x400.jpg'
+      },
+      {
+        name: '各种中国传统颜色',
+        url: 'https://www.zhongguose.com/',
+        photo: 'https://www.zhongguose.com/img/favicon.ico'
+      },
+      {
+        name: '线稿自动上色',
+        url: 'https://petalica.com/index_zh.html',
+        photo: 'https://petalica.com/images/favicon.ico'
+      },
+      {
+        name: '图形计算器',
+        url: 'https://www.geogebra.org/graphing',
+        photo: 'https://www.geogebra.org/apps/icons/graphing.ico'
+      },
+      {
+        name: '图像转文字',
+        url: 'https://www.asciiart.eu/image-to-ascii',
+        photo: 'https://www.asciiart.eu/favicon-32x32.png'
       }
     ]
   }
@@ -312,6 +353,7 @@ const copyToClipboard = () => {
     如果有侵权之处请第一时间联系我们删除。敬请谅解! E-mail：1305573134@qq.com
   </p>
   <Footer></Footer>
+  <br />
 </template>
 
 <style scoped>
