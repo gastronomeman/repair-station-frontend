@@ -29,7 +29,7 @@ const onClick = (url) => {
 <template>
   <div class="view">
     <p class="title">{{ props.title }}</p>
-    <van-row :gutter="10" v-for="(group, index) in s" :key="index">
+    <van-row :gutter="[10, 10]" v-for="(group, index) in s" :key="index">
       <van-col v-for="(item, idx) in group" :key="idx" span="8">
         <div class="container" @click="onClick(item.url)">
           <img class="icon" :src="item.photo" alt="" />
@@ -60,15 +60,18 @@ const onClick = (url) => {
     padding: 5px;
     border-radius: 8px;
     font-weight: bold;
+
     .icon {
       background-color: white;
-      width: 25%;
+      width: 30%;
       margin-right: 5px;
       border-radius: 5px;
     }
     .title {
-      width: 100%;
-      margin: 5px;
+      width: 60%;
+      margin: 5px 0;
+      word-break: break-all;
+      font-size: 15px;
     }
   }
 }
