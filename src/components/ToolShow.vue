@@ -33,7 +33,7 @@ const onClick = (url) => {
       <van-col v-for="(item, idx) in group" :key="idx" span="8">
         <div class="container" @click="onClick(item.url)">
           <img class="icon" :src="item.photo" alt="" />
-          {{ item.name }}
+          <p class="title">{{ item.name }}</p>
         </div>
       </van-col>
     </van-row>
@@ -51,20 +51,24 @@ const onClick = (url) => {
   }
   .container {
     width: 90%;
+    height: 70%;
     display: inline-flex;
     align-items: center;
     margin: 8px auto;
     cursor: pointer;
-    background: #f6f6f6;
+    background: #dad4cb;
     padding: 5px;
     border-radius: 8px;
     font-weight: bold;
     .icon {
       background-color: white;
       width: 25%;
-      height: 25%;
       margin-right: 5px;
       border-radius: 5px;
+    }
+    .title {
+      width: 100%;
+      margin: 5px;
     }
   }
 }
