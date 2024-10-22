@@ -121,6 +121,21 @@ const appList = ref([
         name: '测速网',
         url: 'https://www.speedtest.cn/',
         photo: 'https://www.speedtest.cn/images/ico/favicon.ico'
+      },
+      {
+        name: '在线屏幕测试',
+        url: 'https://lab.luozhinet.com/tool/screentest/',
+        photo: 'https://lab.luozhinet.com/tool/screentest/htmlimg/favicon.ico'
+      },
+      {
+        name: '在线键盘测试',
+        url: 'https://www.zfrontier.com/lab/keyboardTester',
+        photo: 'https://www.zfrontier.com/favicon.ico'
+      },
+      {
+        name: '在线手柄测试',
+        url: 'https://gobing.cn/experiment/key',
+        photo: 'https://gobing.cn/favicon.ico'
       }
     ]
   },
@@ -137,6 +152,12 @@ const appList = ref([
         url: 'https://visualstudio.microsoft.com/zh-hans/downloads/',
         photo:
           'https://visualstudio.microsoft.com/wp-content/uploads/2021/10/Product-Icon.svg'
+      },
+      {
+        name: 'Dev-C++',
+        url: 'https://bloodshed-dev-c.en.softonic.com/',
+        photo:
+          'https://images.sftcdn.net/images/t_app-icon-s/p/4095d654-96d0-11e6-87f8-00163ed833e7/1965154745/bloodshed-dev-c-icon.jpg'
       },
       {
         name: 'sublime',
@@ -175,9 +196,19 @@ const appList = ref([
         photo: 'https://voyager.postman.com/logo/postman-logo-icon-orange.svg'
       },
       {
-        name: 'nodejs',
+        name: 'Apifox',
+        url: 'https://apifox.com/',
+        photo: 'https://cdn.apifox.com/static/logo/favicon.ico'
+      },
+      {
+        name: 'node.js',
         url: 'https://nodejs.cn/download/',
         photo: 'https://img.nodejs.cn/favicon.png'
+      },
+      {
+        name: 'GitHub',
+        url: 'https://github.com/',
+        photo: 'https://github.githubassets.com/favicons/favicon.png'
       },
       {
         name: 'gitee',
@@ -201,10 +232,31 @@ const appList = ref([
         photo: 'https://www.microsoft.com/favicon.ico?v2'
       },
       {
+        name: 'MongoDB',
+        url: 'https://www.mongodb.com/try/download/community',
+        photo: 'https://www.mongodb.com/assets/images/global/favicon.ico'
+      },
+      {
         name: '小程序开发',
         url: 'https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html',
         photo:
           'https://p0.meituan.net/csc/2729b5c1c19758c68dc9ab7a242d362d1378.png'
+      }
+    ]
+  },
+  {
+    title: '工具网站',
+    list: [
+      {
+        name: '草料二维码生成器',
+        url: 'https://cli.im/',
+        photo: 'https://static.clewm.net/static/images/favicon.ico'
+      },
+      {
+        name: '私密文件分享',
+        url: 'https://wormhole.app/',
+        photo:
+          'https://www.zhizhudh.com/wp-content/uploads/2024/03/PmVgYWM1_400x400.jpg'
       }
     ]
   }
