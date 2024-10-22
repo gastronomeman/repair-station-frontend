@@ -243,13 +243,13 @@ const appList = ref([
       },
       {
         name: 'MVN Repository',
-        url: 'https://v2.cn.vuejs.org/',
+        url: 'https://mvnrepository.com/',
         photo:
           'https://mvnrepository.com/assets/images/7080b8b0f6f48e6fbaffd5f9d85fcc7f-favicon.ico'
       },
       {
         name: 'Vue2',
-        url: 'https://mvnrepository.com/',
+        url: 'https://v2.cn.vuejs.org/',
         photo: 'https://cn.vuejs.org/logo.svg'
       },
       {
