@@ -105,17 +105,22 @@
       padding-bottom: 15px;
       font-size: 15px;
       cursor: pointer;
+
+
+        .icon-center {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        span {
+          margin-left: 5px;
+        }
+
+
     }
 
-    .icon-center {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
 
-    span {
-      margin-left: 5px;
-    }
   }
 
 }

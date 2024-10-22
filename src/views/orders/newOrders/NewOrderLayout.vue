@@ -47,15 +47,16 @@ watch(
           </nut-step>
         </nut-steps>
         <router-view></router-view>
-        <div class="tool" @click="router.push('/tool')">
+        <div class="tool">
           <toolkit
+            @click="router.push('/tool')"
             class="icon-center"
             theme="two-tone"
             size="20"
             :fill="['#9b9b9b', '#4a90e2']"
             strokeLinejoin="miter"
           />
-          <span>软件工具箱</span>
+          <span @click="router.push('/tool')"> 软件工具箱</span>
         </div>
       </div>
     </div>
