@@ -95,7 +95,6 @@ const scrollToTop = (index) => {
           <p>个人中心，可查看历史处理记录，修改登陆密码等等。</p>
           <img src="@/assets/help/help11.jpg" width="250px" alt="" /><br />
           <nut-divider dashed />
-          <p>*为了账号安全，退出前务必点击“退出”按钮，退出此次登陆状态。</p>
         </div>
       </van-collapse-item>
     </van-collapse>
