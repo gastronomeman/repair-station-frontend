@@ -58,9 +58,11 @@ const onClick = (url) => {
     background: #f6f6f6;
     padding: 5px;
     border-radius: 8px;
+    font-weight: bold;
     .icon {
       background-color: white;
       width: 25%;
+      height: 25%;
       margin-right: 5px;
       border-radius: 5px;
     }

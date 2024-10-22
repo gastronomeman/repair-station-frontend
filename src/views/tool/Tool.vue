@@ -34,6 +34,11 @@ const appList = ref([
           'https://res.wx.qq.com/t/wx_fed/base/portal/windows/res/assets/logo.ca85d20a32.svg'
       },
       {
+        name: '网易云音乐',
+        url: 'https://music.163.com/#/download',
+        photo: 'https://s1.music.126.net/style/favicon.ico?v20180823'
+      },
+      {
         name: '飞书',
         url: 'https://www.feishu.cn/download',
         photo:
@@ -51,9 +56,19 @@ const appList = ref([
         photo: 'https://www.todesk.com/dist/img/734933e.svg'
       },
       {
+        name: 'Everything',
+        url: 'https://www.voidtools.com/zh-cn/',
+        photo: 'https://www.voidtools.com/favicon.ico'
+      },
+      {
         name: 'steam',
         url: 'https://store.steampowered.com/about/',
         photo: 'https://store.steampowered.com/favicon.ico'
+      },
+      {
+        name: '火绒',
+        url: 'https://www.huorong.cn/',
+        photo: 'https://www.huorong.cn/favicon.png'
       },
       {
         name: 'chrome',
@@ -82,14 +97,30 @@ const appList = ref([
         photo: 'https://www.nvidia.cn/favicon.ico'
       },
       {
-        name: 'AMD驱动',
+        name: 'Intel驱动',
         url: 'https://www.amd.com/zh-cn/support/download/drivers.html',
+        photo:
+          'https://www.intel.cn/etc.clientlibs/settings/wcm/designs/intel/default/resources/favicon.ico'
+      },
+      {
+        name: 'AMD驱动',
+        url: 'https://www.intel.cn/content/www/cn/zh/download-center/home.html',
         photo: 'https://www.amd.com/content/dam/code/images/favicon/favicon.ico'
       },
       {
         name: 'geek卸载工具',
         url: 'https://geekuninstaller.com/',
         photo: 'https://geekuninstaller.com/assets/images/icon_geek_32.png'
+      },
+      {
+        name: '微PE工具箱',
+        url: 'https://www.wepe.com.cn/download.html',
+        photo: 'https://www.wepe.com.cn/favicon.ico'
+      },
+      {
+        name: '测速网',
+        url: 'https://www.speedtest.cn/',
+        photo: 'https://www.speedtest.cn/images/ico/favicon.ico'
       }
     ]
   },
@@ -102,18 +133,24 @@ const appList = ref([
         photo: 'https://code.visualstudio.com/favicon.ico'
       },
       {
+        name: 'VS 2022',
+        url: 'https://visualstudio.microsoft.com/zh-hans/downloads/',
+        photo:
+          'https://visualstudio.microsoft.com/wp-content/uploads/2021/10/Product-Icon.svg'
+      },
+      {
         name: 'sublime',
         url: 'https://www.sublimetext.com/',
         photo: 'https://www.sublimehq.com/images/sublime_text.png'
       },
       {
-        name: 'IDEA',
-        url: 'https://www.jetbrains.com/idea/download/#section=windows',
-        photo: 'https://www.jetbrains.com/icon.svg?r=1234'
+        name: 'Java',
+        url: 'https://www.oracle.com/java/technologies/downloads/',
+        photo: 'https://www.java.com/favicon.ico'
       },
       {
-        name: 'pycharm',
-        url: 'https://www.jetbrains.com.cn/pycharm/',
+        name: 'IDEA',
+        url: 'https://www.jetbrains.com/idea/download/#section=windows',
         photo: 'https://www.jetbrains.com/icon.svg?r=1234'
       },
       {
@@ -123,9 +160,35 @@ const appList = ref([
           'https://www.eclipse.org/downloads/assets/public/images/logo-eclipse.png'
       },
       {
+        name: 'Python',
+        url: 'https://www.python.org/downloads/',
+        photo: 'https://www.python.org/static/favicon.ico'
+      },
+      {
+        name: 'pycharm',
+        url: 'https://www.jetbrains.com.cn/pycharm/',
+        photo: 'https://www.jetbrains.com/icon.svg?r=1234'
+      },
+      {
+        name: 'Postman',
+        url: 'https://www.postman.com/downloads/',
+        photo: 'https://voyager.postman.com/logo/postman-logo-icon-orange.svg'
+      },
+      {
         name: 'nodejs',
         url: 'https://nodejs.cn/download/',
         photo: 'https://img.nodejs.cn/favicon.png'
+      },
+      {
+        name: 'gitee',
+        url: 'https://gitee.com/',
+        photo: 'https://gitee.com/favicon.ico'
+      },
+      {
+        name: 'HBuilder X',
+        url: 'https://www.dcloud.io/hbuilderx.html',
+        photo:
+          'https://qiniu-ecdn.dcloud.net.cn/uploads/images/hbuilderx/hx_icon@2x.png'
       },
       {
         name: 'MySQL',
@@ -133,7 +196,12 @@ const appList = ref([
         photo: 'https://labs.mysql.com/common/themes/sakila/favicon.ico'
       },
       {
-        name: '微信小程序开发',
+        name: 'SQL Server',
+        url: 'https://www.microsoft.com/zh-cn/sql-server/sql-server-downloads',
+        photo: 'https://www.microsoft.com/favicon.ico?v2'
+      },
+      {
+        name: '小程序开发',
         url: 'https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html',
         photo:
           'https://p0.meituan.net/csc/2729b5c1c19758c68dc9ab7a242d362d1378.png'
