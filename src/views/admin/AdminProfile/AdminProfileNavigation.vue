@@ -95,6 +95,26 @@ const logoutUser = async () => {
           strokeLinejoin="miter"
       /></template>
     </nut-navbar>
+    <nut-navbar style="cursor: pointer" @click="router.push('/')">
+      <template #left><span class="nav-title">报修页</span></template>
+      <template #right
+        ><right
+          class="icon-center"
+          theme="two-tone"
+          size="25"
+          strokeLinejoin="miter"
+      /></template>
+    </nut-navbar>
+    <nut-navbar style="cursor: pointer" @click="router.push('/tool')">
+      <template #left><span class="nav-title">软件工具箱</span></template>
+      <template #right
+        ><right
+          class="icon-center"
+          theme="two-tone"
+          size="25"
+          strokeLinejoin="miter"
+      /></template>
+    </nut-navbar>
     <nut-navbar
       style="cursor: pointer; border: 0"
       @click="router.push('/admin/profile/help')"

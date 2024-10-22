@@ -13,10 +13,6 @@ const onClickStep = (index) => {
   }
 }
 
-const toTool = () => {
-  alert('此网页只为帮助大家找到各大软件官网')
-  router.push('/tool')
-}
 watch(
   () => route.fullPath, // 监视的属性
   (newPath) => {
@@ -51,7 +47,7 @@ watch(
           </nut-step>
         </nut-steps>
         <router-view></router-view>
-        <div class="tool" @click="toTool">
+        <div class="tool" @click="router.push('/tool')">
           <toolkit
             class="icon-center"
             theme="two-tone"
