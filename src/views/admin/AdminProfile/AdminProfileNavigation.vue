@@ -105,7 +105,10 @@ const logoutUser = async () => {
           strokeLinejoin="miter"
       /></template>
     </nut-navbar>
-    <nut-navbar style="cursor: pointer" @click="router.push('/tool')">
+    <nut-navbar
+      style="cursor: pointer"
+      @click="router.push('/admin/profile/toolbox')"
+    >
       <template #left><span class="nav-title">软件工具箱</span></template>
       <template #right
         ><right

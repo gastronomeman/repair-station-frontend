@@ -73,6 +73,14 @@ export default [
             component: TransferDatabase
           },
           {
+            path: 'toolbox',
+            component: () => import('@/views/admin/AdminProfile/Toolbox.vue')
+          },
+          {
+            path: 'tool-o',
+            component: () => import('@/views/admin/AdminProfile/ToolO.vue')
+          },
+          {
             path: 'help',
             component: Help
           }
