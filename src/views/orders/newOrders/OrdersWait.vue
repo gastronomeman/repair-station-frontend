@@ -1,3 +1,4 @@
+Redis
 <script setup>
 import { useOrderState } from '@/stores/index.js'
 import { useRouter } from 'vue-router'
@@ -19,7 +20,11 @@ checkAgreed()
       &nbsp;&nbsp;&nbsp;&nbsp;我们是公益服务，不收群众一针一线，
       <span style="color: red"> 如遇讨要钱财，纠纷或需要投诉</span>
       请在下方扫描二维码，在公众号进行留言！<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;如果想要在工具箱添加你喜欢的工具网站，欢迎公众号直接留言哦<br />
       &nbsp;&nbsp;&nbsp;&nbsp;如遇紧急情况，需要维修电脑可添加维修站QQ咨询群：790445318进行咨询。
+    </p>
+    <p style="text-align: center; margin: 20px 0 10px; font-size: 15px">
+      ╭☞( ￣ ▽￣)╭☞&nbsp;如果有空的话，可以看看我们的软件工具箱哦<br />↓↓↓↓↓
     </p>
   </div>
 </template>
