@@ -4,11 +4,14 @@ import { ref } from 'vue'
 import {
   deleteItemService,
   deleteService,
+  getItemByNameService,
   linkFindAllService
 } from '@/api/webLink.js'
 import { Delete, Editor } from '@icon-park/vue-next'
 import { errorMsg, successMsg } from '@/utils/SendMsgUtils.js'
+import { useToolState } from '@/stores/index.js'
 
+const toolState = useToolState()
 const router = useRouter()
 
 const appList = ref([])
@@ -24,6 +27,8 @@ getAppList()
 const back = () => {
   router.go(-1)
 }
+
+const seach = ref('')
 
 const showItem = ref(true)
 
@@ -52,10 +57,34 @@ const add = async () => {
   await router.push('/admin/profile/tool-o?o=add')
 }
 const update = async (i) => {
-  await router.push(`/admin/profile/tool-o?o=update&name=${i.title}&id=${i.id}`)
+  toolState.setWebItem(i)
+  await router.push(`/admin/profile/tool-o?o=update`)
 }
-const addItem = async (id) => {
-  await router.push(`/admin/profile/tool-o?o=addItem&id=${id}`)
+const addItem = async (i) => {
+  toolState.setWebItem(i)
+  toolState.setLinkItem({})
+  await router.push(`/admin/profile/tool-o?o=addItem`)
+}
+const updateItem = async (item, i) => {
+  toolState.setWebItem(item)
+  toolState.setLinkItem(i)
+  await router.push(`/admin/profile/tool-o?o=updateItem`)
+}
+
+const list = ref()
+const show = ref(true)
+const searchItem = async () => {
+  if (seach.value === '') return
+  const resp = await getItemByNameService(seach.value)
+  if (resp.code === 1) {
+    list.value = resp.data
+    if (list.value.length > 0) show.value = false
+  }
+}
+const clean = async () => {
+  show.value = true
+  seach.value = ''
+  list.value = []
 }
 </script>
 
@@ -74,28 +103,75 @@ const addItem = async (id) => {
       收起 / 展开
     </nut-button>
   </div>
-  <div class="toolLink" v-for="item in appList" :key="item.id">
-    <div class="title">
-      <van-row>
-        <van-col span="7">{{ item.title }}</van-col>
-        <van-col span="4">
-          <nut-button type="primary" size="mini" @click="addItem(item.id)">
-            新增
-          </nut-button>
-        </van-col>
-        <van-col span="4">
-          <nut-button type="primary" size="mini" @click="update(item)">
-            修改
-          </nut-button>
-        </van-col>
-        <van-col span="4">
-          <nut-button type="primary" size="mini" @click="del(item)">
-            删除
-          </nut-button>
-        </van-col>
-      </van-row>
+  <div style="text-align: center; margin-top: 20px">
+    <el-input
+      clearable
+      v-model="seach"
+      style="width: 200px"
+      placeholder="搜索"
+    />&nbsp;
+    <nut-button type="primary" size="small" @click="searchItem">
+      搜索 </nut-button
+    >&nbsp;
+    <nut-button type="primary" size="small" @click="clean"> 重置 </nut-button>
+  </div>
+  <div v-if="show">
+    <div class="toolLink" v-for="item in appList" :key="item.id">
+      <div class="title">
+        <van-row>
+          <van-col span="7">{{ item.title }}</van-col>
+          <van-col span="4">
+            <nut-button type="primary" size="mini" @click="addItem(item)">
+              新增
+            </nut-button>
+          </van-col>
+          <van-col span="4">
+            <nut-button type="primary" size="mini" @click="update(item)">
+              修改
+            </nut-button>
+          </van-col>
+          <van-col span="4">
+            <nut-button type="primary" size="mini" @click="del(item)">
+              删除
+            </nut-button>
+          </van-col>
+        </van-row>
+      </div>
+      <div v-show="showItem" class="content" v-for="i in item.list" :key="i.id">
+        <van-row>
+          <van-col span="5">
+            <img class="photo" :src="i.photo" alt=""
+          /></van-col>
+          <van-col span="7">
+            <div class="boxCenter">{{ i.name }}</div>
+          </van-col>
+          <van-col span="12">
+            <div class="boxCenter">
+              <div @click="updateItem(item, i)" class="btn">
+                <editor
+                  class="icon-center"
+                  theme="outline"
+                  size="15"
+                  fill="#333"
+                />编辑
+              </div>
+              <div @click="delItem(item.id, i.id)" class="btn">
+                <delete
+                  class="icon-center"
+                  theme="outline"
+                  size="15"
+                  fill="#333"
+                />删除
+              </div>
+            </div>
+          </van-col>
+        </van-row>
+        <nut-divider style="margin: 5px" dashed> </nut-divider>
+      </div>
     </div>
-    <div v-show="showItem" class="content" v-for="i in item.list" :key="i.id">
+  </div>
+  <div v-else style="margin-top: 15px" class="toolLink">
+    <div v-show="showItem" class="content" v-for="i in list" :key="i.id">
       <van-row>
         <van-col span="5"> <img class="photo" :src="i.photo" alt="" /></van-col>
         <van-col span="7">
@@ -103,7 +179,7 @@ const addItem = async (id) => {
         </van-col>
         <van-col span="12">
           <div class="boxCenter">
-            <div class="btn">
+            <div @click="updateItem(item, i)" class="btn">
               <editor
                 class="icon-center"
                 theme="outline"

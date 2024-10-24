@@ -1,9 +1,16 @@
 <script setup>
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { addItemService, saveService, updateService } from '@/api/webLink.js'
+import {
+  addItemService,
+  saveService,
+  updateItemService,
+  updateService
+} from '@/api/webLink.js'
 import { successMsg } from '@/utils/SendMsgUtils.js'
+import { useToolState } from '@/stores/index.js'
 
+const toolState = useToolState()
 const router = useRouter()
 const route = useRoute()
 
@@ -14,18 +21,9 @@ const back = () => {
   router.go(-1)
 }
 
-const webLink = ref({
-  id: '',
-  title: route.query.name,
-  list: []
-})
+const webLink = ref(toolState.webItem)
 
-const linkItem = ref({
-  id: '',
-  name: '',
-  url: '',
-  photo: ''
-})
+const linkItem = ref(toolState.linkItem)
 
 const add = async () => {
   webLink.value.id = null
@@ -37,16 +35,22 @@ const add = async () => {
 }
 
 const addItem = async () => {
-  const resp = await addItemService(route.query.id, linkItem.value)
+  const resp = await addItemService(webLink.value.id, linkItem.value)
   if (resp.code === 1) {
     successMsg(resp.data)
-    //router.go(-1)
+    router.go(-1)
   }
 }
 
 const update = async () => {
-  webLink.value.id = route.query.id
   const resp = await updateService(webLink.value)
+  if (resp.code === 1) {
+    successMsg(resp.data)
+    router.go(-1)
+  }
+}
+const updateItem = async () => {
+  const resp = await updateItemService(webLink.value.id, linkItem.value)
   if (resp.code === 1) {
     successMsg(resp.data)
     router.go(-1)
@@ -112,6 +116,33 @@ const update = async () => {
       placeholder="输入要修改集合的名字"
     /><br />
     <nut-button type="primary" @click="update">修改</nut-button>
+  </div>
+  <div class="base" v-if="o === 'updateItem'">
+    网站名称:
+    <el-input
+      clearable
+      size="large"
+      v-model="linkItem.name"
+      style="width: 260px; margin-bottom: 15px"
+      placeholder="网站名称"
+    /><br />
+    网站链接:
+    <el-input
+      clearable
+      size="large"
+      v-model="linkItem.url"
+      style="width: 260px; margin-bottom: 15px"
+      placeholder="网站链接"
+    /><br />
+    图标链接:
+    <el-input
+      clearable
+      size="large"
+      v-model="linkItem.photo"
+      style="width: 260px; margin-bottom: 15px"
+      placeholder="图标链接"
+    /><br />
+    <nut-button type="primary" @click="updateItem">修改网页</nut-button>
   </div>
 </template>
 

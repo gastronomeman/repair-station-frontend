@@ -57,6 +57,9 @@ instance.interceptors.response.use(
     if (err.response?.status === 401) {
       /* empty */
     }
+    if (err.response?.status === 500) {
+      router.push('/staff/login')
+    }
 
     // 5. 处理401错误
     return Promise.reject(err)
