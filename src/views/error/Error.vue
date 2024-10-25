@@ -16,7 +16,7 @@ if (time.value.getTime() - currentDate.getTime() <= 0) timeDifference = 0
 <template>
   <div class="base">
     <h1>(＞﹏＜)，很抱歉</h1>
-    <h1>后台正在维护请稍等片刻</h1>
+    <h1>后台数据库正在维护请稍等片刻</h1>
     <div class="time-box">
       <van-count-down :time="timeDifference">
         <template #default="timeData">

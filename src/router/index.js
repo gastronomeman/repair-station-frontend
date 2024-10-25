@@ -40,6 +40,7 @@ router.beforeEach(async (to) => {
     if (resp.code === 1 && to.path === '/orders/announcements') return '/'
     else if (resp.code === 0 && to.path !== '/orders/announcements')
       return '/orders/announcements'
+    else return '/error'
   }
 
   const staffState = useStaffState()
