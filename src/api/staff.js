@@ -25,3 +25,6 @@ export const removeStaffService = (id) => request.delete(`/staff/delete/${id}`)
 
 export const getNameByIdService = (id) =>
   request.get('/staff/getNameById?id=' + id)
+
+export const getStaffOnlineCountService = () =>
+  request.get('/staff/staff-online')

@@ -9,7 +9,7 @@ const route = useRoute()
 const staffState = useStaffState()
 
 const logoutUser = async () => {
-  await logoutService()
+  await logoutService('20240704')
   await router.push('/staff/login')
   staffState.clear()
 }

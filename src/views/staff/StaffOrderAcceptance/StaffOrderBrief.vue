@@ -2,7 +2,11 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { People } from '@icon-park/vue-next'
-import { getStaffOrderTotalService } from '@/api/orders.js'
+import {
+  getOrderTotalService,
+  getStaffOrderTotalService
+} from '@/api/orders.js'
+import { getStaffOnlineCountService } from '@/api/staff.js'
 
 const router = useRouter()
 
@@ -23,7 +27,6 @@ const goToOrderList = (orderType) => {
 }
 
 const staffOrder = ref({
-  staffOnlineNum: '',
   semesterOrderCount: '',
   lastMonthOrderCount: '',
   currentMonthOrderCount: '',
@@ -37,18 +40,38 @@ const staffOrder = ref({
   orderType31: '',
   orderType32: '',
   orderType41: '',
-  orderType42: '',
-  staffSemesterOrderCount: '',
-  staffWeekOrderCount: ''
+  orderType42: ''
 })
 const loading = ref(false)
 const getStaffOrder = async () => {
   loading.value = true
-  const resp = await getStaffOrderTotalService()
+  const resp = await getOrderTotalService()
   staffOrder.value = resp.data
   loading.value = false
 }
+
+const onlineCount = ref(0)
+const getStaffOnlineCount = async () => {
+  const resp = await getStaffOnlineCountService()
+  if (resp.code === 1) {
+    onlineCount.value = resp.data
+  }
+}
+
+const staffTotal = ref({
+  orderTotal: '',
+  weekOrderTotal: ''
+})
+const getStaffOrderTotal = async () => {
+  const resp = await getStaffOrderTotalService()
+  if (resp.code === 1) {
+    staffTotal.value = resp.data
+  }
+}
+
 getStaffOrder()
+getStaffOrderTotal()
+getStaffOnlineCount()
 </script>
 
 <template>
@@ -64,7 +87,7 @@ getStaffOrder()
               size="10"
               fill="#333"
             />
-            {{ staffOrder.staffOnlineNum }}人
+            {{ onlineCount }}人
           </p>
         </div>
       </template>
@@ -227,13 +250,13 @@ getStaffOrder()
         <nut-col :span="12">
           <div class="content">
             <p>本学期已处理</p>
-            <p>{{ staffOrder.staffSemesterOrderCount }}单</p>
+            <p>{{ staffTotal.orderTotal }}单</p>
           </div>
         </nut-col>
         <nut-col :span="12">
           <div class="content">
             <p>本周已处理</p>
-            <p>{{ staffOrder.staffWeekOrderCount }}单</p>
+            <p>{{ staffTotal.weekOrderTotal }}单</p>
           </div>
         </nut-col>
       </nut-row>

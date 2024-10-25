@@ -9,6 +9,11 @@ export const useStaffState = defineStore(
       token.value = newValues
     }
 
+    const id = ref('')
+    const setId = (newValues) => {
+      id.value = newValues
+    }
+
     const studentId = ref('')
     const setStudentId = (newValues) => {
       studentId.value = newValues
@@ -29,10 +34,13 @@ export const useStaffState = defineStore(
       studentId.value = ''
       name.value = ''
       order.value = ''
+      id.value = ''
     }
     return {
       token,
       setToken,
+      id,
+      setId,
       studentId,
       setStudentId,
       name,

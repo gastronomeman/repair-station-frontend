@@ -54,12 +54,7 @@ instance.interceptors.response.use(
     return res.data
   },
   (err) => {
-    if (err.response?.status === 401) {
-      router.push('/error')
-    }
-    if (err.response?.status === 500) {
-      router.push('/error')
-    }
+    errorMsg(err)
   }
 )
 

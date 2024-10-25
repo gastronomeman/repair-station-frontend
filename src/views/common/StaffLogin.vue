@@ -37,6 +37,7 @@ const submit = async () => {
     staffState.setToken(resp.data)
     staffState.setStudentId(staff.value.studentId)
     staffState.setName(jwtDecode(resp.data).name)
+    staffState.setId(jwtDecode(resp.data).id)
 
     let name = jwtDecode(resp.data).name
 

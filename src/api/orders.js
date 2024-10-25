@@ -5,8 +5,10 @@ export const ordersNewService = (data) => request.post('/orders', data)
 export const getOrderListByStudentIdService = (studentId) =>
   request.get('/orders?name=' + studentId)
 
+export const getOrderTotalService = () => request.get('/orders/total')
+
 export const getStaffOrderTotalService = () =>
-  request.get('/orders/staff-order-total')
+  request.get('/orders/staff-total')
 
 export const getOrdersListService = (type, status) =>
   request.get(`/orders/type-list?type=${type}&status=${status}`)
