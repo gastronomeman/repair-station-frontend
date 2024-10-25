@@ -9,11 +9,15 @@ const routes = [
   {
     path: '/:pathMatch(.*)*', // 捕获所有未匹配路径
     name: 'NotFound',
-    component: () => import('@/views/common/NotFound.vue')
+    component: () => import('@/views/error/NotFound.vue')
   },
   {
     path: '/tool',
     component: () => import('@/views/tool/Tool.vue')
+  },
+  {
+    path: '/error',
+    component: () => import('@/views/error/Error.vue')
   },
   ...ordersRoutes, // 导入 Orders 模块路由配置
   ...staffRoutes, // 导入 Staff 模块路由配置
@@ -31,6 +35,7 @@ router.beforeEach(async (to) => {
   //订单的逻辑
   if (to.path.startsWith('/orders')) {
     const resp = await getServerStatusService()
+
     //如果resp.code === 1就是开启接单模式，=== 0 是停止接单
     if (resp.code === 1 && to.path === '/orders/announcements') return '/'
     else if (resp.code === 0 && to.path !== '/orders/announcements')

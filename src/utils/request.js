@@ -54,15 +54,13 @@ instance.interceptors.response.use(
     return res.data
   },
   (err) => {
+    router.push('/error')
     if (err.response?.status === 401) {
-      /* empty */
+      router.push('/error')
     }
     if (err.response?.status === 500) {
-      router.push('/staff/login')
+      router.push('/error')
     }
-
-    // 5. 处理401错误
-    return Promise.reject(err)
   }
 )
 
