@@ -1,32 +1,42 @@
 <script setup>
 import { useRouter, useRoute } from 'vue-router'
-import { logoutService } from '@/api/staff.js'
+import { getStaffOnlineNameService, logoutService } from '@/api/staff.js'
 import { useStaffState } from '@/stores/index.js'
-import { Me, Right, Logout } from '@icon-park/vue-next'
+import { CameraOne, Right, Logout } from '@icon-park/vue-next'
+import { ref } from 'vue'
 
 const router = useRouter()
 const route = useRoute()
 const staffState = useStaffState()
 
 const logoutUser = async () => {
-  await logoutService('20240704')
+  await logoutService()
   await router.push('/staff/login')
   staffState.clear()
 }
+
+const nameList = ref()
+const getOnlineName = async () => {
+  const resp = await getStaffOnlineNameService()
+  if (resp.code === 1) {
+    nameList.value = resp.data.join(', ')
+  }
+}
+getOnlineName()
 </script>
 
 <template>
   <div v-if="route.fullPath === '/admin/profile'">
     <nut-navbar title="我的"></nut-navbar>
     <div class="info">
-      <me
-        class="icon-center"
-        theme="two-tone"
-        size="55"
-        :fill="['#9b9b9b', '#2c68ff']"
-        strokeLinejoin="miter"
-      />
-      <span>Hi，管理员！</span>
+      <div class="onlineTitle">
+        <camera-one theme="two-tone" size="24" :fill="['#9b9b9b', '#0de38a']" />
+        <br />
+        <span>当前在线社员:</span>
+      </div>
+      <span class="onlineName">
+        {{ nameList }}
+      </span>
     </div>
     <nut-navbar
       style="cursor: pointer"
@@ -170,12 +180,22 @@ const logoutUser = async () => {
 }
 .info {
   background-color: white;
-  padding: 10px 15px;
+  padding: 10px 10px;
   margin-bottom: 18px;
   display: flex;
   align-items: center;
-  span {
-    margin: 0 5px;
+  .onlineTitle {
+    margin: 5px;
+    text-align: center;
+    width: 85px;
+    font-size: 10px;
+    color: #939393;
+  }
+  .onlineName {
+    margin: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #302f4b;
   }
 }
 .icon-center {

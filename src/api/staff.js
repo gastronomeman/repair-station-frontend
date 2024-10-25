@@ -28,3 +28,5 @@ export const getNameByIdService = (id) =>
 
 export const getStaffOnlineCountService = () =>
   request.get('/staff/staff-online')
+
+export const getStaffOnlineNameService = () => request.get('/staff/online-name')
