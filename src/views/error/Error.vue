@@ -1,6 +1,10 @@
 <script setup>
 import OrdersFooter from '@/components/orders/OrdersFooter.vue'
 import { ref } from 'vue'
+import { getServerStatusService } from '@/api/repairStationStatus.js'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const time = ref(window.config.time)
 
@@ -11,6 +15,15 @@ let currentDate = new Date()
 let timeDifference = Math.abs(time.value.getTime() - currentDate.getTime())
 
 if (time.value.getTime() - currentDate.getTime() <= 0) timeDifference = 0
+
+const check = async () => {
+  const resp = await getServerStatusService()
+  if (resp.code === 1) {
+    await router.push('/')
+  }
+}
+
+check()
 </script>
 
 <template>
