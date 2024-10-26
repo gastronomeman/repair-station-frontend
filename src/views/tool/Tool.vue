@@ -1,5 +1,5 @@
 <script setup>
-import ToolShow from '@/components/ToolShow.vue'
+import ToolShow from '@/components/tool/ToolShow.vue'
 import Footer from '@/components/Footer.vue'
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
@@ -82,6 +82,7 @@ const allShow = ref(true)
       如果有侵权之处请第一时间联系我们删除。敬请谅解! E-mail：1305573134@qq.com
     </p>
   </div>
+  <nut-backtop el-id="elId1" :distance="100" :bottom="60"></nut-backtop>
   <Footer></Footer>
   <br />
 </template>
