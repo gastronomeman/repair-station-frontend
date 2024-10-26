@@ -54,7 +54,7 @@ instance.interceptors.response.use(
     return res.data
   },
   (err) => {
-    errorMsg(err)
+    errorMsg('网络异常，请稍后尝试' + err.msg)
   }
 )
 
