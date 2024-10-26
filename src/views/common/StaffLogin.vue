@@ -11,6 +11,7 @@ import { User, Key } from '@icon-park/vue-next'
 import { jwtDecode } from 'jwt-decode'
 
 const router = useRouter()
+const isLoading = ref(false)
 
 const staffState = useStaffState()
 const staff = ref({
@@ -27,6 +28,7 @@ const checkPassword = () => {
 }
 
 const submit = async () => {
+  isLoading.value = true
   if (isNotBlank(staff.value.studentId) || isNotBlank(staff.value.password)) {
     warningMsg('账号密码不能为空！')
     staff.value.password = ''
@@ -52,6 +54,7 @@ const submit = async () => {
       await router.push('/staff')
     }
   }
+  isLoading.value = false
 }
 </script>
 
@@ -79,7 +82,7 @@ const submit = async () => {
         type="password"
         size="large"
         v-model="staff.password"
-        style="width: 260px"
+        style="width: 260px; margin-top: 5px"
         placeholder="管理员密码："
         @blur="checkPassword"
       >
@@ -87,8 +90,14 @@ const submit = async () => {
           <el-icon class="input-icon"><key /></el-icon>
         </template>
       </el-input>
-      <div>
-        <nut-button shape="round" type="info" @click="submit">登录</nut-button>
+      <div class="btn">
+        <nut-button
+          :loading="isLoading"
+          shape="round"
+          type="info"
+          @click="submit"
+          >登录</nut-button
+        >
         <p>*仅限ITeam基地维修站成员使用，请妥善保管个人账号和密码。(*^o^*)</p>
       </div>
     </form>
@@ -103,6 +112,7 @@ const submit = async () => {
   align-items: center;
   height: 82vh;
   width: 100%;
+  margin: 5vh auto 0;
 
   .login-img-logo {
     margin-bottom: 10px;
@@ -125,8 +135,8 @@ const submit = async () => {
     .el-input:first-child {
       margin-bottom: 10px;
     }
-    div {
-      margin-top: 10px;
+    .btn {
+      margin: 15px auto 0;
       text-align: center;
       width: 240px;
 
