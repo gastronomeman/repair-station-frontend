@@ -15,22 +15,31 @@ const toolState = useToolState()
 const router = useRouter()
 
 const appList = ref([])
+const showItem = ref({})
 
 const getAppList = async () => {
   const resp = await linkFindAllService()
   if (resp.code === 1) {
     appList.value = resp.data
+    appList.value.forEach((item) => {
+      showItem.value[item.id] = true // 默认折叠状态
+    })
   }
 }
 getAppList()
+
+const toggleAllItems = () => {
+  const allExpanded = Object.values(showItem.value).every(Boolean)
+  appList.value.forEach((item) => {
+    showItem.value[item.id] = !allExpanded // 切换所有集合的状态
+  })
+}
 
 const back = () => {
   router.go(-1)
 }
 
 const seach = ref('')
-
-const showItem = ref(true)
 
 const del = async (item) => {
   if (item.list.length > 0) {
@@ -99,8 +108,8 @@ const clean = async () => {
   <div style="text-align: center; margin-top: 20px">
     <nut-button type="primary" size="small" @click="add">添加新集合</nut-button>
     &nbsp;
-    <nut-button type="primary" size="small" @click="showItem = !showItem">
-      收起 / 展开
+    <nut-button type="primary" size="small" @click="toggleAllItems">
+      展开 / 收起
     </nut-button>
   </div>
   <div style="text-align: center; margin-top: 20px">
@@ -135,9 +144,23 @@ const clean = async () => {
               删除
             </nut-button>
           </van-col>
+          <van-col span="4">
+            <nut-button
+              type="primary"
+              size="mini"
+              @click="showItem[item.id] = !showItem[item.id]"
+            >
+              {{ showItem[item.id] ? '收起' : '展开' }}
+            </nut-button>
+          </van-col>
         </van-row>
       </div>
-      <div v-show="showItem" class="content" v-for="i in item.list" :key="i.id">
+      <div
+        v-show="showItem[item.id]"
+        class="content"
+        v-for="i in item.list"
+        :key="i.id"
+      >
         <van-row>
           <van-col span="5">
             <img class="photo" :src="i.photo" alt=""
