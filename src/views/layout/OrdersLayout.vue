@@ -23,19 +23,9 @@ getText()
 const title = ref('电脑报修')
 
 const search = ref({
-  left: '',
   input: '',
   backgroundColor: '#f0f0f0'
 })
-const sticky = (fixed) => {
-  if (fixed) {
-    search.value.backgroundColor = '#ffffff'
-    search.value.left = 'ITeam维修站'
-  } else {
-    search.value.backgroundColor = '#f0f0f0'
-    search.value.left = ''
-  }
-}
 
 const searchbarRef = ref(null)
 
@@ -83,28 +73,26 @@ watch(
   <div class="orders-head">
     <h1>{{ title }}</h1>
     <h3>- Repair Station -</h3>
-    <nut-sticky @change="sticky" top="40">
-      <nut-searchbar
-        @click="focusSearchbar"
-        ref="searchbarRef"
-        v-model="search.input"
-        :background="search.backgroundColor"
-        @search="goToQuery"
-        placeholder="输入学号或姓名查询报修状态"
-      >
-        <template #leftout>
-          {{ search.left }}
-        </template>
-        <template #rightin>
-          <Search
-            class="search-icon"
-            @click="goToQuery"
-            theme="outline"
-            size="18"
-          />
-        </template>
-      </nut-searchbar>
-    </nut-sticky>
+    <nut-searchbar
+      @click="focusSearchbar"
+      ref="searchbarRef"
+      v-model="search.input"
+      :background="search.backgroundColor"
+      @search="goToQuery"
+      placeholder="输入学号或姓名查询报修状态"
+    >
+      <template #leftout>
+        {{ search.left }}
+      </template>
+      <template #rightin>
+        <Search
+          class="search-icon"
+          @click="goToQuery"
+          theme="outline"
+          size="18"
+        />
+      </template>
+    </nut-searchbar>
     <div class="orders-img">
       <div v-if="title !== '维修公告'">
         <nut-row>
