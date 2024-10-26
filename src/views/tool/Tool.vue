@@ -39,6 +39,8 @@ const copyToClipboard = () => {
     alert('不支持剪贴板功能')
   }
 }
+
+const allShow = ref(true)
 </script>
 
 <template>
@@ -52,6 +54,7 @@ const copyToClipboard = () => {
   <div style="max-width: 800px; margin: 0 auto">
     <div class="title">
       **此网页的工具是为了帮助同学们更好的找到各个软件的官网，用作学习之用，如遇不会安装可以点击<a
+        style="color: #2c68ff; font-weight: bold"
         href="/"
         >报修</a
       >，让我们帮助你！<br />
@@ -59,10 +62,20 @@ const copyToClipboard = () => {
         点击此处，复制网址<br />（复制网址到电脑浏览更佳哦）
       </p>
     </div>
-    <div v-for="app in appList" :key="app.id">
-      <ToolShow :app-list="app.list" :title="app.title"></ToolShow>
+    <div style="text-align: center; margin: 5px auto">
+      <nut-button type="info" @click="allShow = !allShow"
+        >收起 / 展开</nut-button
+      >
     </div>
-    <nut-divider dashed />
+
+    <div v-for="app in appList" :key="app.id">
+      <ToolShow
+        :show="allShow"
+        :app-list="app.list"
+        :title="app.title"
+      ></ToolShow>
+      <nut-divider dashed style="width: 90%; margin: 5px auto" />
+    </div>
     <p style="font-size: 11px; width: 80%; margin: 10px auto; color: #939393">
       &nbsp;&nbsp;&nbsp;&nbsp; 本站所发布的全部内容源于互联网搬运，
       仅限于小范围内传播学习和文献参考， 请在下载后24小时内删除，

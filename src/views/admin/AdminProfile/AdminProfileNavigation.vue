@@ -1,6 +1,10 @@
 <script setup>
 import { useRouter, useRoute } from 'vue-router'
-import { getStaffOnlineNameService, logoutService } from '@/api/staff.js'
+import {
+  getStaffOnlineCountService,
+  getStaffOnlineNameService,
+  logoutService
+} from '@/api/staff.js'
 import { useStaffState } from '@/stores/index.js'
 import { CameraOne, Right, Logout } from '@icon-park/vue-next'
 import { ref } from 'vue'
@@ -22,6 +26,14 @@ const getOnlineName = async () => {
     nameList.value = resp.data.join(', ')
   }
 }
+const onlineCount = ref(0)
+const getStaffOnlineCount = async () => {
+  const resp = await getStaffOnlineCountService()
+  if (resp.code === 1) {
+    onlineCount.value = resp.data
+  }
+}
+getStaffOnlineCount()
 getOnlineName()
 </script>
 
@@ -32,7 +44,8 @@ getOnlineName()
       <div class="onlineTitle">
         <camera-one theme="two-tone" size="24" :fill="['#9b9b9b', '#0de38a']" />
         <br />
-        <span>当前在线社员:</span>
+        <span>当前在线社员:</span><br />
+        <span>{{ onlineCount }} 人</span>
       </div>
       <span class="onlineName">
         {{ nameList }}

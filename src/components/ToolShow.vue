@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 
 const props = defineProps({
   appList: {
@@ -8,6 +8,10 @@ const props = defineProps({
   },
   title: {
     type: String,
+    required: true
+  },
+  show: {
+    type: Boolean,
     required: true
   }
 })
@@ -24,19 +28,37 @@ const s = computed(() => {
 const onClick = (url) => {
   window.open(url)
 }
+
+const show = ref(props.show)
+watch(
+  () => props.show,
+  async (newValue) => {
+    show.value = newValue
+  }
+)
 </script>
 
 <template>
   <div class="view">
-    <p class="title">{{ props.title }}</p>
-    <van-row :gutter="[10, 10]" v-for="(group, index) in s" :key="index">
-      <van-col v-for="(item, idx) in group" :key="idx" span="8">
-        <div class="container" @click="onClick(item.url)">
-          <img class="icon" :src="item.photo" alt="" />
-          <p class="title">{{ item.name }}</p>
-        </div>
-      </van-col>
-    </van-row>
+    <div class="title">
+      {{ props.title }}&nbsp;
+      <nut-button v-if="show" type="info" size="mini" @click="show = !show">
+        收起
+      </nut-button>
+      <nut-button v-else type="info" size="mini" @click="show = !show">
+        展开
+      </nut-button>
+    </div>
+    <div v-show="show">
+      <van-row :gutter="[10, 10]" v-for="(group, index) in s" :key="index">
+        <van-col v-for="(item, idx) in group" :key="idx" span="8">
+          <div class="container" @click="onClick(item.url)">
+            <img class="icon" :src="item.photo" alt="" />
+            <p class="title">{{ item.name }}</p>
+          </div>
+        </van-col>
+      </van-row>
+    </div>
   </div>
 </template>
 
