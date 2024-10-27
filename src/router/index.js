@@ -54,8 +54,10 @@ router.beforeEach(async (to) => {
     if (staffState.token === '') {
       alert('请先登录后尝试吧')
       return '/staff/login'
-    } else {
-      return '/staff/'
+    } else if (to.path.startsWith('/staff')) {
+      return '/staff'
+    } else if (to.path.startsWith('/admin')) {
+      return '/admin'
     }
   }
 
