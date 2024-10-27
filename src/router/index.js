@@ -54,6 +54,8 @@ router.beforeEach(async (to) => {
     if (staffState.token === '') {
       alert('请先登录后尝试吧')
       return '/staff/login'
+    } else {
+      return '/staff/'
     }
   }
 
