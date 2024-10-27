@@ -129,9 +129,8 @@ const submit = async () => {
 
   .login-input {
     margin-bottom: 80px;
-
+    text-align: center;
     h2 {
-      text-align: center;
       margin-bottom: 10px;
     }
 
