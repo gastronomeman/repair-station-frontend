@@ -139,7 +139,7 @@ const changeStaffNotice = async () => {
         </nut-col>
         <nut-col :span="4">
           <div class="content">
-            <p>近7天</p>
+            <p>本周</p>
             <p>{{ adminOrder.currentWeekOrderCount }}</p>
           </div>
         </nut-col>
