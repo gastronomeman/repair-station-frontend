@@ -30,13 +30,13 @@ instance.interceptors.request.use(
 //响应拦截器
 instance.interceptors.response.use(
   (res) => {
-    // 4. 摘取核心响应数据
-    if (res.data.code === 1) {
-      return res.data
-    }
+    // 3. 摘取核心响应数据
+    if (res.data.code === 1) return res.data
+
+    // 4. 处理业务失败
     const staffState = useStaffState()
-    //3. 处理业务失败
-    if (res.data.code === 0 && res.data.msg === 'not_login') {
+
+    if (res.data.msg === 'not_login') {
       alert('登录验证失效请重新登陆')
 
       staffState.clear()
@@ -45,18 +45,13 @@ instance.interceptors.response.use(
       return Promise.reject(res.data.msg)
     }
 
-    if (
-      res.data.code === 0 &&
-      res.data.msg.startsWith('检测到已在别的设备登录此账号')
-    ) {
-      //errorMsg(res.data.msg)
+    if (res.data.msg.startsWith('检测到已在别的设备登录此账号')) {
       staffState.clear()
 
       router.push('/staff/login')
     }
 
-    if (res.data.code === 0 && res.data.msg !== '停止接单')
-      errorMsg(res.data.msg)
+    if (res.data.code === 0) errorMsg(res.data.msg)
 
     return res.data
   },

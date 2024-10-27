@@ -1,7 +1,7 @@
 <script setup>
-import { errorMsg } from '@/utils/SendMsgUtils.js'
 import { ref } from 'vue'
 import { getStopTitleService } from '@/api/repairStationStatus.js'
+import { Toolkit } from '@icon-park/vue-next'
 
 const stopTitle = ref('')
 
@@ -12,8 +12,6 @@ const getStopTitle = async () => {
   }
 }
 getStopTitle()
-
-errorMsg('非常抱歉，已停止接单！૮ ˃̣̣̥⌓˂̣̣̥ა')
 </script>
 
 <template>
@@ -23,9 +21,20 @@ errorMsg('非常抱歉，已停止接单！૮ ˃̣̣̥⌓˂̣̣̥ა')
       <div class="new-order-from">
         <h2>{{ stopTitle }}&nbsp;</h2>
         <p>
-          &nbsp;&nbsp;&nbsp;&nbsp;服务具体开放通知，可关注下面公众号获取最新消息<br />
-          &nbsp;&nbsp;&nbsp;&nbsp;如遇紧急情况，需要维修电脑可添加维修站QQ咨询群：790445318
+          &nbsp;&nbsp;&nbsp;&nbsp;报修服务暂时关闭。具体开放通知，可关注下面公众号获取最新消息。<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;如遇紧急情况，需要维修电脑可添加维修站QQ咨询群：790445318。
         </p>
+        <div class="tool">
+          <toolkit
+            @click="router.push('/tool')"
+            class="icon-center"
+            theme="two-tone"
+            size="20"
+            :fill="['#9b9b9b', '#4a90e2']"
+            strokeLinejoin="miter"
+          />
+          <span @click="router.push('/tool')"> 软件工具箱</span>
+        </div>
       </div>
     </div>
   </div>
@@ -42,9 +51,10 @@ errorMsg('非常抱歉，已停止接单！૮ ˃̣̣̥⌓˂̣̣̥ა')
     }
     p {
       font-size: 18px;
-      padding: 0 8px 25px;
+      padding: 0 8px 10px;
       word-wrap: break-word;
       overflow-wrap: break-word;
+      color: #7a7374;
     }
   }
 }

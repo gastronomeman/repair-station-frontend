@@ -8,7 +8,8 @@ export const warningMsg = (text) => {
 
 export const successMsg = (text) => {
   ElMessage({
-    message: text,
+    dangerouslyUseHTMLString: true,
+    message: `<strong>${text}</strong>`,
     type: 'success',
     center: true
   })
