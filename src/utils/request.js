@@ -34,12 +34,9 @@ instance.interceptors.response.use(
     if (res.data.code === 1) {
       return res.data
     }
+    const staffState = useStaffState()
     //3. 处理业务失败
     if (res.data.code === 0 && res.data.msg === 'not_login') {
-      const staffState = useStaffState()
-      //如果已经发送清理过就不会再次发送
-      if (staffState.token === '') return
-
       alert('登录验证失效请重新登陆')
 
       staffState.clear()
@@ -48,13 +45,24 @@ instance.interceptors.response.use(
       return Promise.reject(res.data.msg)
     }
 
-    if (res.data.code === 0 && res.data.msg !== '停止接单') {
-      errorMsg(res.data.msg)
+    if (
+      res.data.code === 0 &&
+      res.data.msg.startsWith('检测到已在别的设备登录此账号')
+    ) {
+      //errorMsg(res.data.msg)
+      staffState.clear()
+
+      router.push('/staff/login')
     }
+
+    if (res.data.code === 0 && res.data.msg !== '停止接单')
+      errorMsg(res.data.msg)
+
     return res.data
   },
   (err) => {
-    errorMsg('网络异常，请稍后尝试' + err.msg)
+    console.log(err)
+    errorMsg('网络异常，请稍后尝试')
   }
 )
 

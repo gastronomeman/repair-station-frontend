@@ -16,7 +16,9 @@ export const successMsg = (text) => {
 
 export const errorMsg = (text) => {
   ElMessage({
+    dangerouslyUseHTMLString: true,
     message: text,
+    duration: 6000,
     type: 'error',
     center: true
   })

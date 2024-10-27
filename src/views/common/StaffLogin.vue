@@ -53,6 +53,9 @@ const submit = async () => {
 
       await router.push('/staff')
     }
+  } else {
+    staff.value.studentId = ''
+    staff.value.password = ''
   }
   isLoading.value = false
 }
