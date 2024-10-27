@@ -113,9 +113,9 @@ const submit = async () => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 82vh;
+  height: 80vh;
   width: 100%;
-  margin: 5vh auto 0;
+  margin: 6vh auto 0;
 
   .login-img-logo {
     margin-bottom: 10px;
@@ -128,7 +128,7 @@ const submit = async () => {
   }
 
   .login-input {
-    margin-bottom: 80px;
+    margin-bottom: 20px;
     text-align: center;
     h2 {
       margin-bottom: 10px;
