@@ -45,7 +45,14 @@ instance.interceptors.response.use(
       return Promise.reject(res.data.msg)
     }
 
-    if (res.data.msg.startsWith('检测到已在别的设备登录此账号')) {
+    if (res.data.msg.startsWith('检测到账号已在别的设备登录')) {
+      showDialog({
+        allowHtml: true,
+        message: res.data.msg,
+        theme: 'round-button'
+      }).then(() => {
+        // on close
+      })
       staffState.clear()
       router.push('/staff/login')
     }

@@ -35,6 +35,7 @@ module.exports = {
   globals: {
     ElMessage: 'readonly',
     showLoadingToast: 'readonly',
-    showImagePreview: 'readonly'
+    showImagePreview: 'readonly',
+    showDialog: 'readonly'
   }
 }

@@ -20,6 +20,8 @@ const check = async () => {
   const resp = await getServerStatusService()
   if (resp.code === 1) {
     await router.push('/')
+  } else if (resp.code === 0) {
+    await router.push('/')
   }
 }
 
