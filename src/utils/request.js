@@ -48,7 +48,7 @@ instance.interceptors.response.use(
     if (res.data.msg.startsWith('检测到账号已在别的设备登录')) {
       showDialog({
         allowHtml: true,
-        message: res.data.msg,
+        message: `<strong>${res.data.msg}</strong>`,
         theme: 'round-button'
       }).then(() => {
         // on close

@@ -5,34 +5,11 @@ import { useRouter, useRoute } from 'vue-router'
 
 import '@/assets/orders/orders.scss'
 import OrdersFooter from '@/components/orders/OrdersFooter.vue'
-import {
-  getOrderTitleService,
-  getServerStatusService
-} from '@/api/repairStationStatus.js'
+import { getOrderTitleService } from '@/api/repairStationStatus.js'
 import { isNotBlank } from '@/utils/StringUtils.js'
 
 const router = useRouter()
 const route = useRoute()
-
-const checkPath = async () => {
-  //订单的逻辑
-  if (route.fullPath.startsWith('/orders')) {
-    try {
-      const resp = await getServerStatusService()
-      //如果resp.code === 1就是开启接单模式，=== 0 是停止接单
-      if (resp.code === 1 && route.fullPath === '/orders/announcements') {
-        await router.push('/')
-      } else if (
-        resp.code === 0 &&
-        route.fullPath !== '/orders/announcements'
-      ) {
-        await router.push('/orders/announcements')
-      }
-    } catch (error) {
-      await router.push('/error')
-    }
-  }
-}
 
 const text = ref('')
 const getText = async () => {
@@ -80,8 +57,6 @@ watch(
     )
       title.value = '电脑报修'
     else title.value = '维修公告'
-
-    await checkPath()
   },
   { immediate: true }
 )

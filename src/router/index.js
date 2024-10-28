@@ -3,6 +3,8 @@ import staffRoutes from './modules/staffRoutes.js'
 import adminRoutes from './modules/adminRoutes.js'
 import ordersRoutes from './modules/ordersRoutes.js'
 import { useStaffState } from '@/stores/index.js'
+import { getServerStatusService } from '@/api/repairStationStatus.js'
+import { errorMsg, successMsg } from '@/utils/SendMsgUtils.js'
 
 const routes = [
   {
@@ -31,8 +33,25 @@ router.beforeEach(async (to) => {
   // 在导航之前设置页面标题
   document.title = to.meta.title || 'ITeam维修站'
 
+  //订单的逻辑
+  if (to.path.startsWith('/orders')) {
+    const resp = await getServerStatusService()
+    //如果resp.data.serverStatus === 0就是开启接单模式 ，
+    // resp.data.serverStatus === 1 是停止接单
+    if (resp.data.serverStatus === 0 && to.path === '/orders/announcements') {
+      successMsg('欢迎前来报修<br />(ฅ´ω`ฅ)')
+      return '/'
+    } else if (
+      resp.data.serverStatus === 1 &&
+      to.path !== '/orders/announcements'
+    ) {
+      errorMsg('非常抱歉，接单暂时停止！<br /> (,,•́ . •̀,,)')
+      return '/orders/announcements'
+    }
+  }
+
   const staffState = useStaffState()
-  //后台逻辑
+  //后台登录逻辑
   if (
     (to.path.startsWith('/staff') && to.path !== '/staff/login') ||
     to.path.startsWith('/admin')

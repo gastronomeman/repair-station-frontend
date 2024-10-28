@@ -32,6 +32,7 @@ const submit = async () => {
   if (isNotBlank(staff.value.studentId) || isNotBlank(staff.value.password)) {
     warningMsg('账号密码不能为空！')
     staff.value.password = ''
+    isLoading.value = false
     return
   }
   const resp = await staffLoginService(staff.value)

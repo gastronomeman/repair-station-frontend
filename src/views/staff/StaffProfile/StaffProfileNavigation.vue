@@ -4,6 +4,7 @@ import { logoutService } from '@/api/staff.js'
 import { useStaffState } from '@/stores/index.js'
 import { Logout, Me, Right } from '@icon-park/vue-next'
 import { computed } from 'vue'
+import { successMsg } from '@/utils/SendMsgUtils.js'
 
 const router = useRouter()
 const route = useRoute()
@@ -11,8 +12,9 @@ const staffState = useStaffState()
 
 const logoutUser = async () => {
   await logoutService(staffState.id)
-  await router.push('/staff/login')
   staffState.clear()
+  successMsg('退出成功！')
+  await router.push('/staff/login')
 }
 
 const name = computed(() => {
