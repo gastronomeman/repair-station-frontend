@@ -47,7 +47,6 @@ instance.interceptors.response.use(
 
     if (res.data.msg.startsWith('检测到已在别的设备登录此账号')) {
       staffState.clear()
-
       router.push('/staff/login')
     }
 

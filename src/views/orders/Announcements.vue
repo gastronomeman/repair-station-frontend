@@ -22,6 +22,7 @@ getStopTitle()
         <h2>{{ stopTitle }}&nbsp;</h2>
         <p>
           &nbsp;&nbsp;&nbsp;&nbsp;报修服务暂时关闭。具体开放通知，可关注下面公众号获取最新消息。<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;如若关闭时间截至仍在此页面，可以刷新重新尝试一下。<br />
           &nbsp;&nbsp;&nbsp;&nbsp;如遇紧急情况，需要维修电脑可添加维修站QQ咨询群：790445318。
         </p>
         <div class="tool">

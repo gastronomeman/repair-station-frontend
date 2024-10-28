@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { getServerStatusService } from '@/api/repairStationStatus.js'
 import staffRoutes from './modules/staffRoutes.js'
 import adminRoutes from './modules/adminRoutes.js'
 import ordersRoutes from './modules/ordersRoutes.js'
@@ -31,19 +30,6 @@ const router = createRouter({
 router.beforeEach(async (to) => {
   // 在导航之前设置页面标题
   document.title = to.meta.title || 'ITeam维修站'
-
-  //订单的逻辑
-  if (to.path.startsWith('/orders')) {
-    try {
-      const resp = await getServerStatusService()
-      //如果resp.code === 1就是开启接单模式，=== 0 是停止接单
-      if (resp.code === 1 && to.path === '/orders/announcements') return '/'
-      else if (resp.code === 0 && to.path !== '/orders/announcements')
-        return '/orders/announcements'
-    } catch (error) {
-      return '/error'
-    }
-  }
 
   const staffState = useStaffState()
   //后台逻辑

@@ -59,6 +59,15 @@ const submit = async () => {
   }
   isLoading.value = false
 }
+
+const checkJWT = () => {
+  if (staffState.token !== '' && staffState.name !== 'admin') {
+    router.push('/staff')
+  } else if (staffState.token !== '') {
+    router.push('/admin')
+  }
+}
+checkJWT()
 </script>
 
 <template>
