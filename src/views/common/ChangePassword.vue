@@ -57,10 +57,9 @@ const updateClick = async () => {
   if (resp.code === 1) {
     successMsg(resp.data)
     alert('修改成功，请重新登录')
-
     await logoutService()
-    await router.push('/staff/login')
     staffState.clear()
+    await router.push('/staff/login')
   }
 }
 </script>
