@@ -16,6 +16,7 @@ export const useAdminState = defineStore(
 
     const clear = () => {
       startTime.value = ''
+      endTime.value = ''
     }
     return {
       startTime,
