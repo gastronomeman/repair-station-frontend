@@ -30,7 +30,7 @@ instance.interceptors.request.use(
 //响应拦截器
 instance.interceptors.response.use(
   (res) => {
-    // 仅处理非下载请求
+    // 仅处理下载请求
     if (res.headers['content-type'] === 'application/octet-stream') {
       return res // 直接返回 Blob 响应
     }
