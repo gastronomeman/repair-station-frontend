@@ -2,8 +2,9 @@
 import { useRoute, useRouter } from 'vue-router'
 import { changSqlService } from '@/api/orders.js'
 import { successMsg } from '@/utils/SendMsgUtils.js'
-import { backupDBService, downloadZipService } from '@/api/common.js'
+import { backupDBService } from '@/api/common.js'
 import { DatabaseSync, ExchangeThree } from '@icon-park/vue-next'
+import { baseURL } from '@/utils/request.js'
 import { ref } from 'vue'
 
 const router = useRouter()
@@ -39,23 +40,9 @@ const downloadBackup = async (status) => {
   const resp = await backupDBService(status)
   if (resp.code === 1) {
     successMsg(resp.data)
-  }
-
-  try {
-    const response = await downloadZipService()
-    const url = window.URL.createObjectURL(new Blob([response.data]))
-    const link = document.createElement('a')
-    link.href = url
-    if (status === 1)
-      link.setAttribute('download', '数据库原有数据.zip') // 设置下载的文件名
-    else if (status === 2) link.setAttribute('download', '已处理好的数据库.zip') // 设置下载的文件名
-    document.body.appendChild(link)
-    link.click()
-    link.remove()
     if (active.value === 0) active.value = 1
-  } catch (error) {
-    console.error('下载失败:', error)
   }
+  window.location.href = baseURL + '/common/download-zip?status=' + status
 
   loading.value = false
 }

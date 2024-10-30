@@ -17,11 +17,3 @@ export const deletePhotoService = (name) =>
 
 export const backupDBService = (s) =>
   request.get('/common/backup-db?status=' + s)
-
-export const downloadZipService = () =>
-  request.get('/common/download-zip', {
-    responseType: 'blob',
-    headers: {
-      contentType: 'application/octet-stream'
-    }
-  })
