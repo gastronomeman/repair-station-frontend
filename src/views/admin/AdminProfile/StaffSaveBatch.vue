@@ -4,6 +4,8 @@ import * as XLSX from 'xlsx'
 import { DatabaseSuccess, UploadOne } from '@icon-park/vue-next'
 import { useRouter } from 'vue-router'
 import imagePath from '@/assets/staff/saveBatch.jpg'
+import { addStaffListService } from '@/api/staff.js'
+import { successMsg } from '@/utils/SendMsgUtils.js'
 
 const router = useRouter()
 
@@ -39,6 +41,13 @@ const imagePreview = () => {
     closeable: true
   })
 }
+
+const saveBatchStaff = async () => {
+  const resp = await addStaffListService(jsonData.value)
+  if (resp.code === 1) {
+    successMsg(resp.data)
+  }
+}
 </script>
 
 <template>
@@ -70,6 +79,7 @@ const imagePreview = () => {
   </el-upload>
   <div class="format-text">
     <nut-button
+      @click="saveBatchStaff"
       v-if="jsonData.length > 0"
       type="primary"
       style="margin-bottom: 20px"

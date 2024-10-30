@@ -30,3 +30,6 @@ export const getStaffOnlineCountService = () =>
   request.get('/staff/staff-online')
 
 export const getStaffOnlineNameService = () => request.get('/staff/online-name')
+
+export const addStaffListService = (data) =>
+  request.post('/staff/addStaff-list', data)

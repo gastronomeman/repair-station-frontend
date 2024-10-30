@@ -66,7 +66,7 @@ instance.interceptors.response.use(
   },
   (err) => {
     console.log(err)
-    errorMsg('网络异常，请稍后尝试')
+    errorMsg('网站发生异常，请稍后尝试！<br/>╥﹏╥')
   }
 )
 
