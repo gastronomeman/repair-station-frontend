@@ -81,6 +81,11 @@ export default [
             component: () => import('@/views/admin/AdminProfile/ToolO.vue')
           },
           {
+            path: 'save-batch',
+            component: () =>
+              import('@/views/admin/AdminProfile/StaffSaveBatch.vue')
+          },
+          {
             path: 'help',
             component: Help
           }

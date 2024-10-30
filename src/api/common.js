@@ -14,3 +14,14 @@ export const getPhotoListService = (dirName) =>
 
 export const deletePhotoService = (name) =>
   request.delete(`/common/del?name=${name}`)
+
+export const backupDBService = (s) =>
+  request.get('/common/backup-db?status=' + s)
+
+export const downloadZipService = () =>
+  request.get('/common/download-zip', {
+    responseType: 'blob',
+    headers: {
+      contentType: 'application/octet-stream'
+    }
+  })

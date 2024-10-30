@@ -30,6 +30,11 @@ instance.interceptors.request.use(
 //响应拦截器
 instance.interceptors.response.use(
   (res) => {
+    // 仅处理非下载请求
+    if (res.headers['content-type'] === 'application/octet-stream') {
+      return res // 直接返回 Blob 响应
+    }
+
     // 3. 摘取核心响应数据
     if (res.data.code === 1) return res.data
 
@@ -50,8 +55,6 @@ instance.interceptors.response.use(
         allowHtml: true,
         message: `<strong>${res.data.msg}</strong>`,
         theme: 'round-button'
-      }).then(() => {
-        // on close
       })
       staffState.clear()
       router.push('/staff/login')

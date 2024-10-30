@@ -43,9 +43,10 @@ const getPhotoList = async () => {
   })
   loading.value = false
 }
-const url = baseURL + '/common/download?name='
+const url = baseURL + '/common/download-photo?name='
 getPhotoList()
 
+//点击放大展示图片
 const imagePreview = (x) => {
   showImagePreview([x])
 }

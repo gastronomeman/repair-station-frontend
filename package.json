@@ -13,6 +13,7 @@
     "lint-staged": "lint-staged"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
     "@icon-park/vue-next": "^1.4.2",
     "@nutui/nutui": "^4.3.10",
     "@nutui/touch-emulator": "^1.0.0",
@@ -24,7 +25,8 @@
     "pinia": "^2.1.7",
     "vant": "^4.9.7",
     "vue": "^3.4.29",
-    "vue-router": "^4.3.3"
+    "vue-router": "^4.3.3",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
   },
   "devDependencies": {
     "@nutui/auto-import-resolver": "^1.0.0",

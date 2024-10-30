@@ -1,5 +1,5 @@
 <script setup>
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { ref, computed } from 'vue'
 import {
   addStaffService,
@@ -10,10 +10,9 @@ import {
 import { successMsg } from '@/utils/SendMsgUtils.js'
 
 const router = useRouter()
-const route = useRoute()
+
 const onClick = () => {
-  if (route.fullPath.includes('admin')) router.push('/admin/profile')
-  else router.push('/staff/profile')
+  router.push('/admin/profile')
 }
 
 const staff = ref({
@@ -118,6 +117,15 @@ const totalPage = computed(() => {
     <el-input v-model="staff.name" style="width: 110px" placeholder="姓名" />
     <nut-button type="info" size="small" @click="addStaff">添加</nut-button>
   </div>
+  <div style="text-align: center">
+    <nut-button
+      type="info"
+      size="small"
+      @click="router.push('/admin/profile/save-batch')"
+      >批量添加</nut-button
+    >
+  </div>
+
   <div class="search">
     <el-input
       v-model="search"
@@ -170,7 +178,7 @@ const totalPage = computed(() => {
 <style scoped>
 .staff-from {
   width: 90%;
-  margin: 20px auto;
+  margin: 20px auto 8px;
   text-align: center;
 
   .el-input {
@@ -180,7 +188,7 @@ const totalPage = computed(() => {
 
 .search {
   width: 80%;
-  margin: 15px auto;
+  margin: 8px auto 15px;
   text-align: center;
 }
 
