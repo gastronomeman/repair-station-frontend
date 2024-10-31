@@ -94,16 +94,19 @@ watch(
       </template>
     </nut-searchbar>
     <div class="orders-img">
-      <div v-if="title !== '维修公告'">
+      <div v-if="title !== '维修公告'" class="text-box">
         <nut-row>
           <nut-col :span="12">
-            <div class="text" @click="router.push('/')">
+            <div class="text first-text" @click="router.push('/')">
               电脑报修
               <tool class="search-icon" theme="outline" size="20" fill="#333" />
             </div>
           </nut-col>
           <nut-col :span="12">
-            <div class="text" @click="router.push('/orders/query?studentId=')">
+            <div
+              class="text last-text"
+              @click="router.push('/orders/query?studentId=')"
+            >
               <span>报修查询</span>
               <Search class="search-icon" theme="outline" size="20" />
             </div>

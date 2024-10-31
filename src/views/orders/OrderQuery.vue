@@ -30,7 +30,7 @@ watch(
 
 <template>
   <div v-if="orderList.length === 0">
-    <el-empty description="暂无维修记录请输入学号或姓名后尝试查询" />
+    <el-empty description="暂无维修记录请在上方输入学号或姓名后尝试查询" />
   </div>
   <div v-else>
     <div v-for="order in orderList" :key="order.id">
