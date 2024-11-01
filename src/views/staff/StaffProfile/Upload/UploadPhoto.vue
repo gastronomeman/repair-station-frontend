@@ -186,7 +186,7 @@ const compressAndAppend = async (fileList, index) => {
       *1.合页朝下竖起来看b面和c面的松紧程度(拍出松的缝隙)<br />
       *2.触摸板下摁，两边(拍出凹陷程度)<br />
       *3.检查全机有无缝隙<br />
-      *4.屏幕是否开机后无破损
+      *4.屏幕是否开机后无破损，显卡是否正常存在
     </p>
     <van-uploader
       v-model="fileList1"
