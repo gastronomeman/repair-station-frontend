@@ -39,7 +39,8 @@ const resetList = () => {
 
 const getCountCsv = async () => {
   window.location.href =
-    baseURL + `/staff/count-csv?start=${value1.value}&end=${value2.value}`
+    baseURL +
+    `/staff/count-csv?startTime=${value1.value}&endTime=${value2.value}`
 }
 </script>
 
