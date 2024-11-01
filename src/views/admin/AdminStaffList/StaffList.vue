@@ -1,8 +1,9 @@
 <script setup>
 import { ref } from 'vue'
-import { getCountCsvService, orderCountService } from '@/api/staff.js'
+import { orderCountService } from '@/api/staff.js'
 import { useRouter } from 'vue-router'
 import { useAdminState } from '@/stores/index.js'
+import { baseURL } from '@/utils/request.js'
 
 const router = useRouter()
 const adminState = useAdminState()
@@ -37,7 +38,8 @@ const resetList = () => {
 }
 
 const getCountCsv = async () => {
-  await getCountCsvService(value1.value, value2.value)
+  window.location.href =
+    baseURL + `/staff/count-csv?start=${value1.value}&end=${value2.value}`
 }
 </script>
 

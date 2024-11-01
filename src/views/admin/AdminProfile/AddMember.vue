@@ -3,12 +3,12 @@ import { useRouter } from 'vue-router'
 import { ref, computed } from 'vue'
 import {
   addStaffService,
-  getStaffCsvService,
   getStaffListService,
   removeStaffService,
   resetStaffService
 } from '@/api/staff.js'
 import { successMsg } from '@/utils/SendMsgUtils.js'
+import { baseURL } from '@/utils/request.js'
 
 const router = useRouter()
 
@@ -101,10 +101,7 @@ const totalPage = computed(() => {
 })
 
 const getCsv = async () => {
-  const resp = await getStaffCsvService()
-  if (resp.code === 1) {
-    successMsg(resp.data)
-  }
+  window.location.href = baseURL + '/staff/csv'
 }
 </script>
 

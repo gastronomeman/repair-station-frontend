@@ -38,8 +38,3 @@ export const getStaffOnlineNameService = () => request.get('/staff/online-name')
 
 export const addStaffListService = (data) =>
   request.post('/staff/addStaff-list', data)
-
-export const getStaffCsvService = () => request.get('/staff/csv')
-
-export const getCountCsvService = (startTime, endTime) =>
-  request.get(`/staff/count-csv?startTime=${startTime}&endTime=${endTime}`)
