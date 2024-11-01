@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { orderCountService } from '@/api/staff.js'
+import { getCountCsvService, orderCountService } from '@/api/staff.js'
 import { useRouter } from 'vue-router'
 import { useAdminState } from '@/stores/index.js'
 
@@ -35,6 +35,10 @@ const resetList = () => {
   value2.value = ''
   getOrdersList()
 }
+
+const getCountCsv = async () => {
+  await getCountCsvService(value1.value, value2.value)
+}
 </script>
 
 <template>
@@ -58,9 +62,11 @@ const resetList = () => {
       value-format="YYYY-MM-DD HH:mm:ss"
     />
     <div class="list-button">
-      <nut-button type="info" @click="getOrdersList">查找</nut-button>
+      <nut-button type="info" @click="getCountCsv">导出数据</nut-button>
       &nbsp;&nbsp;
       <nut-button type="info" @click="resetList">重置</nut-button>
+      &nbsp;&nbsp;
+      <nut-button type="info" @click="getOrdersList">查找</nut-button>
     </div>
     <nut-divider dashed></nut-divider>
   </div>

@@ -3,6 +3,7 @@ import { useRouter } from 'vue-router'
 import { ref, computed } from 'vue'
 import {
   addStaffService,
+  getStaffCsvService,
   getStaffListService,
   removeStaffService,
   resetStaffService
@@ -98,6 +99,13 @@ const toEnd = async () => {
 const totalPage = computed(() => {
   return Math.ceil(page.value.total / page.value.pageSize)
 })
+
+const getCsv = async () => {
+  const resp = await getStaffCsvService()
+  if (resp.code === 1) {
+    successMsg(resp.data)
+  }
+}
 </script>
 
 <template>
@@ -123,7 +131,8 @@ const totalPage = computed(() => {
       size="small"
       @click="router.push('/admin/profile/save-batch')"
       >批量添加</nut-button
-    >
+    >&nbsp;
+    <nut-button type="info" size="small" @click="getCsv">批量导出</nut-button>
   </div>
 
   <div class="search">
