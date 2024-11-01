@@ -12,6 +12,7 @@ import Signature from '@/views/staff/SignaturePgae.vue'
 import UploadNavigation from '@/views/staff/StaffProfile/Upload/UploadNavigation.vue'
 import UploadPhoto from '@/views/staff/StaffProfile/Upload/UploadPhoto.vue'
 import ShowPhoto from '@/views/common/ShowPhoto.vue'
+import StaffInfo from '@/views/staff/StaffProfile/StaffInfo.vue'
 
 export default [
   {
@@ -22,7 +23,7 @@ export default [
       {
         path: 'login',
         meta: { title: '社员登录' },
-        component: () => import('@/views/common/StaffLogin.vue')
+        component: () => import('@/views/common/Login.vue')
       },
       {
         path: 'order-acceptance',
@@ -72,6 +73,10 @@ export default [
           {
             path: 'uploader-photo',
             component: UploadPhoto
+          },
+          {
+            path: 'staff-info',
+            component: StaffInfo
           },
           {
             path: 'show-photo',

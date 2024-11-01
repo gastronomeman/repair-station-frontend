@@ -28,15 +28,27 @@ const name = computed(() => {
 <template>
   <div v-if="route.fullPath === '/staff/profile'">
     <nut-navbar class="title" title="我的"></nut-navbar>
-    <div class="info">
-      <me
-        class="icon-center"
-        theme="two-tone"
-        size="55"
-        :fill="['#9b9b9b', '#2c68ff']"
-        strokeLinejoin="miter"
-      />
-      <span>{{ name }}</span>
+    <div class="info" @click="router.push('/staff/profile/staff-info')">
+      <div class="left-content">
+        <me
+          class="icon-center"
+          theme="two-tone"
+          size="55"
+          :fill="['#9b9b9b', '#2c68ff']"
+          strokeLinejoin="miter"
+        />
+        <span>{{ name }}</span>
+      </div>
+      <div class="right-content">
+        <span> 更多 </span>
+        <right
+          class="icon-center"
+          theme="two-tone"
+          size="25"
+          :fill="['#c2c2c2']"
+          strokeLinejoin="miter"
+        />
+      </div>
     </div>
     <nut-navbar
       style="cursor: pointer"
@@ -166,8 +178,23 @@ const name = computed(() => {
   margin-bottom: 18px;
   display: flex;
   align-items: center;
-  span {
-    margin: 0 5px;
+  justify-content: space-between;
+  .left-content {
+    display: flex;
+    align-items: center;
+    span {
+      margin: 0 5px;
+    }
+  }
+  .right-content {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    span {
+      font-weight: bold;
+      font-size: 15px;
+      color: #c2c2c2;
+    }
   }
 }
 .icon-center {

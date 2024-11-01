@@ -81,6 +81,9 @@ const downloadBackup = async (status) => {
           </template>
           数据库备份
         </nut-button>
+        <p style="color: red; font-size: 12px">
+          注意！下载文件要在1个半小时内下载完，不然接口会自动关闭
+        </p>
       </div>
       <div v-show="active === 1" class="btn">
         <p>
@@ -114,6 +117,9 @@ const downloadBackup = async (status) => {
           </template>
           再次备份数据库
         </nut-button>
+        <p style="color: red; font-size: 12px">
+          注意！下载文件要在1个半小时内下载完，不然接口会自动关闭
+        </p>
       </div>
     </div>
   </div>
@@ -139,7 +145,7 @@ const downloadBackup = async (status) => {
     max-width: 800px;
     width: 80%;
     margin: 0 auto;
-    padding: 0 0 10px;
+    padding: 0 0 1px;
     p {
       color: #7a7374;
       font-weight: bold;

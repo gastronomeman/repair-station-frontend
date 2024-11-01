@@ -21,6 +21,11 @@ export const addStaffService = (data) => request.post('/staff/addStaff', data)
 
 export const resetStaffService = (data) => request.put('/staff/reset', data)
 
+export const getInfoService = (id) => request.get(`/staff/info?id=${id}`)
+
+export const completeInfoService = (data) =>
+  request.put('/staff/complete-info', data)
+
 export const removeStaffService = (id) => request.delete(`/staff/delete/${id}`)
 
 export const getNameByIdService = (id) =>
