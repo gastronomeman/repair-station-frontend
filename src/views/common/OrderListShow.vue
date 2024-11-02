@@ -24,7 +24,7 @@ if (route.fullPath.includes('admin')) title.value = '所有维修单'
       </template>
     </nut-navbar>
   </nut-sticky>
-  <nut-tabs v-model="tabsShow" auto-height>
+  <nut-tabs :swipeable="true" v-model="tabsShow" auto-height>
     <nut-tab-pane title="本学期" :pane-key="1">
       <OrderList></OrderList>
     </nut-tab-pane>

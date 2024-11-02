@@ -156,6 +156,7 @@ const name = computed(() => {
       </template>
     </nut-navbar>
   </div>
+
   <router-view></router-view>
 </template>
 

@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import staffRoutes from './modules/staffRoutes.js'
 import adminRoutes from './modules/adminRoutes.js'
 import ordersRoutes from './modules/ordersRoutes.js'
+import examRoutes from '@/router/modules/examRoutes.js'
 import { useStaffState } from '@/stores/index.js'
 import { getServerStatusService } from '@/api/repairStationStatus.js'
 import { errorMsg, successMsg } from '@/utils/SendMsgUtils.js'
@@ -22,7 +23,8 @@ const routes = [
   },
   ...ordersRoutes, // 导入 Orders 模块路由配置
   ...staffRoutes, // 导入 Staff 模块路由配置
-  ...adminRoutes // 导入 Admin 模块路由配置
+  ...adminRoutes, // 导入 Admin 模块路由配置
+  ...examRoutes //导入Exam 模块路由配置
 ]
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

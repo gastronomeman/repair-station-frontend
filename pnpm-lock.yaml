@@ -89,7 +89,7 @@ importers:
         version: 1.77.6
       unplugin-auto-import:
         specifier: ^0.17.6
-        version: 0.17.6(@vueuse/core@9.13.0(vue@3.4.31))(rollup@4.18.0)
+        version: 0.17.6(@vueuse/core@11.2.0(vue@3.4.31))(rollup@4.18.0)
       unplugin-vue-components:
         specifier: ^0.27.2
         version: 0.27.2(@babel/parser@7.24.7)(rollup@4.18.0)(vue@3.4.31)
@@ -465,6 +465,9 @@ packages:
   '@types/web-bluetooth@0.0.16':
     resolution: {integrity: sha512-oh8q2Zc32S6gd/j50GowEjKLoOVOwHP/bWVjKJInBwQqdOYMdPrf1oVlelTlyfFK3CKxL1uahMDAr+vy8T7yMQ==}
 
+  '@types/web-bluetooth@0.0.20':
+    resolution: {integrity: sha512-g9gZnnXVq7gM7v3tJCWV/qw7w+KeOlSHAhgF9RytFyifW6AF61hdT2ucrYhPq9hLs5JIryeupHV3qGk95dH9ow==}
+
   '@ungap/structured-clone@1.2.0':
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
 
@@ -527,11 +530,20 @@ packages:
   '@vue/shared@3.5.8':
     resolution: {integrity: sha512-mJleSWbAGySd2RJdX1RBtcrUBX6snyOc0qHpgk3lGi4l9/P/3ny3ELqFWqYdkXIwwNN/kdm8nD9ky8o6l/Lx2A==}
 
+  '@vueuse/core@11.2.0':
+    resolution: {integrity: sha512-JIUwRcOqOWzcdu1dGlfW04kaJhW3EXnnjJJfLTtddJanymTL7lF1C0+dVVZ/siLfc73mWn+cGP1PE1PKPruRSA==}
+
   '@vueuse/core@9.13.0':
     resolution: {integrity: sha512-pujnclbeHWxxPRqXWmdkKV5OX4Wk4YeK7wusHqRwU0Q7EFusHoqNA/aPhB6KCh9hEqJkLAJo7bb0Lh9b+OIVzw==}
 
+  '@vueuse/metadata@11.2.0':
+    resolution: {integrity: sha512-L0ZmtRmNx+ZW95DmrgD6vn484gSpVeRbgpWevFKXwqqQxW9hnSi2Ppuh2BzMjnbv4aJRiIw8tQatXT9uOB23dQ==}
+
   '@vueuse/metadata@9.13.0':
     resolution: {integrity: sha512-gdU7TKNAUVlXXLbaF+ZCfte8BjRJQWPCa2J55+7/h+yDtzw3vOoGQDRXzI6pyKyo6bXFT5/QoPE4hAknExjRLQ==}
+
+  '@vueuse/shared@11.2.0':
+    resolution: {integrity: sha512-VxFjie0EanOudYSgMErxXfq6fo8vhr5ICI+BuE3I9FnX7ePllEsVrRQ7O6Q1TLgApeLuPKcHQxAXpP+KnlrJsg==}
 
   '@vueuse/shared@9.13.0':
     resolution: {integrity: sha512-UrnhU+Cnufu4S6JLCPZnkWh0WwZGUp72ktOF2DFptMlOs3TOdVv8xJN53zhHGARmVOsz5KqOls09+J1NR6sBKw==}
@@ -1405,6 +1417,17 @@ packages:
       terser:
         optional: true
 
+  vue-demi@0.14.10:
+    resolution: {integrity: sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg==}
+    engines: {node: '>=12'}
+    hasBin: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+
   vue-demi@0.14.8:
     resolution: {integrity: sha512-Uuqnk9YE9SsWeReYqK2alDI5YzciATE0r2SkA6iMAtuXvNTMNACJLJEXNXaEy94ECuBe4Sk6RzRU80kjdbIo1Q==}
     engines: {node: '>=12'}
@@ -1720,6 +1743,9 @@ snapshots:
 
   '@types/web-bluetooth@0.0.16': {}
 
+  '@types/web-bluetooth@0.0.20':
+    optional: true
+
   '@ungap/structured-clone@1.2.0': {}
 
   '@vant/auto-import-resolver@1.2.1': {}
@@ -1802,6 +1828,17 @@ snapshots:
 
   '@vue/shared@3.5.8': {}
 
+  '@vueuse/core@11.2.0(vue@3.4.31)':
+    dependencies:
+      '@types/web-bluetooth': 0.0.20
+      '@vueuse/metadata': 11.2.0
+      '@vueuse/shared': 11.2.0(vue@3.4.31)
+      vue-demi: 0.14.10(vue@3.4.31)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+    optional: true
+
   '@vueuse/core@9.13.0(vue@3.4.31)':
     dependencies:
       '@types/web-bluetooth': 0.0.16
@@ -1812,7 +1849,18 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
+  '@vueuse/metadata@11.2.0':
+    optional: true
+
   '@vueuse/metadata@9.13.0': {}
+
+  '@vueuse/shared@11.2.0(vue@3.4.31)':
+    dependencies:
+      vue-demi: 0.14.10(vue@3.4.31)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+    optional: true
 
   '@vueuse/shared@9.13.0(vue@3.4.31)':
     dependencies:
@@ -2640,7 +2688,7 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  unplugin-auto-import@0.17.6(@vueuse/core@9.13.0(vue@3.4.31))(rollup@4.18.0):
+  unplugin-auto-import@0.17.6(@vueuse/core@11.2.0(vue@3.4.31))(rollup@4.18.0):
     dependencies:
       '@antfu/utils': 0.7.10
       '@rollup/pluginutils': 5.1.0(rollup@4.18.0)
@@ -2651,7 +2699,7 @@ snapshots:
       unimport: 3.7.2(rollup@4.18.0)
       unplugin: 1.10.2
     optionalDependencies:
-      '@vueuse/core': 9.13.0(vue@3.4.31)
+      '@vueuse/core': 11.2.0(vue@3.4.31)
     transitivePeerDependencies:
       - rollup
 
@@ -2702,6 +2750,11 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
       sass: 1.77.6
+
+  vue-demi@0.14.10(vue@3.4.31):
+    dependencies:
+      vue: 3.4.31
+    optional: true
 
   vue-demi@0.14.8(vue@3.4.31):
     dependencies:

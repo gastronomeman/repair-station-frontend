@@ -41,7 +41,7 @@ const show = ref(false)
           class="text"
         >
           <div ref="innerRef">
-            <h2 style="margin: 10px 0 0">服务须知</h2>
+            <h2 style="margin: 10px 0 5px">服务须知</h2>
             <p style="font-size: 12px; color: #7a7374; margin: 2px">
               *须知共有七条，若显示不全，请下滑继续阅读
             </p>
