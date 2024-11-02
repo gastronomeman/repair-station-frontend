@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import { RadioTwo } from '@icon-park/vue-next'
 
 const initPage = ref(0)
 const subList = ref([
@@ -20,7 +21,12 @@ const subList = ref([
     option4: 'SMTP'
   }
 ])
-//const radio = ref(0)
+const radio = ref(0)
+
+const check = (s) => {
+  radio.value = s
+  console.log(s)
+}
 </script>
 
 <template>
@@ -34,10 +40,33 @@ const subList = ref([
         <nut-col :span="24">
           <div class="content">
             <p>
-              <span>&nbsp;{{ index + 1 }}.&nbsp;</span>{{ item.topic }}
+              <span class="index">&nbsp;{{ index + 1 }}.&nbsp;</span>
+              {{ item.topic }}
             </p>
-            <div class="radio" @touchstart.prevent="console.log(1)">111</div>
-            <div class="radio" @touchstart.prevent="console.log(2)">222</div>
+            <div class="radio" @touchstart.prevent="check(1)">
+              <p>
+                <radio-two class="icon" theme="outline" size="18" />
+                {{ item.option1 }}
+              </p>
+            </div>
+            <div class="radio" @touchstart.prevent="check(2)">
+              <p>
+                <radio-two class="icon" theme="outline" size="18" />
+                {{ item.option2 }}
+              </p>
+            </div>
+            <div class="radio" @touchstart.prevent="check(3)">
+              <p>
+                <radio-two class="icon" theme="outline" size="18" />
+                {{ item.option3 }}
+              </p>
+            </div>
+            <div class="radio" @touchstart.prevent="check(4)">
+              <p>
+                <radio-two class="icon" theme="outline" size="18" />
+                {{ item.topic }}
+              </p>
+            </div>
           </div>
         </nut-col>
       </nut-row>
@@ -50,7 +79,7 @@ const subList = ref([
   width: 90%;
   margin: 15px auto;
   p {
-    span {
+    .index {
       background-color: #93d5dc;
       border-radius: 10px;
       padding: 1px;
@@ -59,8 +88,19 @@ const subList = ref([
   }
 
   .radio {
-    width: 95%;
-    margin: 0 auto;
+    margin: 10px auto;
+    p {
+      color: #7a7374;
+      display: inline-flex;
+      margin: 0;
+
+      .icon {
+        margin-right: 5px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
   }
 }
 </style>
