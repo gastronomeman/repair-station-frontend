@@ -54,13 +54,20 @@ instance.interceptors.response.use(
     }
 
     if (res.data.msg.startsWith('检测到账号已在别的设备登录')) {
-      showDialog({
-        allowHtml: true,
-        message: `<strong>${res.data.msg}</strong>`,
-        theme: 'round-button'
-      })
+      if (!hasShownAlert) {
+        showDialog({
+          allowHtml: true,
+          message: `<strong>${res.data.msg}</strong>`,
+          theme: 'round-button'
+        })
+        hasShownAlert = true // 设置为已弹出
+      }
+
       staffState.clear()
-      router.push('/staff/login')
+      router.push('/staff/login').then(() => {
+        // 跳转后重置标志位
+        hasShownAlert = false
+      })
     }
 
     if (res.data.code === 0) errorMsg(res.data.msg)
