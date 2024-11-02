@@ -145,7 +145,14 @@ const getCsv = async () => {
     <nut-divider />
   </div>
   <div class="table" v-for="(item, index) in staffList" :key="index">
-    <nut-row>
+    <nut-row
+      :style="{
+        color:
+          item.major !== null && item.politicalStatus !== null
+            ? '#000'
+            : '#bbb5ac'
+      }"
+    >
       <nut-col :span="8">
         <div class="content">{{ item.studentId }}</div>
       </nut-col>
@@ -193,18 +200,25 @@ const getCsv = async () => {
 }
 
 .search {
-  width: 80%;
+  width: 90%;
   margin: 8px auto 15px;
   text-align: center;
+  .nut-divider {
+    margin: 15px 10px 0;
+  }
 }
 
 .table {
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
   text-align: right;
 
+  .content {
+    height: 100%;
+    font-weight: bold;
+  }
   .nut-divider {
-    margin: 8px 0;
+    margin: 6px 10px;
   }
 }
 

@@ -27,6 +27,7 @@ instance.interceptors.request.use(
   (err) => Promise.reject(err)
 )
 
+let hasShownAlert = false // 标志位
 //响应拦截器
 instance.interceptors.response.use(
   (res) => {
@@ -38,11 +39,17 @@ instance.interceptors.response.use(
     const staffState = useStaffState()
 
     if (res.data.msg === 'not_login') {
-      alert('登录验证失效请重新登陆')
+      if (!hasShownAlert) {
+        // 只有在未弹出过的情况下才弹出提示
+        alert('登录验证失效请重新登陆')
+        hasShownAlert = true // 设置为已弹出
+      }
 
       staffState.clear()
-
-      router.push('/staff/login')
+      router.push('/staff/login').then(() => {
+        // 跳转后重置标志位
+        hasShownAlert = false
+      })
       return Promise.reject(res.data.msg)
     }
 
