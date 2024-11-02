@@ -204,7 +204,7 @@ const getCsv = async () => {
   margin: 8px auto 15px;
   text-align: center;
   .nut-divider {
-    margin: 15px 10px 0;
+    margin: 15px 0 0;
   }
 }
 
@@ -218,7 +218,7 @@ const getCsv = async () => {
     font-weight: bold;
   }
   .nut-divider {
-    margin: 6px 10px;
+    margin: 6px 0;
   }
 }
 
