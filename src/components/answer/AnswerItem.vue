@@ -6,7 +6,7 @@ const examState = useExamState()
 
 const props = defineProps({
   index: {
-    type: Object,
+    type: Number,
     required: true
   },
   sub: {
@@ -21,17 +21,18 @@ const index = ref(props.index)
 const radio = ref('')
 
 const emit = defineEmits(['choice'])
-const choice = (s) => {
-  radio.value = s
+
+const onChange = (s) => {
   if (sub.value.result === s) {
     examState.setResult(+index.value, true)
   } else {
     examState.setResult(+index.value, false)
   }
 
+  //设置延时增加体验
   setTimeout(() => {
     emit('choice')
-  }, 150)
+  }, 200)
 }
 </script>
 
@@ -44,17 +45,17 @@ const choice = (s) => {
       </p>
     </div>
     <div class="radio">
-      <nut-radio-group v-model="radio">
-        <nut-radio class="tag" @touchend.prevent="choice('1')" label="1">
+      <nut-radio-group v-model="radio" @change="onChange">
+        <nut-radio class="tag" label="1">
           {{ sub.option1 }}
         </nut-radio>
-        <nut-radio class="tag" @touchend.prevent="choice('2')" label="2">
+        <nut-radio class="tag" label="2">
           {{ sub.option2 }}
         </nut-radio>
-        <nut-radio class="tag" @touchend.prevent="choice('3')" label="3">
+        <nut-radio class="tag" label="3">
           {{ sub.option3 }}
         </nut-radio>
-        <nut-radio class="tag" @touchend.prevent="choice('4')" label="4">
+        <nut-radio class="tag" label="4">
           {{ sub.option4 }}
         </nut-radio>
       </nut-radio-group>
@@ -79,6 +80,7 @@ const choice = (s) => {
 }
 
 .radio {
+  touch-action: manipulation;
   max-width: 500px;
   width: 88%;
   margin: auto;

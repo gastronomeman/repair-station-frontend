@@ -1,7 +1,9 @@
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import AnswerItem from '@/components/answer/AnswerItem.vue'
+import { useExamState } from '@/stores/index.js'
 
+const examState = useExamState()
 const subList = ref([
   {
     id: '123',
@@ -14,11 +16,12 @@ const subList = ref([
   },
   {
     id: '124',
-    topic: 'WWW服务器与客户机之间主要采用（）安全协议进行网页的发送和接收。',
-    option1: 'HTTP',
-    option2: 'HTTPS',
-    option3: 'HTML',
-    option4: 'SMTP',
+    topic:
+      '客系统正在将()文件修改的选择题结果写回磁盘时系统发生崩溃则对系统的影响相对较大。',
+    option1: '空闲块',
+    option2: '用户程序',
+    option3: '目录',
+    option4: '用户数据',
     result: '2'
   },
   {
@@ -41,14 +44,14 @@ const handleNext = () => {
   swiperRef.value?.next()
 }
 
-const i = ref()
+/*const i = ref()
 const onChange = (index) => {
   i.value = index
 }
-onChange(0)
+onChange(0)*/
 
 const progress = computed(() => {
-  return (((i.value + 1) / subList.value.length) * 100).toFixed(2)
+  return ((examState.result.length / subList.value.length) * 100).toFixed(2)
 })
 
 const time = ref(0) // 计时的秒数
@@ -59,13 +62,11 @@ const formattedTime = computed(() => {
   const seconds = time.value % 60
   return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
 })
-
 onMounted(() => {
   timer.value = setInterval(() => {
     time.value++
   }, 1000) // 每秒增加1秒
 })
-
 onBeforeUnmount(() => {
   clearInterval(timer.value) // 清理计时器
 })
@@ -98,7 +99,12 @@ onBeforeUnmount(() => {
       </nut-row>
     </div>
 
-    <nut-swiper :loop="false" @change="onChange" ref="swiperRef" :init-page="0">
+    <nut-swiper
+      :isPreventDefault="false"
+      :loop="false"
+      ref="swiperRef"
+      :init-page="0"
+    >
       <nut-swiper-item v-for="(item, index) in subList" :key="index">
         <div class="progress">
           <nut-progress
