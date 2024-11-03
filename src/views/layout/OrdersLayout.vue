@@ -93,7 +93,14 @@ watch(
         />
       </template>
     </nut-searchbar>
-    <div class="orders-img">
+    <div
+      v-show="
+        !(
+          route.fullPath === '/orders/from' || route.fullPath === '/orders/wait'
+        )
+      "
+      class="orders-img"
+    >
       <div v-if="title !== '维修公告'" class="text-box">
         <nut-row>
           <nut-col :span="12">

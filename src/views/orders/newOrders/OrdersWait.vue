@@ -1,6 +1,7 @@
 <script setup>
 import { useOrderState } from '@/stores/index.js'
 import { useRouter } from 'vue-router'
+import { successMsg } from '@/utils/SendMsgUtils.js'
 
 const router = useRouter()
 const orderState = useOrderState()
@@ -8,6 +9,7 @@ const checkAgreed = () => {
   if (!orderState.agreed) {
     router.push('/')
   }
+  successMsg('报修成功！！！')
   window.scrollTo(0, 0)
 }
 checkAgreed()

@@ -31,7 +31,6 @@ let hasShownAlert = false // 标志位
 //响应拦截器
 instance.interceptors.response.use(
   (res) => {
-    console.log(res)
     // 3. 摘取核心响应数据
     if (res.data.code === 1) return res.data
 
