@@ -1,4 +1,3 @@
-Redis
 <script setup>
 import { useOrderState } from '@/stores/index.js'
 import { useRouter } from 'vue-router'
@@ -9,6 +8,7 @@ const checkAgreed = () => {
   if (!orderState.agreed) {
     router.push('/')
   }
+  window.scrollTo(0, 0)
 }
 checkAgreed()
 </script>
