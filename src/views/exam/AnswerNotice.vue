@@ -21,7 +21,7 @@ const handleAgree = async () => {
       loadingType: 'spinner',
       duration: 0
     })
-    await router.push('/exam/answer')
+    await router.push('/exam/stuInfo')
     toast.close()
   } else {
     alert('请先认真阅读，服务须知')

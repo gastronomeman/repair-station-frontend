@@ -3,7 +3,7 @@ import staffRoutes from './modules/staffRoutes.js'
 import adminRoutes from './modules/adminRoutes.js'
 import ordersRoutes from './modules/ordersRoutes.js'
 import examRoutes from '@/router/modules/examRoutes.js'
-import { useStaffState } from '@/stores/index.js'
+import { useExamState, useStaffState } from '@/stores/index.js'
 import { getServerStatusService } from '@/api/repairStationStatus.js'
 import { errorMsg, successMsg } from '@/utils/SendMsgUtils.js'
 
@@ -16,10 +16,6 @@ const routes = [
   {
     path: '/tool',
     component: () => import('@/views/tool/Tool.vue')
-  },
-  {
-    path: '/error',
-    component: () => import('@/views/error/Error.vue')
   },
   ...ordersRoutes, // 导入 Orders 模块路由配置
   ...staffRoutes, // 导入 Staff 模块路由配置
@@ -73,6 +69,14 @@ router.beforeEach(async (to) => {
   if (to.path.startsWith('/admin') && staffState.studentId !== 'admin') {
     alert('成员不能进管理员页面哦')
     return '/staff/login'
+  }
+
+  const examState = useExamState()
+  if (to.path.startsWith('/exam')) {
+    if (!examState.agreed && to.path !== '/exam/notice') {
+      alert('出现了某些错误...')
+      return '/exam/notice'
+    }
   }
 })
 export default router

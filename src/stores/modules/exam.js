@@ -8,12 +8,11 @@ export const useExamState = defineStore('exam', () => {
   }
 
   const result = ref([])
+  const setResultLength = (length) => {
+    result.value = new Array(length).fill(null)
+  }
   const setResult = (index, value) => {
-    if (result.value.length < index + 1) {
-      result.value.push(value)
-    } else {
-      result.value[index] = value
-    }
+    result.value[index] = value
   }
 
   const clear = () => {
@@ -24,6 +23,7 @@ export const useExamState = defineStore('exam', () => {
     agreed,
     setAgreed,
     result,
+    setResultLength,
     setResult,
     clear
   }

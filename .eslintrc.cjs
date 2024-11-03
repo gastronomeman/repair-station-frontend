@@ -36,6 +36,7 @@ module.exports = {
     ElMessage: 'readonly',
     showLoadingToast: 'readonly',
     showImagePreview: 'readonly',
-    showDialog: 'readonly'
+    showDialog: 'readonly',
+    showConfirmDialog: 'readonly'
   }
 }

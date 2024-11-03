@@ -29,6 +29,12 @@ const onChange = (s) => {
     examState.setResult(+index.value, false)
   }
 
+  let i = 0
+  examState.result.forEach((item) => {
+    if (item === null) i++
+  })
+  if (i === 0) return
+
   //设置延时增加体验
   setTimeout(() => {
     emit('choice')

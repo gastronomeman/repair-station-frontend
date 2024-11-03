@@ -2,6 +2,9 @@
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import AnswerItem from '@/components/answer/AnswerItem.vue'
 import { useExamState } from '@/stores/index.js'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const examState = useExamState()
 const subList = ref([
@@ -35,6 +38,7 @@ const subList = ref([
     result: '2'
   }
 ])
+examState.setResultLength(subList.value.length)
 
 const swiperRef = ref()
 const handlePrev = () => {
@@ -44,14 +48,13 @@ const handleNext = () => {
   swiperRef.value?.next()
 }
 
-/*const i = ref()
-const onChange = (index) => {
-  i.value = index
-}
-onChange(0)*/
-
 const progress = computed(() => {
-  return ((examState.result.length / subList.value.length) * 100).toFixed(2)
+  let i = 0
+  examState.result.forEach((item) => {
+    if (item !== null) i++
+  })
+  if (i === subList.value.length) submit()
+  return ((i / subList.value.length) * 100).toFixed(2)
 })
 
 const time = ref(0) // 计时的秒数
@@ -70,6 +73,19 @@ onMounted(() => {
 onBeforeUnmount(() => {
   clearInterval(timer.value) // 清理计时器
 })
+
+const submit = async () => {
+  showConfirmDialog({
+    title: '提示',
+    message: '是否要提交答卷？'
+  })
+    .then(() => {
+      router.push('/exam/settlement')
+    })
+    .catch(() => {
+      console.log(2)
+    })
+}
 </script>
 
 <template>
@@ -90,7 +106,7 @@ onBeforeUnmount(() => {
               size="mini"
               shape="round"
               type="info"
-              @click.prevent="handleNext"
+              @click.prevent="submit"
             >
               提交
             </nut-button>
