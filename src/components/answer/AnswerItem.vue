@@ -29,7 +29,9 @@ const choice = (s) => {
     examState.setResult(+index.value, false)
   }
 
-  emit('choice')
+  setTimeout(() => {
+    emit('choice')
+  }, 150)
 }
 </script>
 
@@ -43,16 +45,16 @@ const choice = (s) => {
     </div>
     <div class="radio">
       <nut-radio-group v-model="radio">
-        <nut-radio class="tag" @touchstart.prevent="choice('1')" label="1">
+        <nut-radio class="tag" @touchend.prevent="choice('1')" label="1">
           {{ sub.option1 }}
         </nut-radio>
-        <nut-radio class="tag" @touchstart.prevent="choice('2')" label="2">
+        <nut-radio class="tag" @touchend.prevent="choice('2')" label="2">
           {{ sub.option2 }}
         </nut-radio>
-        <nut-radio class="tag" @touchstart.prevent="choice('3')" label="3">
+        <nut-radio class="tag" @touchend.prevent="choice('3')" label="3">
           {{ sub.option3 }}
         </nut-radio>
-        <nut-radio class="tag" @touchstart.prevent="choice('4')" label="4">
+        <nut-radio class="tag" @touchend.prevent="choice('4')" label="4">
           {{ sub.option4 }}
         </nut-radio>
       </nut-radio-group>
