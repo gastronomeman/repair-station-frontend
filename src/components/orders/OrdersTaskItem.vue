@@ -17,13 +17,21 @@ const props = defineProps({
 })
 const order = ref(props.order)
 const handleClick = async () => {
-  if (confirm('是否要结束修单？')) {
-    const resp = await finishOrderService(order.value)
-    if (resp.code === 1) {
-      successMsg(resp.data)
-      emit('refresh')
-    }
-  }
+  await showConfirmDialog({
+    title: 'ฅ( ̳• ◡ • ̳)ฅ',
+    message: '是否要结束修单？'
+  })
+    .then(async () => {
+      // on confirm
+      const resp = await finishOrderService(order.value)
+      if (resp.code === 1) {
+        successMsg(resp.data)
+        emit('refresh')
+      }
+    })
+    .catch(() => {
+      // on cancel
+    })
 }
 const callPhone = () => {
   window.location.href = `tel:${order.value.phone}`
@@ -41,13 +49,20 @@ const transferOrder = async () => {
     errorMsg('此订单为转单，不可再次转出！')
     return
   }
-  if (confirm('是否确认转出订单？')) {
-    const resp = await transferOrderService(order.value.id)
-    if (resp.code === 1) {
-      successMsg(resp.data)
-      emit('refresh')
-    }
-  }
+  await showConfirmDialog({
+    title: 'ฅ( ̳• ◡ • ̳)ฅ',
+    message: '是否确认转出订单？'
+  })
+    .then(async () => {
+      const resp = await transferOrderService(order.value.id)
+      if (resp.code === 1) {
+        successMsg(resp.data)
+        emit('refresh')
+      }
+    })
+    .catch(() => {
+      // on cancel
+    })
 }
 </script>
 
