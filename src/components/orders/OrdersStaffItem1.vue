@@ -13,13 +13,20 @@ const props = defineProps({
 })
 const order = ref(props.order)
 const handleClick = async () => {
-  if (confirm('是否确认接单？')) {
-    const resp = await takingOrdersService(order.value)
-    if (resp.code === 1) {
-      successMsg(resp.data)
-      emit('refresh')
-    }
-  }
+  await showConfirmDialog({
+    title: '(ﾉ>ω<)ﾉ',
+    message: '是否确认接单？'
+  })
+    .then(async () => {
+      const resp = await takingOrdersService(order.value)
+      if (resp.code === 1) {
+        successMsg(resp.data)
+        emit('refresh')
+      }
+    })
+    .catch(() => {
+      // on cancel
+    })
 }
 
 const assignor = ref('')
