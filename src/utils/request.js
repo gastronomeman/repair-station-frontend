@@ -3,8 +3,7 @@ import { useStaffState } from '@/stores'
 import router from '@/router'
 import { errorMsg } from '@/utils/SendMsgUtils.js'
 
-//103.40.13.71:40991
-//const baseURL = 'http://127.0.0.1:8099'
+// 这里配置 baseUrl
 const baseURL = window.config.baseUrl
 
 const instance = axios.create({
@@ -14,10 +13,10 @@ const instance = axios.create({
   withCredentials: true
 })
 
-//请求拦截器
+// 请求拦截器
 instance.interceptors.request.use(
   (config) => {
-    // 2. 携带token
+    // 2. 携带 token
     const staffState = useStaffState()
     if (staffState.token) {
       config.headers.Authorization = staffState.token
@@ -27,20 +26,22 @@ instance.interceptors.request.use(
   (err) => Promise.reject(err)
 )
 
-let hasShownAlert = sessionStorage.getItem('hasShownAlert') === 'true'
-//响应拦截器
+// 响应拦截器
 instance.interceptors.response.use(
-  (res) => {
+  async (res) => {
     // 3. 摘取核心响应数据
     if (res.data.code === 1) return res.data
 
     // 4. 处理业务失败
     const staffState = useStaffState()
 
+    // 处理登录失效
     if (res.data.msg === 'not_login') {
+      let hasShownAlert = sessionStorage.getItem('hasShownAlert') === 'true'
+
       if (!hasShownAlert) {
         // 只有在未弹出过的情况下才弹出提示
-        alert('登录验证失效请重新登陆')
+        alert('登录验证失效，请重新登录')
         // 设置标志位为已弹出并存入 sessionStorage
         sessionStorage.setItem('hasShownAlert', 'true')
       }
@@ -53,9 +54,12 @@ instance.interceptors.response.use(
       return Promise.reject(res.data.msg)
     }
 
+    // 处理设备已登录的提示
     if (res.data.msg.startsWith('检测到账号已在别的设备登录')) {
+      let hasShownAlert = sessionStorage.getItem('hasShownAlert') === 'true'
+
       if (!hasShownAlert) {
-        showDialog({
+        await showDialog({
           allowHtml: true,
           message: `<strong>${res.data.msg}</strong>`,
           theme: 'round-button'
@@ -71,6 +75,7 @@ instance.interceptors.response.use(
       })
     }
 
+    // 其他业务错误处理
     if (res.data.code === 0) errorMsg(res.data.msg)
 
     return res.data
