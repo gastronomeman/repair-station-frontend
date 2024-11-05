@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import { dialog } from '@/utils/DialogUtils.js'
 
 const props = defineProps({
   order: {
@@ -11,11 +12,11 @@ const order = ref(props.order)
 
 const handleClick = async () => {
   if (order.value.status === 3) {
-    alert(`已在${order.value.completionTime}完成维修 (*^▽^*) `)
+    dialog(`已在${order.value.completionTime}完成维修 (*^▽^*) `)
   } else if (order.value.status === 2) {
-    alert('我们的工作人员正在处理，请留意手机短信哦 (*^▽^*) ')
+    dialog('我们的工作人员已经接单，请留意手机短信哦 (*^▽^*) ')
   } else {
-    alert('请耐心等待，工作人员正在赶来 (*^▽^*) ')
+    dialog('请耐心等待，工作人员正在赶来... (*^▽^*) ')
   }
 }
 </script>

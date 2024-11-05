@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import { dialog } from '@/utils/DialogUtils.js'
 
 const props = defineProps({
   order: {
@@ -8,12 +9,8 @@ const props = defineProps({
   }
 })
 const order = ref(props.order)
-const handleClick = async () => {
-  showDialog({
-    title: '维`(*^﹏^*)′修',
-    message: `${order.value.staffName}---正在维修中`
-  })
-}
+
+const handleClick = () => dialog(`${order.value.staffName}---正在维修中`)
 </script>
 
 <template>

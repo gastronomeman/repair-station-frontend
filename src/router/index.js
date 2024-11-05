@@ -6,6 +6,7 @@ import examRoutes from '@/router/modules/examRoutes.js'
 import { useExamState, useStaffState } from '@/stores/index.js'
 import { getServerStatusService } from '@/api/repairStationStatus.js'
 import { errorMsg, successMsg } from '@/utils/SendMsgUtils.js'
+import { dialog } from '@/utils/DialogUtils.js'
 
 const routes = [
   {
@@ -55,26 +56,26 @@ router.beforeEach(async (to) => {
     to.path.startsWith('/admin')
   ) {
     if (staffState.token === '') {
-      alert('请先登录后尝试吧')
+      await dialog('请先登录后再尝试吧！')
       return '/staff/login'
     }
   }
 
   if (!to.path.includes('/staff/login') && to.path.startsWith('/staff')) {
     if (staffState.studentId === 'admin') {
-      alert('管理员不能使用接单页面哦')
+      await dialog('管理员不能使用接单页面哦')
       return '/staff/login'
     }
   }
   if (to.path.startsWith('/admin') && staffState.studentId !== 'admin') {
-    alert('成员不能进管理员页面哦')
+    await dialog('成员不能进管理员页面哦')
     return '/staff/login'
   }
 
   const examState = useExamState()
   if (to.path.startsWith('/exam')) {
     if (!examState.agreed && to.path !== '/exam/notice') {
-      alert('出现了某些错误...')
+      await dialog('出现了某些错误...')
       return '/exam/notice'
     }
   }

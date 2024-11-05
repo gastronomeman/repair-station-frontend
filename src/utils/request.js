@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useStaffState } from '@/stores'
 import router from '@/router'
 import { errorMsg } from '@/utils/SendMsgUtils.js'
+import { dialog, htmlDialog } from '@/utils/DialogUtils.js'
 
 // 这里配置 baseUrl
 const baseURL = window.config.baseUrl
@@ -41,7 +42,7 @@ instance.interceptors.response.use(
 
       if (!hasShownAlert) {
         // 只有在未弹出过的情况下才弹出提示
-        alert('登录验证失效，请重新登录')
+        await dialog('登录验证失效，请重新登录')
         // 设置标志位为已弹出并存入 sessionStorage
         sessionStorage.setItem('hasShownAlert', 'true')
       }
@@ -59,11 +60,8 @@ instance.interceptors.response.use(
       let hasShownAlert = sessionStorage.getItem('hasShownAlert') === 'true'
 
       if (!hasShownAlert) {
-        await showDialog({
-          allowHtml: true,
-          message: `<strong>${res.data.msg}</strong>`,
-          theme: 'round-button'
-        })
+        await htmlDialog(`<strong>${res.data.msg}</strong>`)
+
         // 设置标志位为已弹出并存入 sessionStorage
         sessionStorage.setItem('hasShownAlert', 'true')
       }
