@@ -269,7 +269,7 @@ getToolBox()
           v-if="!showToolI"
           @dblclick="showToolI = true"
         >
-          工具所在位置：<span v-html="toolBox"></span>
+          <span v-html="toolBox"></span>
         </div>
         <div v-else>
           <el-input
