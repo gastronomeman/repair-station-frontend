@@ -4,6 +4,7 @@ import { finishOrderService, transferOrderService } from '@/api/orders.js'
 import { errorMsg, successMsg } from '@/utils/SendMsgUtils.js'
 import { useStaffState } from '@/stores/index.js'
 import { useRouter } from 'vue-router'
+import { confirmDialog } from '@/utils/DialogUtils.js'
 
 const staffState = useStaffState()
 const router = useRouter()
@@ -17,21 +18,13 @@ const props = defineProps({
 })
 const order = ref(props.order)
 const handleClick = async () => {
-  await showConfirmDialog({
-    title: 'ฅ( ̳• ◡ • ̳)ฅ',
-    message: '是否要结束修单？'
-  })
-    .then(async () => {
-      // on confirm
-      const resp = await finishOrderService(order.value)
-      if (resp.code === 1) {
-        successMsg(resp.data)
-        emit('refresh')
-      }
-    })
-    .catch(() => {
-      // on cancel
-    })
+  if (await confirmDialog('ฅ( ̳• ◡ • ̳)ฅ', '是否要结束修单？')) {
+    const resp = await finishOrderService(order.value)
+    if (resp.code === 1) {
+      successMsg(resp.data)
+      emit('refresh')
+    }
+  }
 }
 const callPhone = () => {
   window.location.href = `tel:${order.value.phone}`

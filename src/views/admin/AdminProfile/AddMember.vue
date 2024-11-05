@@ -9,6 +9,7 @@ import {
 } from '@/api/staff.js'
 import { successMsg } from '@/utils/SendMsgUtils.js'
 import { baseURL } from '@/utils/request.js'
+import { confirmDialog } from '@/utils/DialogUtils.js'
 
 const router = useRouter()
 
@@ -52,7 +53,7 @@ const addStaff = async () => {
 }
 
 const resetStaff = async (staffI) => {
-  if (!confirm('是否要重置此账户？')) return
+  if (!(await confirmDialog(' (⊙_⊙)? ', '是否要重置此账户？'))) return
   const resp = await resetStaffService(staffI)
   if (resp.code === 1) {
     successMsg(resp.data)
@@ -61,7 +62,7 @@ const resetStaff = async (staffI) => {
 }
 
 const removeStaff = async (id) => {
-  if (!confirm('是否要删除此账户？')) return
+  if (!(await confirmDialog(' (⊙_⊙)? ', '是否要删除此账户？'))) return
 
   const resp = await removeStaffService(id)
   if (resp.code === 1) {

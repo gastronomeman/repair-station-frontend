@@ -3,6 +3,7 @@ import { ref, defineEmits } from 'vue'
 import { takingOrdersService } from '@/api/orders.js'
 import { successMsg } from '@/utils/SendMsgUtils.js'
 import { getNameByIdService } from '@/api/staff.js'
+import { confirmDialog } from '@/utils/DialogUtils.js'
 
 const emit = defineEmits(['refresh'])
 const props = defineProps({
@@ -13,20 +14,13 @@ const props = defineProps({
 })
 const order = ref(props.order)
 const handleClick = async () => {
-  await showConfirmDialog({
-    title: '(ﾉ>ω<)ﾉ',
-    message: '是否确认接单？'
-  })
-    .then(async () => {
-      const resp = await takingOrdersService(order.value)
-      if (resp.code === 1) {
-        successMsg(resp.data)
-        emit('refresh')
-      }
-    })
-    .catch(() => {
-      // on cancel
-    })
+  if (await confirmDialog('(๑•̀ㅂ•́)و✧', '是否确认接单？')) {
+    const resp = await takingOrdersService(order.value)
+    if (resp.code === 1) {
+      successMsg(resp.data)
+      emit('refresh')
+    }
+  }
 }
 
 const assignor = ref('')

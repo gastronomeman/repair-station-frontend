@@ -6,6 +6,7 @@ import { successMsg, warningMsg } from '@/utils/SendMsgUtils.js'
 import { isNotBlank, checkPassword } from '@/utils/StringUtils.js'
 import { useStaffState } from '@/stores/index.js'
 import { changPasswordService, logoutService } from '@/api/staff.js'
+import { dialog } from '@/utils/DialogUtils.js'
 
 const staffState = useStaffState()
 const router = useRouter()
@@ -56,7 +57,7 @@ const updateClick = async () => {
   const resp = await changPasswordService(password.value)
   if (resp.code === 1) {
     successMsg(resp.data)
-    alert('修改成功，请重新登录')
+    dialog('修改成功，请重新登录')
     await logoutService()
     staffState.clear()
     await router.push('/staff/login')
