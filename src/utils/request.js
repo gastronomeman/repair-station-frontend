@@ -27,7 +27,7 @@ instance.interceptors.request.use(
   (err) => Promise.reject(err)
 )
 
-let hasShownAlert = false // 标志位
+let hasShownAlert = sessionStorage.getItem('hasShownAlert') === 'true'
 //响应拦截器
 instance.interceptors.response.use(
   (res) => {
@@ -41,13 +41,14 @@ instance.interceptors.response.use(
       if (!hasShownAlert) {
         // 只有在未弹出过的情况下才弹出提示
         alert('登录验证失效请重新登陆')
-        hasShownAlert = true // 设置为已弹出
+        // 设置标志位为已弹出并存入 sessionStorage
+        sessionStorage.setItem('hasShownAlert', 'true')
       }
 
       staffState.clear()
       router.push('/staff/login').then(() => {
-        // 跳转后重置标志位
-        hasShownAlert = false
+        // 跳转后清除标志位
+        sessionStorage.removeItem('hasShownAlert')
       })
       return Promise.reject(res.data.msg)
     }
@@ -59,13 +60,14 @@ instance.interceptors.response.use(
           message: `<strong>${res.data.msg}</strong>`,
           theme: 'round-button'
         })
-        hasShownAlert = true // 设置为已弹出
+        // 设置标志位为已弹出并存入 sessionStorage
+        sessionStorage.setItem('hasShownAlert', 'true')
       }
 
       staffState.clear()
       router.push('/staff/login').then(() => {
-        // 跳转后重置标志位
-        hasShownAlert = false
+        // 跳转后清除标志位
+        sessionStorage.removeItem('hasShownAlert')
       })
     }
 

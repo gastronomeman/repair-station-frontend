@@ -9,7 +9,10 @@ const props = defineProps({
 })
 const order = ref(props.order)
 const handleClick = async () => {
-  alert(`${order.value.staffName}-正在维修中`)
+  showDialog({
+    title: '维`(*^﹏^*)′修',
+    message: `${order.value.staffName}---正在维修中`
+  })
 }
 </script>
 
