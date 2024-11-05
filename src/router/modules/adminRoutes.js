@@ -86,6 +86,10 @@ export default [
               import('@/views/admin/AdminProfile/StaffSaveBatch.vue')
           },
           {
+            path: 'exam-admin',
+            component: () => import('@/views/admin/exam/ExamAdmin.vue')
+          },
+          {
             path: 'help',
             component: Help
           }

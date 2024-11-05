@@ -2,12 +2,19 @@
 import icon from '@/assets/logos.png'
 import { School, User, Classroom, Book } from '@icon-park/vue-next'
 import { ref } from 'vue'
+import { addStudentService } from '@/api/student.js'
+import { useExamState } from '@/stores/index.js'
+import { useRouter } from 'vue-router'
+import { successMsg } from '@/utils/SendMsgUtils.js'
+
+const examState = useExamState()
+const router = useRouter()
 
 const student = ref({
   name: '',
   id: '',
   college: '',
-  class: ''
+  classId: ''
 })
 
 const rules = {
@@ -21,14 +28,27 @@ const rules = {
   ],
   id: [{ required: true, message: '请输入学号', trigger: 'blur' }],
   college: [{ required: true, message: '请输入学院', trigger: 'blur' }],
-  class: [{ required: true, message: '请输入班级', trigger: 'blur' }]
+  classId: [{ required: true, message: '请输入班级', trigger: 'blur' }]
 }
 const formRef = ref()
 
 const submitForm = () => {
-  formRef.value.validate((valid) => {
+  formRef.value.validate(async (valid) => {
     if (valid) {
-      console.log('提交成功', student)
+      const toast = showLoadingToast({
+        message: '跳转中...',
+        forbidClick: true,
+        loadingType: 'spinner',
+        duration: 0
+      })
+
+      const resp = await addStudentService(student.value)
+      if (resp.code === 1) {
+        examState.setStudent(resp.data)
+        await router.push('/exam/answer')
+        successMsg('录入成功！')
+      }
+      toast.close()
     } else {
       console.log('提交失败')
       return false
@@ -58,7 +78,7 @@ const submitForm = () => {
       </el-input>
     </el-form-item>
     <el-form-item label="学号：" prop="id">
-      <el-input v-model="student.id" clearable>
+      <el-input v-model.number="student.id" clearable>
         <template #prefix>
           <el-icon class="input-icon">
             <school />
@@ -75,8 +95,8 @@ const submitForm = () => {
         </template>
       </el-input>
     </el-form-item>
-    <el-form-item label="班级：" prop="class">
-      <el-input v-model="student.class" clearable>
+    <el-form-item label="班级：" prop="classId">
+      <el-input v-model="student.classId" clearable>
         <template #prefix>
           <el-icon class="input-icon">
             <book />

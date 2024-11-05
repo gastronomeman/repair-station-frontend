@@ -91,28 +91,20 @@ const submit = async () => {
 <template>
   <div class="swiper-demo">
     <div class="title">
-      <nut-row>
-        <nut-col :span="3">
-          <div class="time">
-            {{ formattedTime }}
-          </div>
-        </nut-col>
-        <nut-col :span="9">
-          <div class="content">&nbsp;</div>
-        </nut-col>
-        <nut-col :span="12">
-          <div class="content">
-            <nut-button
-              size="mini"
-              shape="round"
-              type="info"
-              @click.prevent="submit"
-            >
-              提交
-            </nut-button>
-          </div>
-        </nut-col>
-      </nut-row>
+      <div class="time">
+        {{ formattedTime }}
+      </div>
+      <div class="content">欢迎你！{{ examState.student.name }}同学</div>
+      <div class="submit">
+        <nut-button
+          size="mini"
+          shape="round"
+          type="info"
+          @click.prevent="submit"
+        >
+          提交
+        </nut-button>
+      </div>
     </div>
 
     <nut-swiper
@@ -156,11 +148,26 @@ const submit = async () => {
 .title {
   width: 88%;
   max-width: 500px;
-  text-align: right;
   margin: 8px auto 5px;
+  color: #7a7374;
+  font-size: 14px;
+  font-weight: bold;
+  display: flex; /* 使用 Flexbox 布局 */
+  justify-content: space-between; /* 左中右排列 */
+  align-items: center; /* 垂直居中 */
+  height: 24px;
+
   .time {
-    text-align: left;
-    color: #7a7374;
+    flex: 1; /* 使每个子元素在主轴方向上平分可用空间 */
+    text-align: left; /* 文字居中 */
+  }
+  .content {
+    flex: 2; /* 使每个子元素在主轴方向上平分可用空间 */
+    text-align: center; /* 文字居中 */
+  }
+  .submit {
+    flex: 1; /* 使每个子元素在主轴方向上平分可用空间 */
+    text-align: right; /* 文字居中 */
   }
 }
 .progress {

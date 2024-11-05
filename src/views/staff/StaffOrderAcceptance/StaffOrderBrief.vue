@@ -7,6 +7,8 @@ import {
   getStaffOrderTotalService
 } from '@/api/orders.js'
 import { getStaffOnlineCountService } from '@/api/staff.js'
+import { setToolBoxService, toolBoxService } from '@/api/repairStationStatus.js'
+import { successMsg } from '@/utils/SendMsgUtils.js'
 
 const router = useRouter()
 
@@ -69,9 +71,27 @@ const getStaffOrderTotal = async () => {
   }
 }
 
+const toolBox = ref('')
+const showToolI = ref(false)
+const getToolBox = async () => {
+  const tool = await toolBoxService()
+  if (tool.code === 1) {
+    toolBox.value = tool.data
+  }
+}
+
+const setToolBox = async () => {
+  const tool = await setToolBoxService(toolBox.value)
+  if (tool.code === 1) {
+    successMsg(tool.data)
+    showToolI.value = false
+  }
+}
+
 getStaffOrder()
 getStaffOrderTotal()
 getStaffOnlineCount()
+getToolBox()
 </script>
 
 <template>
@@ -243,6 +263,28 @@ getStaffOnlineCount()
           </template>
         </el-progress>
       </div>
+      <div class="tool-box">
+        <div
+          style="cursor: pointer"
+          v-if="!showToolI"
+          @dblclick="showToolI = true"
+        >
+          工具所在位置：<span v-html="toolBox"></span>
+        </div>
+        <div v-else>
+          <el-input
+            autofocus
+            size="small"
+            v-model="toolBox"
+            style="width: 200px"
+            type="textarea"
+            placeholder="输入工具箱所在人姓名"
+          />&nbsp;
+          <nut-button size="mini" type="info" @click="setToolBox">
+            修改
+          </nut-button>
+        </div>
+      </div>
     </div>
     <div class="staff-orders-count">
       <nut-divider dashed> 我的单量统计</nut-divider>
@@ -321,6 +363,12 @@ getStaffOnlineCount()
     p {
       margin: 8px 0;
     }
+  }
+  .tool-box {
+    margin: 10px auto;
+    text-align: center;
+    font-size: 12px;
+    color: #7a7374;
   }
 }
 

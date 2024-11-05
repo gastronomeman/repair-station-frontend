@@ -145,6 +145,19 @@ getOnlineName()
     </nut-navbar>
     <nut-navbar
       style="cursor: pointer; border: 0"
+      @click="router.push('/admin/profile/exam-admin')"
+    >
+      <template #left><span class="nav-title">题库系统</span></template>
+      <template #right
+        ><right
+          class="icon-center"
+          theme="two-tone"
+          size="25"
+          strokeLinejoin="miter"
+      /></template>
+    </nut-navbar>
+    <nut-navbar
+      style="cursor: pointer; border: 0"
       @click="router.push('/admin/profile/help')"
     >
       <template #left><span class="nav-title">帮助</span></template>

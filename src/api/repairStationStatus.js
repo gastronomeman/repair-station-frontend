@@ -18,3 +18,8 @@ export const changeStaffNoService = (str) =>
 
 export const changeStopNoService = (str) =>
   request.put('/wxzStatus/chang-stop-notice', { stopNotice: str })
+
+export const toolBoxService = () => request.get('/wxzStatus/tool-box')
+
+export const setToolBoxService = (str) =>
+  request.put('/wxzStatus/tool-box', { toolBox: str })
