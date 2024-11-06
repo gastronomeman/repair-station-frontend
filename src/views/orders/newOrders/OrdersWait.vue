@@ -17,7 +17,10 @@ checkAgreed()
 
 <template>
   <div class="order-success">
-    <h2>报修成功！ ᖰ⌯'▾'⌯ᖳ <br />请等待工作人员短信联系</h2>
+    <h2>
+      报修成功！ ᖰ⌯'▾'⌯ᖳ <br />请等待工作人员
+      <span style="color: red"> 短信联系 </span>
+    </h2>
     <p>
       &nbsp;&nbsp;&nbsp;&nbsp;我们是公益服务，不收群众一针一线，
       <span style="color: red"> 如遇讨要钱财，纠纷或需要投诉</span>
