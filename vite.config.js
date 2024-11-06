@@ -40,4 +40,13 @@ export default defineConfig({
       }
     }
   }
+  /* server: {
+    proxy: {
+      '/api': {
+        target: 'https://it-wxz.cn:12345', // 后端服务的地址
+        changeOrigin: true, // 如果后端服务跨域，设置为 true
+        rewrite: (path) => path.replace(/^\/api/, '') // 去掉 /api 前缀
+      }
+    }
+  }*/
 })
