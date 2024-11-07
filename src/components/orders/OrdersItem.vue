@@ -12,11 +12,11 @@ const order = ref(props.order)
 
 const handleClick = async () => {
   if (order.value.status === 3) {
-    dialog(`已在${order.value.completionTime}完成维修 (*^▽^*) `)
+    dialog(`已在${order.value.completionTime}完成您的维修任务哦`)
   } else if (order.value.status === 2) {
-    dialog('我们的工作人员已经接单，请留意手机短信哦 (*^▽^*) ')
+    dialog('我们的工作人员已经接单，请留意手机短信哦')
   } else {
-    dialog('请耐心等待，工作人员正在赶来... (*^▽^*) ')
+    dialog('请耐心等待，工作人员正在赶来...')
   }
 }
 </script>
