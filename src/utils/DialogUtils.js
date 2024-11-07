@@ -1,5 +1,6 @@
 export const dialog = (str) => {
   showDialog({
+    allowHtml: true,
     title: ' `(*^▽^*)′ ',
     message: str
   })

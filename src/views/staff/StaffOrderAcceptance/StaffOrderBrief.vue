@@ -274,6 +274,7 @@ getToolBox()
         <div v-else>
           <el-input
             autofocus
+            @blur="showToolI = false"
             size="small"
             v-model="toolBox"
             style="width: 200px"
