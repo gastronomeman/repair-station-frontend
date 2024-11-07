@@ -1,6 +1,6 @@
 export const dialog = (str) => {
   showDialog({
-    title: ' (*^▽^*) ',
+    title: ' `(*^▽^*)′ ',
     message: str
   })
 }
