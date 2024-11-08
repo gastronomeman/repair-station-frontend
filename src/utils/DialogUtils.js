@@ -18,6 +18,7 @@ export const htmlDialog = (str) => {
 export const confirmDialog = (title, str) => {
   return new Promise((resolve) => {
     showConfirmDialog({
+      allowHtml: true,
       title: title,
       message: str
     })

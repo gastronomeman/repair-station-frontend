@@ -46,7 +46,7 @@ const tabs = ref('1')
     <nut-tab-pane title="摆摊" pane-key="2">
       <el-empty style="background: #f0f0f0">
         <template #description>
-          <p>
+          <p style="max-width: 500px; margin: 0 auto; width: 80%">
             别着急师兄在写了<br />
             o(╥﹏╥)o<br />
             <a href="https://gitee.com/gastronome-0_0/repair-station-app"
