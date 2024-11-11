@@ -1,139 +1,125 @@
 <script setup>
-import { useRouter } from 'vue-router'
-import { User, DegreeHat, School } from '@icon-park/vue-next'
 import { ref } from 'vue'
-import { useStaffState } from '@/stores/index.js'
-import { completeInfoService, getInfoService } from '@/api/staff.js'
-import { successMsg, warningMsg } from '@/utils/SendMsgUtils.js'
-import { isNotBlank } from '@/utils/StringUtils.js'
+import { orderCountService } from '@/api/staff.js'
+import { useRouter } from 'vue-router'
+import { useAdminState } from '@/stores/index.js'
+import { baseURL } from '@/utils/request.js'
 
 const router = useRouter()
-const staffState = useStaffState()
-
-const onClick = () => {
-  router.push('/staff/profile')
-}
-
-const staff = ref({
-  major: '',
-  politicalStatus: ''
-})
+const adminState = useAdminState()
 
 const loading = ref(false)
-const completeInfo = async () => {
-  if (
-    isNotBlank(staff.value.major) ||
-    isNotBlank(staff.value.politicalStatus)
-  ) {
-    warningMsg('填写的信息不能为空')
-    return
-  }
+const value1 = ref(adminState.startTime)
+const value2 = ref(adminState.endTime)
 
+const leaderboard = ref([])
+const getOrdersList = async () => {
   loading.value = true
-  staff.value.id = staffState.id
-  const resp = await completeInfoService(staff.value)
+  adminState.setStartTime(value1.value)
+  adminState.setEndTime(value2.value)
+  const resp = await orderCountService(value1.value, value2.value)
   if (resp.code === 1) {
-    successMsg(resp.data)
+    leaderboard.value = resp.data
   }
   loading.value = false
 }
+getOrdersList()
 
-const getInfo = async () => {
-  const resp = await getInfoService(staffState.id)
-  if (resp.code === 1) {
-    staff.value.major = resp.data.major
-    staff.value.politicalStatus = resp.data.politicalStatus
-  }
+const toStaffOrders = (id) => {
+  router.push(
+    `/admin/orders?id=${id}&start=${value1.value}&end=${value2.value}`
+  )
 }
-getInfo()
+
+const resetList = () => {
+  value1.value = ''
+  value2.value = ''
+  getOrdersList()
+}
+
+const getCountCsv = async () => {
+  window.location.href =
+    baseURL +
+    `/staff/count-csv?startTime=${value1.value}&endTime=${value2.value}`
+}
 </script>
 
 <template>
-  <nut-sticky>
-    <nut-navbar title="个人信息" left-show @click-back="onClick">
+  <nut-navbar title="维修统计"></nut-navbar>
+  <div class="date-picker">
+    <span class="demonstration">开始日期：</span>
+    <el-date-picker
+      v-model="value1"
+      type="datetime"
+      :editable="false"
+      placeholder="开始日期"
+      value-format="YYYY-MM-DD HH:mm:ss"
+    />
+    <div class="br"></div>
+    <span class="demonstration">结束日期：</span>
+    <el-date-picker
+      v-model="value2"
+      :editable="false"
+      type="datetime"
+      placeholder="结束日期"
+      value-format="YYYY-MM-DD HH:mm:ss"
+    />
+    <div class="list-button">
+      <nut-button type="info" @click="getCountCsv">导出数据</nut-button>
+      &nbsp;&nbsp;
+      <nut-button type="info" @click="resetList">重置</nut-button>
+      &nbsp;&nbsp;
+      <nut-button type="info" @click="getOrdersList">查找</nut-button>
+    </div>
+    <nut-divider dashed></nut-divider>
+  </div>
+  <div
+    v-for="(l, index) in leaderboard"
+    :key="index"
+    class="leaderboard"
+    v-loading="loading"
+  >
+    <nut-navbar @click="toStaffOrders(l.id)" style="cursor: pointer">
       <template #left>
-        <div>返回</div>
+        <span class="nav-title">{{ l.name }}</span>
+      </template>
+      <template #right>
+        <span class="nav-title">{{ l.orderCount }}单</span>
       </template>
     </nut-navbar>
-  </nut-sticky>
-
-  <el-form class="from" label-width="auto">
-    <el-form-item label="姓名：">
-      <el-input v-model="staffState.name" clearable disabled>
-        <template #prefix>
-          <el-icon class="input-icon">
-            <user />
-          </el-icon>
-        </template>
-      </el-input>
-    </el-form-item>
-
-    <el-form-item label="学号：">
-      <el-input v-model="staffState.studentId" clearable disabled>
-        <template #prefix>
-          <el-icon class="input-icon">
-            <degree-hat />
-          </el-icon>
-        </template>
-      </el-input>
-    </el-form-item>
-
-    <el-form-item required label="班级：">
-      <el-input
-        v-model="staff.major"
-        clearable
-        placeholder="例：22Java1，22嵌入式2"
-      >
-        <template #prefix>
-          <el-icon class="input-icon">
-            <school />
-          </el-icon>
-        </template>
-      </el-input>
-    </el-form-item>
-
-    <el-form-item required label="政治面貌：">
-      <el-select v-model="staff.politicalStatus" placeholder="请点击选择">
-        <el-option :key="1" :value="1" label="群众" />
-        <el-option :key="2" :value="2" label="党员" />
-        <el-option :key="3" :value="3" label="共青团员" />
-        <el-option :key="4" :value="4" label="其他" />
-      </el-select>
-    </el-form-item>
-    <div class="btn">
-      <nut-button
-        :loading="loading"
-        shape="round"
-        type="info"
-        @click="completeInfo"
-      >
-        保存
-      </nut-button>
-      <p>
-        *请按照示例来填写，班级的填写时不要带“班”字在后面<br />
-        例：22Java1，22嵌入式2 <br />
-        所有信息请认真填写，否则可能录不上分。<br />
-        ^ ̳ᴗ ̫ ᴗ ̳^
-      </p>
-    </div>
-  </el-form>
+    <nut-divider dashed />
+  </div>
 </template>
 
 <style scoped>
-.from {
-  width: 90%;
-  max-width: 320px;
+.date-picker {
+  width: 80%;
   margin: 20px auto;
+  text-align: center;
 
-  .btn {
-    margin: 15px auto 0;
-    text-align: center;
-    width: 85%;
+  .br {
+    margin: 10px 0;
+  }
 
-    p {
-      font-size: 14px;
-      color: red;
-    }
+  .list-button {
+    margin: 8px 0;
+  }
+
+  .nut-divider {
+    margin: 5px 0;
+  }
+}
+
+.leaderboard {
+  width: 80%;
+  margin: 0 auto;
+
+  span {
+    color: black;
+  }
+
+  .nut-divider {
+    margin: 0;
   }
 }
 </style>
