@@ -3,15 +3,12 @@ import icon from '@/assets/logos.png'
 import { ref } from 'vue'
 import { useExamState } from '@/stores/index.js'
 import { useRouter } from 'vue-router'
+import { getSubStatusService } from '@/api/sub_status.js'
 
 const router = useRouter()
 
 const examState = useExamState()
 const show = ref(false)
-
-const exam = ref({
-  notice: ''
-})
 
 const handleAgree = async () => {
   if (examState.agreed) {
@@ -27,6 +24,18 @@ const handleAgree = async () => {
     alert('请先认真阅读，服务须知')
   }
 }
+const subStatus = ref({
+  notice: '',
+  number: '',
+  isOpen: ''
+})
+const getSubStatus = async () => {
+  const resp = await getSubStatusService()
+  if (resp.code === 1) {
+    subStatus.value = resp.data
+  }
+}
+getSubStatus()
 </script>
 
 <template>
@@ -49,7 +58,7 @@ const handleAgree = async () => {
         >
           <div ref="innerRef">
             <h2 style="margin: 10px 0 5px">活动公告</h2>
-            <p class="notice" v-html="exam.notice"></p>
+            <p class="notice" v-html="subStatus.notice"></p>
           </div>
         </el-scrollbar>
 

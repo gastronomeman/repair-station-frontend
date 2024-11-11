@@ -7,6 +7,7 @@ import { useExamState, useStaffState } from '@/stores/index.js'
 import { getServerStatusService } from '@/api/repairStationStatus.js'
 import { errorMsg, successMsg } from '@/utils/SendMsgUtils.js'
 import { dialog } from '@/utils/DialogUtils.js'
+import { getSubStatusService } from '@/api/sub_status.js'
 
 const routes = [
   {
@@ -77,6 +78,11 @@ router.beforeEach(async (to) => {
     if (!examState.agreed && to.path !== '/exam/notice') {
       await dialog('出现了某些错误...')
       return '/exam/notice'
+    }
+
+    if ((await (await getSubStatusService()).data.isOpen) === 1) {
+      dialog('现在还不是答题时间哦')
+      return '/'
     }
   }
 })
