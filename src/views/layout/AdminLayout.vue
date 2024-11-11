@@ -42,7 +42,7 @@ const onRefresh = () => {
         <home theme="outline" size="25" :strokeWidth="3" />
       </template>
     </nut-tabbar-item>
-    <nut-tabbar-item tab-title="维修-摆摊" to="/admin/orders-list">
+    <nut-tabbar-item tab-title="维修统计" to="/admin/orders-list">
       <template #icon>
         <order theme="outline" size="25" :strokeWidth="3" />
       </template>
