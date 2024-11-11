@@ -39,16 +39,14 @@ const updateSubStatus = async () => {
 </script>
 
 <template>
-  <nut-navbar title="维修站答题系统"></nut-navbar>
-
   <el-form class="content" label-width="auto">
     <el-form-item label="活动规则：">
       <el-input
         :maxlength="100"
         show-word-limit
         v-model="subStatus.notice"
-        style="width: 180px"
-        :rows="6"
+        style="width: 200px"
+        :rows="8"
         type="textarea"
         placeholder="注意哦”<br>“是换行"
       />
@@ -56,14 +54,14 @@ const updateSubStatus = async () => {
     <el-form-item label="答题数量：">
       <el-input
         v-model.number="subStatus.number"
-        style="width: 180px"
+        style="width: 200px"
         placeholder="谨慎发言"
       />
     </el-form-item>
     <el-form-item label="及格题数：">
       <el-input
         v-model.number="subStatus.pass"
-        style="width: 180px"
+        style="width: 200px"
         placeholder="谨慎发言"
       />
     </el-form-item>

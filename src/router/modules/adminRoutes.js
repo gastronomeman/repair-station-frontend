@@ -86,12 +86,23 @@ export default [
               import('@/views/admin/AdminProfile/StaffSaveBatch.vue')
           },
           {
-            path: 'exam-admin',
-            component: () => import('@/views/admin/exam/ExamAdmin.vue')
-          },
-          {
             path: 'help',
             component: Help
+          },
+          {
+            path: 'exam',
+            component: () => import('@/views/admin/exam/ExamAdminLayout.vue'),
+            redirect: '/admin/profile/exam/status',
+            children: [
+              {
+                path: 'status',
+                component: () => import('@/views/admin/exam/ExamSubStatus.vue')
+              },
+              {
+                path: 'sub',
+                component: () => import('@/views/admin/exam/ExamSub.vue')
+              }
+            ]
           }
         ]
       }
