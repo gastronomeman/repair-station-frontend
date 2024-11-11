@@ -1,75 +1,65 @@
 <script setup>
-import icon from '@/assets/logos.png'
-import { School, User, Classroom, Book } from '@icon-park/vue-next'
-import { ref } from 'vue'
-import { addStudentService } from '@/api/student.js'
-import { useExamState } from '@/stores/index.js'
 import { useRouter } from 'vue-router'
-import { successMsg } from '@/utils/SendMsgUtils.js'
+import { User, DegreeHat, School } from '@icon-park/vue-next'
+import { ref } from 'vue'
+import { useStaffState } from '@/stores/index.js'
+import { completeInfoService, getInfoService } from '@/api/staff.js'
+import { successMsg, warningMsg } from '@/utils/SendMsgUtils.js'
+import { isNotBlank } from '@/utils/StringUtils.js'
 
-const examState = useExamState()
 const router = useRouter()
+const staffState = useStaffState()
 
-const student = ref({
-  name: '',
-  id: '',
-  college: '',
-  classId: ''
+const onClick = () => {
+  router.push('/staff/profile')
+}
+
+const staff = ref({
+  major: '',
+  politicalStatus: ''
 })
 
-const rules = {
-  name: [
-    { required: true, message: '请输入姓名', trigger: 'blur' },
-    {
-      pattern: /^(?:[\u4e00-\u9fa5·]{2,16})$/,
-      message: '姓名格式不正确',
-      trigger: 'blur'
-    }
-  ],
-  id: [{ required: true, message: '请输入学号', trigger: 'blur' }],
-  college: [{ required: true, message: '请输入学院', trigger: 'blur' }],
-  classId: [{ required: true, message: '请输入班级', trigger: 'blur' }]
-}
-const formRef = ref()
+const loading = ref(false)
+const completeInfo = async () => {
+  if (
+    isNotBlank(staff.value.major) ||
+    isNotBlank(staff.value.politicalStatus)
+  ) {
+    warningMsg('填写的信息不能为空')
+    return
+  }
 
-const submitForm = () => {
-  formRef.value.validate(async (valid) => {
-    if (valid) {
-      const toast = showLoadingToast({
-        message: '跳转中...',
-        forbidClick: true,
-        loadingType: 'spinner',
-        duration: 0
-      })
-
-      const resp = await addStudentService(student.value)
-      if (resp.code === 1) {
-        examState.setStudent(resp.data)
-        await router.push('/exam/answer')
-        successMsg('录入成功！')
-      }
-      toast.close()
-    } else {
-      console.log('提交失败')
-      return false
-    }
-  })
+  loading.value = true
+  staff.value.id = staffState.id
+  const resp = await completeInfoService(staff.value)
+  if (resp.code === 1) {
+    successMsg(resp.data)
+  }
+  loading.value = false
 }
+
+const getInfo = async () => {
+  const resp = await getInfoService(staffState.id)
+  if (resp.code === 1) {
+    staff.value.major = resp.data.major
+    staff.value.politicalStatus = resp.data.politicalStatus
+  }
+}
+getInfo()
 </script>
 
 <template>
-  <div class="image">
-    <van-image width="100%" :src="icon" />
-  </div>
-  <el-form
-    ref="formRef"
-    :model="student"
-    :rules="rules"
-    label-width="auto"
-    class="from"
-  >
-    <el-form-item label="姓名：" prop="name">
-      <el-input v-model="student.name" clearable>
+  <nut-sticky>
+    <nut-navbar title="个人信息" left-show @click-back="onClick">
+      <template #left>
+        <div>返回</div>
+      </template>
+    </nut-navbar>
+  </nut-sticky>
+
+  <el-form class="from" label-width="auto">
+    <el-form-item label="姓名：">
+      <el-input v-model="staffState.name" clearable disabled>
         <template #prefix>
           <el-icon class="input-icon">
             <user />
@@ -77,8 +67,23 @@ const submitForm = () => {
         </template>
       </el-input>
     </el-form-item>
-    <el-form-item label="学号：" prop="id">
-      <el-input v-model.number="student.id" clearable>
+
+    <el-form-item label="学号：">
+      <el-input v-model="staffState.studentId" clearable disabled>
+        <template #prefix>
+          <el-icon class="input-icon">
+            <degree-hat />
+          </el-icon>
+        </template>
+      </el-input>
+    </el-form-item>
+
+    <el-form-item required label="班级：">
+      <el-input
+        v-model="staff.major"
+        clearable
+        placeholder="例：22Java1，22嵌入式2"
+      >
         <template #prefix>
           <el-icon class="input-icon">
             <school />
@@ -86,39 +91,35 @@ const submitForm = () => {
         </template>
       </el-input>
     </el-form-item>
-    <el-form-item label="学院：" prop="college">
-      <el-input v-model="student.college" clearable>
-        <template #prefix>
-          <el-icon class="input-icon">
-            <classroom />
-          </el-icon>
-        </template>
-      </el-input>
+
+    <el-form-item required label="政治面貌：">
+      <el-select v-model="staff.politicalStatus" placeholder="请点击选择">
+        <el-option :key="1" :value="1" label="群众" />
+        <el-option :key="2" :value="2" label="党员" />
+        <el-option :key="3" :value="3" label="共青团员" />
+        <el-option :key="4" :value="4" label="其他" />
+      </el-select>
     </el-form-item>
-    <el-form-item label="班级：" prop="classId">
-      <el-input v-model="student.classId" clearable>
-        <template #prefix>
-          <el-icon class="input-icon">
-            <book />
-          </el-icon>
-        </template>
-      </el-input>
-    </el-form-item>
-    <div style="text-align: center">
-      <nut-button shape="round" type="info" @click.prevent="submitForm">
-        提交
+    <div class="btn">
+      <nut-button
+        :loading="loading"
+        shape="round"
+        type="info"
+        @click="completeInfo"
+      >
+        保存
       </nut-button>
+      <p>
+        *请按照示例来填写，班级的填写时不要带“班”字在后面<br />
+        例：22Java1，22嵌入式2 <br />
+        所有信息请认真填写，否则可能录不上分。<br />
+        ^ ̳ᴗ ̫ ᴗ ̳^
+      </p>
     </div>
   </el-form>
 </template>
 
 <style scoped>
-.image {
-  width: 80%;
-  max-width: 180px;
-  text-align: center;
-  margin: 1vh auto;
-}
 .from {
   width: 90%;
   max-width: 320px;
