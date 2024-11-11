@@ -34,10 +34,8 @@ watch(
 
 const loading = ref(false)
 const onRefresh = () => {
-  setTimeout(() => {
-    loading.value = false
-    location.reload()
-  }, 1000)
+  loading.value = false
+  location.reload()
 }
 </script>
 
