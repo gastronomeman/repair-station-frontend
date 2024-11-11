@@ -92,32 +92,28 @@ const getCountCsv = async () => {
 </template>
 
 <style scoped>
-.nut-tab-pane {
-  background-color: #f0f0f0;
-  padding: 0 !important;
-  .date-picker {
-    width: 80%;
-    margin: 20px auto;
-    text-align: center;
-    .br {
-      margin: 10px 0;
-    }
-    .list-button {
-      margin: 8px 0;
-    }
-    .nut-divider {
-      margin: 5px 0;
-    }
+.date-picker {
+  width: 80%;
+  margin: 20px auto;
+  text-align: center;
+  .br {
+    margin: 10px 0;
   }
-  .leaderboard {
-    width: 80%;
-    margin: 0 auto;
-    span {
-      color: black;
-    }
-    .nut-divider {
-      margin: 0;
-    }
+  .list-button {
+    margin: 8px 0;
+  }
+  .nut-divider {
+    margin: 5px 0;
+  }
+}
+.leaderboard {
+  width: 80%;
+  margin: 0 auto;
+  span {
+    color: black;
+  }
+  .nut-divider {
+    margin: 0;
   }
 }
 </style>

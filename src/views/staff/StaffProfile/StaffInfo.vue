@@ -1,125 +1,138 @@
 <script setup>
+import icon from '@/assets/logos.png'
+import { School, User, Classroom, Book } from '@icon-park/vue-next'
 import { ref } from 'vue'
-import { orderCountService } from '@/api/staff.js'
+import { addStudentService } from '@/api/student.js'
+import { useExamState } from '@/stores/index.js'
 import { useRouter } from 'vue-router'
-import { useAdminState } from '@/stores/index.js'
-import { baseURL } from '@/utils/request.js'
+import { successMsg } from '@/utils/SendMsgUtils.js'
 
+const examState = useExamState()
 const router = useRouter()
-const adminState = useAdminState()
 
-const loading = ref(false)
-const value1 = ref(adminState.startTime)
-const value2 = ref(adminState.endTime)
+const student = ref({
+  name: '',
+  id: '',
+  college: '',
+  classId: ''
+})
 
-const leaderboard = ref([])
-const getOrdersList = async () => {
-  loading.value = true
-  adminState.setStartTime(value1.value)
-  adminState.setEndTime(value2.value)
-  const resp = await orderCountService(value1.value, value2.value)
-  if (resp.code === 1) {
-    leaderboard.value = resp.data
-  }
-  loading.value = false
+const rules = {
+  name: [
+    { required: true, message: '请输入姓名', trigger: 'blur' },
+    {
+      pattern: /^(?:[\u4e00-\u9fa5·]{2,16})$/,
+      message: '姓名格式不正确',
+      trigger: 'blur'
+    }
+  ],
+  id: [{ required: true, message: '请输入学号', trigger: 'blur' }],
+  college: [{ required: true, message: '请输入学院', trigger: 'blur' }],
+  classId: [{ required: true, message: '请输入班级', trigger: 'blur' }]
 }
-getOrdersList()
+const formRef = ref()
 
-const toStaffOrders = (id) => {
-  router.push(
-    `/admin/orders?id=${id}&start=${value1.value}&end=${value2.value}`
-  )
-}
+const submitForm = () => {
+  formRef.value.validate(async (valid) => {
+    if (valid) {
+      const toast = showLoadingToast({
+        message: '跳转中...',
+        forbidClick: true,
+        loadingType: 'spinner',
+        duration: 0
+      })
 
-const resetList = () => {
-  value1.value = ''
-  value2.value = ''
-  getOrdersList()
-}
-
-const getCountCsv = async () => {
-  window.location.href =
-    baseURL +
-    `/staff/count-csv?startTime=${value1.value}&endTime=${value2.value}`
+      const resp = await addStudentService(student.value)
+      if (resp.code === 1) {
+        examState.setStudent(resp.data)
+        await router.push('/exam/answer')
+        successMsg('录入成功！')
+      }
+      toast.close()
+    } else {
+      console.log('提交失败')
+      return false
+    }
+  })
 }
 </script>
 
 <template>
-  <nut-navbar title="维修统计"></nut-navbar>
-  <div class="date-picker">
-    <span class="demonstration">开始日期：</span>
-    <el-date-picker
-      v-model="value1"
-      type="datetime"
-      :editable="false"
-      placeholder="开始日期"
-      value-format="YYYY-MM-DD HH:mm:ss"
-    />
-    <div class="br"></div>
-    <span class="demonstration">结束日期：</span>
-    <el-date-picker
-      v-model="value2"
-      :editable="false"
-      type="datetime"
-      placeholder="结束日期"
-      value-format="YYYY-MM-DD HH:mm:ss"
-    />
-    <div class="list-button">
-      <nut-button type="info" @click="getCountCsv">导出数据</nut-button>
-      &nbsp;&nbsp;
-      <nut-button type="info" @click="resetList">重置</nut-button>
-      &nbsp;&nbsp;
-      <nut-button type="info" @click="getOrdersList">查找</nut-button>
-    </div>
-    <nut-divider dashed></nut-divider>
+  <div class="image">
+    <van-image width="100%" :src="icon" />
   </div>
-  <div
-    v-for="(l, index) in leaderboard"
-    :key="index"
-    class="leaderboard"
-    v-loading="loading"
+  <el-form
+    ref="formRef"
+    :model="student"
+    :rules="rules"
+    label-width="auto"
+    class="from"
   >
-    <nut-navbar @click="toStaffOrders(l.id)" style="cursor: pointer">
-      <template #left>
-        <span class="nav-title">{{ l.name }}</span>
-      </template>
-      <template #right>
-        <span class="nav-title">{{ l.orderCount }}单</span>
-      </template>
-    </nut-navbar>
-    <nut-divider dashed />
-  </div>
+    <el-form-item label="姓名：" prop="name">
+      <el-input v-model="student.name" clearable>
+        <template #prefix>
+          <el-icon class="input-icon">
+            <user />
+          </el-icon>
+        </template>
+      </el-input>
+    </el-form-item>
+    <el-form-item label="学号：" prop="id">
+      <el-input v-model.number="student.id" clearable>
+        <template #prefix>
+          <el-icon class="input-icon">
+            <school />
+          </el-icon>
+        </template>
+      </el-input>
+    </el-form-item>
+    <el-form-item label="学院：" prop="college">
+      <el-input v-model="student.college" clearable>
+        <template #prefix>
+          <el-icon class="input-icon">
+            <classroom />
+          </el-icon>
+        </template>
+      </el-input>
+    </el-form-item>
+    <el-form-item label="班级：" prop="classId">
+      <el-input v-model="student.classId" clearable>
+        <template #prefix>
+          <el-icon class="input-icon">
+            <book />
+          </el-icon>
+        </template>
+      </el-input>
+    </el-form-item>
+    <div style="text-align: center">
+      <nut-button shape="round" type="info" @click.prevent="submitForm">
+        提交
+      </nut-button>
+    </div>
+  </el-form>
 </template>
 
 <style scoped>
-.date-picker {
+.image {
   width: 80%;
-  margin: 20px auto;
+  max-width: 180px;
   text-align: center;
-
-  .br {
-    margin: 10px 0;
-  }
-
-  .list-button {
-    margin: 8px 0;
-  }
-
-  .nut-divider {
-    margin: 5px 0;
-  }
+  margin: 1vh auto;
 }
+.from {
+  width: 90%;
+  max-width: 320px;
+  margin: 20px auto;
 
-.leaderboard {
-  width: 80%;
-  margin: 0 auto;
+  .btn {
+    margin: 15px auto 0;
+    text-align: center;
+    width: 85%;
 
-  span {
-    color: black;
-  }
-
-  .nut-divider {
-    margin: 0;
+    p {
+      font-size: 14px;
+      color: red;
+    }
   }
 }
 </style>

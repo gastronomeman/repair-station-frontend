@@ -14,23 +14,16 @@ export const useAdminState = defineStore(
       endTime.value = newValue
     }
 
-    const tabs = ref('1')
-    const setTabs = (newValue) => {
-      tabs.value = newValue
-    }
-
     const clear = () => {
       startTime.value = ''
       endTime.value = ''
-      tabs.value = ''
     }
     return {
       startTime,
       setStartTime,
       endTime,
       setEndTime,
-      tabs,
-      setTabs,
+
       clear
     }
   },
