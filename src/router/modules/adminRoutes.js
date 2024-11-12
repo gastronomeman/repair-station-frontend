@@ -101,6 +101,14 @@ export default [
               {
                 path: 'sub',
                 component: () => import('@/views/admin/exam/ExamSub.vue')
+              },
+              {
+                path: 'add',
+                component: () => import('@/views/admin/exam/AddSub.vue')
+              },
+              {
+                path: 'set',
+                component: () => import('@/views/admin/exam/SetSub.vue')
               }
             ]
           }
