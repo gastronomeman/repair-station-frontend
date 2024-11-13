@@ -4,7 +4,7 @@ import AnswerItem from '@/components/answer/AnswerItem.vue'
 import { useExamState } from '@/stores/index.js'
 import { useRouter } from 'vue-router'
 import { getRandomSubListService } from '@/api/sub.js'
-import { confirmDialog, dialog } from '@/utils/DialogUtils.js'
+import { confirmDialog } from '@/utils/DialogUtils.js'
 
 const router = useRouter()
 
@@ -28,12 +28,16 @@ const handleNext = () => {
   swiperRef.value?.next()
 }
 
+let isSu = false
 const progress = computed(() => {
   let i = 0
   examState.result.forEach((item) => {
     if (item !== null) i++
   })
-  if (i === subList.value.length) submit()
+  if (i === subList.value.length && !isSu) {
+    isSu = true
+    submit()
+  }
   return ((i / subList.value.length) * 100).toFixed(2)
 })
 
@@ -55,10 +59,6 @@ onBeforeUnmount(() => {
 })
 
 const submit = async () => {
-  if (time.value < 50) {
-    dialog('答题时间不足50秒，请稍等片刻哦')
-    return
-  }
   if (await confirmDialog('提示', '是否确定提交？')) {
     examState.setTime(time.value)
     await router.push('/exam/settlement')
