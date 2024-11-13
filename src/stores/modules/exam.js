@@ -17,15 +17,26 @@ export const useExamState = defineStore(
       result.value[index] = value
     }
 
-    const student = ref({})
+    const student = ref(null)
     const setStudent = (newStudent) => {
       student.value = newStudent
+    }
+
+    const status = ref('')
+    const setStatus = (newStatus) => {
+      status.value = newStatus
+    }
+
+    const time = ref('')
+    const setTime = (newTime) => {
+      time.value = newTime
     }
 
     const clear = () => {
       agreed.value = false
       result.value = []
-      student.value = ''
+      student.value = null
+      status.value = ''
     }
     return {
       agreed,
@@ -35,6 +46,10 @@ export const useExamState = defineStore(
       setResult,
       student,
       setStudent,
+      status,
+      setStatus,
+      time,
+      setTime,
       clear
     }
   },

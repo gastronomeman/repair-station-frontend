@@ -80,7 +80,9 @@ router.beforeEach(async (to) => {
       return '/exam/notice'
     }
 
-    if ((await (await getSubStatusService()).data.isOpen) === 1) {
+    const resp = await getSubStatusService()
+    useExamState().setStatus(resp.data)
+    if (resp.data.isOpen === 1) {
       dialog('现在还不是答题时间哦')
       return '/'
     }

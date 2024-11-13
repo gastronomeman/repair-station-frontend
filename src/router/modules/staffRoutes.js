@@ -13,6 +13,7 @@ import UploadNavigation from '@/views/staff/StaffProfile/Upload/UploadNavigation
 import UploadPhoto from '@/views/staff/StaffProfile/Upload/UploadPhoto.vue'
 import ShowPhoto from '@/views/common/ShowPhoto.vue'
 import StaffInfo from '@/views/staff/StaffProfile/StaffInfo.vue'
+import Code from '@/views/staff/StaffProfile/VerificationCode.vue'
 
 export default [
   {
@@ -81,6 +82,10 @@ export default [
           {
             path: 'show-photo',
             component: ShowPhoto
+          },
+          {
+            path: 'v-code',
+            component: Code
           }
         ]
       }

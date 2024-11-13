@@ -6,6 +6,7 @@ import { addStudentService } from '@/api/student.js'
 import { useExamState } from '@/stores/index.js'
 import { useRouter } from 'vue-router'
 import { successMsg } from '@/utils/SendMsgUtils.js'
+import { dialog } from '@/utils/DialogUtils.js'
 
 const examState = useExamState()
 const router = useRouter()
@@ -47,6 +48,9 @@ const submitForm = () => {
         examState.setStudent(resp.data)
         await router.push('/exam/answer')
         successMsg('录入成功！')
+        dialog(
+          `<p style="text-align: left">姓名：${examState.student.name}<br />学号：${examState.student.id}<br /><span style="color: red">请核对好信息，如遇信息不对请第一时间联系工作人员！</span></p>`
+        )
       }
       toast.close()
     } else {

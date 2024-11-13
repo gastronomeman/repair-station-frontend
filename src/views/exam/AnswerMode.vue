@@ -3,42 +3,22 @@ import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import AnswerItem from '@/components/answer/AnswerItem.vue'
 import { useExamState } from '@/stores/index.js'
 import { useRouter } from 'vue-router'
+import { getRandomSubListService } from '@/api/sub.js'
+import { confirmDialog } from '@/utils/DialogUtils.js'
 
 const router = useRouter()
 
 const examState = useExamState()
-const subList = ref([
-  {
-    id: '123',
-    topic: 'WWW服务器与客户机之间主要采用（）安全协议进行网页的发送和接收。',
-    option1: 'HTTP',
-    option2: 'HTTPS',
-    option3: 'HTML',
-    option4: 'SMTP',
-    result: '2'
-  },
-  {
-    id: '124',
-    topic:
-      '若系统正在将（）文件修改的结果写回磁盘时系统发生崩溃则对系统的影响相对较大。',
-    option1: '空闲块',
-    option2: '用户程序',
-    option3: '目录',
-    option4: '用户数据',
-    result: '2'
-  },
-  {
-    id: '125',
-    topic:
-      '正常情况下，操作系统对保选择题存有大量有用数据的硬盘进行（）操作时，不会清除有用数据。',
-    option1: '磁盘分区和格式化',
-    option2: '磁盘格式化和碎片整理',
-    option3: '磁盘清理和碎片整理',
-    option4: '磁盘分区和磁盘清理',
-    result: '2'
+const subList = ref([])
+
+const getRandomSubList = async () => {
+  const resp = await getRandomSubListService()
+  if (resp.code === 1) {
+    subList.value = resp.data
+    examState.setResultLength(subList.value.length)
   }
-])
-examState.setResultLength(subList.value.length)
+}
+getRandomSubList()
 
 const swiperRef = ref()
 const handlePrev = () => {
@@ -75,16 +55,10 @@ onBeforeUnmount(() => {
 })
 
 const submit = async () => {
-  showConfirmDialog({
-    title: '提示',
-    message: '是否要提交答卷？'
-  })
-    .then(() => {
-      router.push('/exam/settlement')
-    })
-    .catch(() => {
-      console.log(2)
-    })
+  if (await confirmDialog('提示', '是否确定提交？')) {
+    examState.setTime(time.value)
+    await router.push('/exam/settlement')
+  }
 }
 </script>
 

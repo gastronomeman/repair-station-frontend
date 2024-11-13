@@ -23,7 +23,7 @@ const radio = ref('')
 const emit = defineEmits(['choice'])
 
 const onChange = (s) => {
-  if (sub.value.result === s) {
+  if (sub.value.result == s) {
     examState.setResult(+index.value, true)
   } else {
     examState.setResult(+index.value, false)
@@ -52,18 +52,10 @@ const onChange = (s) => {
     </div>
     <div class="radio">
       <nut-radio-group v-model="radio" @change="onChange">
-        <nut-radio class="tag" label="1">
-          {{ sub.option1 }}
-        </nut-radio>
-        <nut-radio class="tag" label="2">
-          {{ sub.option2 }}
-        </nut-radio>
-        <nut-radio class="tag" label="3">
-          {{ sub.option3 }}
-        </nut-radio>
-        <nut-radio class="tag" label="4">
-          {{ sub.option4 }}
-        </nut-radio>
+        <nut-radio class="tag" label="1"> A. {{ sub.option1 }} </nut-radio>
+        <nut-radio class="tag" label="2"> B. {{ sub.option2 }} </nut-radio>
+        <nut-radio class="tag" label="3"> C. {{ sub.option3 }} </nut-radio>
+        <nut-radio class="tag" label="4"> D. {{ sub.option4 }} </nut-radio>
       </nut-radio-group>
     </div>
   </div>
