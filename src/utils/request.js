@@ -30,59 +30,57 @@ instance.interceptors.request.use(
 // 响应拦截器
 instance.interceptors.response.use(
   async (res) => {
-    // 3. 摘取核心响应数据
-    if (res.data.code === 1) return res.data
+    const { code, msg } = res.data
 
-    // 4. 处理业务失败
-    const staffState = useStaffState()
+    if (code === 1) return res.data // 返回成功的数据
 
-    // 处理登录失效
-    if (res.data.msg === 'not_login') {
-      let hasShownAlert = sessionStorage.getItem('hasShownAlert') === 'true'
-
-      if (!hasShownAlert) {
-        // 只有在未弹出过的情况下才弹出提示
-        await dialog('登录验证失效，请重新登录')
-        // 设置标志位为已弹出并存入 sessionStorage
-        sessionStorage.setItem('hasShownAlert', 'true')
-      }
-
-      staffState.clear()
-      router.push('/staff/login').then(() => {
-        // 跳转后清除标志位
-        sessionStorage.removeItem('hasShownAlert')
-      })
-      return Promise.reject(res.data.msg)
+    // 登录失效处理
+    if (msg === 'not_login') {
+      await handleLoginRedirect('登录验证失效，请重新登录')
+      return Promise.reject(msg)
     }
 
-    // 处理设备已登录的提示
-    if (res.data.msg.startsWith('检测到账号已在别的设备登录')) {
-      let hasShownAlert = sessionStorage.getItem('hasShownAlert') === 'true'
-
-      if (!hasShownAlert) {
-        await htmlDialog(`<strong>${res.data.msg}</strong>`)
-
-        // 设置标志位为已弹出并存入 sessionStorage
-        sessionStorage.setItem('hasShownAlert', 'true')
-      }
-
-      staffState.clear()
-      router.push('/staff/login').then(() => {
-        // 跳转后清除标志位
-        sessionStorage.removeItem('hasShownAlert')
-      })
+    // 账号在其他设备登录处理
+    if (msg.startsWith('检测到账号已在别的设备登录')) {
+      await handleLoginRedirect(msg, true)
+      return Promise.reject(msg)
     }
 
     // 其他业务错误处理
-    if (res.data.code === 0) errorMsg(res.data.msg)
+    if (code === 0) errorMsg(msg)
 
     return res.data
   },
   (err) => {
     console.log(err)
     errorMsg('网站发生异常，请稍后尝试！<br/>╥﹏╥')
+    return Promise.reject(err)
   }
 )
+
+// 封装统一的处理逻辑
+// 登录处理逻辑
+const handleLoginRedirect = async (message, useHtml = false) => {
+  const staffState = useStaffState()
+  const hasShownAlert = sessionStorage.getItem('hasShownAlert') === 'true'
+
+  if (!hasShownAlert) {
+    if (useHtml) {
+      await htmlDialog(`<strong>${message}</strong>`)
+    } else {
+      await dialog(message)
+    }
+
+    sessionStorage.setItem('hasShownAlert', 'true')
+  }
+
+  staffState.clear()
+  router.push('/staff/login').then(() => {
+    sessionStorage.removeItem('hasShownAlert')
+  })
+
+  throw new Error(message) // 抛出错误供调用方捕获
+}
 
 export default instance
 export { baseURL }
