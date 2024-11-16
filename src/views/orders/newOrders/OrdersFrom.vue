@@ -72,7 +72,7 @@ const confirmShow = ({ selectedValue }) => {
 
 const loading = ref(false)
 const submit = () => {
-  formRef.value?.validate().then(async ({ valid, errors }) => {
+  formRef.value?.validate().then(async ({ valid }) => {
     if (valid) {
       if (
         order.value.identity === '1' &&
@@ -102,7 +102,7 @@ const submit = () => {
       await router.push('/orders/wait')
       loading.value = false
     } else {
-      console.warn('error:', errors)
+      console.warn('出现错误')
     }
   })
 }
@@ -263,7 +263,11 @@ checkAgreed()
       </nut-form-item>
     </nut-form>
 
-    <nut-button shape="round" size="large" type="primary" @click="submit"
+    <nut-button
+      shape="round"
+      size="large"
+      type="primary"
+      @click.prevent="submit"
       >报修
     </nut-button>
   </div>
