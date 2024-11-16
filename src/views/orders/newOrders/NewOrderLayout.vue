@@ -46,9 +46,7 @@ watch(
             </template>
           </nut-step>
         </nut-steps>
-        <transition name="van-slide-right">
-          <router-view></router-view>
-        </transition>
+        <router-view></router-view>
         <div class="tool">
           <toolkit
             @click="router.push('/tool')"

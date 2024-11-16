@@ -12,7 +12,10 @@ const checkAgreed = () => {
   }
   successMsg('报修成功！！！')
   window.scrollTo(0, 0)
-  dialog('报修成功！请留意手机短信哦，我们会以短信的方式联系你！')
+  dialog(
+    '报修成功！请留意手机短信哦！<br />' +
+      '<span style="color: red; font-weight: bold">我们会以短信的方式联系你！</span>'
+  )
 }
 checkAgreed()
 </script>
