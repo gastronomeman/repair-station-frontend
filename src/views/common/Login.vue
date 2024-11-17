@@ -74,7 +74,7 @@ checkJWT()
 <template>
   <div class="login-container">
     <div class="login-img-logo">
-      <img src="@/assets/rs_logo.png" alt="Logo" />
+      <img src="@/assets/logos.png" alt="Logo" />
     </div>
     <form class="login-input">
       <h2>维修站后台管理系统</h2>
@@ -128,8 +128,7 @@ checkJWT()
   margin: 6vh auto 50px;
 
   .login-img-logo {
-    margin-bottom: 10px;
-    width: 130px;
+    width: 250px;
   }
 
   .login-img-logo img {
@@ -140,6 +139,7 @@ checkJWT()
   .login-input {
     text-align: center;
     h2 {
+      margin-top: 5px;
       margin-bottom: 10px;
     }
 
