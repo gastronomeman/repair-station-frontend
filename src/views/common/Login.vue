@@ -77,7 +77,13 @@ checkJWT()
       <img src="@/assets/logos.png" alt="Logo" />
     </div>
     <form class="login-input">
-      <h2>维修站后台管理系统</h2>
+      <h2>ITeam维修站后台系统</h2>
+      <p
+        style="margin: 8px; font-size: 12px; color: #7a7374; text-align: center"
+      >
+        维修站永远欢迎各位师兄师姐，师弟师妹哦！<br />
+        o(^▽^)o
+      </p>
       <el-input
         clearable
         size="large"
@@ -139,8 +145,7 @@ checkJWT()
   .login-input {
     text-align: center;
     h2 {
-      margin-top: 5px;
-      margin-bottom: 10px;
+      margin: 0;
     }
 
     .el-input:first-child {
