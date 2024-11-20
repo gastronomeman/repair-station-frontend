@@ -1,9 +1,9 @@
 <script setup>
+import { dialog } from '@/utils/DialogUtils.js'
+
 const icp = window.config.icp
 
-const onClick = () => {
-  alert('邮箱：1305573134@qq.com')
-}
+const onClick = () => dialog('邮箱：1305573134@qq.com')
 </script>
 
 <template>
