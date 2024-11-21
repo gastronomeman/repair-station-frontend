@@ -19,7 +19,9 @@ const onClick = () => {
 
 const getNameById = async () => {
   if (!route.fullPath.includes('admin')) return
+  if (order.value.status === 4) order.value.staffName = '作废订单'
   if (order.value.staffId == null) return
+
   const resp = await getNameByIdService(order.value.staffId)
   if (resp.code === 1) {
     order.value.staffName = resp.data
