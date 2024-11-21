@@ -33,5 +33,6 @@ const onClick = () => dialog('邮箱：1305573134@qq.com')
 <style scoped>
 .footer {
   text-align: center;
+  margin-bottom: 10px;
 }
 </style>

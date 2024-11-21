@@ -1,5 +1,5 @@
 <script setup>
-import { ref, nextTick, watch } from 'vue'
+import { ref, watch } from 'vue'
 import { Search, Announcement, Tool } from '@icon-park/vue-next'
 import { useRouter, useRoute } from 'vue-router'
 
@@ -27,18 +27,6 @@ const search = ref({
   backgroundColor: '#f0f0f0'
 })
 
-const searchbarRef = ref(null)
-
-const focusSearchbar = () => {
-  if (searchbarRef.value) {
-    nextTick(() => {
-      const input = searchbarRef.value.$el.querySelector('input')
-      if (input) {
-        input.focus()
-      }
-    })
-  }
-}
 const goToQuery = () => {
   router.push({
     path: '/orders/query',
@@ -73,26 +61,18 @@ watch(
   <div class="orders-head">
     <h1>{{ title }}</h1>
     <h3>- Repair Station -</h3>
-    <nut-searchbar
-      @click="focusSearchbar"
-      ref="searchbarRef"
+    <el-input
+      clearable
+      size="large"
       v-model="search.input"
-      :background="search.backgroundColor"
-      @search="goToQuery"
-      placeholder="输入学号或姓名查询报修状态"
+      style="max-width: 800px; margin: 10px auto; width: 90%"
+      placeholder="输入学号或姓名查询报修情况"
+      class="input-with-select"
     >
-      <template #leftout>
-        {{ search.left }}
+      <template #append>
+        <el-button @click="goToQuery" :icon="Search" />
       </template>
-      <template #rightin>
-        <Search
-          class="search-icon"
-          @click="goToQuery"
-          theme="outline"
-          size="18"
-        />
-      </template>
-    </nut-searchbar>
+    </el-input>
     <div
       v-show="
         !(

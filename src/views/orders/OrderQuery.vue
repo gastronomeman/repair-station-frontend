@@ -4,6 +4,7 @@ import OrdersItem from '@/components/orders/OrdersItem.vue'
 import { useRoute } from 'vue-router'
 import { getOrderListByStudentIdService } from '@/api/orders.js'
 import { isNotBlank } from '@/utils/StringUtils.js'
+import { dialog } from '@/utils/DialogUtils.js'
 
 const route = useRoute()
 
@@ -14,7 +15,7 @@ const getOrderListByStudentId = async (studentId) => {
   const resp = await getOrderListByStudentIdService(studentId)
   if (resp.code === 1) {
     orderList.value = resp.data
-    if (orderList.value.length === 0) alert('查无此人')
+    if (orderList.value.length === 0) dialog('查无此人')
   }
 }
 
