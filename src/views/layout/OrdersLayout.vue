@@ -85,7 +85,7 @@ watch(
         <nut-row>
           <nut-col :span="12">
             <div class="text first-text" @click="router.push('/')">
-              电脑报修
+              报修页面
               <tool class="search-icon" theme="outline" size="20" fill="#333" />
             </div>
           </nut-col>
@@ -94,7 +94,7 @@ watch(
               class="text last-text"
               @click="router.push('/orders/query?studentId=')"
             >
-              <span>报修查询</span>
+              <span>查询页面</span>
               <Search class="search-icon" theme="outline" size="20" />
             </div>
           </nut-col>

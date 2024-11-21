@@ -11,14 +11,19 @@ const props = defineProps({
 const order = ref(props.order)
 
 const handleClick = async () => {
+  console.log(order.value)
   if (order.value.status === 3) {
     dialog(`已在${order.value.completionTime}<br />完成了您的维修任务哦！`)
   } else if (order.value.status === 2) {
-    dialog('我们的工作人员已经接单，<br />请留意手机短信哦！')
+    dialog(
+      `我们的工作人员 ${order.value.staffName} 已经接单，<br />请留意手机短信哦！<br />工作人员电话是：${order.value.staffPhone}`
+    )
   } else if (order.value.status === 1) {
-    dialog('请耐心等待，<br />工作人员正在赶来...')
+    dialog(
+      '请耐心等待，<br />工作人员正在赶来...<br />如果有如何疑问可以加入QQ群：790445318询问哦。'
+    )
   } else {
-    dialog('订单异常 <br />如果有如何疑问可以加入QQ群：790445318询问哦')
+    dialog('订单异常 <br />如果有如何疑问可以加入QQ群：790445318询问哦。')
   }
 }
 </script>

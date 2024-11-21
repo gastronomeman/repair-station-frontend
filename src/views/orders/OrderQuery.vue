@@ -31,9 +31,12 @@ watch(
 
 <template>
   <div v-if="orderList.length === 0">
-    <el-empty description="暂无维修记录请在上方输入学号或姓名后尝试查询" />
+    <el-empty
+      description="暂无维修记录，请在上方输入框输入学号或姓名后尝试查询"
+    />
   </div>
   <div v-else>
+    <nut-divider dashed> 点击维修单可查看详情信息 </nut-divider>
     <div v-for="order in orderList" :key="order.id">
       <orders-item :order="order"></orders-item>
     </div>
