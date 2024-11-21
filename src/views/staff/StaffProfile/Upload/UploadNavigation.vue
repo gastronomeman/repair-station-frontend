@@ -4,7 +4,7 @@ import { ref } from 'vue'
 import { uploaderListService } from '@/api/orders.js'
 import { isNotBlank } from '@/utils/StringUtils.js'
 import { warningMsg } from '@/utils/SendMsgUtils.js'
-import OrderPhotoList from '@/components/orders/orderPhotoList.vue'
+import OrderPhotoList from '@/components/orders/OrderPhotoList.vue'
 
 const router = useRouter()
 const onClick = () => router.push('/staff/profile')

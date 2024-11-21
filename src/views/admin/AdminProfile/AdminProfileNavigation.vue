@@ -5,7 +5,7 @@ import {
   getStaffOnlineNameService,
   logoutService
 } from '@/api/staff.js'
-import { useStaffState } from '@/stores/index.js'
+import { useCommonState, useStaffState } from '@/stores/index.js'
 import { CameraOne, Right, Logout } from '@icon-park/vue-next'
 import { ref } from 'vue'
 import { successMsg } from '@/utils/SendMsgUtils.js'
@@ -13,10 +13,12 @@ import { successMsg } from '@/utils/SendMsgUtils.js'
 const router = useRouter()
 const route = useRoute()
 const staffState = useStaffState()
+const commonState = useCommonState()
 
 const logoutUser = async () => {
   await logoutService()
   staffState.clear()
+  commonState.clear()
   successMsg('退出成功！')
   await router.push('/staff/login')
 }

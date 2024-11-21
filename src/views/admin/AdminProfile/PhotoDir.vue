@@ -1,5 +1,5 @@
 <script setup>
-import OrderPhotoList from '@/components/orders/orderPhotoList.vue'
+import OrderPhotoList from '@/components/orders/OrderPhotoList.vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()

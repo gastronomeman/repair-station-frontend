@@ -1,8 +1,9 @@
 <script setup>
 import { ref } from 'vue'
-import { ordersNewService } from '@/api/orders.js'
+import { checkRepeatService, ordersNewService } from '@/api/orders.js'
 import { useOrderState } from '@/stores/index.js'
 import { useRouter } from 'vue-router'
+import { dialog } from '@/utils/DialogUtils.js'
 
 const router = useRouter()
 const orderState = useOrderState()
@@ -81,6 +82,16 @@ const submit = () => {
         alert('宿舍栋数不能为空！')
         return
       }
+
+      const id = await checkRepeatOrder()
+      if (id) {
+        dialog(
+          '检测到你有订单还在维修哦！<br/ > 如果有如何疑问可以加入QQ群：790445318询问哦'
+        )
+        await router.push(`/orders/query?studentId=${id}`)
+        return
+      }
+
       loading.value = true
 
       const resp = await ordersNewService(order.value)
@@ -105,6 +116,14 @@ const submit = () => {
       console.warn('出现错误')
     }
   })
+}
+
+const checkRepeatOrder = async () => {
+  const resp = await checkRepeatService(order.value)
+  if (resp.code === 1) {
+    if (resp.data == null) return false
+    else return resp.data
+  }
 }
 
 const checkAgreed = () => {

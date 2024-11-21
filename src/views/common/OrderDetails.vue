@@ -1,6 +1,6 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
-import { useStaffState } from '@/stores/index.js'
+import { useStaffState, useCommonState } from '@/stores/index.js'
 import { ref } from 'vue'
 import { getNameByIdService } from '@/api/staff.js'
 import { cancelService, changStatusService } from '@/api/orders.js'
@@ -10,6 +10,8 @@ import { confirmDialog } from '@/utils/DialogUtils.js'
 const router = useRouter()
 const route = useRoute()
 const staffState = useStaffState()
+const commonState = useCommonState()
+
 const order = ref({})
 order.value = staffState.order
 
@@ -184,7 +186,10 @@ const cancel = async () => {
       </nut-col>
     </nut-row>
     <nut-divider dashed />
-    <div v-if="route.fullPath.includes('admin')" style="text-align: center">
+    <div
+      v-show="route.fullPath.includes('admin') && +commonState.tabs === 1"
+      style="text-align: center"
+    >
       <nut-button @click="cancel" type="danger"> 作废订单 </nut-button>&nbsp;
       <nut-button @click="changeStatus(1, order.id)" type="warning">
         恢复待接单 </nut-button
