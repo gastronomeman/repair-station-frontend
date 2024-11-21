@@ -167,6 +167,9 @@ const cancel = async () => {
         <nut-col :span="12" v-if="order.status === 3">
           <div class="content-right">已完成</div>
         </nut-col>
+        <nut-col :span="12" v-if="order.status === 4">
+          <div class="content-right">已作废</div>
+        </nut-col>
       </nut-row>
       <nut-divider dashed />
     </div>
