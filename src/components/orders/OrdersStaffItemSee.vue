@@ -71,14 +71,25 @@ const handleClick = () => {
               style="color: #fecc11"
               >维修中
             </span>
-            <span v-else class="body-right" style="color: #41b349">
+            <span
+              v-else-if="order.status === 3"
+              class="body-right"
+              style="color: #41b349"
+            >
               已完成
+            </span>
+            <span
+              v-else-if="order.status === 4"
+              class="body-right"
+              style="color: #bbb5ac"
+            >
+              作废订单
             </span>
           </div>
         </nut-col>
       </nut-row>
       <nut-divider dashed />
-      <p>{{ order.orderDescribe }}</p>
+      <p style="margin-bottom: 0">{{ order.orderDescribe }}</p>
     </div>
   </div>
 </template>

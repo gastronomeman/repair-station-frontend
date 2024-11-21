@@ -1,11 +1,11 @@
 <script setup>
 import { useRouter } from 'vue-router'
-import { User, DegreeHat, School } from '@icon-park/vue-next'
+import { User, DegreeHat, School, PhoneTelephone } from '@icon-park/vue-next'
 import { ref } from 'vue'
 import { useStaffState } from '@/stores/index.js'
 import { completeInfoService, getInfoService } from '@/api/staff.js'
 import { successMsg, warningMsg } from '@/utils/SendMsgUtils.js'
-import { isNotBlank } from '@/utils/StringUtils.js'
+import { checkPhoneNone, isNotBlank } from '@/utils/StringUtils.js'
 
 const router = useRouter()
 const staffState = useStaffState()
@@ -16,6 +16,7 @@ const onClick = () => {
 
 const staff = ref({
   major: '',
+  phone: '',
   politicalStatus: ''
 })
 
@@ -23,9 +24,15 @@ const loading = ref(false)
 const completeInfo = async () => {
   if (
     isNotBlank(staff.value.major) ||
-    isNotBlank(staff.value.politicalStatus)
+    isNotBlank(staff.value.politicalStatus) ||
+    isNotBlank(staff.value.phone)
   ) {
     warningMsg('填写的信息不能为空')
+    return
+  }
+
+  if (checkPhoneNone(staff.value.phone)) {
+    warningMsg('手机号错误！')
     return
   }
 
@@ -43,6 +50,7 @@ const getInfo = async () => {
   if (resp.code === 1) {
     staff.value.major = resp.data.major
     staff.value.politicalStatus = resp.data.politicalStatus
+    staff.value.phone = resp.data.phone
   }
 }
 getInfo()
@@ -91,7 +99,15 @@ getInfo()
         </template>
       </el-input>
     </el-form-item>
-
+    <el-form-item required label="手机号：">
+      <el-input v-model="staff.phone" clearable placeholder="请输入手机号">
+        <template #prefix>
+          <el-icon class="input-icon">
+            <phone-telephone />
+          </el-icon>
+        </template>
+      </el-input>
+    </el-form-item>
     <el-form-item required label="政治面貌：">
       <el-select v-model="staff.politicalStatus" placeholder="请点击选择">
         <el-option :key="1" :value="1" label="群众" />
