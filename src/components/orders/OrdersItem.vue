@@ -15,8 +15,10 @@ const handleClick = async () => {
     dialog(`已在${order.value.completionTime}<br />完成了您的维修任务哦！`)
   } else if (order.value.status === 2) {
     dialog('我们的工作人员已经接单，<br />请留意手机短信哦！')
-  } else {
+  } else if (order.value.status === 1) {
     dialog('请耐心等待，<br />工作人员正在赶来...')
+  } else {
+    dialog('订单异常 <br />如果有如何疑问可以加入QQ群：790445318询问哦')
   }
 }
 </script>
@@ -63,8 +65,18 @@ const handleClick = async () => {
               style="color: #fecc11"
               >维修中
             </span>
-            <span v-else class="body-right" style="color: #41b349">
+            <span
+              v-else-if="order.status === 3"
+              class="body-right"
+              style="color: #41b349"
+            >
               已完成
+            </span>
+            <span
+              v-else-if="order.status === 4"
+              class="body-right"
+              style="color: #a7a8bd"
+              >订单失效
             </span>
           </div>
         </nut-col>
