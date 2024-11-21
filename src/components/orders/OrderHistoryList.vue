@@ -13,13 +13,13 @@ const ordersList = ref('')
 const getOrderList = async () => {
   loading.value = true
   const resp = await getHistoryListService(
-    commonState.page.currentPage,
-    commonState.page.pageSize,
+    commonState.pageH.currentPage,
+    commonState.pageH.pageSize,
     search.value
   )
   if (resp.code === 1) {
     ordersList.value = resp.data.records
-    commonState.page.total = resp.data.total
+    commonState.pageH.total = resp.data.total
   }
   loading.value = false
 }
@@ -38,20 +38,20 @@ const resetList = async () => {
 }
 
 const toTop = async () => {
-  commonState.page.currentPage = 1
+  commonState.pageH.currentPage = 1
   search.value = ''
   await getOrderList()
 }
 
 const toEnd = async () => {
-  commonState.page.currentPage = Math.ceil(
-    commonState.page.total / commonState.page.pageSize
+  commonState.pageH.currentPage = Math.ceil(
+    commonState.pageH.total / commonState.pageH.pageSize
   )
   search.value = ''
   await getOrderList()
 }
 const totalPage = computed(() => {
-  return Math.ceil(commonState.page.total / commonState.page.pageSize)
+  return Math.ceil(commonState.pageH.total / commonState.pageH.pageSize)
 })
 </script>
 
@@ -90,14 +90,14 @@ const totalPage = computed(() => {
     </div>
     <div class="page">
       <nut-pagination
-        v-model="commonState.page.currentPage"
-        :total-items="commonState.page.total"
-        :items-per-page="commonState.page.pageSize"
+        v-model="commonState.pageH.currentPage"
+        :total-items="commonState.pageH.total"
+        :items-per-page="commonState.pageH.pageSize"
         @change="change"
       />
     </div>
     <div class="page-footer">
-      <p>{{ commonState.page.currentPage }}/{{ totalPage }}页</p>
+      <p>{{ commonState.pageH.currentPage }}/{{ totalPage }}页</p>
       <nut-button size="small" type="default" @click="toTop">首页</nut-button>
       &nbsp;
       <nut-button size="small" type="default" @click="toEnd">尾页</nut-button>
