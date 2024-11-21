@@ -47,6 +47,7 @@ export const useStaffState = defineStore(
       setName,
       order,
       setOrder,
+
       clear
     }
   },

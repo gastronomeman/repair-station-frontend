@@ -1,5 +1,6 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
+import { useCommonState } from '@/stores/index.js'
 import { ref } from 'vue'
 import OrderList from '@/components/orders/OrderList.vue'
 import OrderHistoryList from '@/components/orders/OrderHistoryList.vue'
@@ -10,7 +11,7 @@ const route = useRoute()
 const onClick = () => {
   router.go(-1)
 }
-const tabsShow = ref(1)
+const commonState = useCommonState()
 
 const title = ref('我的历史')
 if (route.fullPath.includes('admin')) title.value = '所有维修单'
@@ -24,7 +25,7 @@ if (route.fullPath.includes('admin')) title.value = '所有维修单'
       </template>
     </nut-navbar>
   </nut-sticky>
-  <nut-tabs v-model="tabsShow" auto-height>
+  <nut-tabs v-model="commonState.tabs" auto-height>
     <nut-tab-pane title="本学期" :pane-key="1">
       <OrderList></OrderList>
     </nut-tab-pane>

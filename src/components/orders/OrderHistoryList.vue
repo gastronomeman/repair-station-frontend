@@ -1,13 +1,10 @@
 <script setup>
 import OrdersStaffItemSee from '@/components/orders/OrdersStaffItemSee.vue'
 import { computed, ref } from 'vue'
+import { useCommonState } from '@/stores/index.js'
 import { getHistoryListService } from '@/api/orders.js'
 
-const page = ref({
-  currentPage: 1,
-  pageSize: 5,
-  total: 0
-})
+const commonState = useCommonState()
 
 const loading = ref(false)
 
@@ -16,13 +13,13 @@ const ordersList = ref('')
 const getOrderList = async () => {
   loading.value = true
   const resp = await getHistoryListService(
-    page.value.currentPage,
-    page.value.pageSize,
+    commonState.page.currentPage,
+    commonState.page.pageSize,
     search.value
   )
   if (resp.code === 1) {
     ordersList.value = resp.data.records
-    page.value.total = resp.data.total
+    commonState.page.total = resp.data.total
   }
   loading.value = false
 }
@@ -41,18 +38,20 @@ const resetList = async () => {
 }
 
 const toTop = async () => {
-  page.value.currentPage = 1
+  commonState.page.currentPage = 1
   search.value = ''
   await getOrderList()
 }
 
 const toEnd = async () => {
-  page.value.currentPage = Math.ceil(page.value.total / page.value.pageSize)
+  commonState.page.currentPage = Math.ceil(
+    commonState.page.total / commonState.page.pageSize
+  )
   search.value = ''
   await getOrderList()
 }
 const totalPage = computed(() => {
-  return Math.ceil(page.value.total / page.value.pageSize)
+  return Math.ceil(commonState.page.total / commonState.page.pageSize)
 })
 </script>
 
@@ -91,14 +90,14 @@ const totalPage = computed(() => {
     </div>
     <div class="page">
       <nut-pagination
-        v-model="page.currentPage"
-        :total-items="page.total"
-        :items-per-page="page.pageSize"
+        v-model="commonState.page.currentPage"
+        :total-items="commonState.page.total"
+        :items-per-page="commonState.page.pageSize"
         @change="change"
       />
     </div>
     <div class="page-footer">
-      <p>{{ page.currentPage }}/{{ totalPage }}页</p>
+      <p>{{ commonState.page.currentPage }}/{{ totalPage }}页</p>
       <nut-button size="small" type="default" @click="toTop">首页</nut-button>
       &nbsp;
       <nut-button size="small" type="default" @click="toEnd">尾页</nut-button>
