@@ -65,7 +65,7 @@ watch(
       clearable
       size="large"
       v-model="search.input"
-      style="max-width: 800px; margin: 10px auto; width: 90%"
+      style="max-width: 780px; margin: 10px auto; width: 92%"
       placeholder="输入学号或姓名查询报修情况"
       class="input-with-select"
     >
