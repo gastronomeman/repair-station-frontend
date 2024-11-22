@@ -88,14 +88,22 @@ const setToolBox = async () => {
   }
 }
 
-getStaffOrder()
-getStaffOrderTotal()
-getStaffOnlineCount()
-getToolBox()
+const onRefresh = async () => {
+  await getStaffOrder()
+  await getStaffOrderTotal()
+  await getStaffOnlineCount()
+  await getToolBox()
+  loading.value = false
+}
+onRefresh()
 </script>
 
 <template>
-  <div v-loading="loading">
+  <van-pull-refresh
+    v-model="loading"
+    success-text="刷新成功"
+    @refresh="onRefresh"
+  >
     <nut-navbar title="站内维修统计">
       <template #right>
         <div class="title-right">
@@ -304,7 +312,7 @@ getToolBox()
         </nut-col>
       </nut-row>
     </div>
-  </div>
+  </van-pull-refresh>
 </template>
 
 <style scoped>

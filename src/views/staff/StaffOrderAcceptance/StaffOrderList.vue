@@ -46,51 +46,62 @@ const getOrdersList = async () => {
     loading.value = false
   }
 }
-getOrdersList()
 
 const refreshOrdersList = async () => getOrdersList()
+
+const onRefresh = async () => {
+  await getOrdersList()
+  loading.value = false
+}
+onRefresh()
 </script>
 
 <template>
-  <nut-navbar :title="title" left-show @click-back="onClick">
-    <template #left>
-      <div>返回</div>
-    </template>
-  </nut-navbar>
-  <nut-tabs type="smile" v-model="value" v-loading="loading">
-    <nut-tab-pane title="待接单" :pane-key="1">
-      <div class="br">&nbsp;</div>
-      <div class="tab-pane-left" v-for="order in ordersList1" :key="order.id">
-        <orders-staff-item1
-          @refresh="refreshOrdersList"
-          :order="order"
-        ></orders-staff-item1>
+  <van-pull-refresh
+    v-model="loading"
+    success-text="刷新成功"
+    @refresh="onRefresh"
+  >
+    <nut-navbar :title="title" left-show @click-back="onClick">
+      <template #left>
+        <div>返回</div>
+      </template>
+    </nut-navbar>
+    <nut-tabs type="smile" v-model="value" v-loading="loading">
+      <nut-tab-pane title="待接单" :pane-key="1">
         <div class="br">&nbsp;</div>
-      </div>
-      <el-empty v-if="ordersList1.length === 0" style="background: #f0f0f0">
-        <template #description>
-          <p style="text-align: center; font-size: 20px">
-            接单页面空空如也！<br />˚‧º·(˚ ˃̣̣̥᷄⌓˂̣̣̥᷅ )‧º·˚
-            <br />去提升一下宣传力度吧
-          </p>
-        </template>
-      </el-empty>
-    </nut-tab-pane>
-    <nut-tab-pane title="维修中" :pane-key="2">
-      <div class="br">&nbsp;</div>
-      <div class="tab-pane-left" v-for="order in ordersList2" :key="order.id">
-        <orders-staff-item2 :order="order"></orders-staff-item2>
+        <div class="tab-pane-left" v-for="order in ordersList1" :key="order.id">
+          <orders-staff-item1
+            @refresh="refreshOrdersList"
+            :order="order"
+          ></orders-staff-item1>
+          <div class="br">&nbsp;</div>
+        </div>
+        <el-empty v-if="ordersList1.length === 0" style="background: #f0f0f0">
+          <template #description>
+            <p style="text-align: center; font-size: 20px">
+              接单页面空空如也！<br />˚‧º·(˚ ˃̣̣̥᷄⌓˂̣̣̥᷅ )‧º·˚
+              <br />去提升一下宣传力度吧
+            </p>
+          </template>
+        </el-empty>
+      </nut-tab-pane>
+      <nut-tab-pane title="维修中" :pane-key="2">
         <div class="br">&nbsp;</div>
-      </div>
-      <el-empty v-if="ordersList2.length === 0" style="background: #f0f0f0">
-        <template #description>
-          <p style="text-align: center; font-size: 20px">
-            维修页面空空如也！<br />˚‧º·(˚ ˃̣̣̥᷄⌓˂̣̣̥᷅ )‧º·˚
-          </p>
-        </template>
-      </el-empty>
-    </nut-tab-pane>
-  </nut-tabs>
+        <div class="tab-pane-left" v-for="order in ordersList2" :key="order.id">
+          <orders-staff-item2 :order="order"></orders-staff-item2>
+          <div class="br">&nbsp;</div>
+        </div>
+        <el-empty v-if="ordersList2.length === 0" style="background: #f0f0f0">
+          <template #description>
+            <p style="text-align: center; font-size: 20px">
+              维修页面空空如也！<br />˚‧º·(˚ ˃̣̣̥᷄⌓˂̣̣̥᷅ )‧º·˚
+            </p>
+          </template>
+        </el-empty>
+      </nut-tab-pane>
+    </nut-tabs>
+  </van-pull-refresh>
 </template>
 
 <style scoped>

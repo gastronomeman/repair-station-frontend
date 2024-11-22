@@ -30,7 +30,7 @@ const getVerificationCode = async () => {
 
       // 计算剩余的有效时间（秒）
       let remainingTime = (v.value.time - Date.now()) / 1000
-      progress.value = remainingTime
+      progress.value = (remainingTime / 70) * 100
 
       // 每秒更新进度条
       const interval = setInterval(async () => {
@@ -41,7 +41,7 @@ const getVerificationCode = async () => {
           await getVerificationCode()
         } else {
           // 计算剩余时间的进度条百分比
-          progress.value = remainingTime
+          progress.value = (remainingTime / 70) * 100
         }
       }, 1000) // 每秒更新一次
     } else {
@@ -55,29 +55,41 @@ const getVerificationCode = async () => {
 onBeforeMount(() => {
   getVerificationCode() // 获取验证码
 })
+
+const loading = ref(false)
+const onRefresh = async () => {
+  await getVerificationCode()
+  loading.value = false
+}
 </script>
 
 <template>
-  <nut-sticky>
-    <nut-navbar title="活动验证码" left-show @click-back="onClick">
-      <template #left>
-        <div>返回</div>
-      </template>
-    </nut-navbar>
-  </nut-sticky>
-  <div class="progress">
-    <nut-space>
-      <!-- 显示验证码进度 -->
-      <nut-circle-progress :radius="180" :progress="progress" color="skyblue">
-        <p style="text-align: center; font-size: 22px">
-          <span style="color: red">{{ parts[0] }}</span>
-          <br />
-          {{ parts[1] }}<br />
-          <span style="font-size: 13px"> *红字为验证码 </span>
-        </p>
-      </nut-circle-progress>
-    </nut-space>
-  </div>
+  <van-pull-refresh
+    v-model="loading"
+    success-text="刷新成功"
+    @refresh="onRefresh"
+  >
+    <nut-sticky>
+      <nut-navbar title="活动验证码" left-show @click-back="onClick">
+        <template #left>
+          <div>返回</div>
+        </template>
+      </nut-navbar>
+    </nut-sticky>
+    <div class="progress">
+      <nut-space>
+        <!-- 显示验证码进度 -->
+        <nut-circle-progress :radius="180" :progress="progress" color="skyblue">
+          <p style="text-align: center; font-size: 22px">
+            <span style="color: red">{{ parts[0] }}</span>
+            <br />
+            {{ parts[1] }}<br />
+            <span style="font-size: 13px"> *红字为验证码 </span>
+          </p>
+        </nut-circle-progress>
+      </nut-space>
+    </div>
+  </van-pull-refresh>
 </template>
 
 <style scoped>
