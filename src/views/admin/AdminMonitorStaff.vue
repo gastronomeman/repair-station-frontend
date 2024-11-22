@@ -58,7 +58,6 @@ const getAdminOrder = async () => {
   adminOrder.value = resp.data
   loading.value = false
 }
-getAdminOrder()
 
 const change = async () => {
   if (!confirm('确认要切换维修状态？')) {
@@ -89,10 +88,20 @@ const changeStaffNotice = async () => {
     successMsg(resp.data)
   }
 }
+// 让我感觉我昨天做的梦
+const onRefresh = async () => {
+  await getAdminOrder()
+  loading.value = false
+}
+onRefresh()
 </script>
 
 <template>
-  <div v-loading="loading">
+  <van-pull-refresh
+    v-model="loading"
+    success-text="刷新成功"
+    @refresh="onRefresh"
+  >
     <nut-navbar title="状态监控"> </nut-navbar>
     <div class="brief-row">
       <nut-row>
@@ -272,7 +281,7 @@ const changeStaffNotice = async () => {
       </div>
       <p class="setting-p">*发布公告请谨慎发言</p>
     </div>
-  </div>
+  </van-pull-refresh>
 </template>
 
 <style scoped>
