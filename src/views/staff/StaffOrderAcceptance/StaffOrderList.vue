@@ -107,6 +107,8 @@ onRefresh()
 <style scoped>
 .nut-tab-pane {
   padding: 0 !important;
+  background-color: #f0f0f0 !important;
+  height: 75vh;
   .tab-pane-left {
     width: 100%;
     height: 100%;
