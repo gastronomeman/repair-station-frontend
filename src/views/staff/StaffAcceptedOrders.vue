@@ -51,11 +51,8 @@ const refreshOrdersList = async () => getOrdersList()
 </template>
 
 <style scoped>
-.nut-tab-pane {
-  background-color: #f0f0f0;
-  padding: 0 !important;
-  .loading {
-    margin-bottom: 50px;
-  }
+.loading {
+  height: 80vh;
+  margin-bottom: 50px;
 }
 </style>

@@ -100,6 +100,7 @@ onRefresh()
 
 <template>
   <van-pull-refresh
+    class="box"
     v-model="loading"
     success-text="刷新成功"
     @refresh="onRefresh"
@@ -316,6 +317,9 @@ onRefresh()
 </template>
 
 <style scoped>
+.box {
+  height: 90vh;
+}
 .title-right {
   font-size: 13px;
 
