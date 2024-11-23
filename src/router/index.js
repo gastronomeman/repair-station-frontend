@@ -14,7 +14,11 @@ const routes = [
   {
     path: '/:pathMatch(.*)*', // 捕获所有未匹配路径
     name: 'NotFound',
-    component: () => import('@/views/error/NotFound.vue')
+    component: () => import('@/views/error/NotFoundPage.vue')
+  },
+  {
+    path: '/error',
+    component: () => import('@/views/error/ErrorPage.vue')
   },
   {
     path: '/tool',

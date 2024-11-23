@@ -52,8 +52,9 @@ instance.interceptors.response.use(
     return res.data
   },
   (err) => {
-    console.log(err)
-    errorMsg('网站发生异常，请稍后尝试！<br/>╥﹏╥')
+    router
+      .push('/error')
+      .then((r) => errorMsg('网站发生异常，请稍后尝试！<br/>╥﹏╥<br/>' + r))
     return Promise.reject(err)
   }
 )
