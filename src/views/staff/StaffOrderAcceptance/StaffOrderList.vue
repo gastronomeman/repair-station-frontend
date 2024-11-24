@@ -45,6 +45,8 @@ const getOrdersList = async () => {
   } finally {
     loading.value = false
   }
+  console.log(ordersList1)
+  console.log(ordersList2)
 }
 
 const refreshOrdersList = async () => getOrdersList()
@@ -58,6 +60,7 @@ onRefresh()
 
 <template>
   <van-pull-refresh
+    style="min-height: 75vh"
     v-model="loading"
     success-text="刷新成功"
     @refresh="onRefresh"
@@ -107,8 +110,6 @@ onRefresh()
 <style scoped>
 .nut-tab-pane {
   padding: 0 !important;
-  background-color: #f0f0f0 !important;
-  height: 75vh;
   .tab-pane-left {
     width: 100%;
     height: 100%;

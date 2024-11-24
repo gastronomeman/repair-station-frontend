@@ -318,7 +318,7 @@ onRefresh()
 
 <style scoped>
 .box {
-  height: 90vh;
+  min-height: 75vh;
 }
 .title-right {
   font-size: 13px;
