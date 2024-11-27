@@ -86,7 +86,7 @@ const cancel = async () => {
         <div class="content-right">学生</div>
       </nut-col>
       <nut-col :span="12" v-if="order.identity === 0">
-        <div class="content-right">教师</div>
+        <div class="content-right">教职工</div>
       </nut-col>
     </nut-row>
     <nut-divider dashed />
