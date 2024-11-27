@@ -154,7 +154,7 @@ checkAgreed()
       <nut-form-item label="身份" prop="identity" required>
         <nut-radio-group v-model="order.identity" direction="horizontal">
           <nut-radio label="1">学生</nut-radio>
-          <nut-radio label="0">教师 / 职工</nut-radio>
+          <nut-radio label="0">教职工</nut-radio>
         </nut-radio-group>
       </nut-form-item>
       <nut-form-item
@@ -240,27 +240,27 @@ checkAgreed()
           v-model="order.orderType"
           @click.prevent="customBlurValidate('orderType')"
         >
-          <nut-radio label="1">
-            软件类：<br />
+          <nut-radio label="1" class="orderType">
+            软件类：
             <span style="color: #465ff0">
-              软件安装、软件错误、电脑内存清理、系统问题、重装系统等
+              软件安装、软件错误、系统问题、重装系统 等
             </span>
           </nut-radio>
-          <nut-radio label="2">
-            硬件类 <br />
+          <nut-radio label="2" class="orderType">
+            硬件类：
             <span style="color: #465ff0">
-              电脑清灰、台式电脑组装、换硬盘/内存条、开机没反应、笔记本进水等
+              电脑清灰、电脑组装、更换硬盘/内存条 等
             </span>
           </nut-radio>
-          <nut-radio label="3">
-            网络类<br />
+          <nut-radio label="3" class="orderType">
+            网络类：
             <span style="color: #465ff0">
-              认证网页不显示、找不到网卡，网络卡顿等
+              认证网页不显示、找不到网卡，网络卡顿 等
             </span>
           </nut-radio>
-          <nut-radio label="4">
-            手机类<br />
-            <span style="color: #465ff0"> 手机贴膜，清理内存，更换屏幕 </span>
+          <nut-radio label="4" class="orderType">
+            手机类：
+            <span style="color: #465ff0"> 手机贴膜，清理内存，更换屏幕 等</span>
           </nut-radio>
         </nut-radio-group>
       </nut-form-item>
@@ -307,6 +307,9 @@ checkAgreed()
   }
   .nut-button {
     margin: 10px 0 0;
+  }
+  .orderType {
+    margin-bottom: 8px;
   }
 }
 </style>
