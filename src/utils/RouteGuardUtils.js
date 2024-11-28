@@ -1,10 +1,15 @@
 import { getServerStatusService } from '@/api/repairStationStatus.js'
 import { errorMsg, successMsg } from '@/utils/SendMsgUtils.js'
 import { dialog } from '@/utils/DialogUtils.js'
+import { useOrderState } from '@/stores/index.js'
 import { getSubStatusService } from '@/api/sub_status.js'
 
 export const handleOrderLogic = async (to) => {
   const resp = await getServerStatusService()
+  const orderState = useOrderState()
+
+  orderState.setOrderTitle(resp.data.orderNotice)
+
   if (resp.data.serverStatus === 0 && to.path === '/orders/announcements') {
     successMsg('欢迎前来报修<br />(ฅ´ω`ฅ)')
     return '/'

@@ -18,7 +18,14 @@ if (route.fullPath.includes('admin')) title.value = '所有维修单'
 </script>
 
 <template>
-  <nut-sticky>
+  <nut-sticky v-if="route.fullPath.includes('admin')">
+    <nut-navbar :title="title" left-show @click-back="onClick">
+      <template #left>
+        <div>返回</div>
+      </template>
+    </nut-navbar>
+  </nut-sticky>
+  <nut-sticky top="40" v-else>
     <nut-navbar :title="title" left-show @click-back="onClick">
       <template #left>
         <div>返回</div>

@@ -30,7 +30,7 @@ const name = computed(() => {
 
 <template>
   <div v-if="route.fullPath === '/staff/profile'">
-    <nut-navbar class="title" title="我的"></nut-navbar>
+    <nut-navbar top="40" class="title" title="我的"></nut-navbar>
     <div class="info" @click="router.push('/staff/profile/staff-info')">
       <div class="left-content">
         <me

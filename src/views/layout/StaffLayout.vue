@@ -37,11 +37,19 @@ watch(
 </script>
 
 <template>
-  <nut-noticebar :text="commonState.staffTitle" scrollable v-if="frame">
-    <template #left-icon>
-      <announcement theme="outline" size="20" />
-    </template>
-  </nut-noticebar>
+  <nut-sticky>
+    <nut-noticebar
+      :text="commonState.staffTitle"
+      background="#f8d86a"
+      color="#f43e06"
+      scrollable
+      v-if="frame"
+    >
+      <template #left-icon>
+        <announcement theme="outline" size="20" />
+      </template>
+    </nut-noticebar>
+  </nut-sticky>
   <router-view></router-view>
   <div class="footer"><Footer /></div>
   <nut-backtop el-id="elId1" :distance="100" :bottom="60"></nut-backtop>

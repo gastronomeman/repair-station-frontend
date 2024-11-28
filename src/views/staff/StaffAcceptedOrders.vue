@@ -52,7 +52,6 @@ const refreshOrdersList = async () => getOrdersList()
 
 <style scoped>
 .loading {
-  min-height: 75vh;
   margin-bottom: 50px;
 }
 </style>

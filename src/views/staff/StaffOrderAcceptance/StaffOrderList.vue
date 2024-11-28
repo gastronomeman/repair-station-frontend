@@ -60,7 +60,6 @@ onRefresh()
 
 <template>
   <van-pull-refresh
-    style="min-height: 75vh"
     v-model="loading"
     success-text="刷新成功"
     @refresh="onRefresh"

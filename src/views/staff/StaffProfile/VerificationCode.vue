@@ -69,7 +69,7 @@ const onRefresh = async () => {
     success-text="刷新成功"
     @refresh="onRefresh"
   >
-    <nut-sticky>
+    <nut-sticky top="40">
       <nut-navbar title="活动验证码" left-show @click-back="onClick">
         <template #left>
           <div>返回</div>

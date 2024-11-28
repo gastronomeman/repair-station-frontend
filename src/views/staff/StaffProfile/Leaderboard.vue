@@ -22,7 +22,7 @@ getLeaderboard()
 </script>
 
 <template>
-  <nut-sticky>
+  <nut-sticky top="40">
     <nut-navbar title="排行榜" left-show @click-back="onClick">
       <template #left>
         <div>返回</div>
