@@ -3,17 +3,20 @@ import { Announcement, Order, People, Home } from '@icon-park/vue-next'
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { getStaffTitleService } from '@/api/repairStationStatus.js'
+import { useCommonState } from '@/stores/index.js'
 import Footer from '@/components/Footer.vue'
 
 const route = useRoute()
+const commonState = useCommonState()
 
 const active = ref(0)
 
-const title = ref('')
 const getTitle = async () => {
+  if (commonState.staffTitle !== '') return
+
   const resp = await getStaffTitleService()
   if (resp.code === 1) {
-    title.value = resp.data
+    commonState.setStaffTitle(resp.data)
   }
 }
 
@@ -34,7 +37,7 @@ watch(
 </script>
 
 <template>
-  <nut-noticebar :text="title" scrollable v-if="frame">
+  <nut-noticebar :text="commonState.staffTitle" scrollable v-if="frame">
     <template #left-icon>
       <announcement theme="outline" size="20" />
     </template>

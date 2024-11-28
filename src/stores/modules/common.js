@@ -25,10 +25,16 @@ export const useCommonState = defineStore('common', () => {
     pageH.value = newValues
   }
 
+  const staffTitle = ref('')
+  const setStaffTitle = (newValues) => {
+    staffTitle.value = newValues
+  }
+
   const clear = () => {
     tabs.value = 1
     page.value = { currentPage: 1, pageSize: 5, total: 0 }
     pageH.value = { currentPage: 1, pageSize: 5, total: 0 }
+    staffTitle.value = ''
   }
   return {
     tabs,
@@ -37,6 +43,8 @@ export const useCommonState = defineStore('common', () => {
     setPage,
     pageH,
     setPageH,
+    staffTitle,
+    setStaffTitle,
     clear
   }
 })
