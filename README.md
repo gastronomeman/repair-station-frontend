@@ -70,7 +70,7 @@ pnpm lint
 
 该项目已托管在 Gitee：
 
-- **前端代码**：[repair-station-app](https://gitee.com/gastronome-0_0/repair-station-frontend)
-- **后端代码**：[repair-station](https://gitee.com/gastronome-0_0/repair-station-backend)
+- **前端代码**：[repair-station-frontend](https://gitee.com/gastronome-0_0/repair-station-frontend)
+- **后端代码**：[repair-station-backend](https://gitee.com/gastronome-0_0/repair-station-backend)
 
 如有任何问题或合作意向，欢迎提交 Issue 或联系项目负责人。
