@@ -1,6 +1,6 @@
 # Repair Station Frontend
 
-**Repair Station Frontend** 该项目是校园电脑维修管理系统的前端部分，基于 Vue 3 和 Vite 构建，集成了 NutUI 和 Element Plus 组件库，提供了丰富的界面组件和交互效果。此项目需要与后端系统结合使用，以实现完整的功能。后端接口地址请参考 [后端文档](https://gitee.com/gastronome-0_0/repair-station)。
+**Repair Station Frontend** 该项目是校园电脑维修管理系统的前端部分，基于 Vue 3 和 Vite 构建，集成了 NutUI 和 Element Plus 组件库，提供了丰富的界面组件和交互效果。此项目需要与后端系统结合使用，以实现完整的功能。后端接口的实现请参考 [后端文档](https://gitee.com/gastronome-0_0/repair-station)。
 
 ## 项目简介
 
