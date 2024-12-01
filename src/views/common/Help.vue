@@ -99,7 +99,7 @@ const scrollToTop = (index) => {
       </van-collapse-item>
     </van-collapse>
     <p style="width: 90%; margin: 20px auto; text-align: center; color: red">
-      此帮助页面由23届隽隽师兄编写
+      帮助页面文案由23届隽隽师兄编写
     </p>
     <nut-divider class="foot-line" />
     <p style="width: 90%; margin: 0 auto; text-align: center">
