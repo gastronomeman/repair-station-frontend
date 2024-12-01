@@ -39,7 +39,8 @@ watch(
 <template>
   <nut-sticky>
     <nut-noticebar :text="commonState.staffTitle" scrollable v-if="frame">
-      <template #left-icon>
+      <template #left-icon
+        >1
         <announcement theme="outline" size="20" />
       </template>
     </nut-noticebar>
