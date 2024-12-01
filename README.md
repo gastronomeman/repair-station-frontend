@@ -37,6 +37,17 @@
 pnpm install
 ```
 
+### 配置后端地址与 ICP 备案
+
+在 `public/config.js` 文件中，你需要设置后端 API 地址以及 ICP 备案信息：
+
+```js
+window.config = {
+  apiBaseUrl: "https://your-backend-api-url", // 设置后端 API 地址
+  icp: "ICP备案号" // 设置 ICP 备案号
+};
+```
+
 ### 启动开发服务器
 
 ```sh
