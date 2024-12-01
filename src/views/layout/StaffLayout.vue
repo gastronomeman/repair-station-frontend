@@ -38,13 +38,7 @@ watch(
 
 <template>
   <nut-sticky>
-    <nut-noticebar
-      :text="commonState.staffTitle"
-      background="#f9cb8b"
-      color="#f43e06"
-      scrollable
-      v-if="frame"
-    >
+    <nut-noticebar :text="commonState.staffTitle" scrollable v-if="frame">
       <template #left-icon>
         <announcement theme="outline" size="20" />
       </template>
