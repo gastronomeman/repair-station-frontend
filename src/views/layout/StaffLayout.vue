@@ -40,7 +40,7 @@ watch(
   <nut-sticky>
     <nut-noticebar
       :text="commonState.staffTitle"
-      background="#f8d86a"
+      background="#f9cb8b"
       color="#f43e06"
       scrollable
       v-if="frame"
