@@ -34,11 +34,12 @@ export const confirmDialog = (title, str) => {
 export const confirm3Dialog = (title, str) => {
   return new Promise((resolve) => {
     let count = 3 // 倒计时从 3 开始
-    let confirmButtonText = `确定（${count}）` // 初始显示文本为 "3"
+    let confirmButtonText = `确定（${count}）` // 初始显示文本为 "确定（3）"
     let confirmButtonDisabled = true // 初始禁用按钮
+    let isDialogClosed = false // 标志变量，确保对话框关闭后不再更新
 
-    // 显示确认框
-    const showDialog = () => {
+    const updateDialog = () => {
+      if (isDialogClosed) return // 如果对话框已关闭，直接返回，停止更新
       showConfirmDialog({
         allowHtml: true,
         title: title,
@@ -47,30 +48,35 @@ export const confirm3Dialog = (title, str) => {
         confirmButtonDisabled: confirmButtonDisabled
       })
         .then(() => {
+          isDialogClosed = true // 标记对话框已关闭
+          clearInterval(interval) // 停止计时器
           resolve(true) // 用户点击确定按钮
         })
         .catch(() => {
+          isDialogClosed = true // 标记对话框已关闭
+          clearInterval(interval) // 停止计时器
           resolve(false) // 用户点击取消按钮
         })
     }
 
     // 初次显示确认框
-    showDialog()
+    updateDialog()
 
     // 创建一个计时器来更新按钮文本和状态
     const interval = setInterval(() => {
-      count-- // 倒计时减 1
-      confirmButtonText = `确定（${count}）` // 更新按钮文本为倒计时
-
-      // 在每次倒计时变化时重新显示弹窗
-      if (count <= 0) {
-        clearInterval(interval) // 倒计时结束后清除计时器
-        confirmButtonText = '确定' // 更新为"确定"
-        confirmButtonDisabled = false // 启用按钮
+      if (isDialogClosed) {
+        clearInterval(interval) // 如果对话框已关闭，停止计时器
+        return
       }
-
-      // 重新显示弹窗
-      showDialog()
+      count-- // 倒计时减 1
+      if (count <= 0) {
+        confirmButtonText = '确定' // 倒计时结束后更新为 "确定"
+        confirmButtonDisabled = false // 启用按钮
+        clearInterval(interval) // 停止计时器
+      } else {
+        confirmButtonText = `确定（${count}）` // 更新按钮文本为倒计时
+      }
+      updateDialog() // 更新对话框
     }, 1000) // 每秒更新一次
   })
 }
