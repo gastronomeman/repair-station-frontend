@@ -130,7 +130,7 @@ const transferOrder = async () => {
   margin: 0 auto;
   max-width: 800px;
   padding: 10px 0 0;
-  background-color: white;
+  background-color: #fffef9;
   border-radius: 10px;
 
   .orders-row {
@@ -168,7 +168,7 @@ const transferOrder = async () => {
       text-align: center;
       word-wrap: break-word;
       overflow-wrap: break-word;
-      margin: 2px auto;
+      margin: 5px auto;
       font-size: 18px;
     }
   }
