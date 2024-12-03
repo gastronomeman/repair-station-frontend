@@ -4,7 +4,7 @@ import { finishOrderService, transferOrderService } from '@/api/orders.js'
 import { errorMsg, successMsg } from '@/utils/SendMsgUtils.js'
 import { useStaffState } from '@/stores/index.js'
 import { useRouter } from 'vue-router'
-import { confirmDialog } from '@/utils/DialogUtils.js'
+import { confirm3Dialog } from '@/utils/DialogUtils.js'
 
 const staffState = useStaffState()
 const router = useRouter()
@@ -18,7 +18,12 @@ const props = defineProps({
 })
 const order = ref(props.order)
 const handleClick = async () => {
-  if (await confirmDialog('ฅ( ̳• ◡ • ̳)ฅ', '是否要结束修单？')) {
+  if (
+    await confirm3Dialog(
+      'ฅ( ̳• ◡ • ̳)ฅ',
+      '是否要结束修单？<br /><span style="font-weight: bold;color: #fbb612">（提示：有没有照片需要上传呢？）</span>'
+    )
+  ) {
     const resp = await finishOrderService(order.value)
     if (resp.code === 1) {
       successMsg(resp.data)
@@ -102,18 +107,18 @@ const transferOrder = async () => {
     </div>
     <nut-row>
       <nut-col :span="12" @click="signature">
-        <div class="orders-row-footer2">协议签订（拆机用）</div>
+        <div class="orders-row-footer1 lt">协议签订（拆机用）</div>
       </nut-col>
       <nut-col :span="12" @click="transferOrder"
-        ><div class="orders-row-footer2">转单</div>
+        ><div class="orders-row-footer1 rt">转单</div>
       </nut-col>
     </nut-row>
     <nut-row>
       <nut-col :span="12" @click="callPhone">
-        <div class="orders-row-footer1">拨打电话</div>
+        <div class="orders-row-footer2 lb">拨打电话</div>
       </nut-col>
-      <nut-col :span="12">
-        <div class="orders-row-footer1" @click="sendSMS">发送短信</div>
+      <nut-col :span="12" @click="sendSMS">
+        <div class="orders-row-footer2 rb">发送短信</div>
       </nut-col>
     </nut-row>
   </div>
@@ -121,24 +126,27 @@ const transferOrder = async () => {
 
 <style scoped>
 .orders-item {
+  width: 98%;
   margin: 0 auto;
   max-width: 800px;
   padding: 10px 0 0;
   background-color: white;
+  border-radius: 10px;
 
   .orders-row {
     margin: 0 auto;
-    max-width: 320px !important;
+    width: 90%;
     cursor: pointer;
 
     .content-head {
+      margin: 1px 0 0;
       font-size: 12px;
       color: #a7a8bd;
     }
 
     .content-body {
-      font-size: 16px;
-      margin: 5px 0;
+      font-size: 18px;
+      margin: 8px 0;
       display: flex;
       justify-content: space-between;
       color: #7a7374;
@@ -164,23 +172,37 @@ const transferOrder = async () => {
       font-size: 18px;
     }
   }
+
   .orders-row-footer1 {
+    background-color: #74787a;
+    color: white;
+    font-weight: bold;
+    padding: 10px 0;
+    margin: 5px 1px 0;
+    text-align: center;
+    cursor: pointer;
+  }
+  .lt {
+    border-top-left-radius: 10px;
+  }
+  .rt {
+    border-top-right-radius: 10px;
+  }
+
+  .orders-row-footer2 {
     background-color: #5e616d;
     color: white;
     font-weight: bold;
-    padding: 6px 0;
+    padding: 10px 0;
     margin: 2px 1px;
     text-align: center;
     cursor: pointer;
   }
-  .orders-row-footer2 {
-    background-color: #74787a;
-    color: white;
-    font-weight: bold;
-    padding: 6px 0;
-    margin: 5px 1px 0;
-    text-align: center;
-    cursor: pointer;
+  .lb {
+    border-bottom-left-radius: 10px;
+  }
+  .rb {
+    border-bottom-right-radius: 10px;
   }
 }
 </style>
