@@ -39,8 +39,8 @@ export default defineConfig({
         additionalData: `@import "@nutui/nutui/dist/styles/variables-jdt.scss";`
       }
     }
-  }
-  /* server: {
+  } /*,
+  server: {
     proxy: {
       '/api': {
         target: 'https://it-wxz.cn:12345', // 后端服务的地址
