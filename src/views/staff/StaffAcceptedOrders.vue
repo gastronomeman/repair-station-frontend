@@ -32,7 +32,6 @@ const refreshOrdersList = async () => getOrdersList()
   >
     <div class="loading" v-loading="loading">
       <div v-for="order in ordersList" :key="order.id">
-        <div class="br">&nbsp;</div>
         <orders-task-item
           @refresh="refreshOrdersList"
           :order="order"

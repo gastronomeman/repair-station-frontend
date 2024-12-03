@@ -39,7 +39,8 @@ export default defineConfig({
         additionalData: `@import "@nutui/nutui/dist/styles/variables-jdt.scss";`
       }
     }
-  } /*,
+  }
+  /*,
   server: {
     proxy: {
       '/api': {

@@ -127,7 +127,7 @@ const transferOrder = async () => {
 <style scoped>
 .orders-item {
   width: 98%;
-  margin: 0 auto;
+  margin: 12px auto;
   max-width: 800px;
   padding: 10px 0 0;
   background-color: #fffef9;
