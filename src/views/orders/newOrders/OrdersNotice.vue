@@ -43,7 +43,7 @@ const show = ref(false)
           <div ref="innerRef">
             <h2 style="margin: 10px 0 5px">服务须知</h2>
             <p style="font-size: 12px; color: #7a7374; margin: 2px">
-              *须知共有七条，若显示不全，请下滑继续阅读
+              *须知共有八条，若显示不全，请下滑继续阅读
             </p>
             <p class="notice">
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一、本服务仅提供广东农工商职业技术学院师生。<br />
@@ -54,9 +54,11 @@ const show = ref(false)
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;五、我们既不销售任何电子产品，也不供提任何购买意见。<br />
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;六、如遇紧急情况，需要维修电脑可添加维修站QQ咨询群：790445318进行询问。<br />
               <span style="color: red">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;七、如有任何纠纷或需进行投诉，请扫描下方二维码与本公众号取得联系！
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;七、如有任何纠纷或需进行投诉，请扫描下方二维码与本公众号取得联系！ </span
+              ><br />
+              <span style="color: red">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;八、如若填写报修信息与实际报修机主不符，我们将不承担任何责任和损坏赔偿。
               </span>
-              <br />
             </p>
           </div>
         </el-scrollbar>
