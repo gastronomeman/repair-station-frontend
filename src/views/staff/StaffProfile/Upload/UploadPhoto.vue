@@ -34,15 +34,15 @@ const submitUpload = async () => {
 
   if (!confirm(`是否确认提交：“${route.query.name}”的图片？`)) return
 
-  const toast = showLoadingToast({
-    message: '上传中...',
+  let toast = showLoadingToast({
+    message: '压缩图片...',
     forbidClick: true,
     loadingType: 'spinner',
     duration: 0
   })
 
   try {
-    await Promise.all([afterRead0, afterRead1, afterRead2, afterRead3])
+    await Promise.all([afterRead0(), afterRead1(), afterRead2(), afterRead3()])
 
     // 创建 FormData 对象
     const formData0 = new FormData()
@@ -63,6 +63,12 @@ const submitUpload = async () => {
       formData3.append('files', file.file)
     })
 
+    toast = showLoadingToast({
+      message: '上传图片...',
+      forbidClick: true,
+      loadingType: 'spinner',
+      duration: 0
+    })
     // 使用 Promise.all 并行发送四个请求
     const [resp0, resp1, resp2, resp3] = await Promise.all([
       uploadsService(formData0, route.query.id),
@@ -101,60 +107,63 @@ const onOversize = () => {
   warningMsg('照片大小不能超过20MB!')
 }
 const afterRead0 = async () => {
-  fileList0.value = await compressAndAppend(fileList0.value, 0)
+  return compressAndAppend(fileList0.value, 0).then((result) => {
+    fileList0.value = result
+  })
 }
-
 const afterRead1 = async () => {
-  fileList1.value = await compressAndAppend(fileList1.value, 1)
+  return compressAndAppend(fileList1.value, 1).then((result) => {
+    fileList1.value = result
+  })
 }
-
 const afterRead2 = async () => {
-  fileList2.value = await compressAndAppend(fileList2.value, 2)
+  return compressAndAppend(fileList2.value, 2).then((result) => {
+    fileList2.value = result
+  })
 }
-
 const afterRead3 = async () => {
-  fileList3.value = await compressAndAppend(fileList3.value, 3)
+  return compressAndAppend(fileList3.value, 3).then((result) => {
+    fileList3.value = result
+  })
 }
 const compressAndAppend = async (fileList, index) => {
-  const compressedFiles = [] // 创建一个数组用于存储压缩后的文件
-  let i = 0
-  for (const item of fileList) {
-    if (item.file.size > 1024 * 1024) {
+  const compressedFiles = [] // 存储压缩后的文件
+
+  for (let i = 0; i < fileList.length; i++) {
+    const item = fileList[i]
+    const { file } = item
+
+    // 如果文件大于1MB，进行压缩
+    if (file.size > 1024 * 1024) {
       item.file = await new Promise((resolve) => {
-        new Compressor(item.file, {
+        new Compressor(file, {
           quality: 0.5, // 压缩质量
           success(result) {
-            // 创建一个 File 对象
-            const file = new File([result], result.name, {
-              type: result.type,
-              lastModified: Date.now()
-            })
-            resolve(file) // 返回压缩后的文件
+            resolve(
+              new File([result], result.name, {
+                type: result.type
+              })
+            )
           },
-          error(err) {
-            console.log(err)
-            resolve(item.file) // 如果压缩失败，返回原始文件
+          error() {
+            resolve(file) // 如果压缩失败，返回原始文件
           }
         })
       })
     }
 
-    // 获取文件的后缀名
-    const extension =
-      item.file.name.substring(item.file.name.lastIndexOf('.')) || ''
-    // 生成新的文件名：index-顺序号.后缀
+    // 生成新的文件名
+    const extension = file.name.slice(file.name.lastIndexOf('.')) || ''
     const newFileName = `${index}_${i}${extension}`
-    // 文件小于1MB，直接使用新的文件名并添加到文件列表
+
+    // 使用新的文件名并添加到压缩文件列表
     item.file = new File([item.file], newFileName, {
-      type: item.file.type,
-      lastModified: Date.now()
+      type: file.type
     })
-    compressedFiles.push(item) // 添加到压缩文件列表
-    i++
+    compressedFiles.push(item)
   }
 
-  // 返回压缩后的文件数组，确保更新到原来的 fileList
-  return compressedFiles // 这里返回新的压缩文件列表
+  return compressedFiles
 }
 </script>
 
@@ -182,7 +191,6 @@ const compressAndAppend = async (fileList, index) => {
       :max-count="1"
       preview-size="100px"
       accept="image/jpeg, image/png"
-      :after-read="afterRead0"
       multiple
     >
       <template #preview-delete>
@@ -208,7 +216,6 @@ const compressAndAppend = async (fileList, index) => {
       :max-count="6"
       preview-size="100px"
       accept="image/jpeg, image/png"
-      :after-read="afterRead1"
       multiple
     >
       <template #preview-delete>
@@ -237,7 +244,6 @@ const compressAndAppend = async (fileList, index) => {
       :max-count="6"
       preview-size="100px"
       accept="image/jpeg, image/png"
-      :after-read="afterRead2"
       multiple
     >
       <template #preview-delete>
@@ -270,7 +276,6 @@ const compressAndAppend = async (fileList, index) => {
       :max-count="6"
       preview-size="100px"
       accept="image/jpeg, image/png"
-      :after-read="afterRead3"
       multiple
     >
       <template #preview-delete>
