@@ -1,11 +1,15 @@
 import request from '@/utils/request.js'
+import { useStaffState } from '@/stores/index.js'
 
-export const uploadsService = (formData, id) =>
-  request.post(`/common/uploads/${id}`, formData, {
+export const uploadsService = (formData, id) => {
+  const staffState = useStaffState()
+  return request.post(`/common/uploads/${id}`, formData, {
     headers: {
-      'content-type': 'multipart/form-data'
+      'content-type': 'multipart/form-data',
+      Authorization: staffState.token
     }
   })
+}
 
 export const checkPhotoService = () => request.post(`/common/check-dir`)
 

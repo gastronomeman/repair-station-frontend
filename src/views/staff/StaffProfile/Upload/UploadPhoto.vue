@@ -42,25 +42,47 @@ const submitUpload = async () => {
   })
 
   try {
-    // 使用 Promise.all 等待所有压缩任务完成
-    await Promise.all([afterRead0(), afterRead1(), afterRead2(), afterRead3()])
+    // 创建 FormData 对象
+    const formData0 = new FormData()
+    const formData1 = new FormData()
+    const formData2 = new FormData()
+    const formData3 = new FormData()
 
-    // 压缩任务完成后再提交表单
+    // 压缩任务完成后，将文件添加到 FormData 中
+    await Promise.all([
+      uploadsService(formData0, route.query.id),
+      uploadsService(formData1, route.query.id),
+      uploadsService(formData2, route.query.id),
+      uploadsService(formData3, route.query.id)
+    ])
     fileList0.value.forEach((file) => {
-      formData.append('files', file.file)
+      formData0.append('files', file.file)
     })
     fileList1.value.forEach((file) => {
-      formData.append('files', file.file)
+      formData1.append('files', file.file)
     })
     fileList2.value.forEach((file) => {
-      formData.append('files', file.file)
+      formData2.append('files', file.file)
     })
     fileList3.value.forEach((file) => {
-      formData.append('files', file.file)
+      formData3.append('files', file.file)
     })
 
-    const resp = await uploadsService(formData, route.query.id)
-    if (resp.code === 1) {
+    // 使用 Promise.all 并行发送四个请求
+    const [resp0, resp1, resp2, resp3] = await Promise.all([
+      uploadsService(formData0, route.query.id),
+      uploadsService(formData1, route.query.id),
+      uploadsService(formData2, route.query.id),
+      uploadsService(formData3, route.query.id)
+    ])
+
+    // 检查响应并处理结果
+    if (
+      resp0.code === 1 &&
+      resp1.code === 1 &&
+      resp2.code === 1 &&
+      resp3.code === 1
+    ) {
       successMsg('提交图片成功')
       await router.push('/staff/profile/uploader')
     }
