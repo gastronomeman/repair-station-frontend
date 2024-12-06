@@ -42,6 +42,8 @@ const submitUpload = async () => {
   })
 
   try {
+    await Promise.all([afterRead0, afterRead1, afterRead2, afterRead3])
+
     // 创建 FormData 对象
     const formData0 = new FormData()
     const formData1 = new FormData()
@@ -184,7 +186,6 @@ const compressAndAppend = async (fileList, index) => {
       :max-count="1"
       preview-size="100px"
       accept="image/jpeg, image/png"
-      :after-read="afterRead0"
       multiple
     >
       <template #preview-delete>
@@ -210,7 +211,6 @@ const compressAndAppend = async (fileList, index) => {
       :max-count="6"
       preview-size="100px"
       accept="image/jpeg, image/png"
-      :after-read="afterRead1"
       multiple
     >
       <template #preview-delete>
@@ -239,7 +239,6 @@ const compressAndAppend = async (fileList, index) => {
       :max-count="6"
       preview-size="100px"
       accept="image/jpeg, image/png"
-      :after-read="afterRead2"
       multiple
     >
       <template #preview-delete>
@@ -272,7 +271,6 @@ const compressAndAppend = async (fileList, index) => {
       :max-count="6"
       preview-size="100px"
       accept="image/jpeg, image/png"
-      :after-read="afterRead3"
       multiple
     >
       <template #preview-delete>
