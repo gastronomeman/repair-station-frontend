@@ -109,6 +109,10 @@ export default [
               {
                 path: 'set',
                 component: () => import('@/views/admin/exam/SetSub.vue')
+              },
+              {
+                path: 'stu',
+                component: () => import('@/views/admin/exam/Student.vue')
               }
             ]
           }

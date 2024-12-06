@@ -5,6 +5,9 @@ import {
   updateSubStatusService
 } from '@/api/sub_status.js'
 import { successMsg } from '@/utils/SendMsgUtils.js'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const subStatus = ref({
   notice: '',
@@ -71,6 +74,14 @@ const updateSubStatus = async () => {
     <div class="setting-button">
       <nut-button type="info" size="small" @click.prevent="updateSubStatus">
         更新状态
+      </nut-button>
+      &nbsp;
+      <nut-button
+        type="info"
+        size="small"
+        @click.prevent="router.push('/admin/profile/exam/stu')"
+      >
+        查看录入信息
       </nut-button>
     </div>
   </el-form>
