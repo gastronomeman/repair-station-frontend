@@ -48,13 +48,6 @@ const submitUpload = async () => {
     const formData2 = new FormData()
     const formData3 = new FormData()
 
-    // 压缩任务完成后，将文件添加到 FormData 中
-    await Promise.all([
-      uploadsService(formData0, route.query.id),
-      uploadsService(formData1, route.query.id),
-      uploadsService(formData2, route.query.id),
-      uploadsService(formData3, route.query.id)
-    ])
     fileList0.value.forEach((file) => {
       formData0.append('files', file.file)
     })
