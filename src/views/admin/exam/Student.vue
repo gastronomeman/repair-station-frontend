@@ -75,9 +75,9 @@ const totalPage = computed(() => {
         <div class="content">{{ item.name }}</div>
       </nut-col>
       <nut-col :span="6" v-if="item.score != null">
-        成绩：{{ item.score }}
+        答题时间：{{ item.score }}
       </nut-col>
-      <nut-col :span="6" v-else> 成绩：无 </nut-col>
+      <nut-col :span="6" v-else> 答题时间：无 </nut-col>
     </nut-row>
     <nut-divider dashed />
   </div>
