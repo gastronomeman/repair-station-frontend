@@ -68,16 +68,22 @@ const totalPage = computed(() => {
   </div>
   <div class="table" v-for="(item, index) in staffList" :key="index">
     <nut-row>
-      <nut-col :span="8">
+      <nut-col :span="7">
         <div class="content">{{ item.id }}</div>
       </nut-col>
       <nut-col :span="6">
         <div class="content">{{ item.name }}</div>
       </nut-col>
-      <nut-col :span="6" v-if="item.score != null">
-        答题时间：{{ item.score }}
+      <nut-col
+        style="text-align: left; margin-left: 20px"
+        :span="7"
+        v-if="item.score != null"
+      >
+        时间：{{ item.score }}s
       </nut-col>
-      <nut-col :span="6" v-else> 答题时间：无 </nut-col>
+      <nut-col style="text-align: left; margin-left: 20px" :span="7" v-else>
+        时间：无
+      </nut-col>
     </nut-row>
     <nut-divider dashed />
   </div>
