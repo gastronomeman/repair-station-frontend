@@ -186,6 +186,7 @@ const compressAndAppend = async (fileList, index) => {
       :max-count="1"
       preview-size="100px"
       accept="image/jpeg, image/png"
+      :after-read="afterRead0"
       multiple
     >
       <template #preview-delete>
@@ -211,6 +212,7 @@ const compressAndAppend = async (fileList, index) => {
       :max-count="6"
       preview-size="100px"
       accept="image/jpeg, image/png"
+      :after-read="afterRead1"
       multiple
     >
       <template #preview-delete>
@@ -239,6 +241,7 @@ const compressAndAppend = async (fileList, index) => {
       :max-count="6"
       preview-size="100px"
       accept="image/jpeg, image/png"
+      :after-read="afterRead2"
       multiple
     >
       <template #preview-delete>
@@ -271,6 +274,7 @@ const compressAndAppend = async (fileList, index) => {
       :max-count="6"
       preview-size="100px"
       accept="image/jpeg, image/png"
+      :after-read="afterRead3"
       multiple
     >
       <template #preview-delete>
