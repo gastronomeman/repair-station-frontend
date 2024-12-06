@@ -101,24 +101,19 @@ const onOversize = () => {
   warningMsg('照片大小不能超过20MB!')
 }
 const afterRead0 = async () => {
-  return compressAndAppend(fileList0.value, 0).then((result) => {
-    fileList0.value = result
-  })
+  fileList0.value = await compressAndAppend(fileList0.value, 0)
 }
+
 const afterRead1 = async () => {
-  return compressAndAppend(fileList1.value, 1).then((result) => {
-    fileList1.value = result
-  })
+  fileList1.value = await compressAndAppend(fileList1.value, 1)
 }
+
 const afterRead2 = async () => {
-  return compressAndAppend(fileList2.value, 2).then((result) => {
-    fileList2.value = result
-  })
+  fileList2.value = await compressAndAppend(fileList2.value, 2)
 }
+
 const afterRead3 = async () => {
-  return compressAndAppend(fileList3.value, 3).then((result) => {
-    fileList3.value = result
-  })
+  fileList3.value = await compressAndAppend(fileList3.value, 3)
 }
 const compressAndAppend = async (fileList, index) => {
   const compressedFiles = [] // 创建一个数组用于存储压缩后的文件
@@ -158,7 +153,8 @@ const compressAndAppend = async (fileList, index) => {
     i++
   }
 
-  return compressedFiles // 返回压缩后的文件数组
+  // 返回压缩后的文件数组，确保更新到原来的 fileList
+  return compressedFiles // 这里返回新的压缩文件列表
 }
 </script>
 
