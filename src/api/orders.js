@@ -51,6 +51,3 @@ export const changStatusService = (n, id) =>
   request.put(`/orders/chang-status${n}/${id}`)
 
 export const cancelService = (data) => request.put('/orders/cancel', data)
-
-export const checkRepeatService = (data) =>
-  request.post('/orders/check-repeat', data)

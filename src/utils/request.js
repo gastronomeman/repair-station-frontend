@@ -6,6 +6,7 @@ import { dialog, htmlDialog } from '@/utils/DialogUtils.js'
 
 // 这里配置 baseUrl
 const baseURL = window.config.baseUrl
+//const baseURL = '/api'
 
 const instance = axios.create({
   // 1. 基础地址，超时时间
@@ -34,16 +35,16 @@ instance.interceptors.response.use(
 
     if (code === 1) return res.data // 返回成功的数据
 
-    // 登录失效处理
-    if (msg === 'not_login') {
-      await handleLoginRedirect('登录验证失效，请重新登录')
-      return Promise.reject(msg)
-    }
-
     // 账号在其他设备登录处理
     if (msg.startsWith('检测到账号已在别的设备登录')) {
       await handleLoginRedirect(msg, true)
       return Promise.reject(msg)
+    }
+
+    if (msg === '订单重复') {
+      dialog(
+        '检测到你有订单还在维修哦！<br/ > 如果有如何疑问可以加入QQ群：790445318询问哦'
+      )
     }
 
     // 其他业务错误处理
@@ -51,7 +52,18 @@ instance.interceptors.response.use(
 
     return res.data
   },
-  (err) => {
+  async (err) => {
+    if (err.response) {
+      const status = err.response.status
+      if (status === 401) {
+        await handleLoginRedirect('登录验证失效，请重新登录')
+        return Promise.reject(err)
+      } else if (status === 403) {
+        console.log('权限不足')
+      } else {
+        console.log(`错误：${status}`)
+      }
+    }
     router
       .push('/error')
       .then((r) => errorMsg('网站发生异常，请稍后尝试！<br/>╥﹏╥<br/>' + r))

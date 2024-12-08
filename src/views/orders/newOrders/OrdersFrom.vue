@@ -1,9 +1,8 @@
 <script setup>
 import { ref } from 'vue'
-import { checkRepeatService, ordersNewService } from '@/api/orders.js'
+import { ordersNewService } from '@/api/orders.js'
 import { useOrderState } from '@/stores/index.js'
 import { useRouter } from 'vue-router'
-import { dialog } from '@/utils/DialogUtils.js'
 
 const router = useRouter()
 const orderState = useOrderState()
@@ -46,7 +45,10 @@ const formRules = ref({
     { regex: /^(?:[\u4e00-\u9fa5·]{2,16})$/, message: '姓名格式不正确' }
   ],
   studentId: [{ required: true, message: '学号不能为空' }],
-  dormitory: [{ required: true, message: '地点不能为空' }],
+  dormitory: [
+    { required: true, message: '地点不能为空' },
+    { regex: /^.{1,10}$/, message: '地点不能超过10个字' }
+  ],
   phone: [
     { required: true, message: '手机号不能为空' },
     {
@@ -82,16 +84,6 @@ const submit = () => {
         alert('宿舍栋数不能为空！')
         return
       }
-
-      const id = await checkRepeatOrder()
-      if (id) {
-        dialog(
-          '检测到你有订单还在维修哦！<br/ > 如果有如何疑问可以加入QQ群：790445318询问哦'
-        )
-        await router.push(`/orders/query?studentId=${id}`)
-        return
-      }
-
       loading.value = true
 
       const resp = await ordersNewService(order.value)
@@ -109,21 +101,15 @@ const submit = () => {
           orderDescribe: '',
           identity: '1'
         }
+        await router.push('/orders/wait')
+        loading.value = false
+      } else {
+        await router.push(`/orders/query?studentId=${order.value.studentId}`)
       }
-      await router.push('/orders/wait')
-      loading.value = false
     } else {
       console.warn('出现错误')
     }
   })
-}
-
-const checkRepeatOrder = async () => {
-  const resp = await checkRepeatService(order.value)
-  if (resp.code === 1) {
-    if (resp.data == null) return false
-    else return resp.data
-  }
 }
 
 const checkAgreed = () => {
