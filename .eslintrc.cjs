@@ -37,6 +37,6 @@ module.exports = {
     showLoadingToast: 'readonly',
     showImagePreview: 'readonly',
     showDialog: 'readonly',
-    showConfirmDialog: 'readonly',
+    showConfirmDialog: 'readonly'
   }
 }

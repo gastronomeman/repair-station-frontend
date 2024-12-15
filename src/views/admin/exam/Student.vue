@@ -1,6 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { getPageService } from '@/api/student.js'
+import { baseURL } from '@/utils/request.js'
 
 const page = ref({
   currentPage: 1,
@@ -51,6 +52,9 @@ const toEnd = async () => {
 const totalPage = computed(() => {
   return Math.ceil(page.value.total / page.value.pageSize)
 })
+const getStudentCsv = async () => {
+  window.location.href = baseURL + `/stu/csv`
+}
 </script>
 
 <template>
@@ -64,6 +68,10 @@ const totalPage = computed(() => {
     <nut-button type="info" size="small" @click="searchStaff">查询</nut-button>
     &nbsp;
     <nut-button type="info" size="small" @click="resetList">重置</nut-button>
+    &nbsp;
+    <nut-button type="info" size="small" @click="getStudentCsv"
+      >导出数据</nut-button
+    >
     <nut-divider />
   </div>
   <div class="table" v-for="(item, index) in staffList" :key="index">
@@ -108,6 +116,7 @@ const totalPage = computed(() => {
   width: 90%;
   margin: 8px auto 15px;
   text-align: center;
+
   .nut-divider {
     margin: 15px 0 0;
   }
@@ -121,6 +130,7 @@ const totalPage = computed(() => {
   .content {
     height: 100%;
   }
+
   .nut-divider {
     margin: 6px 0;
   }
@@ -133,12 +143,15 @@ const totalPage = computed(() => {
   justify-content: center;
   align-items: center;
 }
+
 .page-footer {
   text-align: center;
+
   p {
     color: #7a7374;
     margin: 0 0 5px;
   }
+
   margin: 10px 0 60px;
 }
 </style>
