@@ -282,18 +282,22 @@ checkAgreed()
 .order-from {
   padding: 10px;
   border-radius: 10px;
+
   .nut-input-text {
     width: 100%;
     outline: 0 none;
     border: 0;
     color: black;
   }
+
   .nut-form-item__body__tips {
     text-align: left !important;
   }
+
   .nut-button {
     margin: 10px 0 0;
   }
+
   .orderType {
     margin-bottom: 8px;
   }
