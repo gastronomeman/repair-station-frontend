@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useStaffState } from '@/stores'
 import router from '@/router'
-import { errorMsg } from '@/utils/SendMsgUtils.js'
+import { errorMsg, warningMsg } from '@/utils/SendMsgUtils.js'
 import { dialog, htmlDialog } from '@/utils/DialogUtils.js'
 
 // 这里配置 baseUrl
@@ -55,18 +55,28 @@ instance.interceptors.response.use(
   async (err) => {
     if (err.response) {
       const status = err.response.status
+
       if (status === 401) {
         await handleLoginRedirect('登录验证失效，请重新登录')
         return Promise.reject(err)
       } else if (status === 403) {
-        console.log('权限不足')
+        warningMsg('权限不足')
+      } else if (status === 500) {
+        errorMsg('后台异常请稍后重试！')
       } else {
         console.log(`错误：${status}`)
       }
     }
-    router
-      .push('/error')
-      .then((r) => errorMsg('网站发生异常，请稍后尝试！<br/>╥﹏╥<br/>' + r))
+
+    if (
+      router.currentRoute.value.path.startsWith('/orders') ||
+      router.currentRoute.value.path.startsWith('/')
+    ) {
+      router
+        .push('/error')
+        .then((r) => errorMsg('网站发生异常，请稍后尝试！<br/>╥﹏╥<br/>' + r))
+    }
+
     return Promise.reject(err)
   }
 )
