@@ -78,7 +78,7 @@ watch(
       "
       class="orders-img"
     >
-      <div v-if="title !== '维修公告'" class="text-box">
+      <div class="text-box">
         <nut-row>
           <nut-col :span="12">
             <div class="text first-text" @click="router.push('/')">
