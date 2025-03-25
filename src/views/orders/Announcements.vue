@@ -46,7 +46,7 @@ getStopTitle()
   .new-order-from {
     h2 {
       color: #7a7374;
-      text-align: center;
+      text-align: left;
       margin: 0;
       padding: 0 20px;
     }
